@@ -17,7 +17,8 @@ methods_list = [
     RegLogICEimputation(name="ICE.IMP"),
     RegLogICEMimputation(name="ICE.IMP.M"),
     RegLogICEYimputation(name="ICEY.IMP"),
-    RegLogICEYMimputation(name="ICEY.IMP.M"),    
+    RegLogICEYMimputation(name="ICEY.IMP.M"),   
+    RegLogPatByPat(name="PbP"), 
 ]
 
 # training_size = np.array([50, 100, 500, 1000, 5000, 10000, 50000, 100000])

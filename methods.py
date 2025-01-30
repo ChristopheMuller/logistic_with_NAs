@@ -480,3 +480,63 @@ class CompleteCase(Classification):
         return [beta.tolist(), intercept]
 
 
+
+class RegLogPatByPat(Classification):
+
+    def __init__(self, name="ICEY.IMP.M"):
+        super().__init__(name)
+
+        self.can_predict = True
+        self.return_beta = False
+
+    def fit(self, X, M, y):
+        self.X = X.copy()
+        self.M = M
+        self.y = y
+        self.dic = {}
+        for i in range(len(M)):
+            indices_0 = np.array(self.y == 0) & np.all(M == M[i], axis=1)
+            indices_1 = np.array(self.y == 1) & np.all(M == M[i], axis=1)
+            if (
+                not (str(M[i]) in self.dic)
+                and np.prod(M[i]) == 0  # at least one observed
+                and sum(indices_0) > 0  # pattern with at least one 0
+                and sum(indices_1) > 0  # pattern with at least one 1
+            ):
+                n = len(self.X)
+                S = np.asarray(
+                    [np.prod(M[j] == M[i]) for j in range(n)]
+                )
+                
+                Xp = self.X[S == 1][:, M[i] == 0]
+                yp = self.y[S == 1]
+                reg = LogisticRegression(n_jobs=-1, penalty=None).fit(
+                    np.array(Xp, ndmin=2), yp
+                )
+                self.dic[str(self.M[i])] = reg
+
+    def pred(self, X, m):
+        m = np.asarray(m)
+        if not (str(m) in self.dic) or np.prod(m) == 1:
+            return np.random.binomial(n=1, p=0.5)
+        else:
+            reg = self.dic[str(m)]
+            return reg.predict(np.array(X[m == 0], ndmin=2))[0]
+        
+    def pred_probs(self, X, m):
+        m = np.asarray(m)
+        if not (str(m) in self.dic) or np.prod(m) == 1:
+            return 0.5
+        else:
+            reg = self.dic[str(m)]
+            return reg.predict_proba(np.array(X[m == 0], ndmin=2))[0, 1]
+
+    def predict(self, X, M):
+        n = len(X)
+        prediction = np.array([self.pred(X[i], M[i]) for i in range(n)], ndmin=2)
+        return prediction
+    
+    def predict_probs(self, X, M):
+        n = len(X)
+        prediction = np.array([self.pred_probs(X[i], M[i]) for i in range(n)], ndmin=2).ravel()
+        return prediction
