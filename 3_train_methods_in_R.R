@@ -13,6 +13,7 @@ test_size <- 15000
 # Initialize methods list
 methods_list <- list(
   MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1),
+  MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5),
   SAEMLogisticRegression$new(name="SAEM")
 )
 
