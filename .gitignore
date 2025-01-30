@@ -1,0 +1,8 @@
+.RProj.user
+.Rproj.user
+data/
+*.html
+.Rproj.user
+.npz
+data_log
+*.pdf

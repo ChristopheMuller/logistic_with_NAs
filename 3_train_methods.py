@@ -1,0 +1,110 @@
+import numpy as np
+import pandas as pd
+import os
+import time
+
+from methods import *
+
+exp = "ExpA"
+
+
+methods_list = [
+    CompleteCase(name="CC"),
+    RegLog05imputation(name="05.IMP"),
+    RegLog05Mimputation(name="05.IMP.M"),
+    RegLogMeanimputation(name="Mean.IMP"),
+    RegLogMeanMimputation(name="Mean.IMP.M"),
+    RegLogICEimputation(name="ICE.IMP"),
+    RegLogICEMimputation(name="ICE.IMP.M"),
+    RegLogICEYimputation(name="ICEY.IMP"),
+    RegLogICEYMimputation(name="ICEY.IMP.M"),    
+]
+
+# training_size = np.array([50, 100, 500, 1000, 5000, 10000, 50000, 100000])
+training_size = np.array([500])
+
+test_size = 15000
+
+df_set_up = pd.read_csv(os.path.join("data",exp,"set_up.csv"))
+
+
+
+if os.path.exists(os.path.join("data", exp, "simulation.csv")) == True:
+    simulations_df = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
+else:
+    simulations_df = pd.DataFrame({
+        "set_up": [],
+        "method": [],
+        "n_train": [],
+        "estimated_beta": [],
+        "file_name": [],
+        "running_time": []
+    })
+
+
+for i in range(df_set_up.shape[0]):
+
+    print(f"Running set up {i+1} out of {df_set_up.shape[0]}: {df_set_up['set_up'][i]}")
+
+    # load as npz
+    data = np.load(os.path.join("data", exp, "original_data", f"{df_set_up['set_up'][i]}.npz"))
+    X_obs = data["X_obs"]
+    M = data["M"]
+    y = data["y"]
+    y_probs = data["y_probs"]
+    X_full = data["X_full"]
+
+    true_beta = df_set_up["true_beta"][i]
+    true_beta = np.array([float(x) for x in true_beta[1:-1].split()])
+
+    data_test = np.load(os.path.join("data", exp, "test_data", f"{df_set_up['set_up'][i]}.npz"))
+    X_test = data_test["X_obs"]
+    M_test = data_test["M"]
+    y_probs_test = data_test["y_probs"]
+    y_test = data_test["y"]
+
+    for j in range(len(training_size)):
+
+        print("\tTraining size: ", training_size[j])
+
+        X_train = X_obs[:training_size[j]]
+        M_train = M[:training_size[j]]
+        y_train = y[:training_size[j]]
+
+        for met in methods_list:
+            
+            tic = time.time()
+            met.fit(X_train, M_train, y_train)
+            toc = time.time()
+            running_time = toc - tic
+
+            if met.can_predict:
+
+                y_probs_pred = met.predict_probs(X_test, M_test)
+                to_save = {
+                    "y_probs_pred": y_probs_pred,
+                }
+
+                save_name = f"{df_set_up['set_up'][i]}_{met.name}_{training_size[j]}"
+                np.savez(os.path.join("data", exp, "pred_data", f"{save_name}.npz"), **to_save)
+
+            else:
+                save_name = np.nan
+
+            if met.return_beta:
+                estimated_beta = met.return_params()
+
+            else:
+                estimated_beta = None
+
+            new_row_sim = {
+                "set_up": df_set_up['set_up'][i],
+                "method": met.name,
+                "n_train": training_size[j],
+                "estimated_beta": str(estimated_beta),
+                "file_name": save_name,
+                "running_time": running_time
+            }
+            simulations_df = pd.concat([simulations_df, pd.DataFrame(new_row_sim, index=[0])])
+            simulations_df.to_csv(os.path.join("data", exp, "simulation.csv"), index=False)
+    
