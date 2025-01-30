@@ -3,11 +3,13 @@ library(dplyr)
 library(stringr)
 
 source("methods_in_R.R")
-reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
+reticulate::use_python("/usr/bin/python3.exe")
+#reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
+
 
 # Configuration
 exp <- "ExpA"
-training_sizes <- c(500)
+training_sizes <- c(500, 1000, 5000, 10000)
 test_size <- 15000
 
 # Initialize methods list
