@@ -28,9 +28,25 @@ test_size = 15000
 
 df_set_up = pd.read_csv(os.path.join("data",exp,"set_up.csv"))
 
+def simulation_exists(set_up, method_name, n_train, simulations_df):
+    """Check if simulation exists in the simulations.csv file"""
+    if simulations_df.empty:
+        return False
+    
+    mask = (simulations_df['set_up'] == set_up) & \
+           (simulations_df['method'] == method_name) & \
+           (simulations_df['n_train'] == n_train)
+    
+    return mask.any()
 
+def prediction_file_exists(set_up, method_name, n_train, exp):
+    """Check if prediction file exists in pred_data folder"""
+    save_name = f"{set_up}_{method_name}_{n_train}"
+    file_path = os.path.join("data", exp, "pred_data", f"{save_name}.npz")
+    return os.path.exists(file_path)
 
-if os.path.exists(os.path.join("data", exp, "simulation.csv")) == True:
+# Load or create simulations DataFrame
+if os.path.exists(os.path.join("data", exp, "simulation.csv")):
     simulations_df = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 else:
     simulations_df = pd.DataFrame({
@@ -73,6 +89,11 @@ for i in range(df_set_up.shape[0]):
         y_train = y[:training_size[j]]
 
         for met in methods_list:
+            # Check if simulation should be skipped
+            if simulation_exists(df_set_up['set_up'][i], met.name, training_size[j], simulations_df) and \
+               (not met.can_predict or prediction_file_exists(df_set_up['set_up'][i], met.name, training_size[j], exp)):
+                print(f"\t\tSkipping {met.name} - already completed")
+                continue
             
             tic = time.time()
             met.fit(X_train, M_train, y_train)
@@ -108,4 +129,3 @@ for i in range(df_set_up.shape[0]):
             }
             simulations_df = pd.concat([simulations_df, pd.DataFrame(new_row_sim, index=[0])])
             simulations_df.to_csv(os.path.join("data", exp, "simulation.csv"), index=False)
-    
