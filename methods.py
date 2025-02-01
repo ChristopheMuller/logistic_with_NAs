@@ -41,7 +41,7 @@ class RegLog05imputation(Classification):
     def fit(self, X, M, y):
         Xp = X.copy()
         Xp[M == 1] = 0.5
-        self.reg = LogisticRegression(penalty="none").fit(
+        self.reg = LogisticRegression(penalty=None).fit(
             Xp, y
         )
 
@@ -80,7 +80,7 @@ class RegLog05Mimputation(Classification):
         Xp[M == 1] = 0.5
         # concat X and M
         Xp = np.hstack((Xp, M))
-        self.reg = LogisticRegression(penalty="none").fit(
+        self.reg = LogisticRegression(penalty=None).fit(
             Xp, y
         )
 
@@ -125,7 +125,7 @@ class RegLogMeanimputation(Classification):
             mean_j = np.nanmean(X[:,j])
             Xp[M[:,j] == 1, j] = mean_j
         
-        self.reg = LogisticRegression(penalty="none").fit(
+        self.reg = LogisticRegression(penalty=None).fit(
             Xp, y
         )
 
@@ -174,7 +174,7 @@ class RegLogMeanMimputation(Classification):
         # concat X and M
         Xp = np.hstack((Xp, M))
         
-        self.reg = LogisticRegression(penalty="none").fit(
+        self.reg = LogisticRegression(penalty=None).fit(
             Xp, y
         )
 
@@ -223,7 +223,7 @@ class RegLogICEimputation(Classification):
         self.imp_mean = IterativeImputer(random_state=0, sample_posterior=True)
         self.imp_mean.fit(Xp)
         Xp = self.imp_mean.transform(Xp)
-        self.reg = LogisticRegression(penalty="none").fit(
+        self.reg = LogisticRegression(penalty=None).fit(
            Xp, y
         )
 
@@ -266,7 +266,7 @@ class RegLogICEMimputation(Classification):
         Xp = self.imp_mean.transform(Xp)
         # concat X and M
         Xp = np.hstack((Xp, M))
-        self.reg = LogisticRegression(penalty="none").fit(
+        self.reg = LogisticRegression(penalty=None).fit(
            Xp, y
         )
 
@@ -306,7 +306,7 @@ class RegLogICEYimputation(Classification):
         self.imp_mean.fit(data)
         data_imputed = self.imp_mean.transform(data)
         Xp = data_imputed[:, :-1]
-        self.reg = LogisticRegression(penalty="none").fit(
+        self.reg = LogisticRegression(penalty=None).fit(
             Xp, y
         ) 
 
@@ -352,7 +352,7 @@ class RegLogICEYMimputation(Classification):
         data_imputed = self.imp_mean.transform(data)
         Xp = data_imputed[:, :-1]
         Xp = np.hstack((Xp, M))
-        self.reg = LogisticRegression(penalty="none").fit(
+        self.reg = LogisticRegression(penalty=None).fit(
             Xp, y
         ) 
 
@@ -510,7 +510,7 @@ class RegLogPatByPat(Classification):
                 
                 Xp = self.X[S == 1][:, M[i] == 0]
                 yp = self.y[S == 1]
-                reg = LogisticRegression(n_jobs=-1, penalty="none").fit(
+                reg = LogisticRegression(n_jobs=-1, penalty=None).fit(
                     np.array(Xp, ndmin=2), yp
                 )
                 self.dic[str(self.M[i])] = reg
