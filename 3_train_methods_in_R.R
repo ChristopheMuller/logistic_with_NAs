@@ -9,7 +9,7 @@ reticulate::use_python(Sys.which("python3"))
 
 # Configuration
 exp <- "ExpA"
-training_sizes <- c(500, 1000, 5000, 10000)
+training_sizes <- c(50000)
 test_size <- 15000
 
 # Initialize methods list
