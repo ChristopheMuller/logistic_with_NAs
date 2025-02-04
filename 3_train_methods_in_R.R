@@ -8,15 +8,15 @@ reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe"
 
 
 # Configuration
-exp <- "ExpB"
-training_sizes <- c(100)
+exp <- "ExpA"
+training_sizes <- c(500, 1000, 5000, 10000, 50000)
 test_size <- 15000
 
 # Initialize methods list
 methods_list <- list(
-  # MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1),
-  # MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5),
-  SAEMLogisticRegression$new(name="SAEM")
+  # MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1)
+  MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5)
+  # SAEMLogisticRegression$new(name="SAEM")
 )
 
 # Read setup data
@@ -71,7 +71,7 @@ for (i in 1:nrow(df_set_up)) {
     for (method in methods_list) {
       # Fit method
       tic <- Sys.time()
-      method$fit(X_train, M_train, y_train)
+      method$fit(X_train, M_train, y_train, X_test, M_test)
       toc <- Sys.time()
       running_time <- as.numeric(difftime(toc, tic, units = "secs"))
       
@@ -107,7 +107,7 @@ for (i in 1:nrow(df_set_up)) {
         running_time = running_time,
         stringsAsFactors = FALSE
       )
-      
+
       simulations_df <- rbind(simulations_df, new_row)
       
       # Save updated simulations

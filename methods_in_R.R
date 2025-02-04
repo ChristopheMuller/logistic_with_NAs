@@ -31,83 +31,104 @@ ImputationMethod <- R6::R6Class("ImputationMethod",
                                 )
 )
 
-# MICE implementation with logistic regression
 MICELogisticRegression <- R6::R6Class("MICELogisticRegression",
-                                      inherit = ImputationMethod,
-                                      public = list(
-                                        n_imputations = 5,
-                                        maxit = 5,
-                                        
-                                        initialize = function(name, n_imputations = 5, maxit = 5) {
-                                          super$initialize(name)
-                                          self$n_imputations <- n_imputations
-                                          self$maxit <- maxit
-                                        },
-                                        
-                                        fit = function(X, M, y) {
-                                          # Combine data for imputation
-                                          data <- as.data.frame(X)
-                                          data$y <- y
-                                          
-                                          # Run MICE
-                                          self$imputation_model <- mice(data, m = self$n_imputations, maxit = self$maxit, printFlag = FALSE)
-                                          
-                                          # Fit logistic regression on each imputed dataset
-                                          models <- list()
-                                          for(i in 1:self$n_imputations) {
-                                            imp_data <- complete(self$imputation_model, i)
-                                            X_imp <- imp_data[, 1:(ncol(imp_data)-1)]
-                                            y_imp <- imp_data$y
-                                            
-                                            # Fit logistic regression
-                                            formula <- as.formula(paste("y ~", paste(colnames(X_imp), collapse = " + ")))
-                                            models[[i]] <- glm(formula, family = binomial(), data = imp_data)
-                                          }
-                                          
-                                          # Pool coefficients using Rubin's rules
-                                          self$model <- models
-                                          TRUE
-                                        },
-                                        
-                                        predict_probs = function(X_new, M_new) {
-                                          X_test <- as.data.frame(X_new)
+  inherit = ImputationMethod,
+  public = list(
+    n_imputations = 5,
+    maxit = 5,
+    
+    initialize = function(name, n_imputations = 5, maxit = 5) {
+      super$initialize(name)
+      self$n_imputations <- n_imputations
+      self$maxit <- maxit
+    },
+    
+    fit = function(X_train, M_train, y_train, X_test = NULL, M_test = NULL) {
+      # Combine training data for imputation
+      data_train <- as.data.frame(X_train)
+      data_train$y <- y_train
+      
+      # Create ignore vector for MICE
+      ignore_vec <- rep(FALSE, nrow(data_train))
+      
+      # If test set is provided, add it to the data and create ignore vector
+      if (!is.null(X_test)) {
+        data_test <- as.data.frame(X_test)
+        data_test$y <- NA  # Placeholder for test set target
+        
+        # Combine train and test data
+        data_full <- rbind(data_train, data_test)
+        
+        # Update ignore vector
+        ignore_vec <- c(ignore_vec, rep(TRUE, nrow(data_test)))
+        
+        # Run MICE on full dataset
+        self$imputation_model <- mice(data_full, m = self$n_imputations, 
+                                      maxit = self$maxit, 
+                                      printFlag = FALSE, 
+                                      ignore = ignore_vec)
+      } else {
+        # Run MICE only on training data
+        self$imputation_model <- mice(data_train, m = self$n_imputations, 
+                                      maxit = self$maxit, 
+                                      printFlag = FALSE)
+      }
+      
+      # Fit logistic regression on each imputed training dataset
+      models <- list()
+      for(i in 1:self$n_imputations) {
+        # Complete only the training data
+        imp_train_data <- complete(self$imputation_model, i)[!ignore_vec, ]
+        
+        # Fit logistic regression
+        formula <- as.formula(paste("y ~", paste(names(imp_train_data)[names(imp_train_data) != "y"], 
+                                                 collapse = " + ")))
+        models[[i]] <- glm(formula, family = binomial(), data = imp_train_data)
+      }
+      
+      # Store models
+      self$model <- models
+      TRUE
+    },
+    
+    predict_probs = function(X_new, M_new) {
+      # Predict for each imputed model
+      pred_probs <- matrix(0, nrow = nrow(X_new), ncol = self$n_imputations)
+      
+      for(i in 1:self$n_imputations) {
+        # Complete the test data using the same imputation model
+        imp_test <- complete(self$imputation_model, i)[nrow(self$imputation_model$data) - nrow(X_new) + 1:nrow(X_new), ]
 
-                                          # Predict for each imputed model
-                                          pred_probs <- matrix(0, nrow = nrow(X_new), ncol = self$n_imputations)
-                                          
-                                          for(i in 1:self$n_imputations) {
-                                            # Use the same imputation model from training
-                                            imp_test <- complete(self$imputation_model, i)
-                                            pred_probs[,i] <- predict(self$model[[i]], newdata = imp_test, type = "response")
-                                          }
-                                          
-                                          # Average predictions across imputations
-                                          return(rowMeans(pred_probs))
-                                        },
+        # Predict probabilities
+        pred_probs[,i] <- predict(self$model[[i]], newdata = imp_test, type = "response")
+      }
+      
+      # Average predictions across imputations
+      return(rowMeans(pred_probs))
+    },
                                         
-                                        return_params = function() {
-                                          if (!self$return_beta) return(NULL)
-                                          
-                                          # Pool coefficients using Rubin's rules
-                                          coef_list <- lapply(self$model, coef)
-                                          pooled_coef <- Reduce('+', coef_list) / length(coef_list)
-                                          
-                                          # Separate intercept and coefficients
-                                          intercept <- pooled_coef[1]  # First coefficient is intercept in R
-                                          coefficients <- pooled_coef[-1]  # All other coefficients
-                                          
-                                          # Remove names from the vectors
-                                          names(intercept) <- NULL
-                                          names(coefficients) <- NULL
-                                          
-                                          # Create the exact string format to match Python output
-                                          coef_str <- paste(coefficients, collapse = ", ")
-                                          int_str <- as.character(intercept)
-                                          
-                                          return(sprintf("[[%s], [%s]]", coef_str, int_str))
-                                        }
-                                      )
-                          
+    return_params = function() {
+      if (!self$return_beta) return(NULL)
+      
+      # Pool coefficients using Rubin's rules
+      coef_list <- lapply(self$model, coef)
+      pooled_coef <- Reduce('+', coef_list) / length(coef_list)
+      
+      # Separate intercept and coefficients
+      intercept <- pooled_coef[1]  # First coefficient is intercept in R
+      coefficients <- pooled_coef[-1]  # All other coefficients
+      
+      # Remove names from the vectors
+      names(intercept) <- NULL
+      names(coefficients) <- NULL
+      
+      # Create the exact string format to match Python output
+      coef_str <- paste(coefficients, collapse = ", ")
+      int_str <- as.character(intercept)
+      
+      return(sprintf("[[%s], [%s]]", coef_str, int_str))
+    }
+  )                     
 )
 
 
@@ -118,7 +139,7 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                           super$initialize(name)
                                         },
                                         
-                                        fit = function(X, M, y) {
+                                        fit = function(X, M, y, X_test = NULL, M_test = NULL) {
                                           # Convert data to required format
                                           data <- as.data.frame(X)
                                           colnames(data) <- paste0("X", 1:ncol(X))
@@ -138,7 +159,7 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                           
                                           # Get predictions
                                           pred_probs <- predict(self$model, newdata = X_test, type = "response")
-                                          print(head(pred_probs))
+
                                           return(pred_probs)
                                         },
                                         
