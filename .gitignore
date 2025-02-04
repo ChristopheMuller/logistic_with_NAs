@@ -3,5 +3,5 @@
 *.html
 .Rproj.user
 *.npz
-data_log
 *.pdf
+*.csv
