@@ -21,6 +21,7 @@ metrics_config = {
     "mse_error": {"label": "MSE"},
     "missclassification_error": {"label": "Missclassification"},
     "brier_score": {"label": "Brier Score"},
+    "mae_score": {"label": "MAE"},
 }
 
 methods_config = {
