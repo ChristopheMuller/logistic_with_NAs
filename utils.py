@@ -173,4 +173,13 @@ def generate_mask(n, d, prc):
         M[all_ones] = np.random.binomial(n=1, p=prc, size=(all_ones.sum(), d))
         all_ones = np.all(M == 1, axis=1)  # Recheck after redrawing
 
-    return M
+    return 
+
+def filter_data(df, **kwargs):
+    for key, value in kwargs.items():
+        if key in df.columns:
+            df = df[df[key] == value]
+        else:
+            print(f"Warning: {key} not in columns")
+    return df
+
