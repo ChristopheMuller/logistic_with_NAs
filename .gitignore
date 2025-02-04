@@ -5,3 +5,4 @@
 *.npz
 *.pdf
 *.csv
+*.pyc

@@ -78,7 +78,7 @@ MICELogisticRegression <- R6::R6Class("MICELogisticRegression",
                                           for(i in 1:self$n_imputations) {
                                             # Use the same imputation model from training
                                             imp_test <- complete(self$imputation_model, i)
-                                            pred_probs[,i] <- predict(self$model[[i]], newdata = X_test, type = "response")
+                                            pred_probs[,i] <- predict(self$model[[i]], newdata = imp_test, type = "response")
                                           }
                                           
                                           # Average predictions across imputations
@@ -138,6 +138,7 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                           
                                           # Get predictions
                                           pred_probs <- predict(self$model, newdata = X_test, type = "response")
+                                          print(head(pred_probs))
                                           return(pred_probs)
                                         },
                                         

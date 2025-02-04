@@ -3,19 +3,19 @@ library(dplyr)
 library(stringr)
 
 source("methods_in_R.R")
-reticulate::use_python(Sys.which("python3"))
-#reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
+# reticulate::use_python(Sys.which("python3"))
+reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
 
 
 # Configuration
-exp <- "ExpA"
-training_sizes <- c(50000)
+exp <- "ExpB"
+training_sizes <- c(100)
 test_size <- 15000
 
 # Initialize methods list
 methods_list <- list(
-  MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1),
-  MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5),
+  # MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1),
+  # MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5),
   SAEMLogisticRegression$new(name="SAEM")
 )
 
