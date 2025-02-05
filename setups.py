@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 
 color_palette = plt.cm.tab10.colors
@@ -14,6 +13,7 @@ variable_config = {
     "prcNA": {"label": "Missingness"},
     "prop1": {"label": "Proportion of 1"},
     "d": {"label": "Dimensions"},
+    "centricity": {"label": "Centricity"},
 }
 
 metrics_config = {

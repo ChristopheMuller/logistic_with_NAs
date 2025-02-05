@@ -4,19 +4,22 @@ library(stringr)
 
 source("methods_in_R.R")
 # reticulate::use_python(Sys.which("python3"))
-reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
+# reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
 
 
 # Configuration
-exp <- "ExpA"
-training_sizes <- c(500, 1000, 5000, 10000, 50000)
+exp <- "ExpB"
+training_sizes <- c(500, 1000, 5000, 10000)
 test_size <- 15000
 
 # Initialize methods list
 methods_list <- list(
-  # MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1)
-  MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5)
-  # SAEMLogisticRegression$new(name="SAEM")
+  MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1),
+  MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5),
+  MICELogisticRegression$new(name="MICE.M.IMP", n_imputations = 1, mask=TRUE),
+  MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations = 1, add.y=TRUE),
+  MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations = 1, add.y=TRUE, mask=TRUE),
+  SAEMLogisticRegression$new(name="SAEM")
 )
 
 # Read setup data
@@ -36,6 +39,7 @@ if (file.exists(simulation_file)) {
     stringsAsFactors = FALSE
   )
 }
+
 
 # Main loop
 for (i in 1:nrow(df_set_up)) {
@@ -69,49 +73,62 @@ for (i in 1:nrow(df_set_up)) {
     y_train <- y[1:n_train]
     
     for (method in methods_list) {
-      # Fit method
-      tic <- Sys.time()
-      method$fit(X_train, M_train, y_train, X_test, M_test)
-      toc <- Sys.time()
-      running_time <- as.numeric(difftime(toc, tic, units = "secs"))
+      # Wrap fit method in try-catch
+      fit_success <- tryCatch({
+        tic <- Sys.time()
+        method$fit(X_train, M_train, y_train, X_test, M_test)
+        toc <- Sys.time()
+        running_time <- as.numeric(difftime(toc, tic, units = "secs"))
+        TRUE
+      }, error = function(e) {
+        cat(sprintf("Error in fit for method %s: %s\n", method$name, e$message))
+        FALSE
+      })
       
-      if (method$can_predict) {
-        # Generate and save predictions
-        y_probs_pred <- method$predict_probs(X_test, M_test)
+      # Only proceed if fit was successful
+      if (fit_success && method$can_predict) {
+        # Wrap prediction in try-catch
+        pred_success <- tryCatch({
+          y_probs_pred <- method$predict_probs(X_test, M_test)
+          
+          save_name <- paste0(df_set_up$set_up[i], "_", method$name, "_", n_train)
+          
+          # Save predictions using numpy
+          np$savez(
+            file.path("data", exp, "pred_data", paste0(save_name, ".npz")),
+            y_probs_pred = y_probs_pred
+          )
+          TRUE
+        }, error = function(e) {
+          cat(sprintf("Error in prediction for method %s: %s\n", method$name, e$message))
+          FALSE
+        })
         
-        save_name <- paste0(df_set_up$set_up[i], "_", method$name, "_", n_train)
-        
-        # Save predictions using numpy
-        np$savez(
-          file.path("data", exp, "pred_data", paste0(save_name, ".npz")),
-          y_probs_pred = y_probs_pred
-        )
-      } else {
-        save_name <- NA
+        # Only add row to simulations if both fit and prediction were successful
+        if (fit_success && pred_success) {
+          # Get estimated parameters
+          if (method$return_beta) {
+            estimated_beta <- method$return_params()
+          } else {
+            estimated_beta <- NULL
+          }
+          
+          # Update simulations dataframe
+          new_row <- data.frame(
+            set_up = df_set_up$set_up[i],
+            method = method$name,
+            n_train = n_train,
+            estimated_beta = toString(estimated_beta),
+            file_name = save_name,
+            running_time = running_time,
+            stringsAsFactors = FALSE
+          )
+          simulations_df <- rbind(simulations_df, new_row)
+          
+          # Save updated simulations
+          write.csv(simulations_df, simulation_file, row.names = FALSE)
+        }
       }
-      
-      # Get estimated parameters
-      if (method$return_beta) {
-        estimated_beta <- method$return_params()
-      } else {
-        estimated_beta <- NULL
-      }
-      
-      # Update simulations dataframe
-      new_row <- data.frame(
-        set_up = df_set_up$set_up[i],
-        method = method$name,
-        n_train = n_train,
-        estimated_beta = toString(estimated_beta),
-        file_name = save_name,
-        running_time = running_time,
-        stringsAsFactors = FALSE
-      )
-
-      simulations_df <- rbind(simulations_df, new_row)
-      
-      # Save updated simulations
-      write.csv(simulations_df, simulation_file, row.names = FALSE)
     }
   }
 }
