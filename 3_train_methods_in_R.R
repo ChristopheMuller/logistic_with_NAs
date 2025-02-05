@@ -9,16 +9,16 @@ source("methods_in_R.R")
 
 # Configuration
 exp <- "ExpB"
-training_sizes <- c(500, 1000, 5000, 10000)
+training_sizes <- c(500, 1000, 5000, 10000, 50000)
 test_size <- 15000
 
 # Initialize methods list
 methods_list <- list(
-  # MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1),
-  # MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5),
-  # MICELogisticRegression$new(name="MICE.M.IMP", n_imputations = 1, mask=TRUE),
-  # MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations = 1, add.y=TRUE),
-  # MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations = 1, add.y=TRUE, mask=TRUE),
+  MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1),
+  MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5),
+  MICELogisticRegression$new(name="MICE.M.IMP", n_imputations = 1, mask=TRUE),
+  MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations = 1, add.y=TRUE),
+  MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations = 1, add.y=TRUE, mask=TRUE),
   SAEMLogisticRegression$new(name="SAEM")
 )
 
