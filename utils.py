@@ -153,6 +153,8 @@ def get_index_pattern(pattern, M, remove_all_missing=True):
         temp = np.where(np.all(M == full_pattern, axis=1))[0]
     elif pattern is None:
         temp = np.arange(M.shape[0])
+    else:
+        raise ValueError("Pattern type not recognized.", pattern)
 
     if remove_all_missing:
         id_all_missing = np.where(np.sum(M, axis=1) == M.shape[1])[0]

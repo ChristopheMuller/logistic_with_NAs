@@ -14,10 +14,10 @@ methods_list = [
     RegLog05Mimputation(name="05.IMP.M"),
     RegLogMeanimputation(name="Mean.IMP"),
     RegLogMeanMimputation(name="Mean.IMP.M"),
-    RegLogICEimputation(name="ICE.IMP"),
-    RegLogICEMimputation(name="ICE.IMP.M"),
-    RegLogICEYimputation(name="ICEY.IMP"),
-    RegLogICEYMimputation(name="ICEY.IMP.M"),   
+    # RegLogICEimputation(name="ICE.IMP"),
+    # RegLogICEMimputation(name="ICE.IMP.M"),
+    # RegLogICEYimputation(name="ICEY.IMP"),
+    # RegLogICEYMimputation(name="ICEY.IMP.M"),   
     RegLogPatByPat(name="PbP"), 
 ]
 
