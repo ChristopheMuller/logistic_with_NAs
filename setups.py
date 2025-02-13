@@ -14,9 +14,9 @@ uncertainties_config = {
 }
 
 metrics_set_up = {
-    "brier_score": lambda true, pred: np.mean(((true >= 0.5).astype(int) - pred)**2),
-    "missclassification_error": lambda true, pred: 1 - np.mean((true >= 0.5) == (pred >= 0.5)),
-    "mae_score": lambda true, pred: np.mean(np.abs(true - pred)),
+    "brier_score": lambda true, pred, true_y: np.mean(((true >= 0.5).astype(int) - pred)**2),
+    "missclassification_error": lambda true, pred, true_y: 1 - np.mean(true_y == (pred >= 0.5)),
+    "mae_score": lambda true, pred, true_y: np.mean(np.abs(true - pred)),
 }
 
 variable_config = {
@@ -44,7 +44,7 @@ methods_config = {
     "ICE.IMP.M": {"label": "ICE.IMP.M", "color": color_palette[2], "linestyle": "--", "marker":"x"},
     "ICEY.IMP": {"label": "ICEY.IMP", "color": color_palette[3], "linestyle": "-", "marker":"o"},
     "ICEY.IMP.M": {"label": "ICEY.IMP.M", "color": color_palette[3], "linestyle": "--", "marker":"x"},
-    "MICE.5.IMP": {"label": "MICE.MI.IMP", "color": color_palette[3], "linestyle": "-", "marker":"o"},
+    "MICE.5.IMP": {"label": "MICE.MI.IMP", "color": color_palette[4], "linestyle": "--", "marker":"x"},
     "MICE.IMP": {"label": "MICE.IMP", "color": color_palette[4], "linestyle": "-", "marker":"o"},
     "Mean.IMP": {"label": "Mean.IMP", "color": color_palette[5], "linestyle": "-", "marker":"o"},
     "Mean.IMP.M": {"label": "Mean.IMP.M", "color": color_palette[5], "linestyle": "--", "marker":"x"},
