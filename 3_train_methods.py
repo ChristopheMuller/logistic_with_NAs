@@ -5,7 +5,7 @@ import time
 
 from methods import *
 
-exp = "ExpA"
+exp = "ExpC"
 
 
 methods_list = [
