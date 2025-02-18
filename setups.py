@@ -57,6 +57,7 @@ methods_config = {
     "MICE.M.IMP": {"label": "MICE.IMP.M", "color": color_palette[4], "linestyle": "--", "marker":"x"},
     "MICE.Y.IMP": {"label": "MICE.Y.IMP", "color": color_palette[9], "linestyle": "-", "marker":"o"},
     "MICE.Y.M.IMP": {"label": "MICE.Y.IMP.M", "color": color_palette[9], "linestyle": "--", "marker":"x"},
+    "PY.SAEM": {"label": "PY.SAEM", "color": color_palette[8], "linestyle": "-", "marker":"o"},
 }
 
 methods_no_beta_estimate = [

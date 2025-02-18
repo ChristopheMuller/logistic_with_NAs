@@ -3,13 +3,13 @@ library(dplyr)
 library(stringr)
 
 source("methods_in_R.R")
-reticulate::use_python(Sys.which("python3"))
-# reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
+# reticulate::use_python(Sys.which("python3"))
+reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
 
 
 # Configuration
-exp <- "ExpA"
-training_sizes <- c(500, 1000, 5000, 10000, 50000)
+exp <- "ExpC"
+training_sizes <- c(100, 10000, 50000)
 test_size <- 15000
 
 # Initialize methods list
@@ -19,10 +19,10 @@ methods_list <- list(
   # MICELogisticRegression$new(name="MICE.M.IMP", n_imputations = 1, mask=TRUE),
   # MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations = 1, add.y=TRUE),
   # MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations = 1, add.y=TRUE, mask=TRUE),
-  # SAEMLogisticRegression$new(name="SAEM")
+  SAEMLogisticRegression$new(name="SAEM")
   # MICELogisticRegression$new(name="MICE.10.IMP", n_imputations = 10),
   # MICELogisticRegression$new(name="MICE.20.IMP", n_imputations = 20),
-  MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations = 100, add.y=TRUE)
+  # MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations = 100, add.y=TRUE)
 )
 
 # Read setup data

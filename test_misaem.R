@@ -6,6 +6,7 @@ library(dplyr)
 library(stringr)
 
 
+
 df_set_up <- read.csv(file.path("data", exp, "set_up.csv"))
 
 
@@ -31,7 +32,7 @@ M_test <- data_test$f[["M"]]
 y_probs_test <- data_test$f[["y_probs"]]
 y_test <- data_test$f[["y"]]
 
-n_train <- 100
+n_train <- 20000
 X_train <- X_obs[1:n_train, ]
 M_train <- M[1:n_train, ]
 y_train <- y[1:n_train]
@@ -45,7 +46,7 @@ model <- misaem::miss.glm("y ~ .", data)
 model$mu.X
 df_set_up[i,5]
 model$Sig.X
-toeplitz(c(1,df_set_up[i,8], df_set_up[i,8]^2, df_set_up[i,8]^3, df_set_up[i,8]^4))
+toeplitz(c(1,df_set_up[i,8], df_set_up[i,8]^2))
 model$coefficients
 df_set_up[i,4]
 

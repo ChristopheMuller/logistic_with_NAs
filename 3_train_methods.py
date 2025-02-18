@@ -23,7 +23,7 @@ methods_list = [
 ]
 
 # training_size = np.array([50, 100, 500, 1000, 5000, 10000, 50000, 100000])
-training_size = np.array([500, 1000, 5000, 10000, 50000])
+training_size = np.array([100, 10000, 50000])
 
 test_size = 15000
 

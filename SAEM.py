@@ -279,7 +279,7 @@ class MissGLM(BaseEstimator, ClassifierMixin):
         if np.any(rindic):
 
 
-            if method == "impute":  # Conditional mean imputation
+            if method == "impute":
 
                 for i in range(n):
 
@@ -306,7 +306,7 @@ class MissGLM(BaseEstimator, ClassifierMixin):
             elif method == "map":
 
                 pr2 = np.zeros(n)
-                nmcmc = 100
+                nmcmc = 2500
 
                 for i in range(n):
 
