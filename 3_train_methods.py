@@ -18,11 +18,12 @@ methods_list = [
     # RegLogICEMimputation(name="ICE.IMP.M"),
     # RegLogICEYimputation(name="ICEY.IMP"),
     # RegLogICEYMimputation(name="ICEY.IMP.M"),   
-    RegLogPatByPat(name="PbP"), 
+    # RegLogPatByPat(name="PbP"), 
+    SAEM_python(name="PY.SAEM")
 ]
 
 # training_size = np.array([50, 100, 500, 1000, 5000, 10000, 50000, 100000])
-training_size = np.array([100000])
+training_size = np.array([100])
 
 test_size = 15000
 

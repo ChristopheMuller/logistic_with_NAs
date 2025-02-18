@@ -4,12 +4,13 @@ ssh -i ~/.ssh/chmuller chmuller@nef-frontal.inria.fr
 ssh chmuller@nef-devel.inria.fr
 
 
-oarsub -l nodes=1/core=8,walltime=24:00:00 -n logExpB --stdout output/Out_ExpB.txt --stderr output/Err_ExpB.txt "apptainer exec env.sif python3 3_train_methods.py && apptainer exec env.sif Rscript 3_train_methods_in_R.R"
+oarsub -l nodes=1/core=8,walltime=24:00:00 -n logExpB --stdout output/Out_ExpB.txt --stderr output/Err_ExpB.txt "apptainer exec env.sif Rscript 3_train_methods_in_R.R"
 
 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
 
 
-Exp B : 2025-02-05 17:49:09 => 
+Exp B : 2025-02-05 17:49:09 => ?
+Exp A : 
 
 
 

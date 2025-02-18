@@ -53,6 +53,7 @@ methods_config = {
     "MICE.IMP": {"label": "MICE.IMP", "color": color_palette[2], "linestyle": "-", "marker":"o"},
     "MICE.5.IMP": {"label": "MICE.5.IMP", "color": color_palette[2], "linestyle": "--", "marker":"x"},
     "MICE.10.Y.IMP": {"label": "MICE.10.Y.IMP", "color": color_palette[2], "linestyle": ":", "marker":"^"},
+    "MICE.100.Y.IMP": {"label": "MICE.100.Y.IMP", "color": color_palette[2], "linestyle": "-.", "marker":"v"},
     "MICE.M.IMP": {"label": "MICE.IMP.M", "color": color_palette[4], "linestyle": "--", "marker":"x"},
     "MICE.Y.IMP": {"label": "MICE.Y.IMP", "color": color_palette[9], "linestyle": "-", "marker":"o"},
     "MICE.Y.M.IMP": {"label": "MICE.Y.IMP.M", "color": color_palette[9], "linestyle": "--", "marker":"x"},

@@ -7,7 +7,7 @@ def sigma(x):
 def toep(d, rate):
     return np.array([[(rate) ** abs(i - j) for i in range(d)] for j in range(d)])
 
-def generate_X(d, corr_rate, n, prop=None, beta0=None, limit=0.005, max_iter=100):
+def generate_X(d, corr_rate, n, prop=None, beta0=None, limit=0.005, max_iter=100, intercept=0):
     cov = toep(d, corr_rate)
     X = np.random.multivariate_normal(np.zeros(d), cov, size=n)
 
@@ -15,7 +15,7 @@ def generate_X(d, corr_rate, n, prop=None, beta0=None, limit=0.005, max_iter=100
 
     if prop is not None:
         for _ in range(max_iter):
-            y_attempt = sigma(X @ beta0)
+            y_attempt = sigma(X @ beta0 + intercept)
             y_drawn = np.random.binomial(1, y_attempt)
             current_prop = np.mean(y_drawn)
 
@@ -31,7 +31,7 @@ def generate_X(d, corr_rate, n, prop=None, beta0=None, limit=0.005, max_iter=100
 
 
     
-def get_y_prob_bayes(X_m, full_mu, full_cov, true_beta, n_mc=1000):
+def get_y_prob_bayes(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
     # Group rows by their missingness pattern
     M = np.isnan(X_m)
     unique_patterns = np.unique(M, axis=0)
@@ -45,7 +45,7 @@ def get_y_prob_bayes(X_m, full_mu, full_cov, true_beta, n_mc=1000):
         X_m_subset = X_m[pattern_indices]
         
         # Directly reuse get_y_prob_bayes_same_pattern for this subset
-        prob_y_subset = get_y_prob_bayes_same_pattern(X_m_subset, full_mu, full_cov, true_beta, n_mc)
+        prob_y_subset = get_y_prob_bayes_same_pattern(X_m_subset, full_mu, full_cov, true_beta, n_mc, intercept)
         
         # Update the results for this pattern
         prob_y_all[pattern_indices] = prob_y_subset
@@ -53,7 +53,7 @@ def get_y_prob_bayes(X_m, full_mu, full_cov, true_beta, n_mc=1000):
     return prob_y_all
 
 
-def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000):
+def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
     """
     Apply the conditional_probability function row-wise to X_m,
     optimized for a shared missingness pattern m across all rows.
@@ -109,7 +109,7 @@ def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000):
         X_full_mc[:, missing_idx] = X_mc
 
         # Compute probabilities
-        logits_mc = X_full_mc @ true_beta
+        logits_mc = X_full_mc @ true_beta + intercept
         prob_y_mc = sigma(logits_mc)
 
         # Append results
