@@ -3,8 +3,8 @@ library(dplyr)
 library(stringr)
 
 source("methods_in_R.R")
-# reticulate::use_python(Sys.which("python3"))
-reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
+reticulate::use_python(Sys.which("python3"))
+#reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
 
 
 # Configuration
