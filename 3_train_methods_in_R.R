@@ -9,7 +9,7 @@ reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe"
 
 # Configuration
 exp <- "ExpC"
-training_sizes <- c(100, 10000, 50000)
+training_sizes <- c(100, 500, 1000, 5000, 10000, 50000, 1000000, 300000)
 test_size <- 15000
 
 # Initialize methods list
