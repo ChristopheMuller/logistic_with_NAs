@@ -19,8 +19,8 @@ methods_list <- list(
   # MICELogisticRegression$new(name="MICE.M.IMP", n_imputations = 1, mask=TRUE),
   MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations = 1, add.y=TRUE),
   # MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations = 1, add.y=TRUE, mask=TRUE),
-  SAEMLogisticRegression$new(name="SAEM")
-  MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations = 10, add.y=TRUE),
+  SAEMLogisticRegression$new(name="SAEM"),
+  MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations = 10, add.y=TRUE)
   # MICELogisticRegression$new(name="MICE.20.IMP", n_imputations = 20),
   # MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations = 100, add.y=TRUE)
 )
