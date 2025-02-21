@@ -59,6 +59,7 @@ for (n_train in training_sizes){
   results$y_probs_pred[[as.character(n_train)]] <- y_probs_pred
   results$beta_estimated[[as.character(n_train)]] <- beta_estimated
   results$mu_estimated[[as.character(n_train)]] <- mu_estimated
+  results$sigma_estimated[[as.character(n_train)]] <- sigma_estimated
   
   
 }
@@ -67,5 +68,4 @@ for (n_train in training_sizes){
 current_direcotry <- getwd()
 results_path <- file.path(current_direcotry, "/data/ExpC/SAEM_deepdive.RDS")
 saveRDS(results, results_path)
-
 
