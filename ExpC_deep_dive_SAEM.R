@@ -63,6 +63,9 @@ for (n_train in training_sizes){
   
 }
 
-saveRDS(results, "~/INRIA/R_scripts/logistic_with_NAs/data/ExpC/SAEM_deepdive.RDS")
+
+current_direcotry <- getwd()
+results_path <- file.path(current_direcotry, "/data/ExpC/SAEM_deepdive.RDS")
+saveRDS(results, results_path)
 
 
