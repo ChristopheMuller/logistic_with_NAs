@@ -180,7 +180,8 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                           
                                           # Fit SAEM model
                                           formula <- as.formula(paste("y ~", paste(colnames(data)[1:(ncol(data)-1)], collapse = " + ")))
-                                          self$model <- miss.glm(formula, data = data, print_iter = FALSE)
+                                          self$model <- miss.glm(formula, data = data, print_iter = FALSE, control = list(tau = 0.80, maxruns=1500))
+                                          print("using tau = 0.8")
                                           
                                           TRUE
                                         },
