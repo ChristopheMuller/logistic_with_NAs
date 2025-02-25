@@ -217,3 +217,88 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                         }
                                       )
 )
+
+SAEM_MI <- R6::R6Class("SAEM_MI",
+                       inherit = ImputationMethod,
+                       public = list(
+                         n_imputations = 5,
+                         models = NULL,
+                         
+                         initialize = function(name, n_imputations = 5) {
+                           super$initialize(name)
+                           self$n_imputations <- n_imputations
+                         },
+                         
+                         fit = function(X, M, y, X_test = NULL, M_test = NULL) {
+                           # Convert data to required format
+                           data <- as.data.frame(X)
+                           colnames(data) <- paste0("X", 1:ncol(X))
+                           data$y <- y
+                           
+                           # Create formula for the model
+                           formula <- as.formula(paste("y ~", paste(colnames(data)[1:(ncol(data)-1)], collapse = " + ")))
+                           
+                           # Fit multiple SAEM models
+                           self$models <- list()
+                           for (i in 1:self$n_imputations) {
+                             # Print progress
+                             cat(sprintf("Fitting SAEM model %d of %d\n", i, self$n_imputations))
+                             
+                             # Fit SAEM model with different random seed for each iteration
+                             set.seed(i)  # Different seed for each model
+                             self$models[[i]] <- miss.glm(formula, data = data, print_iter = FALSE, 
+                                                          control = list(tau = 0.80, maxruns = 1500))
+                           }
+                           
+                           # Store the first model as the main model for parameter extraction
+                           self$model <- self$models[[1]]
+                           
+                           TRUE
+                         },
+                         
+                         predict_probs = function(X_new, M_new) {
+                           # Prepare test data
+                           X_test <- as.data.frame(X_new)
+                           colnames(X_test) <- paste0("X", 1:ncol(X_new))
+                           
+                           # Predict for each model and store in matrix
+                           pred_matrix <- matrix(0, nrow = nrow(X_test), ncol = self$n_imputations)
+                           
+                           for (i in 1:self$n_imputations) {
+                             pred_matrix[, i] <- predict(self$models[[i]], newdata = X_test, type = "response")
+                           }
+                           
+                           # Return average predictions across all models
+                           return(rowMeans(pred_matrix))
+                         },
+                         
+                         return_params = function() {
+                           if (!self$return_beta) return(NULL)
+                           
+                           # Extract coefficients from all models
+                           all_coefs <- lapply(self$models, function(model) {
+                             coef_summary <- summary(model)$coef
+                             list(
+                               coefficients = coef_summary[-1, "Estimate"],  # All except intercept
+                               intercept = coef_summary[1, "Estimate"]      # Intercept only
+                             )
+                           })
+                           
+                           # Average coefficients across all models (Rubin's rules - simple average)
+                           avg_coefs <- list(
+                             coefficients = Reduce(`+`, lapply(all_coefs, function(x) x$coefficients)) / self$n_imputations,
+                             intercept = sum(sapply(all_coefs, function(x) x$intercept)) / self$n_imputations
+                           )
+                           
+                           # Remove names from the vectors
+                           names(avg_coefs$coefficients) <- NULL
+                           names(avg_coefs$intercept) <- NULL
+                           
+                           # Create the exact string format to match Python output
+                           coef_str <- paste(avg_coefs$coefficients, collapse = ", ")
+                           int_str <- as.character(avg_coefs$intercept)
+                           
+                           return(sprintf("[[%s], [%s]]", coef_str, int_str))
+                         }
+                       )
+)
