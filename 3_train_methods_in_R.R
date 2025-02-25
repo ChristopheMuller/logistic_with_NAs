@@ -9,8 +9,8 @@ reticulate::use_python(Sys.which("python3"))
 
 # Configuration
 exp <- "ExpC"
-# training_sizes <- c(100, 1000, 10000, 50000, 100000, 300000)
-training_sizes <- c(100)
+#training_sizes <- c(100)
+training_sizes <- c(100, 1000, 10000, 50000, 100000, 300000)
 test_size <- 15000
 
 # Initialize methods list
@@ -23,7 +23,7 @@ methods_list <- list(
   # MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations = 10, add.y=TRUE)
   # MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations = 100, add.y=TRUE)
   # SAEMLogisticRegression$new(name="SAEM"),
-  SAEM_MI(name="SAEM.MI", n_imputations = 5)
+  SAEM_MI$new(name="SAEM.MI", n_imputations = 5)
 )
 
 # Read setup data
