@@ -18,7 +18,7 @@ methods_list = [
     # RegLogICEMimputation(name="ICE.IMP.M"),
     # RegLogICEYimputation(name="ICEY.IMP"),
     # RegLogICEYMimputation(name="ICEY.IMP.M"),   
-    RegLogPatByPat(name="PbP"), 
+    RegLogPatByPat(name="PbP"),
     # SAEM_python(name="PY.SAEM")
 ]
 
