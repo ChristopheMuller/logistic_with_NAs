@@ -41,23 +41,30 @@ metrics_config = {
 methods_config = {
     "05.IMP": {"label": "05.IMP", "color": color_palette[0], "linestyle": "-", "marker":"o"},
     "05.IMP.M": {"label": "05.IMP.M", "color": color_palette[0], "linestyle": "--", "marker":"x"},
+
     "CC": {"label": "CC", "color": color_palette[1], "linestyle": "-", "marker":"o"},
-    # "ICE.IMP": {"label": "ICE.IMP", "color": color_palette[2], "linestyle": "-", "marker":"o"},
-    # "ICE.IMP.M": {"label": "ICE.IMP.M", "color": color_palette[2], "linestyle": "--", "marker":"x"},
-    # "ICEY.IMP": {"label": "ICEY.IMP", "color": color_palette[3], "linestyle": "-", "marker":"o"},
-    # "ICEY.IMP.M": {"label": "ICEY.IMP.M", "color": color_palette[3], "linestyle": "--", "marker":"x"},
-    "Mean.IMP": {"label": "Mean.IMP", "color": color_palette[5], "linestyle": "-", "marker":"o"},
-    "Mean.IMP.M": {"label": "Mean.IMP.M", "color": color_palette[5], "linestyle": "--", "marker":"x"},
-    "PbP": {"label": "PbP", "color": color_palette[6], "linestyle": "-", "marker":"o"},
-    "SAEM": {"label": "SAEM", "color": color_palette[7], "linestyle": "-", "marker":"o"},
-    "MICE.IMP": {"label": "MICE.IMP", "color": color_palette[2], "linestyle": "-", "marker":"o"},
-    "MICE.5.IMP": {"label": "MICE.5.IMP", "color": color_palette[2], "linestyle": "--", "marker":"x"},
-    "MICE.10.Y.IMP": {"label": "MICE.10.Y.IMP", "color": color_palette[2], "linestyle": ":", "marker":"^"},
-    "MICE.100.Y.IMP": {"label": "MICE.100.Y.IMP", "color": color_palette[2], "linestyle": "-.", "marker":"v"},
-    "MICE.M.IMP": {"label": "MICE.IMP.M", "color": color_palette[4], "linestyle": "--", "marker":"x"},
-    "MICE.Y.IMP": {"label": "MICE.Y.IMP", "color": color_palette[9], "linestyle": "-", "marker":"o"},
-    "MICE.Y.M.IMP": {"label": "MICE.Y.IMP.M", "color": color_palette[9], "linestyle": "--", "marker":"x"},
-    "PY.SAEM": {"label": "PY.SAEM", "color": color_palette[8], "linestyle": "-", "marker":"o"},
+
+    "PbP": {"label": "PbP", "color": color_palette[2], "linestyle": "-", "marker":"o"},
+
+    "Mean.IMP": {"label": "Mean.IMP", "color": color_palette[3], "linestyle": "-", "marker":"o"},
+    "Mean.IMP.M": {"label": "Mean.IMP.M", "color": color_palette[3], "linestyle": "--", "marker":"x"},
+
+    "MICE.Y.IMP": {"label": "MICE.1.Y.IMP", "color": color_palette[4], "linestyle": "-", "marker":"o"},
+    "MICE.Y.M.IMP": {"label": "MICE.1.Y.IMP.M", "color": color_palette[4], "linestyle": "--", "marker":"x"},
+
+    "SAEM": {"label": "SAEM", "color": color_palette[5], "linestyle": "-", "marker":"o"},
+
+    "MICE.10.Y.IMP": {"label": "MICE.10.Y.IMP", "color": color_palette[6], "linestyle": "-", "marker":"o"},
+    "MICE.100.Y.IMP": {"label": "MICE.100.Y.IMP", "color": color_palette[6], "linestyle": "--", "marker":"x"},
+
+    "MICE.IMP": {"label": "MICE.1.IMP", "color": color_palette[7], "linestyle": "-", "marker":"o"},
+    "MICE.M.IMP": {"label": "MICE.1.IMP.M", "color": color_palette[7], "linestyle": "--", "marker":"x"},
+
+
+
+#     "MICE.5.IMP": {"label": "MICE.5.IMP", "color": color_palette[2], "linestyle": "--", "marker":"x"},
+#     "PY.SAEM": {"label": "PY.SAEM", "color": color_palette[8], "linestyle": "-", "marker":"o"},
+#     "SAEM.MI": {"label": "SAEM.MI", "color": color_palette[9], "linestyle": "-", "marker":"o"},
 }
 
 methods_no_beta_estimate = [

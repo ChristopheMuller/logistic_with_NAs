@@ -123,7 +123,8 @@ def load_data(set_up, data_type, exp):
 
     dict_path = {
         "bayes": "bayes_data",
-        "test": "test_data"
+        "test": "test_data",
+        "original": "original_data",
     }
 
     if type(set_up) == str:

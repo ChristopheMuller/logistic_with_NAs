@@ -247,7 +247,7 @@ SAEM_MI <- R6::R6Class("SAEM_MI",
                              # Fit SAEM model with different random seed for each iteration
                              set.seed(i)  # Different seed for each model
                              self$models[[i]] <- miss.glm(formula, data = data, print_iter = FALSE, 
-                                                          control = list(tau = 0.80, maxruns = 1500))
+                                                          control = list(tau = 1, maxruns = 750))
                            }
                            
                            # Store the first model as the main model for parameter extraction

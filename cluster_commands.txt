@@ -16,5 +16,6 @@ Exp A :
 
 
 
-scp -i C:\Users\Chris\.ssh\chmuller -r "C:/Users/Chris/Desktop/Fake_folder" chmuller@nef-frontal.inria.fr:/home/chmuller/
-scp -i C:\Users\Chris\.ssh\chmuller chmuller@nef-frontal.inria.fr:/home/chmuller/*  "C:/Users/Chris/Desktop/Local_folder"
+scp -i C:\Users\Chris\.ssh\chmuller -r .\data\ExpD\ chmuller@nef-frontal.inria.fr:/home/chmuller/
+
+scp -r -i C:\Users\Chris\.ssh\chmuller chmuller@nef-frontal.inria.fr:/home/chmuller/logistic_with_NAs/data/ExpD/  .               
