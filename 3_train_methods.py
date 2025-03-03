@@ -22,7 +22,7 @@ methods_list = [
     # SAEM_python(name="PY.SAEM")
 ]
 
-training_size = np.array([100, 500, 1000, 5000, 10000, 50000])
+training_size = np.array([100000, 200000, 300000])
 
 test_size = 15000
 
