@@ -5,15 +5,15 @@ import time
 
 from methods import *
 
-exp = "ExpE"
+exp = "ExpF"
 
 
 methods_list = [
-    CompleteCase(name="CC"),
-    RegLog05imputation(name="05.IMP"),
-    RegLog05Mimputation(name="05.IMP.M"),
-    RegLogMeanimputation(name="Mean.IMP"),
-    RegLogMeanMimputation(name="Mean.IMP.M"),
+    # CompleteCase(name="CC"),
+    # RegLog05imputation(name="05.IMP"),
+    # RegLog05Mimputation(name="05.IMP.M"),
+    # RegLogMeanimputation(name="Mean.IMP"),
+    # RegLogMeanMimputation(name="Mean.IMP.M"),
     # RegLogICEimputation(name="ICE.IMP"),
     # RegLogICEMimputation(name="ICE.IMP.M"),
     # RegLogICEYimputation(name="ICEY.IMP"),
@@ -22,7 +22,7 @@ methods_list = [
     # SAEM_python(name="PY.SAEM")
 ]
 
-training_size = np.array([100000, 200000, 300000])
+training_size = np.array([100, 500, 1000, 5000, 10000, 50000])
 
 test_size = 15000
 
