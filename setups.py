@@ -14,7 +14,7 @@ uncertainties_config = {
 }
 
 metrics_set_up = {
-    "brier_score": lambda true, pred, true_y, bayes: np.mean(((true >= 0.5).astype(int) - pred)**2),
+    "brier_score": lambda true, pred, true_y, bayes: np.mean((true_y - pred)**2),
     "missclassification_error": lambda true, pred, true_y, bayes: 1 - np.mean(true_y == (pred >= 0.5)),
     "mae_score": lambda true, pred, true_y, bayes: np.mean(np.abs(true - pred)),
     "mae_score_bayes": lambda true, pred, true_y, bayes: np.mean(np.abs(bayes - pred)),
@@ -63,7 +63,7 @@ methods_config = {
 
 
 #     "MICE.5.IMP": {"label": "MICE.5.IMP", "color": color_palette[2], "linestyle": "--", "marker":"x"},
-#     "PY.SAEM": {"label": "PY.SAEM", "color": color_palette[8], "linestyle": "-", "marker":"o"},
+    "PY.SAEM": {"label": "PY.SAEM", "color": color_palette[5], "linestyle": "--", "marker":"x"},
 #     "SAEM.MI": {"label": "SAEM.MI", "color": color_palette[9], "linestyle": "-", "marker":"o"},
 }
 
