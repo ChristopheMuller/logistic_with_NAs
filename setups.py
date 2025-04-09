@@ -31,7 +31,7 @@ variable_config = {
 metrics_config = {
     "angular_error": {"label": "Angular Error"},
     "mse_error": {"label": "MSE"},
-    "missclassification_error": {"label": "Missclassification"},
+    "missclassification_error": {"label": "Misclassification"},
     "brier_score": {"label": "Brier Score"},
     "mae_score": {"label": "MAE"},
     "running_time": {"label": "Running Time (s.)"},

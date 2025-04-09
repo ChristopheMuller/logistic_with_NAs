@@ -4,11 +4,11 @@ library(stringr)
 
 source("methods_in_R.R")
 reticulate::use_python(Sys.which("python3"))
-#reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
+# reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
 
 
 # Configuration
-exp <- "ExpF"
+exp <- "ExpG_exponential"
 #training_sizes <- c(100)
 training_sizes <- c(100, 500, 1000, 5000, 10000, 50000)
 test_size <- 15000
@@ -44,21 +44,17 @@ if (file.exists(simulation_file)) {
 }
 
 
-# Main loop
 for (i in 1:nrow(df_set_up)) {
   cat(sprintf("Running set up %d out of %d: %s\n", i, nrow(df_set_up), df_set_up$set_up[i]))
   
-  # Load NPZ files using reticulate
   np <- import("numpy")
   data <- np$load(file.path("data", exp, "original_data", paste0(df_set_up$set_up[i], ".npz")))
   X_obs <- data$f[["X_obs"]]
   M <- data$f[["M"]]
   y <- data$f[["y"]]
 
-  # Parse true beta from setup
   true_beta <- as.numeric(str_split(gsub("\\[|\\]", "", df_set_up$true_beta[i]), " ")[[1]])
   
-  # Load test data
   data_test <- np$load(file.path("data", exp, "test_data", paste0(df_set_up$set_up[i], ".npz")))
   X_test <- data_test$f[["X_obs"]]
   M_test <- data_test$f[["M"]]
@@ -68,13 +64,12 @@ for (i in 1:nrow(df_set_up)) {
   for (n_train in training_sizes) {
     cat(sprintf("\tTraining size: %d\n", n_train))
     
-    # Subset training data
     X_train <- X_obs[1:n_train, ]
     M_train <- M[1:n_train, ]
     y_train <- y[1:n_train]
     
     for (method in methods_list) {
-      # Wrap fit method in try-catch
+
       fit_success <- tryCatch({
         tic <- Sys.time()
         method$fit(X_train, M_train, y_train, X_test, M_test)
@@ -86,15 +81,13 @@ for (i in 1:nrow(df_set_up)) {
         FALSE
       })
       
-      # Only proceed if fit was successful
       if (fit_success && method$can_predict) {
-        # Wrap prediction in try-catch
+
         pred_success <- tryCatch({
           y_probs_pred <- method$predict_probs(X_test, M_test)
           
           save_name <- paste0(df_set_up$set_up[i], "_", method$name, "_", n_train)
           
-          # Save predictions using numpy
           np$savez(
             file.path("data", exp, "pred_data", paste0(save_name, ".npz")),
             y_probs_pred = y_probs_pred
@@ -105,16 +98,14 @@ for (i in 1:nrow(df_set_up)) {
           FALSE
         })
         
-        # Only add row to simulations if both fit and prediction were successful
         if (fit_success && pred_success) {
-          # Get estimated parameters
+
           if (method$return_beta) {
             estimated_beta <- method$return_params()
           } else {
             estimated_beta <- NULL
           }
           
-          # Update simulations dataframe
           new_row <- data.frame(
             set_up = df_set_up$set_up[i],
             method = method$name,
@@ -126,7 +117,6 @@ for (i in 1:nrow(df_set_up)) {
           )
           simulations_df <- rbind(simulations_df, new_row)
           
-          # Save updated simulations
           write.csv(simulations_df, simulation_file, row.names = FALSE)
         }
       }

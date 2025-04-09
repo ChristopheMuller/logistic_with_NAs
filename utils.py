@@ -164,6 +164,30 @@ def get_index_pattern(pattern, M, remove_all_missing=True):
     return temp
 
 
+def get_index_pattern_probs(pattern_probs=None, true_y=None, bayes=None):
+
+    if pattern_probs is None:
+        pattern_probs = {"bayes":[0,1], "true":[0,1]}
+    
+    all_idx = np.arange(len(true_y))
+    if pattern_probs["bayes"] is not None:
+        if bayes is None:
+            raise ValueError("Bayes data is missing")
+        else:
+            from_bayes = pattern_probs["bayes"][0]
+            to_bayes = pattern_probs["bayes"][1]
+            all_idx = all_idx[np.where((bayes[all_idx] >= from_bayes) & (bayes[all_idx] < to_bayes))[0]]
+
+    if pattern_probs["true"] is not None:
+        if true_y is None:
+            raise ValueError("True data is missing")
+        from_true = pattern_probs["true"][0]
+        to_true = pattern_probs["true"][1]
+        all_idx = all_idx[np.where((true_y[all_idx] >= from_true) & (true_y[all_idx] < to_true))[0]]
+
+    return all_idx
+
+
 def generate_mask(n, d, prc):
     """Generate an MCAR missingness mask M, ensuring no row is fully missing."""
     M = np.random.binomial(n=1, p=prc, size=(n, d))

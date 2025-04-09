@@ -227,10 +227,10 @@ class MissGLM(BaseEstimator, ClassifierMixin):
             mu = np.nanmean(X, axis=0)
             sigma = np.cov(X, rowvar=False)*(n-1)/n
             if self.var_cal:
-                P = np.exp(X @ beta) / (1 + np.exp(X @ beta))
+                P = np.exp(X @ log_reg.coef_.ravel() + log_reg.intercept_) / (1 + np.exp(X @ log_reg.coef_.ravel() + log_reg.intercept_))
                 W = np.diag(P * (1 - P))
-                X = np.hstack([np.ones((n, 1)), X])
-                var_obs = np.linalg.inv(X.T @ W @ X)
+                Xstar = np.hstack([np.ones((n, 1)), X])
+                var_obs = np.linalg.inv(Xstar.T @ W @ Xstar)
                 std_obs = np.sqrt(np.diag(var_obs))
                 self.std_err = std_obs
             
@@ -258,6 +258,8 @@ class MissGLM(BaseEstimator, ClassifierMixin):
         T : array-like of shape (n_samples, n_classes)
             Returns the probability of the samples for both classes.
         """
+
+        Xtest = Xtest.copy()
 
         if self.seed is not None:
             np.random.seed(self.seed)
