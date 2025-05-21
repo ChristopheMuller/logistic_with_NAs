@@ -3,14 +3,14 @@ library(dplyr)
 library(stringr)
 
 source("methods_in_R.R")
-reticulate::use_python(Sys.which("python3"))
+# reticulate::use_python(Sys.which("python3"))
 # reticulate::use_python("C:\\Users\\Chris\\Anaconda3\\envs\\logistic\\python.exe")
 
 
 # Configuration
 exp <- "ExpG_exponential"
-#training_sizes <- c(100)
-training_sizes <- c(100, 500, 1000, 5000, 10000, 50000)
+# training_sizes <- c(100)
+training_sizes <- c(5000)
 test_size <- 15000
 
 # Initialize methods list
@@ -22,7 +22,12 @@ methods_list <- list(
   # MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations = 1, add.y=TRUE, mask=TRUE),
   # MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations = 10, add.y=TRUE),
   # MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations = 100, add.y=TRUE)
-  SAEMLogisticRegression$new(name="SAEM")
+  MICECartLogisticRegression$new(name="MICE.Cart.100.Y.IMP", n_imputations=100, add.y=TRUE)
+  # MICERFLogisticRegression$new(name="MICE.RF.10.Y.IMP.M", n_imputations=10, add.y=TRUE, mask=TRUE)
+  # MICECaliberLogisticRegression$new(name="MICE.Caliber.10.Y.IMP", n_imputations=10, add.y=TRUE, mask=FALSE)
+  # SAEMLogisticRegression$new(name="SAEM")
+  # DRFLogisticRegression$new(name="DRF.100.IMP", n_imputations=100)
+  # MICERandomLogisticRegression$new(name="MICE.Random.500.Y.IMP", n_imputations=500, add.y=FALSE)
 )
 
 # Read setup data

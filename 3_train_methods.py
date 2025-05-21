@@ -5,15 +5,15 @@ import time
 
 from methods import *
 
-exp = "ExpF"
+exp = "ExpG_exponential"
 
 
 methods_list = [
-    # CompleteCase(name="CC"),
-    # RegLog05imputation(name="05.IMP"),
-    # RegLog05Mimputation(name="05.IMP.M"),
-    # RegLogMeanimputation(name="Mean.IMP"),
-    # RegLogMeanMimputation(name="Mean.IMP.M"),
+    CompleteCase(name="CC"),
+    RegLog05imputation(name="05.IMP"),
+    RegLog05Mimputation(name="05.IMP.M"),
+    RegLogMeanimputation(name="Mean.IMP"),
+    RegLogMeanMimputation(name="Mean.IMP.M"),
     # RegLogICEimputation(name="ICE.IMP"),
     # RegLogICEMimputation(name="ICE.IMP.M"),
     # RegLogICEYimputation(name="ICEY.IMP"),

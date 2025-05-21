@@ -65,6 +65,14 @@ methods_config = {
 #     "MICE.5.IMP": {"label": "MICE.5.IMP", "color": color_palette[2], "linestyle": "--", "marker":"x"},
     "PY.SAEM": {"label": "PY.SAEM", "color": color_palette[5], "linestyle": "--", "marker":"x"},
 #     "SAEM.MI": {"label": "SAEM.MI", "color": color_palette[9], "linestyle": "-", "marker":"o"},
+
+     "MICE.Random.500.Y.IMP": {"label": "MICE.Random.500.IMP", "color": color_palette[8], "linestyle": "-", "marker":"o"},
+     "MICE.Cart.10.Y.IMP": {"label": "MICE.Cart.10.Y.IMP", "color": color_palette[8], "linestyle": "-", "marker":"o"},
+     "MICE.Cart.100.Y.IMP": {"label": "MICE.Cart.100.Y.IMP", "color": color_palette[8], "linestyle": "--", "marker":"x"},
+     "MICE.RF.10.Y.IMP": {"label": "MICE.RF.10.Y.IMP", "color": color_palette[8], "linestyle": "-", "marker":"o"},
+     "MICE.Caliber.10.Y.IMP": {"label": "MICE.Caliber.10.Y.IMP", "color": color_palette[8], "linestyle": "-", "marker":"o"},
+     "DRF.100.IMP": {"label": "DRF.100.IMP", "color": color_palette[8], "linestyle": "--", "marker":"x"},
+
 }
 
 methods_no_beta_estimate = [
