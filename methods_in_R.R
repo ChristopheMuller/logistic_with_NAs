@@ -1,9 +1,9 @@
 library(mice)
 library(dplyr)
 library(stringr)
-library(misaem.fork)
+# library(misaem.fork)
 library(CALIBERrfimpute)
-# library(missaem)
+library(misaem)
 
 # Base class for imputation methods
 ImputationMethod <- R6::R6Class("ImputationMethod",

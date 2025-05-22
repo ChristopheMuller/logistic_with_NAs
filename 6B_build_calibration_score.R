@@ -10,25 +10,25 @@ np <- import("numpy")
 # Configuration
 ####
 
-exp <- "ExpA"
+exp <- "SimulationA"
 df_set_up <- read.csv(file.path("data", exp, "set_up.csv"))
 simulation_file <- file.path("data", exp, "simulation.csv")
 df_simulations <- read.csv(simulation_file)
 matrix_scores <- read.csv(file.path("data", exp, "score_matrix.csv"))
 
-list_of_methods <- c("SAEM"
-    # "05.IMP",
-    # "05.IMP.M",
-    # "Mean.IMP",
-    # "Mean.IMP.M",
-    # "PbP",
-    # "MICE.IMP",
-    # "MICE.5.IMP",
-    # "MICE.M.IMP",
-    # "MICE.Y.IMP",
-    # "MICE.Y.M.IMP",
-    # "MICE.10.Y.IMP",
-    # "MICE.100.Y.IMP"
+list_of_methods <- c("SAEM",
+    "05.IMP",
+    "05.IMP.M",
+    "Mean.IMP",
+    "Mean.IMP.M",
+    "PbP",
+    "MICE.IMP",
+    "MICE.5.IMP",
+    "MICE.M.IMP",
+    "MICE.Y.IMP",
+    "MICE.Y.M.IMP",
+    "MICE.10.Y.IMP",
+    "MICE.100.Y.IMP"
   )
 
 
@@ -63,15 +63,13 @@ for (i in (1:dim(df_simulations)[1])){
       pred_y <- pred_y[,1]
     }
 
-        bayes_y_file <- file.path("data", exp, "bayes_data", paste0(setup, ".npz"))
+    bayes_y_file <- file.path("data", exp, "bayes_data", paste0(setup, ".npz"))
     bayes <- np$load(bayes_y_file)
     bayes_y <- bayes$f[["y_probs_bayes"]]
 
     diag <- reliabilitydiag(preds = pred_y, bayes=bayes_y, y = y_test)
     cali <- summary(diag)$miscalibration
     
-    print(cali)
-
     pred_score <- cali[1]
     pred_bayes <- cali[2]
 
