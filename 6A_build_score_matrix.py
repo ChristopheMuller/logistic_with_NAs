@@ -19,9 +19,9 @@ import pandas as pd
 
 # %% set up
 
-exp = "ExpA"
-set_up = pd.read_csv(os.path.join("..", "data", exp, "set_up.csv"))
-simulation = pd.read_csv(os.path.join("..", "data", exp, "simulation.csv"))
+exp = "SimulationA"
+set_up = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
+simulation = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 
 
 # %% define metrics we want to calculate
@@ -38,18 +38,18 @@ metrics = {
 
 methods = [
     "SAEM",
-    # "05.IMP",
-    # "05.IMP.M",
-    # "Mean.IMP",
-    # "Mean.IMP.M",
-    # "PbP",
-    # "MICE.IMP",
-    # "MICE.5.IMP",
-    # "MICE.M.IMP",
-    # "MICE.Y.IMP",
-    # "MICE.Y.M.IMP",
-    # "MICE.10.Y.IMP",
-    # "MICE.100.Y.IMP"
+    "05.IMP",
+    "05.IMP.M",
+    "Mean.IMP",
+    "Mean.IMP.M",
+    "PbP",
+    "MICE.IMP",
+    "MICE.5.IMP",
+    "MICE.M.IMP",
+    "MICE.Y.IMP",
+    "MICE.Y.M.IMP",
+    "MICE.10.Y.IMP",
+    "MICE.100.Y.IMP"
 ]
 
 # %% build the score matrix (predictions)
@@ -84,9 +84,9 @@ def build_score_matrix(exp, set_up, simulation, metrics, methods, existing_matri
 
             ####
 
-            true_y = np.load(os.path.join("..", "data", exp, "test_data", f"{setup}.npz"))["y"]
-            pred_probs = np.load(os.path.join("..", "data", exp, "pred_data", f"{setup}_{method}_{ntrain}.npz"))["y_probs_pred"].ravel()
-            bayes_probs = np.load(os.path.join("..", "data", exp, "bayes_data", f"{setup}.npz"))["y_probs_bayes"]
+            true_y = np.load(os.path.join("data", exp, "test_data", f"{setup}.npz"))["y"]
+            pred_probs = np.load(os.path.join("data", exp, "pred_data", f"{setup}_{method}_{ntrain}.npz"))["y_probs_pred"].ravel()
+            bayes_probs = np.load(os.path.join("data", exp, "bayes_data", f"{setup}.npz"))["y_probs_bayes"]
 
             ####
 
@@ -134,7 +134,7 @@ matrix = build_score_matrix(exp, set_up, simulation, metrics, methods)
 
 # %%
 
-matrix.to_csv(os.path.join("..", "data", exp, "score_matrix.csv"), index=False)
+# matrix.to_csv(os.path.join("data", exp, "score_matrix.csv"), index=False)
 
 
 
@@ -143,7 +143,7 @@ matrix.to_csv(os.path.join("..", "data", exp, "score_matrix.csv"), index=False)
 score_matrix = matrix.copy()
 
 methods = [
-    "SAEM"
+    "SAEM",
     "05.IMP",
     "05.IMP.M",
     "Mean.IMP",
@@ -159,7 +159,7 @@ methods = [
     "CC"
 ]
 
-simulation_setup = pd.read_csv(os.path.join("..", "data", exp, "simulation_set_up.csv"))
+simulation_setup = pd.read_csv(os.path.join("data", exp, "simulation_set_up.csv"))
 simulation_setup = simulation_setup[["set_up", "method", "n_train", "running_time", "angular_error", "mse_error"]]
 simulation_setup = simulation_setup[simulation_setup["method"].isin(methods)]
 
@@ -189,6 +189,6 @@ for i in range(len(simulation_setup)):
 
     score_matrix = pd.concat([score_matrix, new_scores], ignore_index=True)
 
-score_matrix.to_csv(os.path.join("..", "data", exp, "score_matrix.csv"), index=False)
+score_matrix.to_csv(os.path.join("data", exp, "score_matrix.csv"), index=False)
 
 # %%

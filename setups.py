@@ -36,6 +36,10 @@ metrics_config = {
     "mae_score": {"label": "MAE"},
     "running_time": {"label": "Running Time (s.)"},
     "mae_score_bayes": {"label": "Mean Absolute Distance to Bayes Probs"},
+    "misclassification": {"label": "Misclassification"},
+    "mae_bayes": {"label": "MAE to Bayes"},
+    "calibration": {"label": "Calibration"}
+
 }
 
 methods_config = {

@@ -157,9 +157,9 @@ set_up_df = pd.DataFrame({
     "d": [],
     "corr": [],
     "prop_NA": [],
-    "beta0": [],
-    "mu0": [],
-    "setup": []
+    "true_beta": [],
+    "center_X": [],
+    "set_up": []
 })
 
 
@@ -189,7 +189,7 @@ for i in range(n_replicates):
     prop_NA = np.round(_prop_NA*100,0).astype(int)
     beta0 = beta0
     mu0 = np.zeros(_d)
-    setup = f"{sim}_rep{rep}_n{n}_d{d}_corr{corr}_NA{prop_NA}"
+    set_up = f"{sim}_rep{rep}_n{n}_d{d}_corr{corr}_NA{prop_NA}"
 
     # save the data
     new_row = pd.DataFrame({
@@ -199,9 +199,9 @@ for i in range(n_replicates):
         "d": [d],
         "corr": [corr],
         "prop_NA": [prop_NA],
-        "beta0": [beta0],
-        "mu0": [mu0],
-        "setup": [setup]
+        "true_beta": [beta0],
+        "center_X": [mu0],
+        "set_up": [set_up]
     })
     set_up_df = pd.concat([set_up_df, new_row], ignore_index=True)
 
@@ -212,7 +212,7 @@ for i in range(n_replicates):
         "y_probs": y_probs,
         "X_full": X
     }
-    np.savez(os.path.join(experiment_data_folder, "original_data", f"{setup}.npz"), **data_to_save)
+    np.savez(os.path.join(experiment_data_folder, "original_data", f"{set_up}.npz"), **data_to_save)
 
     # save test data
     data_to_save = {
@@ -222,7 +222,7 @@ for i in range(n_replicates):
         "y_probs": y_probs[n_train:],
         "X_full": X[n_train:]
     }
-    np.savez(os.path.join(experiment_data_folder, "test_data", f"{setup}.npz"), **data_to_save)
+    np.savez(os.path.join(experiment_data_folder, "test_data", f"{set_up}.npz"), **data_to_save)
 
     # save bayes data
     y_probs_bayes = get_y_prob_bayes(X[n_train:], np.zeros(_d), toep_matrix(_d, _corr), beta0, N_MC)
@@ -231,7 +231,7 @@ for i in range(n_replicates):
     data_to_save = {
         "y_probs_bayes": y_probs_bayes
     }
-    np.savez(os.path.join(experiment_data_folder, "bayes_data", f"{setup}.npz"), **data_to_save)
+    np.savez(os.path.join(experiment_data_folder, "bayes_data", f"{set_up}.npz"), **data_to_save)
 
 
 # save the set up

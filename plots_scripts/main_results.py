@@ -15,23 +15,24 @@ from setups import metrics_config, methods_config
 
 # %% set up
 
-exp = "ExpA"
-score_matrix = pd.read_csv(os.path.join("..", "data", exp, "score_matrix.csv"))
+exp = "SimulationA"
+score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 
 
 metrics_config
 
 # %% 1st Plot : columns of each score
 
-methods_sel = ['SAEM', 'CC', '05.IMP', 'Mean.IMP', 'Mean.IMP.M', 'PbP',
-     'MICE.Y.IMP', 'MICE.10.Y.IMP', 'MICE.100.Y.IMP']
+# methods_sel = ['SAEM', 'CC', '05.IMP', 'Mean.IMP', 'Mean.IMP.M', 'PbP',
+#      'MICE.Y.IMP', 'MICE.10.Y.IMP', 'MICE.100.Y.IMP']
+methods_sel = ["05.IMP", "Mean.IMP", "Mean.IMP.M", "PbP",]
 
 scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
 filter_bayes = [True, True, False, False]
 
-ntrains = [500, 1000, 5000, 10000, 50000]
+ntrains = [100, 500]
 
-ylims = [(-0.001,0.04), (-0.001,0.03), (-0.01, 0.45), (-0.005, 0.17)]
+ylims = [None, None, None, None]
 
 # one sub-plot for each score
 
@@ -55,7 +56,6 @@ for i, score in enumerate(scores_sel):
 
     # plot the mean and se
     for method in methods_sel:
-
         method_config = methods_config[method]
 
         score_matrix_method = score_matrix_sel[score_matrix_sel["method"] == method]
@@ -79,6 +79,8 @@ for i, score in enumerate(scores_sel):
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
-plt.savefig(os.path.join("..", "plots_scripts", "plots", "expA_general.pdf"))
+# plt.savefig(os.path.join("..", "plots_scripts", "plots", "expA_general.pdf"))
 plt.show()
     
+
+# %%

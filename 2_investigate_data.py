@@ -16,7 +16,7 @@ all_p = []
 
 for i in range(len(set_ups)):
 
-    set_up = set_ups.loc[i, "setup"]
+    set_up = set_ups.loc[i, "set_up"]
     p_i = load_data(set_up=set_up, data_type="original", exp=sim)["y_probs"]
     
     all_p.append(p_i)
@@ -31,7 +31,7 @@ plt.show()
 
 for i in range(len(set_ups)):
 
-    set_up = set_ups.loc[i, "setup"]
+    set_up = set_ups.loc[i, "set_up"]
     p_i = load_data(set_up=set_up, data_type="original", exp=sim)["y_probs"]
     
     plt.hist(p_i.flatten(), bins=50, alpha=0.5, label=set_up)
