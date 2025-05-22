@@ -5,7 +5,7 @@ import time
 
 from methods import *
 
-exp = "ExpG_exponential"
+exp = "SimulationA"
 
 
 methods_list = [
@@ -14,15 +14,10 @@ methods_list = [
     RegLog05Mimputation(name="05.IMP.M"),
     RegLogMeanimputation(name="Mean.IMP"),
     RegLogMeanMimputation(name="Mean.IMP.M"),
-    # RegLogICEimputation(name="ICE.IMP"),
-    # RegLogICEMimputation(name="ICE.IMP.M"),
-    # RegLogICEYimputation(name="ICEY.IMP"),
-    # RegLogICEYMimputation(name="ICEY.IMP.M"),   
     RegLogPatByPat(name="PbP"),
-    # SAEM_python(name="PY.SAEM")
 ]
 
-training_size = np.array([100, 500, 1000, 5000, 10000, 50000])
+training_size = np.array([100, 500])
 
 test_size = 15000
 
