@@ -144,19 +144,19 @@ score_matrix = matrix.copy()
 
 methods = [
     "SAEM"
-    # "05.IMP",
-    # "05.IMP.M",
-    # "Mean.IMP",
-    # "Mean.IMP.M",
-    # "PbP",
-    # "MICE.IMP",
-    # "MICE.5.IMP",
-    # "MICE.M.IMP",
-    # "MICE.Y.IMP",
-    # "MICE.Y.M.IMP",
-    # "MICE.10.Y.IMP",
-    # "MICE.100.Y.IMP",
-    # "CC"
+    "05.IMP",
+    "05.IMP.M",
+    "Mean.IMP",
+    "Mean.IMP.M",
+    "PbP",
+    "MICE.IMP",
+    "MICE.5.IMP",
+    "MICE.M.IMP",
+    "MICE.Y.IMP",
+    "MICE.Y.M.IMP",
+    "MICE.10.Y.IMP",
+    "MICE.100.Y.IMP",
+    "CC"
 ]
 
 simulation_setup = pd.read_csv(os.path.join("..", "data", exp, "simulation_set_up.csv"))
@@ -189,6 +189,6 @@ for i in range(len(simulation_setup)):
 
     score_matrix = pd.concat([score_matrix, new_scores], ignore_index=True)
 
-score_matrix.to_csv(os.path.join("..", "data", exp, "score_matrix2.csv"), index=False)
+score_matrix.to_csv(os.path.join("..", "data", exp, "score_matrix.csv"), index=False)
 
 # %%
