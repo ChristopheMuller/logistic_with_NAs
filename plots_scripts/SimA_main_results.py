@@ -1,6 +1,6 @@
 #####
 #
-# 
+# Plot main results (4 metrics), Simulation A
 #
 #####
 
@@ -21,20 +21,22 @@ score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 
 metrics_config
 
-# %% 1st Plot : columns of each score
+# %% 
 
-# methods_sel = ['SAEM', 'CC', '05.IMP', 'Mean.IMP', 'Mean.IMP.M', 'PbP',
-#      'MICE.Y.IMP', 'MICE.10.Y.IMP', 'MICE.100.Y.IMP']
-methods_sel = ["05.IMP", "Mean.IMP", "Mean.IMP.M", "PbP",]
+from utils import calculate_ymin_for_R_proportion
+
+# methods_sel = ["MICE.IMP", "MICE.M.IMP", "MICE.Y.IMP", "MICE.Y.M.IMP", "Mean.IMP", "Mean.IMP.M", "05.IMP", "05.IMP.M"]  ## Single Imputation
+methods_sel = ["Mean.IMP", "PbP", "CC", "MICE.IMP", "MICE.Y.IMP",  "MICE.10.Y.IMP", "MICE.100.Y.IMP", "SAEM"]  ## Selected Procedures
 
 scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
 filter_bayes = [True, True, False, False]
 
-ntrains = [100, 500]
+ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
-ylims = [None, None, None, None]
-
-# one sub-plot for each score
+# ylimsmax = [0.06, 0.035, 1.5, 0.20] ## Single Imputation
+ylimsmax = [0.12, 0.1, 1.25, 0.3]  ## Selected Procedures
+ylimsmin = calculate_ymin_for_R_proportion(0.03, ylimsmax)
+ylims = [(ylimsmin[i], ylimsmax[i]) for i in range(len(ylimsmax))] 
 
 fig, axes = plt.subplots(1, len(scores_sel), figsize=(4 * len(scores_sel), 5))
 
@@ -59,7 +61,7 @@ for i, score in enumerate(scores_sel):
         method_config = methods_config[method]
 
         score_matrix_method = score_matrix_sel[score_matrix_sel["method"] == method]
-        axes[i].plot(score_matrix_method["n_train"], score_matrix_method["mean"], label=method, 
+        axes[i].plot(score_matrix_method["n_train"], score_matrix_method["mean"], label=method_config["label"], 
                      color=method_config["color"], linestyle=method_config["linestyle"],
                      marker=method_config["marker"], markersize=5)
         axes[i].fill_between(score_matrix_method["n_train"], score_matrix_method["mean"] - score_matrix_method["se"],
@@ -79,8 +81,7 @@ for i, score in enumerate(scores_sel):
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
-# plt.savefig(os.path.join("..", "plots_scripts", "plots", "expA_general.pdf"))
+plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SelectedProcedures.pdf"))
 plt.show()
     
 
-# %%
