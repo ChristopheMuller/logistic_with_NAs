@@ -14,10 +14,10 @@ methods_list = [
     RegLog05Mimputation(name="05.IMP.M"),
     RegLogMeanimputation(name="Mean.IMP"),
     RegLogMeanMimputation(name="Mean.IMP.M"),
-    RegLogPatByPat(name="PbP"),
+    RegLogPatByPat(name="PbP")
 ]
 
-training_size = np.array([100, 500])
+training_size = np.array([100, 500, 1000, 5000, 10000, 50000])
 
 test_size = 15000
 

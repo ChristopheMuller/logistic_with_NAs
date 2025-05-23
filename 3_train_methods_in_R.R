@@ -10,23 +10,18 @@ source("methods_in_R.R")
 # Configuration
 exp <- "SimulationA"
 # training_sizes <- c(100)
-training_sizes <- c(100, 500)
+training_sizes <- c(100, 500, 1000, 5000, 10000, 50000)
 test_size <- 15000
 
 # Initialize methods list
 methods_list <- list(
   MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1),
-  # MICELogisticRegression$new(name="MICE.5.IMP", n_imputations = 5),
-  # MICELogisticRegression$new(name="MICE.M.IMP", n_imputations = 1, mask=TRUE),
-  # MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations = 1, add.y=TRUE),
-  # MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations = 1, add.y=TRUE, mask=TRUE),
-  # MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations = 10, add.y=TRUE),
-  # MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations = 100, add.y=TRUE)
-  # MICERFLogisticRegression$new(name="MICE.RF.10.Y.IMP.M", n_imputations=10, add.y=TRUE, mask=TRUE)
-  # MICECaliberLogisticRegression$new(name="MICE.Caliber.10.Y.IMP", n_imputations=10, add.y=TRUE, mask=FALSE)
+  MICELogisticRegression$new(name="MICE.M.IMP", n_imputations = 1, mask=TRUE),
+  MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations = 1, add.y=TRUE),
+  MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations = 1, add.y=TRUE, mask=TRUE),
+  MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations = 10, add.y=TRUE),
+  MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations = 100, add.y=TRUE),
   SAEMLogisticRegression$new(name="SAEM")
-  # DRFLogisticRegression$new(name="DRF.100.IMP", n_imputations=100)
-  # MICERandomLogisticRegression$new(name="MICE.Random.500.Y.IMP", n_imputations=500, add.y=FALSE)
 )
 
 # Read setup data

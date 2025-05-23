@@ -23,7 +23,6 @@ list_of_methods <- c("SAEM",
     "Mean.IMP.M",
     "PbP",
     "MICE.IMP",
-    "MICE.5.IMP",
     "MICE.M.IMP",
     "MICE.Y.IMP",
     "MICE.Y.M.IMP",
@@ -37,7 +36,7 @@ list_of_methods <- c("SAEM",
 ####
 
 for (i in (1:dim(df_simulations)[1])){
-# for (i in (1:10)){
+
   print(i)
   
   cat("Simulation ", i, " of ", dim(df_simulations)[1], "\n")
