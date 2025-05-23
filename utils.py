@@ -210,3 +210,25 @@ def filter_data(df, **kwargs):
             print(f"Warning: {key} not in columns")
     return df
 
+def calculate_ymin_for_R_proportion(R, max_y_values):
+
+
+    if not (0 < R < 1):
+        raise ValueError("R (proportion) must be between 0 and 1 (exclusive of 1).")
+
+    # Ensure max_y_values is iterable
+    if isinstance(max_y_values, (int, float)):
+        max_y_values = [max_y_values]
+
+    calculated_ymin_values = []
+    
+    # The formula derived from R = (0 - y_min) / (y_max - y_min)
+    # is: y_min = (R * y_max) / (R - 1)
+    # Since R is a proportion, R-1 will be negative, making y_min negative as expected.
+    denominator = R - 1 
+
+    for y_max in max_y_values:
+        y_min = (R * y_max) / denominator
+        calculated_ymin_values.append(y_min)
+        
+    return calculated_ymin_values
