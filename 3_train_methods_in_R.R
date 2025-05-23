@@ -8,7 +8,7 @@ source("methods_in_R.R")
 
 
 # Configuration
-exp <- "SimulationA"
+exp <- "SimulationB"
 # training_sizes <- c(100)
 training_sizes <- c(100, 500, 1000, 5000, 10000, 50000)
 test_size <- 15000
@@ -51,8 +51,6 @@ for (i in 1:nrow(df_set_up)) {
   X_obs <- data$f[["X_obs"]]
   M <- data$f[["M"]]
   y <- data$f[["y"]]
-
-  true_beta <- as.numeric(str_split(gsub("\\[|\\]", "", df_set_up$true_beta[i]), " ")[[1]])
   
   data_test <- np$load(file.path("data", exp, "test_data", paste0(df_set_up$set_up[i], ".npz")))
   X_test <- data_test$f[["X_obs"]]
