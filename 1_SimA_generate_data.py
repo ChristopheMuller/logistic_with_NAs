@@ -225,7 +225,7 @@ for i in range(n_replicates):
     np.savez(os.path.join(experiment_data_folder, "test_data", f"{set_up}.npz"), **data_to_save)
 
     # save bayes data
-    y_probs_bayes = get_y_prob_bayes(X[n_train:], np.zeros(_d), toep_matrix(_d, _corr), beta0, N_MC)
+    y_probs_bayes = get_y_prob_bayes(X_obs[n_train:], np.zeros(_d), toep_matrix(_d, _corr), beta0, N_MC)
     y_probs_bayes = np.mean(y_probs_bayes, axis=1)
 
     data_to_save = {
