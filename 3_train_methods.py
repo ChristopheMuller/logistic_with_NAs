@@ -5,7 +5,7 @@ import time
 
 from methods import *
 
-exp = "SimulationA"
+exp = "SimulationB"
 
 
 methods_list = [
@@ -65,9 +65,6 @@ for i in range(df_set_up.shape[0]):
     y = data["y"]
     y_probs = data["y_probs"]
     X_full = data["X_full"]
-
-    true_beta = df_set_up["true_beta"][i]
-    true_beta = np.array([float(x) for x in true_beta[1:-1].split()])
 
     data_test = np.load(os.path.join("data", exp, "test_data", f"{df_set_up['set_up'][i]}.npz"))
     X_test = data_test["X_obs"]
