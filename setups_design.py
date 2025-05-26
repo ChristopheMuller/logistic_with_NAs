@@ -43,10 +43,10 @@ metrics_config = {
 }
 
 methods_config = {
-    "05.IMP": {"label": "05.IMP", "color": color_palette[0], "linestyle": "-", "marker":"o"},
-    "05.IMP.M": {"label": "05.IMP.M", "color": color_palette[0], "linestyle": "--", "marker":"x"},
+    "05.IMP": {"label": "05.IMP", "color": color_palette[6], "linestyle": "-", "marker":"o"},
+    "05.IMP.M": {"label": "05.IMP.M", "color": color_palette[6], "linestyle": "--", "marker":"x"},
 
-    "CC": {"label": "CC", "color": color_palette[1], "linestyle": "-", "marker":"o"},
+    "CC": {"label": "CC", "color": color_palette[9], "linestyle": "-", "marker":"o"},
 
     "PbP": {"label": "PbP", "color": color_palette[2], "linestyle": "-", "marker":"o"},
 
@@ -56,26 +56,26 @@ methods_config = {
     "MICE.Y.IMP": {"label": "MICE.1.Y.IMP", "color": color_palette[4], "linestyle": "-", "marker":"o"},
     "MICE.Y.M.IMP": {"label": "MICE.1.Y.IMP.M", "color": color_palette[4], "linestyle": "--", "marker":"x"},
 
-    "SAEM": {"label": "SAEM", "color": color_palette[5], "linestyle": "-", "marker":"o"},
-
-    "MICE.10.Y.IMP": {"label": "MICE.10.Y.IMP", "color": color_palette[6], "linestyle": "-", "marker":"o"},
-    "MICE.100.Y.IMP": {"label": "MICE.100.Y.IMP", "color": color_palette[6], "linestyle": "--", "marker":"x"},
-
     "MICE.IMP": {"label": "MICE.1.IMP", "color": color_palette[7], "linestyle": "-", "marker":"o"},
-    "MICE.M.IMP": {"label": "MICE.1.IMP.M", "color": color_palette[7], "linestyle": "--", "marker":"x"},
+    "MICE.IMP.M": {"label": "MICE.1.IMP.M", "color": color_palette[7], "linestyle": "--", "marker":"x"},
+
+    "MICE.10.IMP": {"label": "MICE.10.IMP", "color": color_palette[5], "linestyle": "-", "marker":"o"},
+    "MICE.10.IMP.M": {"label": "MICE.10.IMP.M", "color": color_palette[5], "linestyle": "--", "marker":"x"},
+
+    "MICE.10.Y.IMP": {"label": "MICE.10.Y.IMP", "color": color_palette[0], "linestyle": "-", "marker":"o"},
+    "MICE.10.Y.IMP.M": {"label": "MICE.10.Y.IMP.M", "color": color_palette[0], "linestyle": "--", "marker":"x"},
+
+    "MICE.100.IMP": {"label": "MICE.100.IMP", "color": color_palette[8], "linestyle": "-", "marker":"o"},
+    "MICE.100.IMP.M": {"label": "MICE.100.IMP.M", "color": color_palette[8], "linestyle": "--", "marker":"x"},
+
+    "MICE.100.Y.IMP": {"label": "MICE.100.Y.IMP", "color": color_palette[1], "linestyle": "-", "marker":"o"},
+    "MICE.100.Y.IMP.M": {"label": "MICE.100.Y.IMP.M", "color": color_palette[1], "linestyle": "--", "marker":"x"},
+
+    # "MICE.100.Y.IMP": {"label": "MICE.100.Y.IMP", "color": color_palette[6], "linestyle": "--", "marker":"x"},
 
 
 
-#     "MICE.5.IMP": {"label": "MICE.5.IMP", "color": color_palette[2], "linestyle": "--", "marker":"x"},
-    "PY.SAEM": {"label": "PY.SAEM", "color": color_palette[5], "linestyle": "--", "marker":"x"},
-#     "SAEM.MI": {"label": "SAEM.MI", "color": color_palette[9], "linestyle": "-", "marker":"o"},
-
-     "MICE.Random.500.Y.IMP": {"label": "MICE.Random.500.IMP", "color": color_palette[8], "linestyle": "-", "marker":"o"},
-     "MICE.Cart.10.Y.IMP": {"label": "MICE.Cart.10.Y.IMP", "color": color_palette[8], "linestyle": "-", "marker":"o"},
-     "MICE.Cart.100.Y.IMP": {"label": "MICE.Cart.100.Y.IMP", "color": color_palette[8], "linestyle": "--", "marker":"x"},
-     "MICE.RF.10.Y.IMP": {"label": "MICE.RF.10.Y.IMP", "color": color_palette[8], "linestyle": "-", "marker":"o"},
-     "MICE.Caliber.10.Y.IMP": {"label": "MICE.Caliber.10.Y.IMP", "color": color_palette[8], "linestyle": "-", "marker":"o"},
-     "DRF.100.IMP": {"label": "DRF.100.IMP", "color": color_palette[8], "linestyle": "--", "marker":"x"},
+    "SAEM": {"label": "SAEM", "color": color_palette[5], "linestyle": "-", "marker":"o"},
 
 }
 

@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from setups import metrics_config, methods_config
+from setups_design import metrics_config, methods_config
 
 # %% set up
 
@@ -29,7 +29,9 @@ score_matrix = score_matrix[score_matrix["filter"] == "all"]
 
 
 # methods_sel = ["MICE.IMP", "MICE.M.IMP", "MICE.Y.IMP", "MICE.Y.M.IMP", "Mean.IMP", "Mean.IMP.M", "05.IMP", "05.IMP.M"]  ## Single Imputation
-methods_sel = ["Mean.IMP.M", "PbP", "CC", "MICE.IMP", "MICE.Y.IMP",  "MICE.10.Y.IMP", "MICE.100.Y.IMP", "SAEM"]  ## Selected Procedures
+# methods_sel = ["Mean.IMP.M", "PbP", "CC", "MICE.IMP", "MICE.Y.IMP",  "MICE.10.Y.IMP", "MICE.100.Y.IMP", "SAEM"]  ## Selected Procedures
+methods_sel = ["MICE.IMP", "MICE.IMP.M", "MICE.Y.IMP", "MICE.Y.M.IMP", "MICE.10.IMP", "MICE.10.IMP.M", "MICE.10.Y.IMP", "MICE.10.Y.IMP.M",
+               "MICE.100.IMP", "MICE.100.IMP.M", "MICE.100.Y.IMP", "MICE.100.Y.IMP.M"]  ## MICE Methods
 
 scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
 filter_bayes = [True, True, False, False]
@@ -38,6 +40,8 @@ ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
 # ylimsmax = [0.06, 0.035, 1.5, 0.20] ## Single Imputation
 ylimsmax = [0.12, 0.1, 1.25, 0.3]  ## Selected Procedures
+ylimsmax = [0.06, 0.035, 1.1, 0.20]  ## MICE Procedures
+
 
 ylimsmin = calculate_ymin_for_R_proportion(0.03, ylimsmax)
 ylims = [(ylimsmin[i], ylimsmax[i]) for i in range(len(ylimsmax))] 
@@ -76,7 +80,8 @@ for i, score in enumerate(scores_sel):
     axes[i].set_xlabel("Number of training samples")
     axes[i].set_ylabel(metrics_config[score]["label"])
     axes[i].set_title(metrics_config[score]["label"])   
-    if i == 0:
+    # if i == 0:
+    if i == 1:
         axes[i].legend()
     # axes[i].grid()
     axes[i].set_ylim(ylims[i])
@@ -86,7 +91,8 @@ for i, score in enumerate(scores_sel):
 
 plt.tight_layout()
 # plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SingleImputation.pdf"))
-plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SelectedProcedures.pdf"))
+# plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SelectedProcedures.pdf"))
+plt.savefig(os.path.join("plots_scripts", "plots", "SimA_MICE_Procedures.pdf"))
 plt.show()
     
 
