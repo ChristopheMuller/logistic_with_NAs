@@ -17,6 +17,7 @@ from setups import metrics_config, methods_config
 
 exp = "SimulationA"
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
+score_matrix = score_matrix[score_matrix["exp"] == exp]
 
 
 metrics_config
@@ -24,9 +25,11 @@ metrics_config
 # %% 
 
 from utils import calculate_ymin_for_R_proportion
+score_matrix = score_matrix[score_matrix["filter"] == "all"]
+
 
 # methods_sel = ["MICE.IMP", "MICE.M.IMP", "MICE.Y.IMP", "MICE.Y.M.IMP", "Mean.IMP", "Mean.IMP.M", "05.IMP", "05.IMP.M"]  ## Single Imputation
-methods_sel = ["Mean.IMP", "PbP", "CC", "MICE.IMP", "MICE.Y.IMP",  "MICE.10.Y.IMP", "MICE.100.Y.IMP", "SAEM"]  ## Selected Procedures
+methods_sel = ["Mean.IMP.M", "PbP", "CC", "MICE.IMP", "MICE.Y.IMP",  "MICE.10.Y.IMP", "MICE.100.Y.IMP", "SAEM"]  ## Selected Procedures
 
 scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
 filter_bayes = [True, True, False, False]
@@ -35,6 +38,7 @@ ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
 # ylimsmax = [0.06, 0.035, 1.5, 0.20] ## Single Imputation
 ylimsmax = [0.12, 0.1, 1.25, 0.3]  ## Selected Procedures
+
 ylimsmin = calculate_ymin_for_R_proportion(0.03, ylimsmax)
 ylims = [(ylimsmin[i], ylimsmax[i]) for i in range(len(ylimsmax))] 
 
@@ -81,7 +85,71 @@ for i, score in enumerate(scores_sel):
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
+# plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SingleImputation.pdf"))
 plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SelectedProcedures.pdf"))
 plt.show()
     
 
+
+# %%
+
+metric_sel = "mae_bayes"
+patterns_sel = [0, 1, 2, 3, 4]
+
+
+patterns_sel = [str(pattern) for pattern in patterns_sel]
+
+# sel_methods = ["MICE.IMP", "MICE.M.IMP", "MICE.Y.IMP", "MICE.Y.M.IMP", "Mean.IMP", "Mean.IMP.M", "05.IMP", "05.IMP.M"]  ## Single Imputation
+sel_methods = ["Mean.IMP.M", "PbP", "CC", "MICE.IMP", "MICE.Y.IMP",  "MICE.10.Y.IMP", "MICE.100.Y.IMP", "SAEM"]  ## Selected Procedures
+
+score_matrix_sel = score_matrix[score_matrix["metric"] == metric_sel]
+score_matrix_sel = score_matrix_sel[score_matrix_sel["method"].isin(sel_methods)]
+score_matrix_sel = score_matrix_sel[score_matrix_sel["exp"] == exp]
+
+score_matrix_sel = score_matrix_sel[score_matrix_sel["filter"].isin(patterns_sel)]
+
+
+score_matrix_sel = score_matrix_sel.groupby(["filter", "method", "n_train"]).agg({"score": ["mean", "std", "count"]}).reset_index()
+score_matrix_sel.columns = ["filter", "method", "n_train", "mean", "sd", "count"]
+score_matrix_sel["se"] = score_matrix_sel["sd"] / np.sqrt(score_matrix_sel["count"])
+
+fig, axes = plt.subplots(1, len(patterns_sel), figsize=(4 * len(patterns_sel), 5))
+
+for i, pattern in enumerate(patterns_sel):
+
+    print(i, pattern)
+
+    # filter the score
+    score_matrix_pattern = score_matrix_sel[score_matrix_sel["filter"] == pattern]
+
+    # plot the mean and se
+    for method in sel_methods:
+        method_config = methods_config[method]
+
+        score_matrix_method = score_matrix_pattern[score_matrix_pattern["method"] == method]
+        axes[i].plot(score_matrix_method["n_train"], score_matrix_method["mean"], label=method_config["label"], 
+                     color=method_config["color"], linestyle=method_config["linestyle"],
+                     marker=method_config["marker"], markersize=5)
+        axes[i].fill_between(score_matrix_method["n_train"], score_matrix_method["mean"] - score_matrix_method["se"],
+                              score_matrix_method["mean"] + score_matrix_method["se"], alpha=0.2, 
+                              color=method_config["color"], linestyle=method_config["linestyle"])
+    
+    axes[i].set_xscale("log")
+    axes[i].set_xlabel("Number of training samples")
+    axes[i].set_ylabel(metrics_config[metric_sel]["label"])
+    axes[i].set_title(f"{pattern} Missing Values")   
+    if i == 0:
+        axes[i].legend()
+    # axes[i].grid()
+
+    axes[i].set_ylim(-0.01, 0.4)
+    # line at
+    axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
+
+plt.tight_layout()
+# plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SingleImputation_per_pattern.pdf"))
+plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SelectedProcedures_per_pattern.pdf"))
+plt.show()
+
+
+# %%
