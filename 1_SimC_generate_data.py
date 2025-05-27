@@ -40,7 +40,7 @@ n_train = 100_000
 n_test = 15_000
 n = n_train + n_test
 
-N_MC = 1000
+N_MC = 1_000
 
 # %%
 
@@ -73,44 +73,231 @@ def generate_X(n, d, corr, mu=None):
     
     return X
 
-def generate_Z(X):
+def generate_M(n, d, prc):
+    """
+    Generate a missing data matrix M with n rows and d columns, with a proportion of missing data prop_NA.
+    It guarantees no row with all missing data.
+    """
+    M = np.random.binomial(n=1, p=prc, size=(n, d))
 
-    Z = np.zeros_like(X)
+    all_ones = np.all(M == 1, axis=1)
 
-    Z[:, 0] = X[:,0]
-    Z[:, 1] = X[:,1]
-    
-    Z[:, 2] = np.exp(X[:,2])
-    Z[:, 3] = np.power(X[:,3], 3)
-    Z[:, 4] = np.where(X[:,4] >= 0, X[:,4]**2, -10*np.exp(X[:,4]))
+    while np.any(all_ones):
+        M[all_ones] = np.random.binomial(n=1, p=prc, size=(all_ones.sum(), d))
+        all_ones = np.all(M == 1, axis=1)  # Recheck after redrawing
 
-    return Z
+    return M
 
 def transform_Z_to_X(Z):
-
-    X = np.zeros((Z.shape[0], Z.shape[1]))
+    """
+    Transforms Z back to X based on the inverse operations.
+    Handles potential issues with domains of operations (log, sqrt, fractional powers)
+    and ensures correct sign recovery, accounting for shifts introduced in transform_X_to_Z.
+    """
+    X = np.zeros_like(Z, dtype=float) # Ensure output is float and matches Z's shape
 
     X[:,0] = Z[:,0]
     X[:,1] = Z[:,1]
     
-    X[:,2] = np.log(Z[:,2])
-    X[:,3] = np.power(Z[:,3], 3)
-    X[:,4] = np.where(Z[:,4] > 0, np.sqrt(Z[:,4]), -np.log(-Z[:,4]/10))
+    # Inverse for Z[:,2] = np.exp(X[:,2]) - 1.67
+    # So, X[:,2] = log(Z[:,2] + 1.67)
+    X[:,2] = np.log(Z[:,2] + 1.67)
+
+    X[:,3] = np.sign(Z[:,3]) * np.power(np.abs(Z[:,3]), 1/3) # No change needed here for Col 3
+
+    # Inverse for Z[:,4] = np.where(...) + 2
+    # First, reverse the +2 shift: Z_prime = Z[:,4] - 2
+    Z_prime_col4 = Z[:,4] - 2
+
+    # Now apply the original inverse logic on Z_prime_col4
+    # The conditions for the np.where must also consider Z_prime_col4
+    mask_Z4_positive = Z_prime_col4 > 0
+    mask_Z4_zero = Z_prime_col4 == 0
+    mask_Z4_negative = Z_prime_col4 < 0
+
+    # If Z_prime_col4 > 0, then X[:,4] was >= 0. Inverse: X[:,4] = sqrt(Z_prime_col4)
+    X[mask_Z4_positive, 4] = np.sqrt(Z_prime_col4[mask_Z4_positive])
+    
+    # If Z_prime_col4 == 0, then X[:,4] was 0. Inverse: X[:,4] = 0.0
+    X[mask_Z4_zero, 4] = 0.0
+    
+    # If Z_prime_col4 < 0, then X[:,4] was < 0. Inverse: X[:,4] = log(-Z_prime_col4 / 10)
+    X[mask_Z4_negative, 4] = np.log(-Z_prime_col4[mask_Z4_negative] / 10)
 
     return X
 
 def transform_X_to_Z(X):
-
-    Z = np.zeros((X.shape[0], X.shape[1]))
+    """
+    Transforms X to Z based on the specified piecewise and power transformations.
+    (This function is provided by the user and is the 'target' for inversion).
+    """
+    Z = np.zeros_like(X, dtype=float)
 
     Z[:, 0] = X[:,0]
     Z[:, 1] = X[:,1]
     
-    Z[:, 2] = np.exp(X[:,2])
-    Z[:, 3] = np.power(X[:,3], 1/3)
-    Z[:, 4] = np.where(X[:,4] >= 0, X[:,4]**2, -10*np.exp(X[:,4]))
+    Z[:, 2] = np.exp(X[:,2]) - 1.67 # Added constant
+    
+    Z[:, 3] = np.power(X[:,3], 3)
+    
+    Z[:, 4] = np.where(X[:,4] >= 0, X[:,4]**2, -10*np.exp(X[:,4])) + 2 # Added constant
 
     return Z
 
+
+def get_y_prob_bayes(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
+
+    M = np.isnan(X_m)
+    unique_patterns = np.unique(M, axis=0)
+    
+    prob_y_all = np.zeros((X_m.shape[0], n_mc))
+    
+    for pattern in unique_patterns:
+
+        pattern_indices = np.all(M == pattern, axis=1)
+        X_m_subset = X_m[pattern_indices]
+        
+        prob_y_subset = get_y_prob_bayes_same_pattern(X_m_subset, full_mu, full_cov, true_beta, n_mc, intercept)
+        
+        prob_y_all[pattern_indices] = prob_y_subset
+    
+    return prob_y_all
+
+def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
+
+    m = np.isnan(X_m[0])
+    
+    observed_idx = ~m
+    missing_idx = m
+
+    mu_obs = full_mu[observed_idx]
+    mu_mis = full_mu[missing_idx]
+
+    cov_obs = full_cov[np.ix_(observed_idx, observed_idx)]
+    cov_obs_inv = np.linalg.inv(cov_obs)
+
+    cov_mis = full_cov[np.ix_(missing_idx, missing_idx)]
+    cross_cov = full_cov[np.ix_(observed_idx, missing_idx)]
+
+    cond_cov = cov_mis - cross_cov.T @ cov_obs_inv @ cross_cov
+
+    prob_y_all = []
+    X_mc_all = []
+
+    for x_obs in X_m:
+        x_obs_obs = x_obs[observed_idx]
+
+        cond_mu = mu_mis + cross_cov.T @ cov_obs_inv @ (x_obs_obs - mu_obs)
+
+        if len(cond_mu) == 0:
+            X_mc = np.zeros((n_mc, 0))
+        else:
+            X_mc = np.random.multivariate_normal(cond_mu, cond_cov, size=n_mc)
+
+        X_full_mc = np.tile(x_obs, (n_mc, 1))
+        X_full_mc[:, missing_idx] = X_mc
+
+        Z_full_mc = transform_X_to_Z(X_full_mc)
+
+        logits_mc = Z_full_mc @ true_beta + intercept
+        prob_y_mc = sigma(logits_mc)
+
+        prob_y_all.append(prob_y_mc)
+        X_mc_all.append(X_mc)
+
+    return np.array(prob_y_all)
+
 # %% 
 
+set_up_df = pd.DataFrame({
+    "sim": [],
+    "replicate": [],
+    "n": [],
+    "d": [],
+    "corr": [],
+    "prop_NA": [],
+    "true_beta": [],
+    "center_X": [],
+    "set_up": []
+})
+
+
+for i in range(n_replicates):
+
+    print(f"Set up {i+1}/{n_replicates}")
+
+    # generate X, Z
+    X = generate_X(n, _d, _corr)
+    Z = transform_X_to_Z(X)
+
+    # generate y
+    y_logits = np.dot(Z, beta0)
+    y_probs = 1 / (1 + np.exp(-y_logits))
+    y = np.random.binomial(1, y_probs)
+
+    # generate M
+    M = generate_M(n, _d, _prop_NA)
+    Z_obs = Z.copy()
+    Z_obs[M == 1] = np.nan
+    X_obs = X.copy()
+    X_obs[M == 1] = np.nan
+
+    # create the params
+    sim = experiment_name
+    rep = i
+    n = n_test + n_train
+    d = _d
+    corr = np.round(_corr*100,0).astype(int)
+    prop_NA = np.round(_prop_NA*100,0).astype(int)
+    beta0 = beta0
+    mu0 = np.zeros(_d)
+    set_up = f"{sim}_rep{rep}_n{n}_d{d}_corr{corr}_NA{prop_NA}"
+
+    # save the data
+    new_row = pd.DataFrame({
+        "sim": [sim],
+        "replicate": [rep],
+        "n": [n],
+        "d": [d],
+        "corr": [corr],
+        "prop_NA": [prop_NA],
+        "true_beta": [beta0],
+        "center_X": [mu0],
+        "set_up": [set_up]
+    })
+    set_up_df = pd.concat([set_up_df, new_row], ignore_index=True)
+
+    data_to_save = {
+        "X_obs": Z_obs,
+        "M": M,
+        "y": y,
+        "y_probs": y_probs,
+        "X_full": X
+    }
+    np.savez(os.path.join(experiment_data_folder, "original_data", f"{set_up}.npz"), **data_to_save)
+
+    # save test data
+    data_to_save = {
+        "X_obs": X_obs[n_train:],
+        "M": M[n_train:],
+        "y": y[n_train:],
+        "y_probs": y_probs[n_train:],
+        "X_full": X[n_train:]
+    }
+    np.savez(os.path.join(experiment_data_folder, "test_data", f"{set_up}.npz"), **data_to_save)
+
+    # save bayes data
+    y_probs_bayes = get_y_prob_bayes(X_obs[n_train:], np.zeros(_d), toep_matrix(_d, _corr), beta0, N_MC)
+    y_probs_bayes = np.mean(y_probs_bayes, axis=1)
+
+    data_to_save = {
+        "y_probs_bayes": y_probs_bayes
+    }
+    np.savez(os.path.join(experiment_data_folder, "bayes_data", f"{set_up}.npz"), **data_to_save)
+
+
+# save the set up
+set_up_df.to_csv(os.path.join(experiment_data_folder, "set_up.csv"), index=False)
+
+
+# %%
