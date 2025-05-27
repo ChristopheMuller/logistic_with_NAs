@@ -10,7 +10,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimulationC"
+experiment_name = "SimulationD"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:
@@ -34,22 +34,14 @@ n_replicates = 10
 
 _prop_NA = 0.25
 _d = 5
-_corr = 0.95
+_corr_max = 0.95
 
 n_train = 100_000
 n_test = 15_000
 n = n_train + n_test
 
-N_MC = 1_000
+N_MC = 1000
 
-# %%
-
-np.random.seed(1)
-random.seed(1)
-
-beta0 = np.random.normal(0, 1.0, _d)
-
-print("beta0", beta0)
 
 # %%
 
@@ -88,80 +80,6 @@ def generate_M(n, d, prc):
 
     return M
 
-def transform_Z_to_X(Z):
-    """
-    Transforms Z back to X based on the inverse operations.
-    Handles potential issues with domains of operations (log, sqrt, fractional powers)
-    and ensures correct sign recovery, accounting for shifts introduced in transform_X_to_Z.
-    """
-    X = np.zeros_like(Z, dtype=float) # Ensure output is float and matches Z's shape
-
-    X[:,0] = Z[:,0]
-    X[:,1] = Z[:,1]
-    
-    # Inverse for Z[:,2] = np.exp(X[:,2]) - 1.67
-    # So, X[:,2] = log(Z[:,2] + 1.67)
-    X[:,2] = np.log(Z[:,2] + 1.67)
-
-    X[:,3] = np.sign(Z[:,3]) * np.power(np.abs(Z[:,3]), 1/3) # No change needed here for Col 3
-
-    # Inverse for Z[:,4] = np.where(...) + 2
-    # First, reverse the +2 shift: Z_prime = Z[:,4] - 2
-    Z_prime_col4 = Z[:,4] - 2
-
-    # Now apply the original inverse logic on Z_prime_col4
-    # The conditions for the np.where must also consider Z_prime_col4
-    mask_Z4_positive = Z_prime_col4 > 0
-    mask_Z4_zero = Z_prime_col4 == 0
-    mask_Z4_negative = Z_prime_col4 < 0
-
-    # If Z_prime_col4 > 0, then X[:,4] was >= 0. Inverse: X[:,4] = sqrt(Z_prime_col4)
-    X[mask_Z4_positive, 4] = np.sqrt(Z_prime_col4[mask_Z4_positive])
-    
-    # If Z_prime_col4 == 0, then X[:,4] was 0. Inverse: X[:,4] = 0.0
-    X[mask_Z4_zero, 4] = 0.0
-    
-    # If Z_prime_col4 < 0, then X[:,4] was < 0. Inverse: X[:,4] = log(-Z_prime_col4 / 10)
-    X[mask_Z4_negative, 4] = np.log(-Z_prime_col4[mask_Z4_negative] / 10)
-
-    return X
-
-def transform_X_to_Z(X):
-    """
-    Transforms X to Z based on the specified piecewise and power transformations.
-    (This function is provided by the user and is the 'target' for inversion).
-    """
-    Z = np.zeros_like(X, dtype=float)
-
-    Z[:, 0] = X[:,0]
-    Z[:, 1] = X[:,1]
-    
-    Z[:, 2] = np.exp(X[:,2]) - 1.67 # Added constant
-    
-    Z[:, 3] = np.power(X[:,3], 3)
-    
-    Z[:, 4] = np.where(X[:,4] >= 0, X[:,4]**2, -10*np.exp(X[:,4])) + 2 # Added constant
-
-    return Z
-
-
-def get_y_prob_bayes(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
-
-    M = np.isnan(X_m)
-    unique_patterns = np.unique(M, axis=0)
-    
-    prob_y_all = np.zeros((X_m.shape[0], n_mc))
-    
-    for pattern in unique_patterns:
-
-        pattern_indices = np.all(M == pattern, axis=1)
-        X_m_subset = X_m[pattern_indices]
-        
-        prob_y_subset = get_y_prob_bayes_same_pattern(X_m_subset, full_mu, full_cov, true_beta, n_mc, intercept)
-        
-        prob_y_all[pattern_indices] = prob_y_subset
-    
-    return prob_y_all
 
 def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
 
@@ -197,9 +115,7 @@ def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000, 
         X_full_mc = np.tile(x_obs, (n_mc, 1))
         X_full_mc[:, missing_idx] = X_mc
 
-        Z_full_mc = transform_X_to_Z(X_full_mc)
-
-        logits_mc = Z_full_mc @ true_beta + intercept
+        logits_mc = X_full_mc @ true_beta + intercept
         prob_y_mc = sigma(logits_mc)
 
         prob_y_all.append(prob_y_mc)
@@ -207,7 +123,6 @@ def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000, 
 
     return np.array(prob_y_all)
 
-# %% 
 
 set_up_df = pd.DataFrame({
     "sim": [],
@@ -216,29 +131,83 @@ set_up_df = pd.DataFrame({
     "d": [],
     "corr": [],
     "prop_NA": [],
-    "true_beta": [],
     "center_X": [],
     "set_up": []
 })
+
+# %%
+
+np.random.seed(1)
+random.seed(1)
+
+beta0 = np.random.normal(0, 1, _d)
+
+print("beta0", beta0)
+
+all_mus = {}
+all_corrs = {}
+for i in range(2**_d):
+
+    pattern = np.array([int(x) for x in np.binary_repr(i, width=_d)])
+
+    mu_pattern = np.random.normal(0, 0.5, _d)
+    corr_pattern = np.random.uniform(0, _corr_max)
+
+    print("Pattern:", pattern)
+    print("\tMu:", np.round(mu_pattern,2))
+    print("\tCorr:", np.round(corr_pattern, 2))
+    
+    all_mus[tuple(pattern)] = mu_pattern
+    all_corrs[tuple(pattern)] = corr_pattern
+    
+
+# save the Mus and Corrs
+all_mus_df = pd.DataFrame(all_mus).T
+all_mus_df.columns = [f"mu_{i}" for i in range(_d)]
+all_mus_df["pattern"] = all_mus_df.index
+all_mus_df.to_csv(os.path.join(experiment_data_folder, "all_mus.csv"), index=False)
+
+all_corrs_df = pd.Series(all_corrs)
+index = all_corrs_df.index
+all_corrs_df = pd.DataFrame(all_corrs_df).reset_index(drop=True)
+all_corrs_df["pattern"] = index
+all_corrs_df.columns = ["corr", "pattern"]
+all_corrs_df.to_csv(os.path.join(experiment_data_folder, "all_corrs.csv"), index=False)
+
+
+# %%
 
 
 for i in range(n_replicates):
 
     print(f"Set up {i+1}/{n_replicates}")
 
-    # generate X, Z
-    X = generate_X(n, _d, _corr)
-    Z = transform_X_to_Z(X)
+    # Generate M
+    M = generate_M(n, _d, _prop_NA)
+
+    # generate X: mu and corr based on the pattern of M
+    X = np.zeros_like(M, dtype=float)
+    unique_patterns = np.unique(M, axis=0)
+    total_pats = 0
+    for pat in unique_patterns:
+
+        rows_with_pat = np.all(M == pat, axis=1)
+        mu_pat = all_mus[tuple(pat)]
+        corr_pat = all_corrs[tuple(pat)]
+        X_temp = generate_X(np.sum(rows_with_pat), _d, corr_pat, mu=mu_pat)
+
+        X[rows_with_pat] = X_temp
+
+        total_pats += np.sum(rows_with_pat)
+
+    assert total_pats == n, "The number of rows with the same pattern does not match the total number of rows."  
 
     # generate y
-    y_logits = np.dot(Z, beta0)
+    y_logits = np.dot(X, beta0)
     y_probs = 1 / (1 + np.exp(-y_logits))
     y = np.random.binomial(1, y_probs)
 
-    # generate M
-    M = generate_M(n, _d, _prop_NA)
-    Z_obs = Z.copy()
-    Z_obs[M == 1] = np.nan
+    # Mask X
     X_obs = X.copy()
     X_obs[M == 1] = np.nan
 
@@ -247,7 +216,7 @@ for i in range(n_replicates):
     rep = i
     n = n_test + n_train
     d = _d
-    corr = np.round(_corr*100,0).astype(int)
+    corr = "MIXTURE"
     prop_NA = np.round(_prop_NA*100,0).astype(int)
     beta0 = beta0
     mu0 = np.zeros(_d)
@@ -268,27 +237,45 @@ for i in range(n_replicates):
     set_up_df = pd.concat([set_up_df, new_row], ignore_index=True)
 
     data_to_save = {
-        "X_obs": Z_obs,
+        "X_obs": X_obs,
         "M": M,
         "y": y,
         "y_probs": y_probs,
-        "X_full": Z
+        "X_full": X
     }
     np.savez(os.path.join(experiment_data_folder, "original_data", f"{set_up}.npz"), **data_to_save)
 
     # save test data
     data_to_save = {
-        "X_obs": Z_obs[n_train:],
+        "X_obs": X_obs[n_train:],
         "M": M[n_train:],
         "y": y[n_train:],
         "y_probs": y_probs[n_train:],
-        "X_full": Z[n_train:]
+        "X_full": X[n_train:]
     }
     np.savez(os.path.join(experiment_data_folder, "test_data", f"{set_up}.npz"), **data_to_save)
 
     # save bayes data
-    y_probs_bayes = get_y_prob_bayes(X_obs[n_train:], np.zeros(_d), toep_matrix(_d, _corr), beta0, N_MC)
-    y_probs_bayes = np.mean(y_probs_bayes, axis=1)
+    y_probs_bayes = np.zeros(n_test)
+    total_pats = 0
+    for pat in unique_patterns:
+        rows_with_pat = np.all(M[n_train:] == pat, axis=1)
+        mu_pat = all_mus[tuple(pat)]
+        corr_pat = all_corrs[tuple(pat)]
+
+        total_pats += np.sum(rows_with_pat)
+
+        y_probs_bayes_pat = get_y_prob_bayes_same_pattern(
+            X_obs[n_train:][rows_with_pat],
+            mu_pat,
+            toep_matrix(_d, corr_pat),
+            beta0,
+            n_mc=N_MC
+        )
+
+        y_probs_bayes[rows_with_pat] = np.mean(y_probs_bayes_pat, axis=1)
+
+    assert total_pats == n_test, "The number of rows with the same pattern does not match the number of test rows."
 
     data_to_save = {
         "y_probs_bayes": y_probs_bayes
