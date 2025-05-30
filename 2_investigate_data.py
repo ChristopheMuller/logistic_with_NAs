@@ -38,3 +38,56 @@ for i in range(len(set_ups)):
     plt.show()
 
 # %%
+
+
+# simulations_df = pd.read_csv(os.path.join("data", sim, "simulation.csv"))
+# score_matrix = pd.read_csv(os.path.join("data", sim, "score_matrix.csv"))
+
+# all_methods = score_matrix["method"].unique()
+# print(all_methods)
+
+# methods_to_remove = [
+#     "MICE.Y.M.IMP",
+#     "MICE.M.IMP"
+# ]
+
+# # Remove methods from the score matrix
+# print(score_matrix.shape)
+
+# score_matrix = score_matrix[~score_matrix["method"].isin(methods_to_remove)]
+# print(score_matrix["method"].unique())
+
+# print(score_matrix.shape)
+# print(score_matrix.head())
+
+# # save score matrix
+
+# score_matrix.to_csv(os.path.join("data", sim, "score_matrix.csv"), index=False)
+
+# # loop over the simulation df:
+# # if method is in methods to remove => remove the file corresponding (name of the file in "file_name" column)
+
+# simulation_with_methods = simulations_df[simulations_df["method"].isin(methods_to_remove)]
+# print(simulation_with_methods.shape)
+
+# sum_ = 0
+# for i in range(len(simulations_df)):
+
+#     method = simulations_df.loc[i, "method"]
+    
+#     if method in methods_to_remove:
+#         file_name = simulations_df.loc[i, "file_name"]
+#         # print(file_name)
+
+#         full_file_path = os.path.join("data", sim, "pred_data", f"{file_name}.npz")
+#         # print(full_file_path)
+
+#         if os.path.exists(full_file_path):
+#             sum_ += 1
+#             os.remove(full_file_path)
+#             print(f"Removed {full_file_path}")
+
+# print(sum_)
+
+# simulations_df = simulations_df[~simulations_df["method"].isin(methods_to_remove)]
+# simulations_df.to_csv(os.path.join("data", sim, "simulation.csv"), index=False)
