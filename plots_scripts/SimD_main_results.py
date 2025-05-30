@@ -1,6 +1,6 @@
 #####
 #
-# Plot main results (4 metrics), Simulation A
+# Plot main results (4 metrics), Simulation D
 #
 #####
 
@@ -15,7 +15,7 @@ from setups_design import metrics_config, methods_config
 
 # %% set up
 
-exp = "SimulationB"
+exp = "SimulationD"
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 
@@ -28,16 +28,21 @@ from utils import calculate_ymin_for_R_proportion
 score_matrix = score_matrix[score_matrix["filter"] == "all"]
 
 
-# methods_sel = ["MICE.IMP", "MICE.M.IMP", "MICE.Y.IMP", "MICE.Y.M.IMP", "Mean.IMP", "Mean.IMP.M", "05.IMP", "05.IMP.M"]  ## Single Imputation
-methods_sel = ["Mean.IMP.M", "PbP", "CC", "MICE.IMP", "MICE.Y.IMP",  "MICE.10.Y.IMP", "MICE.100.Y.IMP", "SAEM"]  ## Selected Procedures
+# methods_sel = ["MICE.IMP", "MICE.IMP.M", "MICE.Y.IMP", "MICE.Y.M.IMP", "Mean.IMP", "Mean.IMP.M", "05.IMP", "05.IMP.M"]  ## Single Imputation
+# methods_sel = ["Mean.IMP.M", "PbP", "CC", "MICE.IMP", "MICE.Y.IMP",  "MICE.10.Y.IMP", "MICE.100.Y.IMP", "SAEM"]  ## Selected Procedures
+methods_sel = ["MICE.10.Y.IMP", "MICE.RF.10.Y.IMP", "MICE.RF.10.Y.IMP.M"]  ## MICE Methods
 
-scores_sel = ["misclassification", "mae_bayes"]
-filter_bayes = [True, False]
+
+
+scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
+filter_bayes = [True, True, False, False]
+
 
 ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
 # ylimsmax = [0.06, 0.035, 1.5, 0.20] ## Single Imputation
-ylimsmax = [0.22, 0.35]  ## Selected Procedures
+# ylimsmax = [0.12, 0.08, 1.2, 0.30]  ## Selected Procedures
+ylimsmax = [0.08,0.04,0.8,0.2]
 
 ylimsmin = calculate_ymin_for_R_proportion(0.03, ylimsmax)
 ylims = [(ylimsmin[i], ylimsmax[i]) for i in range(len(ylimsmax))] 
@@ -78,15 +83,15 @@ for i, score in enumerate(scores_sel):
     axes[i].set_title(metrics_config[score]["label"])   
     if i == 1:
         axes[i].legend()
-    # axes[i].grid()
     axes[i].set_ylim(ylims[i])
 
     # line at 
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
-# plt.savefig(os.path.join("plots_scripts", "plots", "SimB_SingleImputation.pdf"))
-plt.savefig(os.path.join("plots_scripts", "plots", "SimB_SelectedProcedures.pdf"))
+# plt.savefig(os.path.join("plots_scripts", "plots", "SimD_SingleImputation.pdf"))
+# plt.savefig(os.path.join("plots_scripts", "plots", "SimD_SelectedProcedures.pdf"))
+plt.savefig(os.path.join("plots_scripts", "plots", "SimD_MICE.pdf"))
 plt.show()
     
 
@@ -107,7 +112,7 @@ filter_bayes = [True, False]
 ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
 # ylimsmax = [0.06, 0.035, 1.5, 0.20] ## Single Imputation
-ylimsmax = [0.12, 2]  ## Selected Procedures
+ylimsmax = [0.12, 0.2]  ## Selected Procedures
 # ylimsmax = [0.06, 0.035, 1.1, 0.20]  ## MICE Procedures
 
 
@@ -159,9 +164,6 @@ for i, score in enumerate(scores_sel):
 
 plt.tight_layout()
 # plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SingleImputation.pdf"))
-plt.savefig(os.path.join("plots_scripts", "plots", "SimB_SelectedProcedures_Brier_Angular.pdf"))
+plt.savefig(os.path.join("plots_scripts", "plots", "SimD_SelectedProcedures_Brier_Angular.pdf"))
 # plt.savefig(os.path.join("plots_scripts", "plots", "SimA_MICE_Procedures.pdf"))
 plt.show()
-    
-
-# %%

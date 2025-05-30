@@ -29,10 +29,11 @@ variable_config = {
 }
 
 metrics_config = {
-    "angular_error": {"label": "Angular Error"},
+    "angular_error": {"label": "Angular"},
     "mse_error": {"label": "MSE"},
     "missclassification_error": {"label": "Misclassification"},
     "brier_score": {"label": "Brier Score"},
+    "brier": {"label": "Brier"},
     "mae_score": {"label": "MAE"},
     "running_time": {"label": "Running Time (s.)"},
     "mae_score_bayes": {"label": "Mean Absolute Distance to Bayes Probs"},
@@ -58,6 +59,7 @@ methods_config = {
 
     "MICE.IMP": {"label": "MICE.1.IMP", "color": color_palette[7], "linestyle": "-", "marker":"o"},
     "MICE.IMP.M": {"label": "MICE.1.IMP.M", "color": color_palette[7], "linestyle": "--", "marker":"x"},
+    "MICE.M.IMP": {"label": "MICE.1.IMP.M", "color": color_palette[7], "linestyle": "--", "marker":"x"},
 
     "MICE.10.IMP": {"label": "MICE.10.IMP", "color": color_palette[5], "linestyle": "-", "marker":"o"},
     "MICE.10.IMP.M": {"label": "MICE.10.IMP.M", "color": color_palette[5], "linestyle": "--", "marker":"x"},
@@ -71,9 +73,17 @@ methods_config = {
     "MICE.100.Y.IMP": {"label": "MICE.100.Y.IMP", "color": color_palette[1], "linestyle": "-", "marker":"o"},
     "MICE.100.Y.IMP.M": {"label": "MICE.100.Y.IMP.M", "color": color_palette[1], "linestyle": "--", "marker":"x"},
 
-    # "MICE.100.Y.IMP": {"label": "MICE.100.Y.IMP", "color": color_palette[6], "linestyle": "--", "marker":"x"},
+    "MICE.Caliber.10.IMP": {"label": "MICE.Caliber.10.IMP", "color": color_palette[9], "linestyle": "-", "marker":"o"},
+    "MICE.Caliber.10.Y.IMP": {"label": "MICE.Caliber.10.Y.IMP", "color": color_palette[2], "linestyle": "-", "marker":"o"},
+    "MICE.Caliber.10.IMP.M": {"label": "MICE.Caliber.10.IMP.M", "color": color_palette[9], "linestyle": "--", "marker":"x"},
+    "MICE.Caliber.10.Y.IMP.M": {"label": "MICE.Caliber.10.Y.IMP.M", "color": color_palette[2], "linestyle": "--", "marker":"x"},
 
+    "MICE.Cart.10.Y.IMP.M": {"label": "MICE.Cart.10.IMP.M", "color": color_palette[3], "linestyle": "--", "marker":"x"},
 
+    "MICE.RF.10.IMP": {"label": "MICE.RF.10.IMP", "color": color_palette[9], "linestyle": "-", "marker":"o"},
+    "MICE.RF.10.Y.IMP": {"label": "MICE.RF.10.Y.IMP", "color": color_palette[2], "linestyle": "-", "marker":"o"},
+    "MICE.RF.10.IMP.M": {"label": "MICE.RF.10.IMP.M", "color": color_palette[9], "linestyle": "--", "marker":"x"},
+    "MICE.RF.10.Y.IMP.M": {"label": "MICE.RF.10.Y.IMP.M", "color": color_palette[2], "linestyle": "--", "marker":"x"},
 
     "SAEM": {"label": "SAEM", "color": color_palette[5], "linestyle": "-", "marker":"o"},
 
