@@ -54,6 +54,7 @@ MICELogisticRegression <- R6::R6Class("MICELogisticRegression",
       
       # change the col names of M-train: M1, .., Md
       colnames(M_train) <- paste0("M", seq_len(ncol(M_train)))
+      M_train <- as.data.frame(M_train)
 
       # Combine training data for imputation
       data_train <- as.data.frame(X_train)
@@ -118,7 +119,7 @@ MICELogisticRegression <- R6::R6Class("MICELogisticRegression",
         }
 
         if (self$mask.before) {
-          imp_train_data <- imp_train_data[, !names(imp_train_data) %in% names(M_train)]
+          imp_train_data <- imp_train_data[, !(names(imp_train_data) %in% names(M_train))]
         }
 
         # Add mask before logistic regression if mask is TRUE
@@ -218,6 +219,7 @@ MICECartLogisticRegression <- R6::R6Class("MICECartLogisticRegression",
                                           
                                           # change the col names of M-train: M1, .., Md
                                           colnames(M_train) <- paste0("M", seq_len(ncol(M_train)))
+                                          M_train <- as.data.frame(M_train)
 
                                           # Combine training data for imputation
                                           data_train <- as.data.frame(X_train)
@@ -280,7 +282,7 @@ MICECartLogisticRegression <- R6::R6Class("MICECartLogisticRegression",
                                             }
 
                                             if (self$mask.before) {
-                                              imp_train_data <- imp_train_data[, !names(imp_train_data) %in% names(M_train)]
+                                              imp_train_data <- imp_train_data[, !(names(imp_train_data) %in% names(M_train))]
                                             }
 
                                             # Add mask before logistic regression if mask is TRUE
@@ -380,6 +382,7 @@ MICERFLogisticRegression <- R6::R6Class("MICERFLogisticRegression",
                                               
                                               # change the col names of M-train: M1, .., Md
                                               colnames(M_train) <- paste0("M", seq_len(ncol(M_train)))
+                                              M_train <- as.data.frame(M_train)
 
                                               # Combine training data for imputation
                                               data_train <- as.data.frame(X_train)
@@ -442,7 +445,7 @@ MICERFLogisticRegression <- R6::R6Class("MICERFLogisticRegression",
                                                 }
 
                                                 if (self$mask.before) {
-                                                  imp_train_data <- imp_train_data[, !names(imp_train_data) %in% names(M_train)]
+                                                  imp_train_data <- imp_train_data[, !(names(imp_train_data) %in% names(M_train))]
                                                 }
 
                                                 # Add mask before logistic regression if mask is TRUE
