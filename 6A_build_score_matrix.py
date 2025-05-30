@@ -23,6 +23,14 @@ exp = "SimulationA"
 set_up = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
 simulation = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 
+# try if the path exists,
+if os.path.exists(os.path.join("data", exp, "score_matrix.csv")):
+    original_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
+    print("Score matrix found, loading it.")
+else:
+    original_matrix = None
+    print("No score matrix found, building a new one.")
+
 
 # %% define metrics we want to calculate
 
@@ -128,7 +136,7 @@ def build_score_matrix(exp, set_up, simulation, metrics, methods, existing_matri
     return score_matrix
 
 
-matrix = build_score_matrix(exp, set_up, simulation, metrics, methods)
+matrix = build_score_matrix(exp, set_up, simulation, metrics, methods, original_matrix)
 
 
 # %%
