@@ -8,20 +8,15 @@ source("methods_in_R.R")
 
 
 # Configuration
-exp <- "SimulationB"
-# training_sizes <- c(100)
-training_sizes <- c(100, 500, 1000, 5000, 10000, 50000)
+exp <- "SimulationA"
+training_sizes <- c(100)
+# training_sizes <- c(100, 500, 1000, 5000, 10000, 50000)
 test_size <- 15000
 
 # Initialize methods list
 methods_list <- list(
-  MICELogisticRegression$new(name="MICE.IMP", n_imputations = 1),
-  MICELogisticRegression$new(name="MICE.M.IMP", n_imputations = 1, mask=TRUE),
-  MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations = 1, add.y=TRUE),
-  MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations = 1, add.y=TRUE, mask=TRUE),
-  MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations = 10, add.y=TRUE),
-  MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations = 100, add.y=TRUE),
-  SAEMLogisticRegression$new(name="SAEM")
+  # SAEMLogisticRegression$new(name="SAEM")
+  MICELogisticRegressionRe$new(name="MICE.IMP.Y.M.IMP.M", n_imputations=1, add.y=TRUE, mask.after=TRUE, mask.before=TRUE)
 )
 
 # Read setup data
@@ -31,6 +26,10 @@ df_set_up <- read.csv(file.path("data", exp, "set_up.csv"))
 simulation_file <- file.path("data", exp, "simulation.csv")
 if (file.exists(simulation_file)) {
   simulations_df <- read.csv(simulation_file)
+  # if the file does not contain the column "running_time_pred", add it
+  if (!"running_time_pred" %in% colnames(simulations_df)) {
+    simulations_df$running_time_pred <- NA
+  }
 } else {
   simulations_df <- data.frame(
     set_up = character(),
@@ -38,15 +37,17 @@ if (file.exists(simulation_file)) {
     n_train = numeric(),
     estimated_beta = character(),
     file_name = character(),
+    running_time = numeric(),
+    running_time_pred = numeric(),
     stringsAsFactors = FALSE
   )
 }
 
 
+np <- import("numpy")
 for (i in 1:nrow(df_set_up)) {
   cat(sprintf("Running set up %d out of %d: %s\n", i, nrow(df_set_up), df_set_up$set_up[i]))
   
-  np <- import("numpy")
   data <- np$load(file.path("data", exp, "original_data", paste0(df_set_up$set_up[i], ".npz")))
   X_obs <- data$f[["X_obs"]]
   M <- data$f[["M"]]
@@ -81,7 +82,10 @@ for (i in 1:nrow(df_set_up)) {
       if (fit_success && method$can_predict) {
 
         pred_success <- tryCatch({
+          tic.pred <- Sys.time()
           y_probs_pred <- method$predict_probs(X_test, M_test)
+          toc.pred <- Sys.time()
+          running_time.pred <- as.numeric(difftime(toc.pred, tic.pred, units = "secs"))
           
           save_name <- paste0(df_set_up$set_up[i], "_", method$name, "_", n_train)
           
@@ -110,6 +114,7 @@ for (i in 1:nrow(df_set_up)) {
             estimated_beta = toString(estimated_beta),
             file_name = save_name,
             running_time = running_time,
+            running_time_pred = running_time.pred,
             stringsAsFactors = FALSE
           )
           simulations_df <- rbind(simulations_df, new_row)
