@@ -16,7 +16,10 @@ test_size <- 15000
 # Initialize methods list
 methods_list <- list(
   # SAEMLogisticRegression$new(name="SAEM")
-  MICELogisticRegressionRe$new(name="MICE.IMP.Y.M.IMP.M", n_imputations=1, add.y=TRUE, mask.after=TRUE, mask.before=TRUE)
+  MICELogisticRegression$new(name="MICE.Y.M.IMP.M", n_imputations=1, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+  MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+  MICELogisticRegression$new(name="MICE.Y.IMP.M", n_imputations=1, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+  MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=FALSE)
 )
 
 # Read setup data
