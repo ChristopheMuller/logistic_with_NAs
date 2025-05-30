@@ -14,7 +14,7 @@ from utils import *
 
 # %%
 
-exp = "SimulationA"
+exp = "SimulationC"
 set_up = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
 simulation = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 
@@ -40,12 +40,20 @@ methods = [
     "MICE.100.Y.IMP"
 ]
 
+# patterns = [
+#     0,
+#     1,
+#     2,
+#     3,
+#     4
+# ]
+
 patterns = [
-    0,
-    1,
-    2,
-    3,
-    4
+    [1,0,0,0,0],
+    [0,1,0,0,0],
+    [0,0,1,0,0],
+    [0,0,0,1,0],
+    [0,0,0,0,1],
 ]
 
 # %%
