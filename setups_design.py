@@ -63,6 +63,16 @@ methods_config = {
     "MICE.10.Y.M.IMP": {"label": "MICE.10.Y.M.IMP", "color": color_palette[2], "linestyle": "-", "marker":"o"},
     "MICE.10.Y.M.IMP.M": {"label": "MICE.10.Y.M.IMP.M", "color": color_palette[2], "linestyle": "--", "marker":"x"},
 
+    "MICE.100.IMP": {"label": "MICE.100.IMP", "color": color_palette[4], "linestyle": ":", "marker":"^"},
+    "MICE.100.Y.IMP": {"label": "MICE.100.Y.IMP", "color": color_palette[1], "linestyle": ":", "marker":"^"},
+    "MICE.100.M.IMP": {"label": "MICE.100.M.IMP", "color": color_palette[8], "linestyle": ":", "marker":"^"},
+    "MICE.100.Y.M.IMP": {"label": "MICE.100.Y.M.IMP", "color": color_palette[2], "linestyle": ":", "marker":"^"},
+
+    "MICE.RF.10.IMP": {"label": "MICE.RF.10.IMP", "color": color_palette[4], "linestyle": "-.", "marker":"*"},
+    "MICE.RF.10.Y.IMP": {"label": "MICE.RF.10.Y.IMP", "color": color_palette[1], "linestyle": "-.", "marker":"*"},
+    "MICE.RF.10.M.IMP": {"label": "MICE.RF.10.M.IMP", "color": color_palette[8], "linestyle": "-.", "marker":"*"},
+    "MICE.RF.10.Y.M.IMP": {"label": "MICE.RF.10.Y.M.IMP", "color": color_palette[2], "linestyle": "-.", "marker":"*"},
+
     "SAEM": {"label": "SAEM", "color": color_palette[5], "linestyle": "-", "marker":"o"},
 
 }
