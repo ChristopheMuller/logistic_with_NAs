@@ -1,0 +1,64 @@
+/var/lib/oar/.batch_job_bashrc: line 5: /home/cmuller/.bashrc: No such file or directory
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 4.4.3 
+Warning message:
+package ‘stringr’ was built under R version 4.4.3 
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+Warning message:
+package ‘mice’ was built under R version 4.4.3 
+There were 50 or more warnings (use warnings() to see the first 50)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 4.4.3 
+Warning message:
+package ‘stringr’ was built under R version 4.4.3 
+Error in c("MICE.100.IMP", "MICE.100.Y.IMP", "MICE.100.M.IMP", "MICE.100.Y.M.IMP",  : 
+  argument 9 is empty
+Execution halted
+/var/lib/oar/.batch_job_bashrc: line 5: /home/cmuller/.bashrc: No such file or directory
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 4.4.3 
+Warning message:
+package ‘stringr’ was built under R version 4.4.3 
