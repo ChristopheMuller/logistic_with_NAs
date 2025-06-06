@@ -10,24 +10,44 @@ np <- import("numpy")
 # Configuration
 ####
 
-exp <- "SimulationA"
+exp <- "SimulationD"
 df_set_up <- read.csv(file.path("data", exp, "set_up.csv"))
 simulation_file <- file.path("data", exp, "simulation.csv")
 df_simulations <- read.csv(simulation_file)
 matrix_scores <- read.csv(file.path("data", exp, "score_matrix.csv"))
 
-list_of_methods <- c("SAEM",
-    "05.IMP",
-    "05.IMP.M",
-    "Mean.IMP",
-    "Mean.IMP.M",
-    "PbP",
-    "MICE.IMP",
-    "MICE.M.IMP",
-    "MICE.Y.IMP",
-    "MICE.Y.M.IMP",
-    "MICE.10.Y.IMP",
-    "MICE.100.Y.IMP"
+list_of_methods <- c(
+    # "MICE.M.IMP",
+    # "MICE.M.IMP.M",
+    # "MICE.Y.M.IMP",
+    # "MICE.Y.M.IMP.M",
+    # "MICE.IMP.M",
+    # "MICE.Y.IMP.M",
+    # "MICE.IMP",
+    # "MICE.Y.IMP",
+
+    # "MICE.10.M.IMP",
+    # "MICE.10.M.IMP.M",
+    # "MICE.10.Y.M.IMP",
+    # "MICE.10.Y.M.IMP.M",
+    # "MICE.10.IMP",
+    # "MICE.10.IMP.M",
+    # "MICE.10.Y.IMP",
+    # "MICE.10.Y.IMP.M"
+
+    "MICE.1000.IMP", 
+    "MICE.1000.Y.IMP",
+    "MICE.1000.M.IMP",
+    "MICE.1000.Y.M.IMP"
+
+    # "MICE.RF.10.IMP",
+    # "MICE.RF.10.Y.IMP",
+    # "MICE.RF.10.M.IMP",
+    # "MICE.RF.10.Y.M.IMP"
+    # "MICE.RF.10.IMP.M",
+    # "MICE.RF.10.Y.IMP.M",
+    # "MICE.RF.10.M.IMP.M",
+    # "MICE.RF.10.Y.M.IMP.M"
   )
 
 

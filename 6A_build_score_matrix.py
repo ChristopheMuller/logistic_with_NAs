@@ -17,15 +17,17 @@ import os
 import numpy as np
 import pandas as pd
 
+name_score_matrix = "score_matrix.csv"
+
 # %% set up
 
-exp = "SimulationA"
+exp = "SimulationC"
 set_up = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
 simulation = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 
 # try if the path exists,
-if os.path.exists(os.path.join("data", exp, "score_matrix.csv")):
-    original_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
+if os.path.exists(os.path.join("data", exp, name_score_matrix)):
+    original_matrix = pd.read_csv(os.path.join("data", exp, name_score_matrix))
     print("Score matrix found, loading it.")
 else:
     original_matrix = None
@@ -44,20 +46,16 @@ metrics = {
 
 }
 
-methods = [
-    "SAEM",
-    "05.IMP",
-    "05.IMP.M",
-    "Mean.IMP",
-    "Mean.IMP.M",
-    "PbP",
-    "MICE.IMP",
-    "MICE.M.IMP",
-    "MICE.Y.IMP",
-    "MICE.Y.M.IMP",
-    "MICE.10.Y.IMP",
-    "MICE.100.Y.IMP"
-]
+methods = ['SAEM', '05.IMP', '05.IMP.M', 'Mean.IMP', 'Mean.IMP.M', 'PbP',
+       'MICE.M.IMP', 'MICE.M.IMP.M', 'MICE.Y.M.IMP',
+       'MICE.Y.M.IMP.M', 'MICE.IMP.M', 'MICE.Y.IMP.M', 'MICE.IMP',
+       'MICE.Y.IMP', 'MICE.10.M.IMP', 'MICE.10.M.IMP.M',
+       'MICE.10.Y.M.IMP', 'MICE.10.Y.M.IMP.M', 'MICE.10.Y.IMP',
+       'MICE.10.Y.IMP.M', 'MICE.10.IMP', 'MICE.10.IMP.M', 'MICE.100.IMP',
+       'MICE.100.Y.IMP', 'MICE.100.M.IMP', 'MICE.100.Y.M.IMP',
+       'MICE.RF.10.IMP', 'MICE.RF.10.Y.IMP', 'MICE.RF.10.M.IMP',
+       'MICE.RF.10.Y.M.IMP', 'MICE.1000.IMP', 'MICE.1000.Y.IMP',
+       'MICE.1000.M.IMP', 'MICE.1000.Y.M.IMP']
 
 # %% build the score matrix (predictions)
 
@@ -136,7 +134,7 @@ def build_score_matrix(exp, set_up, simulation, metrics, methods, existing_matri
     return score_matrix
 
 
-matrix = build_score_matrix(exp, set_up, simulation, metrics, methods, original_matrix)
+score_matrix = build_score_matrix(exp, set_up, simulation, metrics, methods, original_matrix)
 
 
 # %%
@@ -147,22 +145,9 @@ matrix = build_score_matrix(exp, set_up, simulation, metrics, methods, original_
 
 # %%
 
-score_matrix = matrix.copy()
-
-methods = [
-    "SAEM",
-    "05.IMP",
-    "05.IMP.M",
-    "Mean.IMP",
-    "Mean.IMP.M",
-    "PbP",
-    "MICE.IMP",
-    "MICE.M.IMP",
-    "MICE.Y.IMP",
-    "MICE.Y.M.IMP",
-    "MICE.10.Y.IMP",
-    "MICE.100.Y.IMP",
-    "CC"
+methods = ["Mean.IMP",  "PbP", "SAEM", "MICE.IMP", "MICE.10.IMP",  
+           "MICE.100.IMP", "MICE.Y.IMP", "MICE.10.Y.IMP", "MICE.100.Y.IMP", 
+           "MICE.1000.IMP", "MICE.1000.Y.IMP"
 ]
 
 simulation_setup = pd.read_csv(os.path.join("data", exp, "simulation_set_up.csv"))
@@ -195,6 +180,7 @@ for i in range(len(simulation_setup)):
 
     score_matrix = pd.concat([score_matrix, new_scores], ignore_index=True)
 
-score_matrix.to_csv(os.path.join("data", exp, "score_matrix.csv"), index=False)
 
 # %%
+
+score_matrix.to_csv(os.path.join("data", exp, name_score_matrix), index=False)

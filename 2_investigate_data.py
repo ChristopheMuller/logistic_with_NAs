@@ -8,7 +8,7 @@ import pandas as pd
 
 # %% SIM A - distribution of p
 
-sim = "SimulationA"
+sim = "SimulationD"
 
 set_ups = pd.read_csv(os.path.join("data", sim, "set_up.csv"))
 
@@ -47,8 +47,23 @@ for i in range(len(set_ups)):
 # print(all_methods)
 
 # methods_to_remove = [
+#     "MICE.IMP",
+#     "MICE.M.IMP",
+#     "MICE.Y.IMP",
 #     "MICE.Y.M.IMP",
-#     "MICE.M.IMP"
+#     "MICE.10.Y.IMP",
+#     "MICE.100.Y.IMP",
+#     "MICE.10.Y.IMP.M",
+#     "MICE.100.Y.IMP.M",
+#     "MICE.10.IMP.M",
+#     "MICE.100.IMP.M",
+#     "MICE.10.IMP",
+#     "MICE.100.IMP",
+#     "MICE.Caliber.10.IMP",
+#     "MICE.Caliber.10.Y.IMP",
+#     "MICE.Caliber.10.Y.IMP.M",
+#     "MICE.RF.10.Y.IMP.M",
+#     "MICE.RF.10.Y.IMP"
 # ]
 
 # # Remove methods from the score matrix
@@ -85,7 +100,7 @@ for i in range(len(set_ups)):
 #         if os.path.exists(full_file_path):
 #             sum_ += 1
 #             os.remove(full_file_path)
-#             print(f"Removed {full_file_path}")
+#             # print(f"Removed {full_file_path}")
 
 # print(sum_)
 

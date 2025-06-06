@@ -8,19 +8,56 @@ source("methods_in_R.R")
 
 
 # Configuration
-exp <- "SimulationA"
-training_sizes <- c(100)
-# training_sizes <- c(100, 500, 1000, 5000, 10000, 50000)
+exp <- "SimulationD"
+# training_sizes <- c(100)
+training_sizes <- c(100, 500, 1000, 5000, 10000, 50000)
 test_size <- 15000
 
 # Initialize methods list
 methods_list <- list(
-  # SAEMLogisticRegression$new(name="SAEM")
-  MICELogisticRegression$new(name="MICE.Y.M.IMP.M", n_imputations=1, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
-  MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
-  MICELogisticRegression$new(name="MICE.Y.IMP.M", n_imputations=1, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
-  MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=FALSE)
+  # SAEMLogisticRegression$new(name="SAEM"),
+
+  # MICELogisticRegression$new(name="MICE.M.IMP", n_imputations=1, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
+  # MICELogisticRegression$new(name="MICE.M.IMP.M", n_imputations=1, add.y=FALSE, mask.after=TRUE, mask.before=TRUE),
+  # MICELogisticRegression$new(name="MICE.Y.M.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+  # MICELogisticRegression$new(name="MICE.Y.M.IMP.M", n_imputations=1, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+  # MICELogisticRegression$new(name="MICE.IMP.M", n_imputations=1, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+  # MICELogisticRegression$new(name="MICE.Y.IMP.M", n_imputations=1, add.y=TRUE, mask.after=TRUE, mask.before=FALSE),
+  # MICELogisticRegression$new(name="MICE.IMP", n_imputations=1, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+  # MICELogisticRegression$new(name="MICE.Y.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
+
+  # MICELogisticRegression$new(name="MICE.10.M.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
+  # MICELogisticRegression$new(name="MICE.10.M.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=TRUE),
+  # MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+  # MICELogisticRegression$new(name="MICE.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+  # MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
+  # MICELogisticRegression$new(name="MICE.10.Y.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=FALSE),
+  # MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+  # MICELogisticRegression$new(name="MICE.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE)
+
+  MICELogisticRegression$new(name="MICE.1000.IMP", n_imputations=1000, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+  MICELogisticRegression$new(name="MICE.1000.Y.IMP", n_imputations=1000, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
+  MICELogisticRegression$new(name="MICE.1000.M.IMP", n_imputations=1000, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
+  MICELogisticRegression$new(name="MICE.1000.Y.M.IMP", n_imputations=1000, add.y=TRUE, mask.after=FALSE, mask.before=TRUE)
+
+  # MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+  # MICERFLogisticRegression$new(name="MICE.RF.10.Y.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
+  # MICERFLogisticRegression$new(name="MICE.RF.10.M.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
+  # MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE)
+  # MICERFLogisticRegression$new(name="MICE.RF.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+  # MICERFLogisticRegression$new(name="MICE.RF.10.Y.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=FALSE),
+  # MICERFLogisticRegression$new(name="MICE.RF.10.M.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=TRUE),
+  # MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE)
+
 )
+
+print("TRAINING IN R:")
+print("Methods:")
+for (method in methods_list) {
+  print(method$name)
+}
+print("Training sizes:")
+print(training_sizes)
 
 # Read setup data
 df_set_up <- read.csv(file.path("data", exp, "set_up.csv"))
