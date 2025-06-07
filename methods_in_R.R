@@ -1,7 +1,6 @@
 library(mice)
 library(dplyr)
 library(stringr)
-# library(misaem.fork)
 library(misaem)
 
 # Base class for imputation methods
@@ -105,7 +104,7 @@ MICELogisticRegression <- R6::R6Class("MICELogisticRegression",
                                       printFlag = FALSE)
       }
       
-      # print(self$imputation_model$loggedEvents)
+      print(self$imputation_model$loggedEvents)
       
       # Fit logistic regression on each imputed training dataset
       models <- list()

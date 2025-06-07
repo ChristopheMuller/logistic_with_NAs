@@ -30,7 +30,7 @@ formula <- as.formula(paste("y ~", paste0("X", 1:3, collapse = " + ")))
 
 
 tic <- Sys.time()
-misaem.fork.model <- misaem.fork::miss.glm(formula, data)
+# misaem.fork.model <- misaem.fork::miss.glm(formula, data)
 toc <- Sys.time()
 
 (time.misaem.fork <- toc - tic)
@@ -46,5 +46,4 @@ X.new <- X[1:50,]
 predict(misaem.model, X.new)
 
 X.new <- X[1:50,]
-library(misaem.fork)
 predict(misaem.fork.model, X.new, method="map")

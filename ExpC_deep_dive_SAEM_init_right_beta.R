@@ -55,10 +55,10 @@ data_train$y <- y_train
 all_predictions <- list()
 for (i in 1:1){
 
-  model <- misaem.fork::miss.glm("y ~ .", data=data_train, control=list(nmcmc=5, maxruns=20, k1=1, tau=9999),
-                                 init_params = list(beta=true_beta, 
-                                                    Sigma=true_sigma, 
-                                                    mu=true_mu))
+  # model <- misaem.fork::miss.glm("y ~ .", data=data_train, control=list(nmcmc=5, maxruns=20, k1=1, tau=9999),
+  #                                init_params = list(beta=true_beta, 
+  #                                                   Sigma=true_sigma, 
+  #                                                   mu=true_mu))
   y.hat <- predict(model, newdata = as.data.frame(X_test)[1:100,], mcmc_map=500)
   all_predictions[[i]] <- y.hat
   print(i)
