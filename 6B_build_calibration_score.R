@@ -10,21 +10,23 @@ np <- import("numpy")
 # Configuration
 ####
 
-exp <- "SimulationD"
+exp <- "SimA"
 df_set_up <- read.csv(file.path("data", exp, "set_up.csv"))
 simulation_file <- file.path("data", exp, "simulation.csv")
 df_simulations <- read.csv(simulation_file)
 matrix_scores <- read.csv(file.path("data", exp, "score_matrix.csv"))
 
 list_of_methods <- c(
-    # "MICE.M.IMP",
-    # "MICE.M.IMP.M",
-    # "MICE.Y.M.IMP",
-    # "MICE.Y.M.IMP.M",
-    # "MICE.IMP.M",
-    # "MICE.Y.IMP.M",
-    # "MICE.IMP",
-    # "MICE.Y.IMP",
+    "MICE.1.M.IMP",
+    "MICE.1.M.IMP.M",
+    "MICE.1.Y.M.IMP",
+    "MICE.1.Y.M.IMP.M",
+    "MICE.1.IMP.M",
+    "MICE.1.Y.IMP.M",
+    "MICE.1.IMP",
+    "MICE.1.Y.IMP",
+    
+    "SAEM"
 
     # "MICE.10.M.IMP",
     # "MICE.10.M.IMP.M",
@@ -35,10 +37,10 @@ list_of_methods <- c(
     # "MICE.10.Y.IMP",
     # "MICE.10.Y.IMP.M"
 
-    "MICE.1000.IMP", 
-    "MICE.1000.Y.IMP",
-    "MICE.1000.M.IMP",
-    "MICE.1000.Y.M.IMP"
+    # "MICE.1000.IMP", 
+    # "MICE.1000.Y.IMP",
+    # "MICE.1000.M.IMP",
+    # "MICE.1000.Y.M.IMP"
 
     # "MICE.RF.10.IMP",
     # "MICE.RF.10.Y.IMP",
@@ -56,8 +58,6 @@ list_of_methods <- c(
 ####
 
 for (i in (1:dim(df_simulations)[1])){
-
-  print(i)
   
   cat("Simulation ", i, " of ", dim(df_simulations)[1], "\n")
 

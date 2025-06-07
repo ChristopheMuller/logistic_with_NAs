@@ -21,166 +21,178 @@ name_score_matrix = "score_matrix.csv"
 
 # %% set up
 
-exp = "SimulationC"
-set_up = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
-simulation = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
+exp = "SimA"
 
-# try if the path exists,
-if os.path.exists(os.path.join("data", exp, name_score_matrix)):
-    original_matrix = pd.read_csv(os.path.join("data", exp, name_score_matrix))
+all_methods_to_process = [
+    'SAEM', '05.IMP', '05.IMP.M', 'Mean.IMP', 'Mean.IMP.M', 'PbP',
+    'MICE.M.IMP', 'MICE.M.IMP.M', 'MICE.Y.M.IMP',
+    'MICE.Y.M.IMP.M', 'MICE.IMP.M', 'MICE.Y.IMP.M', 'MICE.IMP',
+    'MICE.Y.IMP', 'MICE.10.M.IMP', 'MICE.10.M.IMP.M',
+    'MICE.10.Y.M.IMP', 'MICE.10.Y.M.IMP.M', 'MICE.10.Y.IMP',
+    'MICE.10.Y.IMP.M', 'MICE.10.IMP', 'MICE.10.IMP.M', 'MICE.100.IMP',
+    'MICE.100.Y.IMP', 'MICE.100.M.IMP', 'MICE.100.Y.M.IMP',
+    'MICE.RF.10.IMP', 'MICE.RF.10.Y.IMP', 'MICE.RF.10.M.IMP',
+    'MICE.RF.10.Y.M.IMP', 'MICE.1000.IMP', 'MICE.1000.Y.IMP',
+    'MICE.1000.M.IMP', 'MICE.1000.Y.M.IMP'
+ ]
+
+
+# %% Load data
+
+set_up_df = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
+simulation_df = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
+simulation_df = simulation_df[simulation_df["method"].isin(all_methods_to_process)]
+
+simulation_results_df = pd.read_csv(os.path.join("data", exp, "simulation_set_up.csv"))
+simulation_results_df = simulation_results_df[simulation_results_df["method"].isin(all_methods_to_process)]
+
+path_score_matrix = os.path.join("data", exp, name_score_matrix)
+if os.path.exists(path_score_matrix):
+    original_score_matrix = pd.read_csv(path_score_matrix)
     print("Score matrix found, loading it.")
 else:
-    original_matrix = None
+    original_score_matrix = None
     print("No score matrix found, building a new one.")
 
 
-# %% define metrics we want to calculate
+# %% Define prediction metrics
 
-
-metrics = {
-
+prediction_metrics = {
     "brier": lambda y, pred_probs, bayes_probs: np.mean((y - pred_probs)**2),
     "misclassification": lambda y, pred_probs, bayes_probs: 1 - np.mean(y == (pred_probs >= 0.5)),
     "mae_bayes": lambda y, pred_probs, bayes_probs: np.mean(np.abs(bayes_probs - pred_probs))
-
-
 }
 
-methods = ['SAEM', '05.IMP', '05.IMP.M', 'Mean.IMP', 'Mean.IMP.M', 'PbP',
-       'MICE.M.IMP', 'MICE.M.IMP.M', 'MICE.Y.M.IMP',
-       'MICE.Y.M.IMP.M', 'MICE.IMP.M', 'MICE.Y.IMP.M', 'MICE.IMP',
-       'MICE.Y.IMP', 'MICE.10.M.IMP', 'MICE.10.M.IMP.M',
-       'MICE.10.Y.M.IMP', 'MICE.10.Y.M.IMP.M', 'MICE.10.Y.IMP',
-       'MICE.10.Y.IMP.M', 'MICE.10.IMP', 'MICE.10.IMP.M', 'MICE.100.IMP',
-       'MICE.100.Y.IMP', 'MICE.100.M.IMP', 'MICE.100.Y.M.IMP',
-       'MICE.RF.10.IMP', 'MICE.RF.10.Y.IMP', 'MICE.RF.10.M.IMP',
-       'MICE.RF.10.Y.M.IMP', 'MICE.1000.IMP', 'MICE.1000.Y.IMP',
-       'MICE.1000.M.IMP', 'MICE.1000.Y.M.IMP']
+estimation_metrics_names = [
+    "angular_error",
+    "mse_error",
+    "angular_error_with_intercept", 
+    "mse_error_with_intercept",
+    "running_time_train",
+    "running_time_pred"
+]
 
-# %% build the score matrix (predictions)
 
-def build_score_matrix(exp, set_up, simulation, metrics, methods, existing_matrix=None):
+# %% Function to build score matrix for prediction metrics
 
-    n_set_ups = len(set_up)
-    n_metrics = len(metrics)
+def calculate_prediction_scores(exp, simulation_runs_df, metrics_dict, existing_matrix=None):
+    """
+    Calculates prediction scores and appends to existing matrix if provided.
+    """
+    new_scores_list = []
 
-    if existing_matrix is not None:
-        score_matrix = existing_matrix.copy()
-    else:  
-        score_matrix = pd.DataFrame(
-            columns = ["exp", "set_up", "method", "n_train", "bayes_adj", "metric", "score", "filter"]
-        )
+    unique_runs = simulation_runs_df[['set_up', 'method', 'n_train']].drop_duplicates()
 
-    simulation = simulation.copy()
-    simulation = simulation[simulation["method"].isin(methods)]
+    for index, row in unique_runs.iterrows():
+        setup = row["set_up"]
+        method = row["method"]
+        ntrain = np.round(row["n_train"], 0).astype(int)
 
-    for i in range(n_set_ups):
+        if existing_matrix is not None:
 
-        setup = set_up.iloc[i]["set_up"]
-        print(f"Set up {i+1}/{n_set_ups} - {setup}")
+            existing_rows_count = existing_matrix[
+                (existing_matrix["exp"] == exp) &
+                (existing_matrix["set_up"] == setup) &
+                (existing_matrix["method"] == method) &
+                (existing_matrix["n_train"] == ntrain) &
+                (existing_matrix["metric"].isin(list(metrics_dict.keys())))
+            ].shape[0]
+            
+            # Since each metric produces two rows (bayes_adj=True/False), check for double the count
+            if existing_rows_count >= (len(metrics_dict) * 2):
+                print(f"Skipping existing prediction data for {setup} - {method} - {ntrain}")
+                continue
 
-        simulation_setup = simulation[simulation["set_up"] == setup]
-        
-        for j in range(len(simulation_setup)):
-            method = simulation_setup.iloc[j]["method"]
-            ntrain = np.round(simulation_setup.iloc[j]["n_train"], 0).astype(int)
 
-            # print(f"Simulation {j+1}/{len(simulation_setup)} - {method} - {ntrain}")
+        print(f"Processing prediction data for {setup} - {method} - {ntrain}")
 
-            ####
-
+        # Load data once per unique run
+        try:
             true_y = np.load(os.path.join("data", exp, "test_data", f"{setup}.npz"))["y"]
             pred_probs = np.load(os.path.join("data", exp, "pred_data", f"{setup}_{method}_{ntrain}.npz"))["y_probs_pred"].ravel()
             bayes_probs = np.load(os.path.join("data", exp, "bayes_data", f"{setup}.npz"))["y_probs_bayes"]
+        except FileNotFoundError as e:
+            print(f"Warning: Missing data file for {setup}_{method}_{ntrain}. Skipping. Error: {e}")
+            continue
 
-            ####
+        for metric_name, metric_func in metrics_dict.items():
+            score = metric_func(true_y, pred_probs, bayes_probs)
+            score_bayes = metric_func(true_y, bayes_probs, bayes_probs)
+            score_bayes_adj = score - score_bayes
 
-            for k in range(n_metrics):
+            new_scores_list.append({
+                "exp": exp, "set_up": setup, "method": method, "n_train": ntrain,
+                "bayes_adj": False, "metric": metric_name, "score": score, "filter": "all"
+            })
+            new_scores_list.append({
+                "exp": exp, "set_up": setup, "method": method, "n_train": ntrain,
+                "bayes_adj": True, "metric": metric_name, "score": score_bayes_adj, "filter": "all"
+            })
 
-                metric = list(metrics.keys())[k]
-                score = metrics[metric](true_y, pred_probs, bayes_probs)
-                score_bayes = metrics[metric](true_y, bayes_probs, bayes_probs)
-                score_bayes_adj = score - score_bayes
-
-                score_matrix = pd.concat([
-                    score_matrix,
-                    pd.DataFrame({
-                        "exp": [exp],
-                        "set_up": [setup],
-                        "method": [method],
-                        "n_train": [ntrain],
-                        "bayes_adj": False,
-                        "metric": [metric],
-                        "score": [score],
-                        "filter": ["all"]
-                    })
-                ], ignore_index=True)
-
-                score_matrix = pd.concat([
-                    score_matrix,
-                    pd.DataFrame({
-                        "exp": [exp],
-                        "set_up": [setup],
-                        "method": [method],
-                        "n_train": [ntrain],
-                        "bayes_adj": True,
-                        "metric": [metric],
-                        "score": [score_bayes_adj],
-                        "filter": ["all"]
-                    })
-                ], ignore_index=True)
-
-    score_matrix = score_matrix.reset_index(drop=True)
-    return score_matrix
+    if new_scores_list:
+        new_scores_df = pd.DataFrame(new_scores_list)
+        if existing_matrix is not None:
+            combined_df = pd.concat([existing_matrix, new_scores_df], ignore_index=True)
+            return combined_df.drop_duplicates(subset=["exp", "set_up", "method", "n_train", "metric", "bayes_adj"])
+        else:
+            return new_scores_df
+    else:
+        return existing_matrix if existing_matrix is not None else pd.DataFrame(columns = ["exp", "set_up", "method", "n_train", "bayes_adj", "metric", "score", "filter"])
 
 
-score_matrix = build_score_matrix(exp, set_up, simulation, metrics, methods, original_matrix)
+# %% Calculate prediction scores
+score_matrix_pred = calculate_prediction_scores(exp, simulation_df, prediction_metrics, original_score_matrix)
 
 
-# %%
+# %% Function to add estimation metrics (angular, MSE, running_time)
 
-# matrix.to_csv(os.path.join("data", exp, "score_matrix.csv"), index=False)
+def add_estimation_scores(score_matrix, results_df, metrics_to_add):
+    """
+    Adds estimation-based scores (angular error, MSE error, running time)
+    to the score matrix.
+    """
+    new_estimation_scores_list = []
+
+    # Iterate through each row of the simulation_results_df
+    for index, row in results_df.iterrows():
+        setup = row["set_up"]
+        method = row["method"]
+        ntrain = np.round(row["n_train"], 0).astype(int)
+
+        is_already_present = (score_matrix["exp"] == exp) & \
+                             (score_matrix["set_up"] == setup) & \
+                             (score_matrix["method"] == method) & \
+                             (score_matrix["n_train"] == ntrain) & \
+                             (score_matrix["metric"].isin(metrics_to_add))
+        
+        if score_matrix[is_already_present].shape[0] >= len(metrics_to_add):
+            continue
+            
+        for metric_name in metrics_to_add:
+            # Ensure the metric exists in the results_df
+            if metric_name in row and pd.notna(row[metric_name]):
+                score = row[metric_name]
+                new_estimation_scores_list.append({
+                    "exp": exp, "set_up": setup, "method": method, "n_train": ntrain,
+                    "bayes_adj": False, "metric": metric_name, "score": score, "filter": "all"
+                })
+            else:
+                print(f"Warning: Metric '{metric_name}' not found or is NaN for {setup}-{method}-{ntrain}. Skipping.")
+
+    if new_estimation_scores_list:
+        new_estimation_df = pd.DataFrame(new_estimation_scores_list)
+
+        final_score_matrix = pd.concat([score_matrix, new_estimation_df], ignore_index=True)
+        return final_score_matrix.drop_duplicates(subset=["exp", "set_up", "method", "n_train", "metric", "bayes_adj"])
+    else:
+        return score_matrix
 
 
-
-# %%
-
-methods = ["Mean.IMP",  "PbP", "SAEM", "MICE.IMP", "MICE.10.IMP",  
-           "MICE.100.IMP", "MICE.Y.IMP", "MICE.10.Y.IMP", "MICE.100.Y.IMP", 
-           "MICE.1000.IMP", "MICE.1000.Y.IMP"
-]
-
-simulation_setup = pd.read_csv(os.path.join("data", exp, "simulation_set_up.csv"))
-simulation_setup = simulation_setup[["set_up", "method", "n_train", "running_time", "angular_error", "mse_error"]]
-simulation_setup = simulation_setup[simulation_setup["method"].isin(methods)]
+# %% Add estimation scores
+final_score_matrix = add_estimation_scores(score_matrix_pred, simulation_results_df, estimation_metrics_names)
 
 
-for i in range(len(simulation_setup)):
+# %% Save the final score matrix
 
-    setup = simulation_setup.iloc[i]["set_up"]
-    method = simulation_setup.iloc[i]["method"]
-    ntrain = np.round(simulation_setup.iloc[i]["n_train"], 0).astype(int)
-
-    print(f"Simulation {i+1}/{len(simulation_setup)} - {setup} - {method} - {ntrain}")
-
-    angular_error = simulation_setup.iloc[i]["angular_error"]
-    mse_error = simulation_setup.iloc[i]["mse_error"]
-    running_time = simulation_setup.iloc[i]["running_time"]
-
-    new_scores = pd.DataFrame({
-        "exp": [exp, exp, exp],
-        "set_up": [setup, setup, setup],
-        "method": [method, method, method],
-        "n_train": [ntrain, ntrain, ntrain],
-        "bayes_adj": [False, False, False],
-        "metric": ["angular_error", "mse_error", "running_time"],
-        "score": [angular_error, mse_error, running_time],
-        "filter": ["all", "all", "all"]
-    })
-
-    score_matrix = pd.concat([score_matrix, new_scores], ignore_index=True)
-
-
-# %%
-
-score_matrix.to_csv(os.path.join("data", exp, name_score_matrix), index=False)
+final_score_matrix.to_csv(path_score_matrix, index=False)
+print(f"Score matrix saved to {path_score_matrix}")
