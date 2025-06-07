@@ -44,12 +44,12 @@ training_sizes <- as.numeric(unlist(strsplit(training_sizes_str, ",")))
 #################################################
 
 
-library(tidyr)
-library(dplyr)
-library(furrr)
-library(future)
-library(reticulate)
-library(stringr)
+library(tidyr, quietly=TRUE)
+library(dplyr, quietly=TRUE)
+library(furrr, quietly=TRUE)
+library(future, quietly=TRUE)
+library(reticulate, quietly=TRUE)
+library(stringr, quietly=TRUE)
 
 source("methods_in_R.R")
 
@@ -110,6 +110,9 @@ create_method_object <- function(key) {
 
     "Mean.IMP" = MeanImputationLogisticRegression$new(name="Mean.IMP", mask=FALSE),
     "Mean.IMP.M" = MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),
+
+    "05.IMP" = ConstantImputationLogisticRegression$new(name="05.IMP", fill_value=0.5, mask=FALSE),
+    "05.IMP.M" = ConstantImputationLogisticRegression$new(name="05.IMP.M", fill_value=0.5, mask=TRUE),
 
     stop("Unknown method key: ", key)
   )

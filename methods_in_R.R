@@ -1,7 +1,7 @@
-library(mice)
-library(dplyr)
-library(stringr)
-library(misaem)
+library(mice, quietly=TRUE)
+library(dplyr, quietly=TRUE)
+library(stringr, quietly=TRUE)
+library(misaem, quietly=TRUE)
 
 # Base class for imputation methods
 ImputationMethod <- R6::R6Class("ImputationMethod",
@@ -482,6 +482,74 @@ MeanImputationLogisticRegression <- R6::R6Class("MeanImputationLogisticRegressio
       names(coefficients) <- NULL
 
       # Create the exact string format to match Python output
+      coef_str <- paste(coefficients, collapse = ", ")
+      int_str <- as.character(intercept)
+
+      return(sprintf("[[%s], [%s]]", coef_str, int_str))
+    }
+  )
+)
+
+ConstantImputationLogisticRegression <- R6::R6Class("ConstantImputationLogisticRegression",
+  inherit = ImputationMethod,
+  public = list(
+    fill_value = 0, 
+    mask = FALSE,
+
+    initialize = function(name = "0.IMP", fill_value = 0, mask = FALSE) {
+      super$initialize(name)
+      self$fill_value <- fill_value
+      self$mask <- mask
+    },
+
+    fit = function(X, M, y, X_test = NULL, M_test = NULL) {
+      data_train <- as.data.frame(X)
+
+      # Impute missing values with the constant fill_value
+      for (col_name in names(data_train)) {
+        if (any(is.na(data_train[[col_name]]))) {
+          data_train[[col_name]][is.na(data_train[[col_name]])] <- self$fill_value
+        }
+      }
+
+      # Add mask M to covariates if 'mask' is TRUE
+      if (self$mask) {
+        colnames(M) <- paste0("M", seq_len(ncol(M)))
+        data_train <- cbind(data_train, as.data.frame(M))
+      }
+
+      formula <- as.formula(paste("y ~", paste(names(data_train), collapse = " + ")))
+      self$model <- glm(formula, family = binomial(), data = cbind(data_train, y = y))
+      TRUE
+    },
+
+    predict_probs = function(X_new, M_new) {
+      data_new <- as.data.frame(X_new)
+
+      for (col_name in names(data_new)) {
+        if (any(is.na(data_new[[col_name]]))) {
+          data_new[[col_name]][is.na(data_new[[col_name]])] <- self$fill_value
+        }
+      }
+
+      if (self$mask) {
+        colnames(M_new) <- paste0("M", seq_len(ncol(M_new)))
+        data_new <- cbind(data_new, as.data.frame(M_new))
+      }
+
+      return(predict(self$model, newdata = data_new, type = "response"))
+    },
+
+    return_params = function() {
+      if (!self$return_beta) return(NULL)
+
+      model_coef <- coef(self$model)
+      intercept <- model_coef[1]
+      coefficients <- model_coef[-1]
+
+      names(intercept) <- NULL
+      names(coefficients) <- NULL
+
       coef_str <- paste(coefficients, collapse = ", ")
       int_str <- as.character(intercept)
 
