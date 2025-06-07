@@ -158,6 +158,7 @@ set_up_df = pd.DataFrame({
     "corr": [],
     "prop_NA": [],
     "true_beta": [],
+    "true_intercept":[],
     "center_X": [],
     "set_up": []
 })
@@ -200,6 +201,7 @@ for i in range(n_replicates):
         "corr": [corr],
         "prop_NA": [prop_NA],
         "true_beta": [beta0],
+        "true_intercept": [0.0],
         "center_X": [mu0],
         "set_up": [set_up]
     })

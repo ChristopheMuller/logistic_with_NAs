@@ -9,7 +9,7 @@ from methods import *
 
 # %%
 
-exp = "SimulationA"
+exp = "SimA"
 
 df_set_up = pd.read_csv(os.path.join("data",exp,"set_up.csv"))
 df_simulations = pd.read_csv(os.path.join("data",exp,"simulation.csv"))
@@ -39,8 +39,19 @@ def deal_with_estimated_beta(beta_str, method, d=5):
     
     else:
         raise ValueError(f"The length of beta_list is not 5 or 10 -- Method {method}")
+    
+def deal_with_estimated_intercept(beta_str):
+    if type(beta_str) != str:
+        return None
+    
+    beta_list = ast.literal_eval(beta_str)
+    
+    # The intercept is the second element of the outer list and is a single-element list
+    return beta_list[1][0] # Access the value inside the single-element list
+
 
 df_simulations_enlarged["pred_beta"] = df_simulations_enlarged.apply(lambda x: deal_with_estimated_beta(x["estimated_beta"], x["method"], d=np.round(x["d"]).astype(int)), axis=1)
+df_simulations_enlarged["pred_intercept"] = df_simulations_enlarged.apply(lambda x: deal_with_estimated_intercept(x["estimated_beta"]), axis=1)
 df_simulations_enlarged.to_csv(os.path.join("data",exp,"simulation_set_up.csv"), index=False)
 
 # %%
