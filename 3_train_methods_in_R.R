@@ -53,7 +53,6 @@ library(stringr)
 
 source("methods_in_R.R")
 
-
 #################################################
 # Start the simulation
 #################################################
@@ -63,16 +62,20 @@ plan(multisession)
 cat("Number of parallel sessions configured:", future::nbrOfWorkers(), "\n")
 
 # Experiment configuration
-exp <- "SimA"
-training_sizes <- c(100, 500, 1000)
 test_size <- 15000
 
-# methods_list <- list(
-#   MICELogisticRegression$new(name="MICE.1.IMP", n_imputations=1, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
-#   MICELogisticRegression$new(name="MICE.1.Y.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
-#   MICELogisticRegression$new(name="MICE.1.M.IMP", n_imputations=1, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
-#   MICELogisticRegression$new(name="MICE.1.Y.M.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=TRUE)
-# )
+create_method_object <- function(key) {
+  switch(key,
+    "MICE.1.IMP" = MICELogisticRegression$new(name="MICE.1.IMP", n_imputations=1, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+    "MICE.1.Y.IMP" = MICELogisticRegression$new(name="MICE.1.Y.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
+    "MICE.1.M.IMP" = MICELogisticRegression$new(name="MICE.1.M.IMP", n_imputations=1, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
+    "MICE.1.Y.M.IMP" = MICELogisticRegression$new(name="MICE.1.Y.M.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+    stop("Unknown method key: ", key)
+  )
+}
+
+# Create the list of method objects based on keys from the config
+methods_list <- lapply(method_keys, create_method_object)
 
 cat("TRAINING IN R:\n")
 cat("Methods:\n")
@@ -114,10 +117,10 @@ task_grid <- expand.grid(
 run_task <- function(set_up, n_train, method_idx) {
   
   source("methods_in_R.R")
+  np <- import("numpy")
   
   time.start <- Sys.time()
   
-  np <- import("numpy")
   method <- methods_list[[method_idx]]
   
   data <- np$load(file.path("data", exp, "original_data", paste0(set_up, ".npz")))
