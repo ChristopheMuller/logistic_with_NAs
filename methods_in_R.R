@@ -622,7 +622,6 @@ RegLogPatByPat <- R6::R6Class("RegLogPatByPat",
           }
         }
       }
-      cat("Finished fitting Pattern-by-Pattern Logistic Regression.\n")
       TRUE
     },
 
@@ -679,7 +678,7 @@ CompleteCase <- R6::R6Class("CompleteCase",
       self$default_prob = 0.5 
     },
 
-    fit = function(X, M, y) {
+    fit = function(X, M, y, X_test = NULL, M_test = NULL) {
       self$can_predict = FALSE
       self$return_beta = TRUE
       self$reg = NULL
