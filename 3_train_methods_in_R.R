@@ -170,7 +170,7 @@ run_task <- function(set_up, n_train, method_idx) {
       file_name = save_name,
       running_time_train = running_time,
       running_time_pred = running_time_pred,
-      running_datetime = time.start,
+      running_datetime = as.character(time.start),
       stringsAsFactors = FALSE
     )
   }, error = function(e) {
