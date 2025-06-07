@@ -58,7 +58,7 @@ source("methods_in_R.R")
 #################################################
 
 plan(multisession)
-
+cat("\n")
 cat("Number of parallel sessions configured:", future::nbrOfWorkers(), "\n")
 
 # Experiment configuration
@@ -70,6 +70,47 @@ create_method_object <- function(key) {
     "MICE.1.Y.IMP" = MICELogisticRegression$new(name="MICE.1.Y.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
     "MICE.1.M.IMP" = MICELogisticRegression$new(name="MICE.1.M.IMP", n_imputations=1, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
     "MICE.1.Y.M.IMP" = MICELogisticRegression$new(name="MICE.1.Y.M.IMP", n_imputations=1, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+
+    "MICE.10.IMP" = MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+    "MICE.10.Y.IMP" = MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
+    "MICE.10.M.IMP" = MICELogisticRegression$new(name="MICE.10.M.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
+    "MICE.10.Y.M.IMP" = MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+
+    "MICE.100.IMP" = MICELogisticRegression$new(name="MICE.100.IMP", n_imputations=100, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+    "MICE.100.Y.IMP" = MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations=100, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
+    "MICE.100.M.IMP" = MICELogisticRegression$new(name="MICE.100.M.IMP", n_imputations=100, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
+    "MICE.100.Y.M.IMP" = MICELogisticRegression$new(name="MICE.100.Y.M.IMP", n_imputations=100, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+  
+    "MICE.1.IMP.M" = MICELogisticRegression$new(name="MICE.1.IMP", n_imputations=1, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+    "MICE.1.Y.IMP.M" = MICELogisticRegression$new(name="MICE.1.Y.IMP", n_imputations=1, add.y=TRUE, mask.after=TRUE, mask.before=FALSE),
+    "MICE.1.M.IMP.M" = MICELogisticRegression$new(name="MICE.1.M.IMP", n_imputations=1, add.y=FALSE, mask.after=TRUE, mask.before=TRUE),
+    "MICE.1.Y.M.IMP.M" = MICELogisticRegression$new(name="MICE.1.Y.M.IMP", n_imputations=1, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+
+    "MICE.10.IMP.M" = MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+    "MICE.10.Y.IMP.M" = MICELogisticRegression$new(name="MICE.10.Y.IMP", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=FALSE),
+    "MICE.10.M.IMP.M" = MICELogisticRegression$new(name="MICE.10.M.IMP", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=TRUE),
+    "MICE.10.Y.M.IMP.M" = MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+
+    "MICE.100.IMP.M" = MICELogisticRegression$new(name="MICE.100.IMP", n_imputations=100, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+    "MICE.100.Y.IMP.M" = MICELogisticRegression$new(name="MICE.100.Y.IMP", n_imputations=100, add.y=TRUE, mask.after=TRUE, mask.before=FALSE),
+    "MICE.100.M.IMP.M" = MICELogisticRegression$new(name="MICE.100.M.IMP", n_imputations=100, add.y=FALSE, mask.after=TRUE, mask.before=TRUE),
+    "MICE.100.Y.M.IMP.M" = MICELogisticRegression$new(name="MICE.100.Y.M.IMP", n_imputations=100, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+
+    "MICE.RF.10.IMP" = MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+    "MICE.RF.10.Y.IMP" = MICERFLogisticRegression$new(name="MICE.RF.10.Y.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=FALSE),
+    "MICE.RF.10.M.IMP" = MICERFLogisticRegression$new(name="MICE.RF.10.M.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=TRUE),
+    "MICE.RF.10.Y.M.IMP" = MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+
+    "MICE.RF.10.IMP.M" = MICERFLogisticRegression$new(name="MICE.RF.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+    "MICE.RF.10.Y.IMP.M" = MICERFLogisticRegression$new(name="MICE.RF.10.Y.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=FALSE),
+    "MICE.RF.10.M.IMP.M" = MICERFLogisticRegression$new(name="MICE.RF.10.M.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=TRUE),
+    "MICE.RF.10.Y.M.IMP.M" = MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+
+    "SAEM" = SAEMLogisticRegression$new(name="SAEM"),
+
+    "Mean.IMP" = MeanImputationLogisticRegression$new(name="Mean.IMP", mask=FALSE),
+    "Mean.IMP.M" = MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),
+
     stop("Unknown method key: ", key)
   )
 }
@@ -77,7 +118,7 @@ create_method_object <- function(key) {
 # Create the list of method objects based on keys from the config
 methods_list <- lapply(method_keys, create_method_object)
 
-cat("TRAINING IN R:\n")
+cat("\n")
 cat("Methods:\n")
 for (method in methods_list) cat(method$name, "\n")
 cat("Training sizes:\n")
