@@ -557,3 +557,110 @@ ConstantImputationLogisticRegression <- R6::R6Class("ConstantImputationLogisticR
     }
   )
 )
+
+
+RegLogPatByPat <- R6::R6Class("RegLogPatByPat",
+  inherit = ImputationMethod,
+  public = list(
+    
+    models_by_pattern = NULL,
+    default_prob = NULL,
+
+    initialize = function(name = "PbP") {
+      super$initialize(name)
+      self$can_predict = TRUE  
+      self$return_beta = FALSE 
+      self$models_by_pattern = list()
+    },
+
+    fit = function(X, M, y, X_test = NULL, M_test = NULL) {
+
+      X_df <- as.data.frame(X)
+      M_matrix <- as.matrix(M)
+      y_vec <- as.numeric(y)
+
+      self$default_prob <- mean(y_vec, na.rm = TRUE)
+
+      n_obs <- nrow(X_df)
+
+      all_pattern_keys <- apply(M_matrix, 1, paste, collapse = "_")
+      unique_pattern_keys <- unique(all_pattern_keys)
+      
+      for (pattern_str in unique_pattern_keys) {
+
+        current_pattern_mask_vec <- M_matrix[match(pattern_str, all_pattern_keys),]
+
+        has_observed_vars <- any(current_pattern_mask_vec == 0)
+
+        if (has_observed_vars) {
+
+          S_indices <- which(apply(M_matrix, 1, function(row) all(row == current_pattern_mask_vec)))
+
+          Xp <- X_df[S_indices, current_pattern_mask_vec == 0, drop = FALSE]
+          yp <- y_vec[S_indices]
+
+          if (nrow(Xp) > 0 && length(unique(yp)) == 2) {
+
+            model_data <- Xp
+            model_data$y_outcome <- yp 
+            
+            if (ncol(Xp) > 0) {
+              formula_str <- paste("y_outcome ~", paste(names(Xp), collapse = " + "))
+            } else {
+              formula_str <- "y_outcome ~ 1"
+              cat("Warning: No observed variables for pattern '", pattern_str, "'. Using intercept-only model.\n")
+            }
+
+            reg_model <- tryCatch({
+              glm(as.formula(formula_str), family = binomial(), data = model_data)
+            }, error = function(e) {
+              message(paste("  Warning: GLM failed for pattern '", pattern_str, "'. Error: ", e$message, sep=""))
+              return(NULL)
+            })
+            
+            self$models_by_pattern[[pattern_str]] <- reg_model
+          }
+        }
+      }
+      cat("Finished fitting Pattern-by-Pattern Logistic Regression.\n")
+      TRUE
+    },
+
+    .pred_probs_single = function(x_row, m_row) {
+      m_row_vec <- as.numeric(m_row)
+      pattern_str <- paste(m_row_vec, collapse = "_")
+
+      all_vars_missing <- all(m_row_vec == 1)
+
+      if (all_vars_missing || is.null(self$models_by_pattern[[pattern_str]])) {
+        return(self$default_prob)
+      } else {
+
+        reg_model <- self$models_by_pattern[[pattern_str]]
+        
+        x_observed <- x_row[, m_row_vec == 0, drop = FALSE] 
+        names(x_observed) <- names(x_row)[m_row_vec == 0]
+
+        return(predict(reg_model, newdata = x_observed, type = "response"))
+      }
+    },
+
+    predict_probs = function(X_new, M_new) {
+
+      X_new_df <- as.data.frame(X_new)
+      M_new_matrix <- as.matrix(M_new)
+      
+      n_new_obs <- nrow(X_new_df)
+      predictions <- numeric(n_new_obs) # Pre-allocate vector for efficiency
+
+      for (i in 1:n_new_obs) {
+        predictions[i] <- self$.pred_probs_single(X_new_df[i, , drop = FALSE], M_new_matrix[i, ])
+      }
+      return(predictions)
+    },
+
+    return_params = function() {
+      if (!self$return_beta) return(NULL)
+    }
+  )
+)

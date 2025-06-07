@@ -114,6 +114,8 @@ create_method_object <- function(key) {
     "05.IMP" = ConstantImputationLogisticRegression$new(name="05.IMP", fill_value=0.5, mask=FALSE),
     "05.IMP.M" = ConstantImputationLogisticRegression$new(name="05.IMP.M", fill_value=0.5, mask=TRUE),
 
+    "PbP" = RegLogPatByPat$new(name="PbP"),
+
     stop("Unknown method key: ", key)
   )
 }
