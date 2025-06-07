@@ -664,3 +664,86 @@ RegLogPatByPat <- R6::R6Class("RegLogPatByPat",
     }
   )
 )
+
+CompleteCase <- R6::R6Class("CompleteCase",
+  inherit = ImputationMethod,
+  public = list(
+    reg = NULL,                  
+    default_prob = NULL,         
+
+    initialize = function(name = "CC") {
+      super$initialize(name)
+      self$can_predict = FALSE
+      self$return_beta = TRUE
+      self$reg = NULL
+      self$default_prob = 0.5 
+    },
+
+    fit = function(X, M, y) {
+      self$can_predict = FALSE
+      self$return_beta = TRUE
+      self$reg = NULL
+
+      X_df <- as.data.frame(X)
+      M_matrix <- as.matrix(M)
+      y_vec <- as.numeric(y)
+
+      self$default_prob <- mean(y_vec, na.rm = TRUE)
+
+      complete_case_indices <- apply(M_matrix == 0, 1, all)
+      
+      X_cc <- X_df[complete_case_indices, , drop = FALSE]
+      y_cc <- y_vec[complete_case_indices]
+
+      num_complete_cases <- nrow(X_cc)
+
+
+      if (num_complete_cases > 0 && sum(y_cc == 0) > 0 && sum(y_cc == 1) > 0) {
+        data_for_glm <- X_cc
+        data_for_glm$y_outcome <- y_cc
+
+        if (ncol(X_cc) > 0) {
+          formula_str <- paste("y_outcome ~", paste(names(X_cc), collapse = " + "))
+        } else {
+          formula_str <- "y_outcome ~ 1"
+          cat("  No features in complete cases. Training intercept-only model.\n")
+        }
+
+        self$reg <- tryCatch({
+          glm(as.formula(formula_str), family = binomial(), data = data_for_glm)
+        }, error = function(e) {
+          message(paste("  Warning: GLM failed for complete cases. Error: ", e$message, sep=""))
+          self$reg <- NULL
+          return(NULL)
+        })
+      } else {
+        cat("  Insufficient complete cases or only one class in complete cases. No model trained.\n")
+        self$reg <- NULL
+      }
+      TRUE
+    },
+
+    predict = function(X, M) {
+      return(NULL)
+    },
+
+    predict_probs = function(X, M) {
+      return(NULL)
+    },
+
+    return_params = function() {
+
+      model_coef <- coef(self$reg)
+      intercept <- model_coef[1]
+      coefficients <- model_coef[-1]
+
+      names(intercept) <- NULL
+      names(coefficients) <- NULL
+
+      coef_str <- paste(coefficients, collapse = ", ")
+      int_str <- as.character(intercept)
+
+      return(sprintf("[[%s], [%s]]", coef_str, int_str))
+    }
+  )
+)
