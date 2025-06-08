@@ -1,5 +1,0 @@
-
-simulation copy is the file simulation.csv before i remove some duplicates:
-
-Some LOG_n115000_d5_corr00_prcNA025_prop105_rep0_MICE.IMP had duplicates,
-Some other ones too.
