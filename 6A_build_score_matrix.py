@@ -24,16 +24,7 @@ name_score_matrix = "score_matrix.csv"
 exp = "SimA"
 
 all_methods_to_process = [
-    'SAEM', '05.IMP', '05.IMP.M', 'Mean.IMP', 'Mean.IMP.M', 'PbP',
-    'MICE.M.IMP', 'MICE.M.IMP.M', 'MICE.Y.M.IMP',
-    'MICE.Y.M.IMP.M', 'MICE.IMP.M', 'MICE.Y.IMP.M', 'MICE.IMP',
-    'MICE.Y.IMP', 'MICE.10.M.IMP', 'MICE.10.M.IMP.M',
-    'MICE.10.Y.M.IMP', 'MICE.10.Y.M.IMP.M', 'MICE.10.Y.IMP',
-    'MICE.10.Y.IMP.M', 'MICE.10.IMP', 'MICE.10.IMP.M', 'MICE.100.IMP',
-    'MICE.100.Y.IMP', 'MICE.100.M.IMP', 'MICE.100.Y.M.IMP',
-    'MICE.RF.10.IMP', 'MICE.RF.10.Y.IMP', 'MICE.RF.10.M.IMP',
-    'MICE.RF.10.Y.M.IMP', 'MICE.1000.IMP', 'MICE.1000.Y.IMP',
-    'MICE.1000.M.IMP', 'MICE.1000.Y.M.IMP'
+"MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP"
  ]
 
 
