@@ -1,1 +1,0 @@
-5000 MCMC for Bayes Prob estimation
