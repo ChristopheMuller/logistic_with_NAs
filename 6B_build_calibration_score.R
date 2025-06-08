@@ -17,7 +17,7 @@ df_simulations <- read.csv(simulation_file)
 matrix_scores <- read.csv(file.path("data", exp, "score_matrix.csv"))
 
 list_of_methods <- c(
-"MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP"
+"MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP","MICE.1.IMP.M","MICE.1.Y.IMP.M","MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M","MICE.10.IMP.M","MICE.10.Y.IMP.M","MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M","SAEM","Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M","PbP","CC"
   )
 
 
