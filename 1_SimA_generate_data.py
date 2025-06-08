@@ -2,7 +2,6 @@
 # %%
 
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 import random
 import os
@@ -40,7 +39,7 @@ n_train = 100_000
 n_test = 15_000
 n = n_train + n_test
 
-N_MC = 5000
+N_MC = 10000
 
 
 # %%
