@@ -10,7 +10,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimulationC"
+experiment_name = "SimC"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:
@@ -30,7 +30,7 @@ if os.path.exists(os.path.join(experiment_data_folder, "bayes_data")) == False:
 
 # %%
 
-n_replicates = 10
+n_replicates = 1
 
 _prop_NA = 0.25
 _d = 5
@@ -40,7 +40,7 @@ n_train = 100_000
 n_test = 15_000
 n = n_train + n_test
 
-N_MC = 1_000
+N_MC = 10000
 
 # %%
 
@@ -59,7 +59,7 @@ def toep_matrix(d, corr):
     """
     return np.array([[corr**abs(i-j) for j in range(d)] for i in range(d)])
 
-def generate_X(n, d, corr, mu=None):
+def generate_Z(n, d, corr, mu=None):
     """
     Generate a design matrix X with n rows and d columns, with a correlation of corr.
     """
@@ -88,61 +88,57 @@ def generate_M(n, d, prc):
 
     return M
 
-def transform_Z_to_X(Z):
+def transform_X_to_Z(X):
     """
     Transforms Z back to X based on the inverse operations.
     Handles potential issues with domains of operations (log, sqrt, fractional powers)
     and ensures correct sign recovery, accounting for shifts introduced in transform_X_to_Z.
     """
-    X = np.zeros_like(Z, dtype=float) # Ensure output is float and matches Z's shape
+    Z = np.zeros_like(X, dtype=float) # Ensure output is float and matches Z's shape
 
-    X[:,0] = Z[:,0]
-    X[:,1] = Z[:,1]
+    Z[:,0] = X[:,0]
+    Z[:,1] = X[:,1]
     
     # Inverse for Z[:,2] = np.exp(X[:,2]) - 1.67
-    # So, X[:,2] = log(Z[:,2] + 1.67)
-    X[:,2] = np.log(Z[:,2] + 1.67)
+    Z[:,2] = np.log(X[:,2] + 1.67)
 
-    X[:,3] = np.sign(Z[:,3]) * np.power(np.abs(Z[:,3]), 1/3) # No change needed here for Col 3
+    Z[:,3] = np.sign(X[:,3]) * np.power(np.abs(X[:,3]), 1/3)
 
     # Inverse for Z[:,4] = np.where(...) + 2
-    # First, reverse the +2 shift: Z_prime = Z[:,4] - 2
-    Z_prime_col4 = Z[:,4] - 2
+    X_prime_col4 = X[:,4] - 2
 
-    # Now apply the original inverse logic on Z_prime_col4
-    # The conditions for the np.where must also consider Z_prime_col4
-    mask_Z4_positive = Z_prime_col4 > 0
-    mask_Z4_zero = Z_prime_col4 == 0
-    mask_Z4_negative = Z_prime_col4 < 0
+    mask_X4_positive = X_prime_col4 > 0
+    mask_X4_zero = X_prime_col4 == 0
+    mask_X4_negative = X_prime_col4 < 0
 
-    # If Z_prime_col4 > 0, then X[:,4] was >= 0. Inverse: X[:,4] = sqrt(Z_prime_col4)
-    X[mask_Z4_positive, 4] = np.sqrt(Z_prime_col4[mask_Z4_positive])
+    # If X_prime_col4 > 0, then X[:,4] was >= 0. Inverse: X[:,4] = sqrt(Z_prime_col4)
+    Z[mask_X4_positive, 4] = np.sqrt(X_prime_col4[mask_X4_positive])
     
-    # If Z_prime_col4 == 0, then X[:,4] was 0. Inverse: X[:,4] = 0.0
-    X[mask_Z4_zero, 4] = 0.0
+    # If X_prime_col4 == 0, then Z[:,4] was 0. Inverse: X[:,4] = 0.0
+    Z[mask_X4_zero, 4] = 0.0
     
-    # If Z_prime_col4 < 0, then X[:,4] was < 0. Inverse: X[:,4] = log(-Z_prime_col4 / 10)
-    X[mask_Z4_negative, 4] = np.log(-Z_prime_col4[mask_Z4_negative] / 10)
+    # If X_prime_col4 < 0, then X[:,4] was < 0. Inverse: X[:,4] = log(-Z_prime_col4 / 10)
+    Z[mask_X4_negative, 4] = np.log(-X_prime_col4[mask_X4_negative] / 10)
 
-    return X
+    return Z
 
-def transform_X_to_Z(X):
+def transform_Z_to_X(Z):
     """
     Transforms X to Z based on the specified piecewise and power transformations.
     (This function is provided by the user and is the 'target' for inversion).
     """
-    Z = np.zeros_like(X, dtype=float)
+    X = np.zeros_like(Z, dtype=float)
 
-    Z[:, 0] = X[:,0]
-    Z[:, 1] = X[:,1]
+    X[:, 0] = Z[:,0]
+    X[:, 1] = Z[:,1]
     
-    Z[:, 2] = np.exp(X[:,2]) - 1.67 # Added constant
+    X[:, 2] = np.exp(Z[:,2]) - 1.67 # Added constant
     
-    Z[:, 3] = np.power(X[:,3], 3)
+    X[:, 3] = np.power(Z[:,3], 3)
     
-    Z[:, 4] = np.where(X[:,4] >= 0, X[:,4]**2, -10*np.exp(X[:,4])) + 2 # Added constant
+    X[:, 4] = np.where(Z[:,4] >= 0, Z[:,4]**2, -10*np.exp(Z[:,4])) + 2 # Added constant
 
-    return Z
+    return X
 
 
 def get_y_prob_bayes(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
@@ -166,6 +162,8 @@ def get_y_prob_bayes(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
 def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
 
     m = np.isnan(X_m[0])
+
+    Z_m = transform_X_to_Z(X_m)
     
     observed_idx = ~m
     missing_idx = m
@@ -182,28 +180,25 @@ def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000, 
     cond_cov = cov_mis - cross_cov.T @ cov_obs_inv @ cross_cov
 
     prob_y_all = []
-    X_mc_all = []
 
-    for x_obs in X_m:
-        x_obs_obs = x_obs[observed_idx]
-
-        cond_mu = mu_mis + cross_cov.T @ cov_obs_inv @ (x_obs_obs - mu_obs)
+    for z_m in Z_m:
+        z_m_obs = z_m[observed_idx]
+        cond_mu = mu_mis + cross_cov.T @ cov_obs_inv @ (z_m_obs - mu_obs)
 
         if len(cond_mu) == 0:
-            X_mc = np.zeros((n_mc, 0))
+            Z_mc = np.zeros((n_mc, 0))
         else:
-            X_mc = np.random.multivariate_normal(cond_mu, cond_cov, size=n_mc)
+            Z_mc = np.random.multivariate_normal(cond_mu, cond_cov, size=n_mc)
 
-        X_full_mc = np.tile(x_obs, (n_mc, 1))
-        X_full_mc[:, missing_idx] = X_mc
+        Z_full_mc = np.tile(z_m, (n_mc, 1))
+        Z_full_mc[:, missing_idx] = Z_mc
 
-        Z_full_mc = transform_X_to_Z(X_full_mc)
+        X_full_mc = transform_Z_to_X(Z_full_mc)
 
-        logits_mc = Z_full_mc @ true_beta + intercept
+        logits_mc = X_full_mc @ true_beta + intercept
         prob_y_mc = sigma(logits_mc)
 
         prob_y_all.append(prob_y_mc)
-        X_mc_all.append(X_mc)
 
     return np.array(prob_y_all)
 
@@ -227,11 +222,11 @@ for i in range(n_replicates):
     print(f"Set up {i+1}/{n_replicates}")
 
     # generate X, Z
-    X = generate_X(n, _d, _corr)
-    Z = transform_X_to_Z(X)
+    Z = generate_Z(n, _d, _corr)
+    X = transform_Z_to_X(Z)
 
     # generate y
-    y_logits = np.dot(Z, beta0)
+    y_logits = np.dot(X, beta0)
     y_probs = 1 / (1 + np.exp(-y_logits))
     y = np.random.binomial(1, y_probs)
 
@@ -268,21 +263,21 @@ for i in range(n_replicates):
     set_up_df = pd.concat([set_up_df, new_row], ignore_index=True)
 
     data_to_save = {
-        "X_obs": Z_obs,
+        "X_obs": X_obs,
         "M": M,
         "y": y,
         "y_probs": y_probs,
-        "X_full": Z
+        "X_full": X
     }
     np.savez(os.path.join(experiment_data_folder, "original_data", f"{set_up}.npz"), **data_to_save)
 
     # save test data
     data_to_save = {
-        "X_obs": Z_obs[n_train:],
+        "X_obs": X_obs[n_train:],
         "M": M[n_train:],
         "y": y[n_train:],
         "y_probs": y_probs[n_train:],
-        "X_full": Z[n_train:]
+        "X_full": X[n_train:]
     }
     np.savez(os.path.join(experiment_data_folder, "test_data", f"{set_up}.npz"), **data_to_save)
 

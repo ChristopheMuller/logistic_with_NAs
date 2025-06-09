@@ -18,6 +18,10 @@ In linex terminal (not job): Rscript 3_train_methods_in_R.R configs/config_SimA_
 In linux terminal (job): 
     oarsub -l nodes=1/core=8,walltime=48:00:00 -n SimA -q production --project premedical --stdout output/SimA_config02.txt --stderr output/SimA_config02_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimA_02.txt && apptainer exec env.sif python3 4_adjust_results.py && apptainer exec env.sif python3 5_param_estimation_scores.py && apptainer exec env.sif python3 6A_build_score_matrix.py && apptainer exec env.sif Rscript 6B_build_calibration_score.R"
 
+    or 
+    oarsub -l walltime=48:00:00 -n SimB -q production --project premedical --stdout output/SimB_config02.txt --stderr output/SimB_config02_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimB_02.txt"
+
+
 
 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
 
