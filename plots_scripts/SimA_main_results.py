@@ -15,7 +15,7 @@ from setups_design import metrics_config, methods_config
 
 # %% set up
 
-exp = "SimulationA"
+exp = "SimA"
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 
@@ -27,15 +27,7 @@ metrics_config
 from utils import calculate_ymin_for_R_proportion
 score_matrix = score_matrix[score_matrix["filter"] == "all"]
 
-
-# methods_sel = ["MICE.IMP", "MICE.M.IMP", "MICE.Y.IMP", "MICE.Y.M.IMP", "Mean.IMP", "Mean.IMP.M", "05.IMP", "05.IMP.M"]  ## Single Imputation
-# methods_sel = ["Mean.IMP.M", "PbP", "CC", "MICE.IMP", "MICE.Y.IMP",  "MICE.10.Y.IMP", "MICE.100.Y.IMP", "SAEM"]  ## Selected Procedures
-# methods_sel = ["MICE.10.IMP", "MICE.10.IMP.M", "MICE.10.Y.IMP", "MICE.10.Y.IMP.M",
-#                "MICE.10.M.IMP", "MICE.10.M.IMP.M", "MICE.10.Y.M.IMP", "MICE.10.Y.M.IMP.M"]  ## MICE Methods
-# methods_sel = ["MICE.10.IMP", "MICE.10.Y.IMP", "MICE.10.M.IMP", "MICE.10.Y.M.IMP", 
-#                "MICE.100.IMP", "MICE.100.Y.IMP", "MICE.100.M.IMP", "MICE.100.Y.M.IMP"]  ## MICE Methods
-methods_sel = ["MICE.10.IMP", "MICE.10.Y.IMP", "MICE.10.M.IMP", "MICE.10.Y.M.IMP", 
-               "MICE.RF.10.IMP", "MICE.RF.10.Y.IMP", "MICE.RF.10.M.IMP", "MICE.RF.10.Y.M.IMP"]  ## MICE RF Methods
+methods_sel = ["MICE.10.IMP.M"]
 
 scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
 filter_bayes = [True, True, False, False]
@@ -44,7 +36,7 @@ ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
 # ylimsmax = [0.06, 0.035, 1.5, 0.20] ## Single Imputation
 # ylimsmax = [0.12, 0.1, 1.25, 0.3]  ## Selected Procedures
-ylimsmax = [0.045, 0.02, 0.7, 0.15]  ## MICE Procedures
+ylimsmax = [0.05, 0.05, 0.7, 0.15]  ## MICE Procedures
 
 
 ylimsmin = calculate_ymin_for_R_proportion(0.03, ylimsmax)
@@ -64,6 +56,7 @@ for i, score in enumerate(scores_sel):
     score_matrix_sel = score_matrix_sel[score_matrix_sel["bayes_adj"] == filter_bayes[i]]
 
     # group by method and n_train
+    score_matrix_sel["score"] = score_matrix_sel["score"].astype(float)
     score_matrix_sel = score_matrix_sel.groupby(["method", "n_train"]).agg({"score": ["mean", "std", "count"]}).reset_index()
     score_matrix_sel.columns = ["method", "n_train", "mean", "sd", "count"]
     score_matrix_sel["se"] = score_matrix_sel["sd"] / np.sqrt(score_matrix_sel["count"])
@@ -95,8 +88,6 @@ for i, score in enumerate(scores_sel):
 
 plt.tight_layout()
 # plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SingleImputation.pdf"))
-# plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SelectedProcedures.pdf"))
-# plt.savefig(os.path.join("plots_scripts", "plots", "SimA_MICE_Procedures.pdf"))
 plt.show()
     
 

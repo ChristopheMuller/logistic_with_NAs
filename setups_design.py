@@ -79,6 +79,11 @@ methods_config = {
     "MICE.100.M.IMP": {"label": "MICE.100.M.IMP", "color": color_palette[8], "linestyle": ":", "marker":"^"},
     "MICE.100.Y.M.IMP": {"label": "MICE.100.Y.M.IMP", "color": color_palette[2], "linestyle": ":", "marker":"^"},
 
+    "MICE.100.IMP.M": {"label": "MICE.100.IMP.M", "color": color_palette[4], "linestyle": "dashdot", "marker":"^"},
+    "MICE.100.Y.IMP.M": {"label": "MICE.100.Y.IMP.M", "color": color_palette[1], "linestyle": "dashdot", "marker":"^"},
+    "MICE.100.M.IMP.M": {"label": "MICE.100.M.IMP.M", "color": color_palette[8], "linestyle": "dashdot", "marker":"^"},
+    "MICE.100.Y.M.IMP.M": {"label": "MICE.100.Y.M.IMP.M", "color": color_palette[2], "linestyle": "dashdot", "marker":"^"},
+
     "MICE.1000.IMP": {"label": "MICE.1000.IMP", "color": color_palette[4], "linestyle": "-.", "marker":"*"},
     "MICE.1000.Y.IMP": {"label": "MICE.1000.Y.IMP", "color": color_palette[1], "linestyle": "-.", "marker":"*"},
     "MICE.1000.M.IMP": {"label": "MICE.1000.M.IMP", "color": color_palette[8], "linestyle": "-.", "marker":"*"},
