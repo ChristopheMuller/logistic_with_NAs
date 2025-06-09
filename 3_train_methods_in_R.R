@@ -163,6 +163,9 @@ task_grid <- expand.grid(
 
 # Correctly defined run_task function
 run_task <- function(set_up, n_train, method_idx) {
+
+  cat("\n")
+  cat("Running task for set_up:", set_up, "n_train:", n_train, "method_idx:", method_idx, "\n")
   
   source("methods_in_R.R")
   np <- import("numpy")
@@ -237,16 +240,16 @@ run_task <- function(set_up, n_train, method_idx) {
     method = method$name,
     n_train = n_train,
     estimated_beta = estimated_beta,
-    file_name = save_name, # Will be NA if can_predict is FALSE or prediction failed
+    file_name = save_name,
     running_time_train = running_time,
-    running_time_pred = running_time_pred, # Will be NA if can_predict is FALSE or prediction failed
+    running_time_pred = running_time_pred,
     running_datetime = as.character(time.start),
     stringsAsFactors = FALSE
   )
 }
 
 # Run tasks in parallel
-results_df <- future_pmap_dfr(task_grid, run_task, .progress = TRUE,   .options = furrr_options(seed = TRUE))
+results_df <- future_pmap_dfr(task_grid, run_task, .progress = FALSE,   .options = furrr_options(seed = TRUE))
 simulations_df <- bind_rows(simulations_df, results_df)
 
 write.csv(simulations_df, simulation_file, row.names = FALSE)
