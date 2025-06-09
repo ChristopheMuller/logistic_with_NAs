@@ -9,3 +9,4 @@
 env.sif
 data/*
 !data/SimA/
+!data/SimB/
