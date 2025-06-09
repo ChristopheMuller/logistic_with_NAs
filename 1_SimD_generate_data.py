@@ -2,7 +2,6 @@
 # %%
 
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 import random
 import os
@@ -10,7 +9,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimulationD"
+experiment_name = "SimD"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:
@@ -40,7 +39,7 @@ n_train = 100_000
 n_test = 15_000
 n = n_train + n_test
 
-N_MC = 1000
+N_MC = 10_000
 
 
 # %%
