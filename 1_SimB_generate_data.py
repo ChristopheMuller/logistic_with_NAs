@@ -64,6 +64,26 @@ for i in range(2**_d):
     all_corrs[tuple(pattern)] = corr_obs
     all_vars[tuple(pattern)] = var_obs
 
+all_mus_df = pd.DataFrame(all_mus).T
+all_mus_df.columns = [f"mu_{i}" for i in range(_n_obs)]
+all_mus_df["pattern"] = all_mus_df.index
+all_mus_df.to_csv(os.path.join(experiment_data_folder, "all_mus.csv"), index=False)
+
+all_corrs_df = pd.Series(all_corrs)
+index = all_corrs_df.index
+all_corrs_df = pd.DataFrame(all_corrs_df).reset_index(drop=True)
+all_corrs_df["pattern"] = index
+all_corrs_df.columns = ["corr", "pattern"]
+all_corrs_df.to_csv(os.path.join(experiment_data_folder, "all_corrs.csv"), index=False)
+
+all_vars_df = pd.Series(all_vars)
+index = all_vars_df.index
+all_vars_df = pd.DataFrame(all_vars_df).reset_index(drop=True)
+all_vars_df["pattern"] = index
+all_vars_df.columns = ["var", "pattern"]
+all_vars_df.to_csv(os.path.join(experiment_data_folder, "all_vars.csv"), index=False)
+
+
 def generate_full_mu(d, mu_miss, mu_obs):
 
     full_mu = np.zeros(d)
