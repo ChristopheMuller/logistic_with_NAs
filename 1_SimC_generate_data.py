@@ -30,7 +30,7 @@ if os.path.exists(os.path.join(experiment_data_folder, "bayes_data")) == False:
 
 # %%
 
-n_replicates = 1
+n_replicates = 10
 
 _prop_NA = 0.25
 _d = 5
@@ -40,7 +40,7 @@ n_train = 100_000
 n_test = 15_000
 n = n_train + n_test
 
-N_MC = 10000
+N_MC = 10_000
 
 # %%
 
