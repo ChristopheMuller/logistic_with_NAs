@@ -2,7 +2,6 @@
 # %%
 
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 import random
 import os
@@ -10,7 +9,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimulationB"
+experiment_name = "SimB"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:
@@ -34,14 +33,77 @@ n_replicates = 10
 
 _prop_NA = 0.25
 _d = 5
-_corr = 0.65
+_corr_miss = 0.65
+_var_miss = 1.
+_max_var_obs = 1.
+_mu_miss = 0.0
+_var_mu_obs = 0.5
+_n_obs = 2
 
 n_train = 100_000
 n_test = 15_000
 n = n_train + n_test
 
-N_MC = 1000
+N_MC = 10_000
 
+
+# %%
+
+all_mus = {}
+all_corrs = {}
+all_vars = {}
+for i in range(2**_d):
+
+    pattern = np.array([int(x) for x in np.binary_repr(i, width=_d)])
+
+    corr_obs = np.random.uniform(-1,1)
+    var_obs = np.random.uniform(0, _max_var_obs)
+    mu_obs = np.random.normal(0, np.sqrt(_var_mu_obs), _n_obs)
+
+    all_mus[tuple(pattern)] = mu_obs
+    all_corrs[tuple(pattern)] = corr_obs
+    all_vars[tuple(pattern)] = var_obs
+
+def generate_full_mu(d, mu_miss, mu_obs):
+
+    full_mu = np.zeros(d)
+    n_obs = mu_obs.shape[0]
+    full_mu[:n_obs] = mu_obs
+    full_mu[n_obs:] = mu_miss
+
+    return full_mu
+
+def generate_full_cov(d, n_obs, corr_miss, var_miss, corr_obs, var_obs):
+
+    full_cov = np.zeros((d, d))
+
+    # upper left corner = toep matrix with corr_obs    
+    full_cov[:n_obs, :n_obs] = toep(n_obs, corr_obs) * var_obs
+
+    # lower right corner = toeplitz matrix with corr_miss
+    full_cov[n_obs:, n_obs:] = toep(d - n_obs, corr_miss) * var_miss
+
+    # cross terms = 0
+    full_cov[:n_obs, n_obs:] = 0
+    full_cov[n_obs:, :n_obs] = 0
+
+    return full_cov
+
+
+# E.g.
+# print(generate_full_cov(_d, _n_obs, corr_miss=_corr_miss, var_miss=_var_miss, 
+#                         corr_obs=all_corrs[tuple(np.ones(_d))], var_obs=all_vars[tuple(np.ones(_d))]))
+
+# print(generate_full_mu(_d, _mu_miss, all_mus[tuple(np.ones(_d))]))
+
+# %%
+
+np.random.seed(1)
+random.seed(1)
+
+beta0 = np.random.normal(0, 1.0, _d)
+
+print("beta0", beta0)
 
 # %%
 
@@ -131,89 +193,59 @@ set_up_df = pd.DataFrame({
     "d": [],
     "corr": [],
     "prop_NA": [],
+    "true_beta": [],
+    "true_intercept":[],
     "center_X": [],
     "set_up": []
 })
 
 
-
-np.random.seed(1)
-random.seed(1)
-
-
-all_betas = {}
-for i in range(2**_d):
-
-    pattern = np.array([int(x) for x in np.binary_repr(i, width=_d)])
-    all_betas[tuple(pattern)] = np.random.normal(0, 1, _d)
-
-#save the betas
-all_betas = pd.DataFrame(all_betas).T
-all_betas.columns = [f"beta_{i}" for i in range(_d)]
-all_betas["pattern"] = all_betas.index
-
-all_betas.to_csv(os.path.join(experiment_data_folder, "all_betas.csv"), index=False)
-
-# %%
-all_betas = pd.read_csv(os.path.join(experiment_data_folder, "all_betas.csv"))
-
-
-# %%
-
 for i in range(n_replicates):
 
     print(f"Set up {i+1}/{n_replicates}")
 
-    # generate X
-    X = generate_X(n, _d, _corr)
-
-    # generate M
+    # Generate M
     M = generate_M(n, _d, _prop_NA)
-    X_obs = X.copy()
-    X_obs[M == 1] = np.nan
+
+    # generate X: mu and corr based on the pattern of M
+    X = np.zeros_like(M, dtype=float)
+    unique_patterns = np.unique(M, axis=0)
+    total_pats = 0
+    for pat in unique_patterns:
+
+        rows_with_pat = np.all(M == pat, axis=1)
+        cov_pat = generate_full_cov(_d, _n_obs, _corr_miss, _var_miss,
+                                   all_corrs[tuple(pat)], all_vars[tuple(pat)])
+        mu_pat = generate_full_mu(_d, _mu_miss, all_mus[tuple(pat)])
+        X_temp = np.random.multivariate_normal(mu_pat, cov_pat, size=np.sum(rows_with_pat))
+
+        X[rows_with_pat] = X_temp
+
+        total_pats += np.sum(rows_with_pat)
+
+    assert total_pats == n, "The number of rows with the same pattern does not match the total number of rows."  
 
     # generate y
-    y_logits = np.zeros(n)
-    y_prob_bayes = np.zeros(n_test)
-
-    # for each pattern, generate y from betas
-    sum_ = 0
-    sum_bayes = 0
-    for j in range(len(all_betas)):
-
-        pattern = all_betas.iloc[j]["pattern"]
-        pattern = np.array([int(x) for x in pattern[1:-1].split(",")])
-
-        beta0 = all_betas.iloc[j][:-1].values
-        beta0 = np.array([float(x) for x in beta0])
-
-        idx_pattern = get_index_pattern(list(pattern), M)
-
-        y_logits[idx_pattern] = np.dot(X[idx_pattern], beta0)
-        sum_ += len(idx_pattern)
-
-        # for test set [n_train:]
-        idx_pattern = get_index_pattern(list(pattern), M[n_train:])
-        if len(idx_pattern) > 0:
-            y_prob_bayes[idx_pattern] = get_y_prob_bayes_same_pattern(X_obs[n_train:][idx_pattern], np.zeros(_d), toep_matrix(_d, _corr), beta0, N_MC).mean(axis=1)
-            sum_bayes += len(idx_pattern)
-    
-    assert sum_ == n, "The number of samples does not match the number of rows in X"
-    assert sum_bayes == n_test, "The number of samples does not match the number of rows in X"
-
+    y_logits = np.dot(X, beta0)
     y_probs = 1 / (1 + np.exp(-y_logits))
     y = np.random.binomial(1, y_probs)
 
+    # Mask X
+    X_obs = X.copy()
+    X_obs[M == 1] = np.nan
     # create the params
     sim = experiment_name
     rep = i
     n = n_test + n_train
     d = _d
-    corr = np.round(_corr*100,0).astype(int)
+    corr = "MIXTURE"
     prop_NA = np.round(_prop_NA*100,0).astype(int)
+    beta0 = beta0
     mu0 = np.zeros(_d)
     set_up = f"{sim}_rep{rep}_n{n}_d{d}_corr{corr}_NA{prop_NA}"
 
+
+    # save the data
     new_row = pd.DataFrame({
         "sim": [sim],
         "replicate": [rep],
@@ -221,6 +253,8 @@ for i in range(n_replicates):
         "d": [d],
         "corr": [corr],
         "prop_NA": [prop_NA],
+        "true_beta": [beta0],
+        "true_intercept": [0.0],
         "center_X": [mu0],
         "set_up": [set_up]
     })
@@ -246,8 +280,30 @@ for i in range(n_replicates):
     np.savez(os.path.join(experiment_data_folder, "test_data", f"{set_up}.npz"), **data_to_save)
 
     # save bayes data
+    y_probs_bayes = np.zeros(n_test)
+    total_pats = 0
+    for pat in unique_patterns:
+        rows_with_pat = np.all(M[n_train:] == pat, axis=1)
+        cov_pat = generate_full_cov(_d, _n_obs, _corr_miss, _var_miss,
+                                   all_corrs[tuple(pat)], all_vars[tuple(pat)])
+        mu_pat = generate_full_mu(_d, _mu_miss, all_mus[tuple(pat)])
+
+        total_pats += np.sum(rows_with_pat)
+
+        y_probs_bayes_pat = get_y_prob_bayes_same_pattern(
+            X_obs[n_train:][rows_with_pat],
+            mu_pat,
+            cov_pat,
+            beta0,
+            n_mc=N_MC
+        )
+
+        y_probs_bayes[rows_with_pat] = np.mean(y_probs_bayes_pat, axis=1)
+
+    assert total_pats == n_test, "The number of rows with the same pattern does not match the number of test rows."
+
     data_to_save = {
-        "y_probs_bayes": y_prob_bayes
+        "y_probs_bayes": y_probs_bayes
     }
     np.savez(os.path.join(experiment_data_folder, "bayes_data", f"{set_up}.npz"), **data_to_save)
 
