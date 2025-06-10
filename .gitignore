@@ -9,6 +9,17 @@
 env.sif
 data/*
 !data/SimA/
+!data/SimA/*
+data/SimA/*/
+
 !data/SimB/
+!data/SimB/*
+data/SimB/*/
+
 !data/SimC/
+!data/SimC/*
+data/SimC/*/
+
 !data/SimD/
+!data/SimD/*
+data/SimD/*/
