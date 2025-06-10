@@ -5,11 +5,9 @@ import numpy as np
 import pandas as pd
 import os
 
-# from methods import *
-
 # %%
 
-exp = "SimA"
+exp = "SimD"
 
 df_set_up = pd.read_csv(os.path.join("data",exp,"set_up.csv"))
 df_simulations = pd.read_csv(os.path.join("data",exp,"simulation.csv"))
