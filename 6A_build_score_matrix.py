@@ -24,8 +24,16 @@ name_score_matrix = "score_matrix.csv"
 exp = "SimA"
 
 all_methods_to_process = [
-"MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP","MICE.1.IMP.M","MICE.1.Y.IMP.M","MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M","MICE.10.IMP.M","MICE.10.Y.IMP.M","MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M","SAEM","Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M","PbP","CC"
- ]
+"MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
+"MICE.1.IMP.M","MICE.1.Y.IMP.M","MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
+"MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP",
+"MICE.10.IMP.M","MICE.10.Y.IMP.M","MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M",
+"SAEM",
+"Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M",
+"PbP","CC",
+"MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
+"MICE.RF.10.IMP.M","MICE.RF.10.Y.IMP.M","MICE.RF.10.M.IMP.M","MICE.RF.10.Y.M.IMP.M"
+]
 
 
 # %% Load data
@@ -161,14 +169,14 @@ def add_estimation_scores(score_matrix, results_df, metrics_to_add):
             
         for metric_name in metrics_to_add:
             # Ensure the metric exists in the results_df
-            if metric_name in row and pd.notna(row[metric_name]):
-                score = row[metric_name]
-                new_estimation_scores_list.append({
-                    "exp": exp, "set_up": setup, "method": method, "n_train": ntrain,
-                    "bayes_adj": False, "metric": metric_name, "score": score, "filter": "all"
-                })
-            else:
-                print(f"Warning: Metric '{metric_name}' not found or is NaN for {setup}-{method}-{ntrain}. Skipping.")
+            score = row[metric_name]
+            if pd.isna(score):
+                print(f"Skipping NaN score for {setup} - {method} - {ntrain} - {metric_name}")
+                continue
+            new_estimation_scores_list.append({
+                "exp": exp, "set_up": setup, "method": method, "n_train": ntrain,
+                "bayes_adj": False, "metric": metric_name, "score": score, "filter": "all"
+            })
 
     if new_estimation_scores_list:
         new_estimation_df = pd.DataFrame(new_estimation_scores_list)
