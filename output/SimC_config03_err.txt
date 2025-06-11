@@ -1,0 +1,636 @@
+/var/lib/oar/.batch_job_bashrc: line 5: /home/cmuller/.bashrc: No such file or directory
+Warning message:
+package ‘tidyr’ was built under R version 4.4.3 
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Warning message:
+package ‘dplyr’ was built under R version 4.4.3 
+Warning message:
+package ‘stringr’ was built under R version 4.4.3 
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+Warning message:
+package ‘mice’ was built under R version 4.4.3 
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+    Not enough data points (2) or not enough unique outcomes (2) for pattern '0_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '0_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (5) or not enough unique outcomes (1) for pattern '0_0_0_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (4) or not enough unique outcomes (1) for pattern '1_0_0_0_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (2) for pattern '1_0_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '0_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (2) for pattern '1_0_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (2) for pattern '0_0_1_1_0'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_0_0_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (2) for pattern '0_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (4) or not enough unique outcomes (1) for pattern '1_0_0_0_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_1_0_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_0_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (2) for pattern '1_0_0_0_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_0_1_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+    Not enough data points (2) or not enough unique outcomes (2) for pattern '0_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (2) for pattern '1_1_0_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_0_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_0_1_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_0_0_1'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '0_1_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_0_1_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (2) for pattern '0_0_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_0_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_0_1'. Model not trained for this pattern.
+    Not enough data points (4) or not enough unique outcomes (1) for pattern '0_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (2) for pattern '1_0_1_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '0_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (5) or not enough unique outcomes (1) for pattern '1_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_1_0_1'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_1_1'. Model not trained for this pattern.
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+    Not enough data points (4) or not enough unique outcomes (1) for pattern '0_1_1_0_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_1_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (8) or not enough unique outcomes (1) for pattern '1_0_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (14) or not enough unique outcomes (1) for pattern '0_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (4) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_1_1_0_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_1_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '0_1_1_1_1'. Model not trained for this pattern.
+    Not enough data points (4) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_0_1'. Model not trained for this pattern.
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '0_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_1_0_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (4) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_0_1_0_1'. Model not trained for this pattern.
+    Not enough data points (8) or not enough unique outcomes (1) for pattern '0_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_1_1_0_1'. Model not trained for this pattern.
+    Not enough data points (5) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+    Not enough data points (5) or not enough unique outcomes (1) for pattern '1_1_0_0_1'. Model not trained for this pattern.
+    Not enough data points (4) or not enough unique outcomes (1) for pattern '1_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (2) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (4) or not enough unique outcomes (1) for pattern '0_1_1_1_1'. Model not trained for this pattern.
+    Not enough data points (3) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_0_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_0_1_1_1'. Model not trained for this pattern.
+    Not enough data points (1) or not enough unique outcomes (1) for pattern '1_1_1_1_0'. Model not trained for this pattern.
+    Not enough data points (6) or not enough unique outcomes (1) for pattern '1_1_0_1_0'. Model not trained for this pattern.
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘mice’
+
+The following object is masked from ‘package:stats’:
+
+    filter
+
+The following objects are masked from ‘package:base’:
+
+    cbind, rbind
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+There were 50 or more warnings (use warnings() to see the first 50)
