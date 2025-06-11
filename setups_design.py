@@ -39,6 +39,7 @@ metrics_config = {
     "mae_bayes": {"label": "MAE to Bayes"},
     "calibration": {"label": "Calibration"},
     "mse_error_with_intercept": {"label": "MSE"},
+    "angular_error_with_intercept": {"label": "Angular"},
 }
 
 color_palette = plt.cm.tab10.colors
