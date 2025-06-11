@@ -21,7 +21,7 @@ from setups_design import metrics_config, methods_config
 
 # %% set up
 
-exp = "SimA"
+exp = "SimD"
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 
@@ -60,11 +60,13 @@ methods_sel = [
 "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
 "MICE.1.IMP.M","MICE.1.Y.IMP.M","MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
 ]
+selection_name = "MICE_with_or_without_M"
 
 methods_sel = [
 "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
 "Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M",
 ]
+selection_name = "Single_Imputation"
 
 methods_sel = [
 "MICE.1.IMP","MICE.1.Y.IMP",
@@ -74,8 +76,9 @@ methods_sel = [
 "Mean.IMP.M",
 "PbP","CC",
 ]
+selection_name = "Selected_Procedures"
 
-scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
+scores_sel = ["misclassification", "calibration", "mse_error_with_intercept", "mae_bayes"]
 filter_bayes = [True, True, False, False]
 
 ntrains = [100, 500, 1000, 5000, 10000, 50000]
@@ -133,6 +136,6 @@ for i, score in enumerate(scores_sel):
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
-# plt.savefig(os.path.join("plots_scripts", "plots", "SimA_SingleImputation.pdf"))
+plt.savefig(os.path.join("plots_scripts", exp, f"{selection_name}.pdf"))
 plt.show()
     
