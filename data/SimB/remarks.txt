@@ -16,3 +16,8 @@ n_test = 15_000
 n = n_train + n_test
 
 N_MC = 10_000
+
+
+####
+
+BUG IN DATA-GENERATING PROCESS: M not conditioned to always observe 2 first features. Starting again in SimE!
