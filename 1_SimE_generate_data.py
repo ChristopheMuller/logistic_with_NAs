@@ -1,7 +1,4 @@
 
-####
-# BUG IN SIMULATION: M Should be constrained!
-####
 # %%
 
 import numpy as np
@@ -12,7 +9,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimB"
+experiment_name = "SimE"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:
@@ -150,12 +147,15 @@ def generate_X(n, d, corr, mu=None):
     
     return X
 
-def generate_M(n, d, prc):
+def generate_M(n, d, prc, forbid_full_missing=True):
     """
     Generate a missing data matrix M with n rows and d columns, with a proportion of missing data prop_NA.
     It guarantees no row with all missing data.
     """
     M = np.random.binomial(n=1, p=prc, size=(n, d))
+
+    if not forbid_full_missing:
+        return M
 
     all_ones = np.all(M == 1, axis=1)
 
@@ -228,7 +228,9 @@ for i in range(n_replicates):
     print(f"Set up {i+1}/{n_replicates}")
 
     # Generate M
-    M = generate_M(n, _d, _prop_NA)
+    M_mis = generate_M(n, _d- _n_obs, _prop_NA, forbid_full_missing=False)
+    M_obs = np.zeros((n, _n_obs), dtype=int)
+    M = np.hstack((M_obs, M_mis))
 
     # generate X: mu and corr based on the pattern of M
     X = np.zeros_like(M, dtype=float)
