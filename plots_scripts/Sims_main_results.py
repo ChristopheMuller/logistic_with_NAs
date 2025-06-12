@@ -33,65 +33,106 @@ metrics_config
 from utils import calculate_ymin_for_R_proportion
 score_matrix = score_matrix[score_matrix["filter"] == "all"]
 
-methods_sel = [
-"MICE.1.IMP","MICE.1.Y.IMP",
-"MICE.1.M.IMP","MICE.1.Y.M.IMP",
-"MICE.1.IMP.M","MICE.1.Y.IMP.M",
-"MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
-"MICE.10.IMP","MICE.10.Y.IMP",
-"MICE.10.M.IMP","MICE.10.Y.M.IMP",
-"MICE.10.IMP.M","MICE.10.Y.IMP.M",
-"MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M",
-"MICE.100.IMP","MICE.100.Y.IMP",
-"MICE.100.M.IMP","MICE.100.Y.M.IMP",
-"MICE.100.IMP.M","MICE.100.Y.IMP.M",
-"MICE.100.M.IMP.M","MICE.100.Y.M.IMP.M",
-"SAEM",
-"Mean.IMP",
-"Mean.IMP.M",
-"05.IMP",
-"05.IMP.M",
-"PbP","CC",
-"MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
-"MICE.RF.10.IMP.M","MICE.RF.10.Y.IMP.M","MICE.RF.10.M.IMP.M","MICE.RF.10.Y.M.IMP.M"
-]
+# methods_sel = [
+# "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
+# "MICE.1.IMP.M","MICE.1.Y.IMP.M","MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
+# ]
+# selection_name = "MICE1_with_or_without_M"
 
 methods_sel = [
-"MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
-"MICE.1.IMP.M","MICE.1.Y.IMP.M","MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
+"MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP",
+"MICE.10.IMP.M",
+"MICE.10.Y.IMP.M",
+"MICE.10.M.IMP.M",
+"MICE.10.Y.M.IMP.M",
 ]
-selection_name = "MICE_with_or_without_M"
+selection_name = "MICE10_with_or_without_M"
 
-methods_sel = [
-"MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
-"Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M",
-]
-selection_name = "Single_Imputation"
 
-methods_sel = [
-"MICE.1.IMP","MICE.1.Y.IMP",
-"MICE.10.IMP","MICE.10.Y.IMP",
-"MICE.100.IMP","MICE.100.Y.IMP",
-"SAEM",
-"Mean.IMP.M",
-"PbP","CC",
-]
-selection_name = "Selected_Procedures"
+# methods_sel = [
+# "MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
+# "MICE.RF.10.IMP.M",
+# "MICE.RF.10.Y.IMP.M",
+# "MICE.RF.10.M.IMP.M",
+# "MICE.RF.10.Y.M.IMP.M",
+# ]
+# selection_name = "MICE10RF_with_or_without_M"
 
-scores_sel = ["misclassification", "calibration", "mse_error_with_intercept", "mae_bayes"]
+
+# methods_sel = [
+# "MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP",
+# "MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
+# ]
+# selection_name = "MICE10_with_RF"
+
+
+
+# methods_sel = [
+# "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
+# "Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M",
+# ]
+# selection_name = "Single_Imputation"
+
+
+# methods_sel = [
+# "MICE.1.IMP","MICE.1.Y.IMP",
+# "MICE.10.IMP","MICE.10.Y.IMP",
+# "MICE.100.IMP","MICE.100.Y.IMP",
+# "SAEM",
+# "Mean.IMP.M",
+# "PbP.Fixed",
+# ]
+# selection_name = "Selected_Procedures"
+
+
+# methods_sel = [
+# "MICE.10.IMP","MICE.10.Y.IMP",
+# "MICE.100.IMP","MICE.100.Y.IMP",
+# "MICE.RF.10.IMP","MICE.RF.10.Y.IMP",
+# "SAEM",
+# "Mean.IMP.M",
+# "PbP.Fixed", "CC",
+# ]
+# selection_name = "RF_selected"
+
+# methods_sel = [
+# "MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
+# "MICE.RF.10.IMP.M","MICE.RF.10.Y.IMP.M","MICE.RF.10.M.IMP.M","MICE.RF.10.Y.M.IMP.M"
+# ]
+# selection_name = "RF_all"
+
+# methods_sel = [
+# "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
+# "MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP",
+# "MICE.100.IMP","MICE.100.Y.IMP","MICE.100.M.IMP","MICE.100.Y.M.IMP",
+# ]
+# selection_name = "MICE_multiple"
+
+# methods_sel = [
+#     "PbP.Fixed", "PbP.Fixed.MinObs"
+# ]
+# selection_name = "PbP.Fixed_selected"
+
+scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
+metrics_name = "4_metrics"
 filter_bayes = [True, True, False, False]
+ylimsmax = [0.07, 0.01, 0.85, 0.16]
+
+# scores_sel = ["brier", "angular_error"]
+# metrics_name = "2_other_metrics"
+# filter_bayes = [True, False]
+# ylimsmax = [0.1, 1.1]
 
 ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
-# ylimsmax = [0.06, 0.035, 1.5, 0.20] ## Single Imputation
-# ylimsmax = [0.12, 0.1, 1.25, 0.3]  ## Selected Procedures
-ylimsmax = [0.05, 0.05, 0.7, 0.15]  ## MICE Procedures
 
 
 ylimsmin = calculate_ymin_for_R_proportion(0.03, ylimsmax)
 ylims = [(ylimsmin[i], ylimsmax[i]) for i in range(len(ylimsmax))] 
 
 fig, axes = plt.subplots(1, len(scores_sel), figsize=(4 * len(scores_sel), 5)) # default is 4 * len, 5
+if len(scores_sel) == 1:
+    axes = [axes]
 
 for i, score in enumerate(scores_sel):
 
@@ -126,8 +167,8 @@ for i, score in enumerate(scores_sel):
     axes[i].set_xlabel("Number of training samples")
     axes[i].set_ylabel(metrics_config[score]["label"])
     axes[i].set_title(metrics_config[score]["label"])   
-    # if i == 0:
-    if i == 1:
+    if i == 0:
+    # if i == 1:
         axes[i].legend()
     # axes[i].grid()
     axes[i].set_ylim(ylims[i])
@@ -136,6 +177,8 @@ for i, score in enumerate(scores_sel):
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
-plt.savefig(os.path.join("plots_scripts", exp, f"{selection_name}.pdf"))
+plt.savefig(os.path.join("plots_scripts", exp, f"{metrics_name}_{selection_name}.pdf"))
 plt.show()
     
+
+# %%
