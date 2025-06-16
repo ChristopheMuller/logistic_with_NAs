@@ -74,15 +74,21 @@ selection_name = "MICE10_with_or_without_M"
 # selection_name = "Single_Imputation"
 
 
-# methods_sel = [
-# "MICE.1.IMP","MICE.1.Y.IMP",
-# "MICE.10.IMP","MICE.10.Y.IMP",
-# "MICE.100.IMP","MICE.100.Y.IMP",
-# "SAEM",
-# "Mean.IMP.M",
-# "PbP.Fixed",
-# ]
-# selection_name = "Selected_Procedures"
+methods_sel = [
+        "CC",
+        "PbP.Fixed",
+        "Mean.IMP.M",
+        "SAEM",
+        "MICE.100.Y.IMP",
+        "MICE.100.IMP",
+        "MICE.RF.10.Y.IMP",
+        "MICE.RF.10.IMP"
+        # "MICE.100.Y.M.IMP.M",
+        # "MICE.100.Y.IMP.M",
+        # "MICE.RF.10.Y.M.IMP.M",
+        # "MICE.RF.10.Y.IMP.M"
+    ]
+selection_name = "Selected_Procedures"
 
 
 # methods_sel = [
@@ -113,15 +119,15 @@ selection_name = "MICE10_with_or_without_M"
 # ]
 # selection_name = "PbP.Fixed_selected"
 
-scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
-metrics_name = "4_metrics"
-filter_bayes = [True, True, False, False]
-ylimsmax = [0.07, 0.01, 0.85, 0.16]
+# scores_sel = ["misclassification", "calibration", "mse_error", "mae_bayes"]
+# metrics_name = "4_metrics"
+# filter_bayes = [True, True, False, False]
+# ylimsmax = [0.07, 0.01, 0.85, 0.16]
 
-# scores_sel = ["brier", "angular_error"]
-# metrics_name = "2_other_metrics"
-# filter_bayes = [True, False]
-# ylimsmax = [0.1, 1.1]
+scores_sel = ["brier", "angular_error"]
+metrics_name = "2_other_metrics"
+filter_bayes = [True, False]
+ylimsmax = [0.05, 0.5]
 
 ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
@@ -146,6 +152,7 @@ for i, score in enumerate(scores_sel):
     score_matrix_sel = score_matrix_sel[score_matrix_sel["bayes_adj"] == filter_bayes[i]]
 
     # group by method and n_train
+    score_matrix_sel["score"] = score_matrix_sel["score"].replace("[nan nan nan nan nan]", np.nan)
     score_matrix_sel["score"] = score_matrix_sel["score"].astype(float)
     score_matrix_sel = score_matrix_sel.groupby(["method", "n_train"]).agg({"score": ["mean", "std", "count"]}).reset_index()
     score_matrix_sel.columns = ["method", "n_train", "mean", "sd", "count"]

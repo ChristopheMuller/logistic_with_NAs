@@ -103,27 +103,32 @@ methods_sel = [
 # selection_name = "Single_Imputation"
 
 
+methods_sel = [
+        "CC",
+        "PbP.Fixed",
+        "Mean.IMP.M",
+        "SAEM",
+        "MICE.100.Y.IMP",
+        "MICE.100.IMP",
+        "MICE.RF.10.Y.IMP",
+        "MICE.RF.10.IMP"
+        # "MICE.100.Y.M.IMP.M",
+        # "MICE.100.Y.IMP.M",
+        # "MICE.RF.10.Y.M.IMP.M",
+        # "MICE.RF.10.Y.IMP.M"
+    ]
+
+
 # methods_sel = [
-# "MICE.1.IMP","MICE.1.Y.IMP",
+# # "MICE.1.IMP","MICE.1.Y.IMP",
 # "MICE.10.IMP","MICE.10.Y.IMP",
 # "MICE.100.IMP","MICE.100.Y.IMP",
+# "MICE.RF.10.IMP","MICE.RF.10.Y.IMP",
 # "SAEM",
 # "Mean.IMP.M",
-# "PbP",
+# "PbP", "CC",
 # ]
-# selection_name = "Selected_Procedures"
-
-
-methods_sel = [
-# "MICE.1.IMP","MICE.1.Y.IMP",
-"MICE.10.IMP","MICE.10.Y.IMP",
-"MICE.100.IMP","MICE.100.Y.IMP",
-"MICE.RF.10.IMP","MICE.RF.10.Y.IMP",
-"SAEM",
-"Mean.IMP.M",
-"PbP", "CC",
-]
-selection_name = "RF_selected"
+# selection_name = "RF_selected"
 
 
 # methods_sel = [
