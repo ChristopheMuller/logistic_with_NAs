@@ -1,5 +1,7 @@
 ###
 # SimD: GPMM, MNAR, 5 dim
+# BUG: variance of mu not same as Sim E and F; covariance matrix not same as Sim E and F
+# Correction in SimG
 ###
 # %%
 
