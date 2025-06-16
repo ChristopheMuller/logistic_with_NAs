@@ -162,7 +162,7 @@ patterns_df.to_csv(os.path.join(experiment_data_folder, "patterns.csv"), index=F
 
 for pattern in patterns_selected:
 
-    mu_pattern = np.random.normal(0, _var_mu_obs, _d)
+    mu_pattern = np.random.normal(0, np.sqrt(_var_mu_obs), _d)
     corr_pattern = np.random.uniform(-1, 1)
     var_pattern = np.random.uniform(0, _max_var_obs)
 
