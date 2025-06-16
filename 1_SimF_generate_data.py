@@ -35,8 +35,8 @@ n_replicates = 10
 
 _prop_NA = 0.25
 _d =25
-_max_var_obs = 1.
-_var_mu_obs = 0.5
+_max_var = 1.
+_var_mu = 0.5
 
 n_train = 100_000
 n_test = 15_000
@@ -162,9 +162,9 @@ patterns_df.to_csv(os.path.join(experiment_data_folder, "patterns.csv"), index=F
 
 for pattern in patterns_selected:
 
-    mu_pattern = np.random.normal(0, np.sqrt(_var_mu_obs), _d)
+    mu_pattern = np.random.normal(0, np.sqrt(_var_mu), _d)
     corr_pattern = np.random.uniform(-1, 1)
-    var_pattern = np.random.uniform(0, _max_var_obs)
+    var_pattern = np.random.uniform(0, _max_var)
 
 
     print("Pattern:", pattern[:3], "...", pattern[-3:])
