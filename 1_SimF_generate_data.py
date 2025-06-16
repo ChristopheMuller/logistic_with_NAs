@@ -220,7 +220,9 @@ for i in range(n_replicates):
         rows_with_pat = np.all(M == pat, axis=1)
         mu_pat = all_mus[tuple(pat)]
         corr_pat = all_corrs[tuple(pat)]
-        X_temp = generate_X(np.sum(rows_with_pat), _d, corr_pat, mu=mu_pat)
+        var_pat = all_vars[tuple(pat)]
+        cov_pat = toep_matrix(_d, corr_pat) * var_pat
+        X_temp = np.random.multivariate_normal(mu_pat, cov_pat, size=np.sum(rows_with_pat))
 
         X[rows_with_pat] = X_temp
 
@@ -288,13 +290,15 @@ for i in range(n_replicates):
         rows_with_pat = np.all(M[n_train:] == pat, axis=1)
         mu_pat = all_mus[tuple(pat)]
         corr_pat = all_corrs[tuple(pat)]
+        var_pat = all_vars[tuple(pat)]
+        cov_pat = toep_matrix(_d, corr_pat) * var_pat
 
         total_pats += np.sum(rows_with_pat)
 
         y_probs_bayes_pat = get_y_prob_bayes_same_pattern(
             X_obs[n_train:][rows_with_pat],
             mu_pat,
-            toep_matrix(_d, corr_pat),
+            cov_pat,
             beta0,
             n_mc=N_MC
         )
