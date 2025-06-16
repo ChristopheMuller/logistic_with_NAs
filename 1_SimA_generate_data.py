@@ -1,4 +1,6 @@
-
+###
+# SimA: Gaussian, MCAR, 5 dim
+###
 # %%
 
 import numpy as np

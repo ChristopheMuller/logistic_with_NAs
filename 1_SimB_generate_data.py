@@ -1,6 +1,8 @@
 
 ####
-# BUG IN SIMULATION: M Should be constrained!
+# SimB: BUG IN SIMULATION: M Should be constrained!
+# Was: GPMM, MAR, d = 5
+# Fixed in SimD
 ####
 # %%
 

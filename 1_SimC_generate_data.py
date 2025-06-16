@@ -1,4 +1,6 @@
-
+### 
+# SimC: Non-linear, MCAR, 5 dim
+###
 # %%
 
 import numpy as np

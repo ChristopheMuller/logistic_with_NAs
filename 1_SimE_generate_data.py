@@ -1,4 +1,7 @@
-
+###
+# SimE: Correction of SimB
+# is: GPMM, MAR, dim 5
+###
 # %%
 
 import numpy as np
