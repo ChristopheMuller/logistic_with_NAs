@@ -1,0 +1,3 @@
+sim=SimF
+methods=SAEM
+training=5000,10000,50000
