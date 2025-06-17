@@ -136,24 +136,6 @@ print(training_sizes)
 # Load setup
 df_set_up <- read.csv(file.path("data", exp, "set_up.csv"))
 
-# Load or initialize results
-simulation_file <- file.path("data", exp, "simulation.csv")
-if (file.exists(simulation_file)) {
-  simulations_df <- read.csv(simulation_file)
-} else {
-  simulations_df <- data.frame(
-    set_up = character(),
-    method = character(),
-    n_train = numeric(),
-    estimated_beta = character(),
-    file_name = character(),
-    running_time_train = numeric(),
-    running_time_pred = numeric(),
-    running_datetime = character(),
-    stringsAsFactors = FALSE
-  )
-}
-
 
 # Grid of tasks
 task_grid <- expand.grid(
@@ -252,6 +234,25 @@ run_task <- function(set_up, n_train, method_idx) {
 
 # Run tasks in parallel
 results_df <- future_pmap_dfr(task_grid, run_task, .progress = FALSE,   .options = furrr_options(seed = TRUE))
+
+# Load or initialize results
+simulation_file <- file.path("data", exp, "simulation.csv")
+if (file.exists(simulation_file)) {
+  simulations_df <- read.csv(simulation_file)
+} else {
+  simulations_df <- data.frame(
+    set_up = character(),
+    method = character(),
+    n_train = numeric(),
+    estimated_beta = character(),
+    file_name = character(),
+    running_time_train = numeric(),
+    running_time_pred = numeric(),
+    running_datetime = character(),
+    stringsAsFactors = FALSE
+  )
+}
+
 simulations_df <- bind_rows(simulations_df, results_df)
 
 write.csv(simulations_df, simulation_file, row.names = FALSE)
