@@ -51,6 +51,9 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -73,6 +76,8 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -95,6 +100,9 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -117,6 +125,8 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -139,6 +149,9 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -161,6 +174,8 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -183,6 +198,9 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -205,6 +223,8 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -227,6 +247,9 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -249,6 +272,7 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -271,6 +295,7 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
@@ -293,6 +318,8 @@ The following objects are masked from ‘package:base’:
 
     intersect, setdiff, setequal, union
 
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
+Error in fit for method SAEM: missing value where TRUE/FALSE needed
 
 Attaching package: ‘mice’
 
