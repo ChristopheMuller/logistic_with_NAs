@@ -32,6 +32,10 @@ data/SimE/*/
 !data/SimF/*
 data/SimF/*/
 
+!data/SimF2/
+!data/SimF2/*
+data/SimF2/*/
+
 !data/SimG/
 !data/SimG/*
 data/SimG/*/
