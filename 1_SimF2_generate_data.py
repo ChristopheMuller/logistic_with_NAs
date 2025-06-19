@@ -44,7 +44,7 @@ n = n_train + n_test
 
 N_MC = 10_000
 
-n_patterns = 8
+n_patterns = 15
 
 # %%
 
