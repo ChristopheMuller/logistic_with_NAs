@@ -1,0 +1,3 @@
+sim=SimF2
+methods=PbP.Fixed,PbP.MinObs,Mean.IMP,Mean.IMP.M,05.IMP,05.IMP.M,CC
+training=100,500,1000,5000,10000,50000

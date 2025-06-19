@@ -1,0 +1,3 @@
+sim=SimF2
+methods=SAEM
+training=50000
