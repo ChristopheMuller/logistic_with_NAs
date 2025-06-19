@@ -156,6 +156,10 @@ all_corrs = {}
 all_vars = {}
 
 patterns_selected = (np.random.rand(n_patterns, _d) < 0.25).astype(int)
+# if pattern fully observed (only 0), sample again:
+for i in range(n_patterns):
+    while np.all(patterns_selected[i] == 0):
+        patterns_selected[i] = (np.random.rand(_d) < 0.25).astype(int)
 patterns_df = pd.DataFrame(patterns_selected)
 patterns_df.columns = [f"pattern_{i}" for i in range(_d)]
 patterns_df.to_csv(os.path.join(experiment_data_folder, "patterns.csv"), index=False)
