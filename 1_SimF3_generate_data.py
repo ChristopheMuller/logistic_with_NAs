@@ -1,5 +1,5 @@
 ####
-# SimF2: GPMM, MNAR, big dimension, few patterns, beta changing at each replicate (more replicates)
+# SimF3: GPMM, MNAR, 5 dimension, few patterns
 ####
 # %%
 
@@ -11,7 +11,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimF2"
+experiment_name = "SimF3"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:
@@ -31,10 +31,10 @@ if os.path.exists(os.path.join(experiment_data_folder, "bayes_data")) == False:
 
 # %%
 
-n_replicates = 20
+n_replicates = 10
 
 _prop_NA = 0.25
-_d =25
+_d =5
 _max_var = 1.
 _var_mu = 0.5
 
@@ -44,7 +44,7 @@ n = n_train + n_test
 
 N_MC = 10_000
 
-n_patterns = 15
+n_patterns = 3
 
 # %%
 
@@ -147,10 +147,13 @@ set_up_df = pd.DataFrame({
 np.random.seed(1)
 random.seed(1)
 
+beta0 = np.random.normal(0, 1, _d)
+
+print("beta0", beta0)
+
 all_mus = {}
 all_corrs = {}
 all_vars = {}
-all_betas = {}
 
 patterns_selected = (np.random.rand(n_patterns, _d) < 0.25).astype(int)
 patterns_df = pd.DataFrame(patterns_selected)
@@ -163,6 +166,7 @@ for pattern in patterns_selected:
     corr_pattern = np.random.uniform(-1, 1)
     var_pattern = np.random.uniform(0, _max_var)
 
+
     print("Pattern:", pattern[:3], "...", pattern[-3:])
     print("\tMu:", np.round(mu_pattern[:3],2), "...", np.round(mu_pattern[-3:],2))
     print("\tCorr:", np.round(corr_pattern, 2))
@@ -172,11 +176,6 @@ for pattern in patterns_selected:
     all_mus[tuple(pattern)] = mu_pattern
     all_corrs[tuple(pattern)] = corr_pattern
     all_vars[tuple(pattern)] = var_pattern
-
-for i in range(n_replicates):
-
-    beta0 = np.random.normal(0, 1, _d)
-    all_betas[i] = beta0
     
 
 
@@ -200,11 +199,6 @@ all_vars_df["pattern"] = index
 all_vars_df.columns = ["var", "pattern"]
 all_vars_df.to_csv(os.path.join(experiment_data_folder, "all_vars.csv"), index=False)
 
-all_betas_df = pd.DataFrame(all_betas).T
-all_betas_df.columns = [f"beta_{i}" for i in range(_d)]
-all_betas_df["rep"] = all_betas_df.index
-all_betas_df.to_csv(os.path.join(experiment_data_folder, "all_betas.csv"), index=False)
-
 
 # %%
 
@@ -212,8 +206,6 @@ all_betas_df.to_csv(os.path.join(experiment_data_folder, "all_betas.csv"), index
 for i in range(n_replicates):
 
     print(f"Set up {i+1}/{n_replicates}")
-
-    beta0 = all_betas[i]
 
     # Generate M
     M = generate_M_specific_patterns(n, patterns_selected)
