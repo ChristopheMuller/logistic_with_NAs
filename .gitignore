@@ -40,6 +40,10 @@ data/SimF2/*/
 !data/SimF3/*
 data/SimF3/*/
 
+!data/SimF4/
+!data/SimF4/*
+data/SimF4/*/
+
 !data/SimG/
 !data/SimG/*
 data/SimG/*/
