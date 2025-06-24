@@ -14,7 +14,7 @@ from utils import *
 
 # %%
 
-exp = "SimC"
+exp = "SimG"
 set_up = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
 simulation = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 
@@ -32,7 +32,7 @@ methods = [
 "MICE.10.IMP.M","MICE.10.Y.IMP.M","MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M",
 "SAEM",
 "Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M",
-"PbP",#"CC",
+"PbP.Fixed",#"CC",
 "MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
 "MICE.RF.10.IMP.M","MICE.RF.10.Y.IMP.M","MICE.RF.10.M.IMP.M","MICE.RF.10.Y.M.IMP.M",
 "MICE.100.IMP","MICE.100.Y.IMP","MICE.100.M.IMP","MICE.100.Y.M.IMP",
