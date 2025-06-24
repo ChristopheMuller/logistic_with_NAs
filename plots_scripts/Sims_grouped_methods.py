@@ -16,7 +16,7 @@ from utils import calculate_ymin_for_R_proportion
 
 # %% set up
 
-exp = "SimD"
+exp = "SimG"
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 
@@ -74,21 +74,16 @@ selected_method_groups = [
 scores_sel = ["misclassification", "mae_bayes", "calibration", "mse_error"]
 metrics_name = "4_metrics_grid_with_legends" # Updated filename
 filter_bayes = [True, True, True, False]
-ylimsmax = [0.08, 0.189, 0.017, 0.49]
+ylimsmax = [0.1, 0.2, 0.009, 0.6]
 ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
-# Calculate ylimsmin based on the provided proportion
 ylimsmin = calculate_ymin_for_R_proportion(0.03, ylimsmax)
 ylims = [(ylimsmin[i], ylimsmax[i]) for i in range(len(ylimsmax))]
 
-# Determine layout for the grid plot
 num_rows = len(selected_method_groups)
 num_cols = len(scores_sel) + 1 # +1 for the legend column
 
-# Create the figure and a GridSpec object
-# Reduced overall width since we're making legend column smaller
 fig = plt.figure(figsize=(5 * len(scores_sel) + 1.5, 4.75 * num_rows))
-# Make legend column smaller and adjust spacing
 gs = gridspec.GridSpec(num_rows, num_cols, figure=fig,
                          width_ratios=[1] * len(scores_sel) + [0.3],
                          )
@@ -103,10 +98,8 @@ for r_idx, group_name in enumerate(selected_method_groups):
                       fontsize=12, va='center', ha='right', rotation=90)
     row_title_ax.set_axis_off()
 
-    # ADDED: Add the row label (a), (b), etc.
     # Calculate character for the label: 'a' + r_idx
     row_char_label = '(' + chr(ord('a') + r_idx) + ')'
-    # Position this label to the left of the group name
     row_title_ax.text(-0.25, 0.5, row_char_label,
                       transform=row_title_ax.transAxes,
                       fontsize=14, va='center', ha='right')
@@ -147,10 +140,10 @@ for r_idx, group_name in enumerate(selected_method_groups):
         ax.set_ylim(ylims[c_idx])
 
         # Set titles and labels
-        if r_idx == 0: # Top row gets metric titles
+        if r_idx == 0: 
             ax.set_title(metrics_config[score]["label"], fontsize=12)
 
-        if r_idx == num_rows - 1: # Bottom row gets x-axis label
+        if r_idx == num_rows - 1:
             ax.set_xlabel("Number of training samples", fontsize=10)
         else:
             ax.set_xticklabels([])
@@ -167,28 +160,19 @@ for r_idx, group_name in enumerate(selected_method_groups):
     for method in methods_in_group:
         if method in methods_config:
             method_config = methods_config[method]
-            # Create dummy artists for the legend
             handles.append(plt.Line2D([0], [0], color=method_config["color"],
                                       linestyle=method_config["linestyle"],
                                       marker=method_config["marker"], markersize=5))
             labels.append(method_config["label"])
 
 
-    # Sort handles and labels alphabetically by label for consistent legend order
     sorted_labels, sorted_handles = zip(*sorted(zip(labels, handles), key=lambda t: t[0]))
 
-    # Position legend closer to the left edge of its subplot
     legend_ax.legend(sorted_handles, sorted_labels, loc='center left',
                      bbox_to_anchor=(-0.1, 0.5), frameon=False, fontsize=10)
     legend_ax.set_axis_off()
 
-# add background color to the legend column
-
-
-# Adjust margins to ensure legend is not cropped - increase right margin
-# Adjusted 'left' to make more space for the (a), (b) labels
 plt.subplots_adjust(left=0.08, top=0.9, right=0.85, bottom=0.05, wspace=0.21, hspace=0.1)
 
-# Save the plot with bbox_inches='tight' to ensure nothing is cropped
 plt.savefig(os.path.join("plots_scripts", exp, f"{metrics_name}_grid.pdf"), bbox_inches='tight', pad_inches=0.1)
 plt.show()

@@ -21,7 +21,7 @@ from setups_design import metrics_config, methods_config
 
 # %% set up
 
-exp = "SimC"
+exp = "SimG3"
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 
@@ -32,123 +32,37 @@ metrics_config
 # %%
 
 metric_sel = "mae_bayes"
-patterns_sel = [[1,0,0,0,0],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,0,0,0,1]]
+patterns_sel = [[0,0,1,0],
+    [0,1,1,0],
+    [1,0,0,0],
+    [1,1,0,0]]
 patterns_sel = [str(pattern) for pattern in patterns_sel]
 
-pattern_names = ["Gaussian missing (Z1)", "Gaussian missing (Z2)",
-                 "Exponential missing (Z3)", "Cubic missing (Z4)",
-                 "Non-monotonic missing (Z5)"]
+pattern_names = patterns_sel.copy()
 
 methods_sel = [
-"MICE.1.IMP","MICE.1.Y.IMP",
-"MICE.1.M.IMP","MICE.1.Y.M.IMP",
-"MICE.1.IMP.M","MICE.1.Y.IMP.M",
-"MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
-"MICE.10.IMP","MICE.10.Y.IMP",
-"MICE.10.M.IMP","MICE.10.Y.M.IMP",
-"MICE.10.IMP.M","MICE.10.Y.IMP.M",
-"MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M",
-"MICE.100.IMP","MICE.100.Y.IMP",
-"MICE.100.M.IMP","MICE.100.Y.M.IMP",
-"MICE.100.IMP.M","MICE.100.Y.IMP.M",
-"MICE.100.M.IMP.M","MICE.100.Y.M.IMP.M",
-"SAEM",
+# "MICE.1.IMP","MICE.1.Y.IMP",
+# "MICE.1.M.IMP","MICE.1.Y.M.IMP",
+# "MICE.1.IMP.M","MICE.1.Y.IMP.M",
+# "MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
+# "MICE.10.IMP","MICE.10.Y.IMP",
+# "MICE.10.M.IMP","MICE.10.Y.M.IMP",
+# "MICE.10.IMP.M","MICE.10.Y.IMP.M",
+# "MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M",
+# "MICE.100.IMP","MICE.100.Y.IMP",
+# "MICE.100.M.IMP","MICE.100.Y.M.IMP",
+# "MICE.100.IMP.M","MICE.100.Y.IMP.M",
+# "MICE.100.M.IMP.M","MICE.100.Y.M.IMP.M",
+# "SAEM",
 "Mean.IMP",
 "Mean.IMP.M",
-"05.IMP",
-"05.IMP.M",
-"PbP","CC",
-"MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
-"MICE.RF.10.IMP.M","MICE.RF.10.Y.IMP.M","MICE.RF.10.M.IMP.M","MICE.RF.10.Y.M.IMP.M"
-]
-
-# methods_sel = [
-# "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
-# "MICE.1.IMP.M","MICE.1.Y.IMP.M","MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
-# ]
-# selection_name = "MICE1_with_or_without_M"
-
-# methods_sel = [
-# "MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP",
-# "MICE.10.IMP.M",
-# "MICE.10.Y.IMP.M",
-# "MICE.10.M.IMP.M",
-# "MICE.10.Y.M.IMP.M",
-# ]
-# selection_name = "MICE10_with_or_without_M"
-
-
-# methods_sel = [
-# "MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
-# "MICE.RF.10.IMP.M",
-# "MICE.RF.10.Y.IMP.M",
-# "MICE.RF.10.M.IMP.M",
-# "MICE.RF.10.Y.M.IMP.M",
-# ]
-# selection_name = "MICE10RF_with_or_without_M"
-
-
-# methods_sel = [
-# "MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP",
-# "MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
-# ]
-# selection_name = "MICE10_with_RF"
-
-
-
-# methods_sel = [
-# "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
-# "Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M",
-# ]
-# selection_name = "Single_Imputation"
-
-
-methods_sel = [
-        "CC",
-        "PbP.Fixed",
-        "Mean.IMP.M",
-        "SAEM",
-        "MICE.100.Y.IMP",
-        "MICE.100.IMP",
-        "MICE.RF.10.Y.IMP",
-        "MICE.RF.10.IMP"
-        # "MICE.100.Y.M.IMP.M",
-        # "MICE.100.Y.IMP.M",
-        # "MICE.RF.10.Y.M.IMP.M",
-        # "MICE.RF.10.Y.IMP.M"
-    ]
-
-
-# methods_sel = [
-# # "MICE.1.IMP","MICE.1.Y.IMP",
-# "MICE.10.IMP","MICE.10.Y.IMP",
-# "MICE.100.IMP","MICE.100.Y.IMP",
-# "MICE.RF.10.IMP","MICE.RF.10.Y.IMP",
-# "SAEM",
-# "Mean.IMP.M",
-# "PbP", "CC",
-# ]
-# selection_name = "RF_selected"
-
-
-# methods_sel = [
+# "05.IMP",
+# "05.IMP.M",
+# "PbP","CC",
+"PbP.Fixed",
 # "MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
 # "MICE.RF.10.IMP.M","MICE.RF.10.Y.IMP.M","MICE.RF.10.M.IMP.M","MICE.RF.10.Y.M.IMP.M"
-# ]
-# selection_name = "RF_all"
-
-# methods_sel = [
-# "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
-# "MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP",
-# "MICE.100.IMP","MICE.100.Y.IMP","MICE.100.M.IMP","MICE.100.Y.M.IMP",
-# ]
-# selection_name = "MICE_multiple"
-
-# methods_sel = [
-#     "PbP", "PbP.MinObs"
-# ]
-# selection_name = "PbP_selected"
-
+]
 
 
 score_matrix_sel = score_matrix[score_matrix["metric"] == metric_sel]
@@ -192,10 +106,10 @@ for i, pattern in enumerate(patterns_sel):
         axes[i].legend()
     # axes[i].grid()
 
-    axes[i].set_ylim(-0.01, 0.4)
+    axes[i].set_ylim(-0.01, 0.2)
     # line at
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
-plt.savefig(os.path.join("plots_scripts", exp, f"perPattern_{metric_sel}_{selection_name}.pdf"))
+# plt.savefig(os.path.join("plots_scripts", exp, f"perPattern_{metric_sel}_{selection_name}.pdf"))
 plt.show()
