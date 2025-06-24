@@ -1,0 +1,3 @@
+sim=SimG3
+methods=PbP.Fixed,Mean.IMP,Mean.IMP.M
+training=100,500,1000,5000,10000,50000

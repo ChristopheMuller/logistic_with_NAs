@@ -1,0 +1,775 @@
+exp,set_up,method,n_train,bayes_adj,metric,score,filter
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,brier,0.17687458317555096,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,brier,0.024721781327873893,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,misclassification,0.24993333333333334,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,misclassification,0.017066666666666674,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.10290459355305474,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.10290459355305474,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,brier,0.154906923139927,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,brier,0.002754121292249917,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,misclassification,0.23419999999999996,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,misclassification,0.0013333333333332975,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.042458638643364854,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.042458638643364854,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,brier,0.15313175773524312,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,brier,0.000978955887566052,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,misclassification,0.23199999999999998,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,misclassification,-0.0008666666666666822,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.023806997196279312,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.023806997196279312,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,brier,0.1523528164587287,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,brier,0.00020001461105162432,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,misclassification,0.23133333333333328,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,misclassification,-0.0015333333333333865,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.011780626012621961,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.011780626012621961,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,brier,0.15227572381001037,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,brier,0.00012292196233329444,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,misclassification,0.23186666666666667,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,misclassification,-0.0010000000000000009,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.009874949053814832,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.009874949053814832,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,brier,0.1521078953947432,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,brier,-4.49064529338683e-05,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,misclassification,0.23186666666666667,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,misclassification,-0.0010000000000000009,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.0039176188916936186,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.0039176188916936186,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,brier,0.15912292287204108,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,brier,0.006970121024364007,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,misclassification,0.23486666666666667,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,misclassification,0.0020000000000000018,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.06735855820439807,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.06735855820439807,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,brier,0.15356044309355277,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,brier,0.001407641245875696,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,misclassification,0.2326666666666667,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,misclassification,-0.00019999999999997797,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.02882451165017103,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.02882451165017103,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,brier,0.15365367637930333,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,brier,0.0015008745316262562,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,misclassification,0.23240000000000005,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,misclassification,-0.00046666666666661527,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.029542673209466536,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.029542673209466536,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,brier,0.15390630743382616,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,brier,0.00175350558614909,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,misclassification,0.23193333333333332,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,misclassification,-0.0009333333333333416,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.03172450102980166,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.03172450102980166,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,brier,0.15400111688991933,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,brier,0.0018483150422422545,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,misclassification,0.23173333333333335,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,misclassification,-0.0011333333333333195,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.03269984442991783,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.03269984442991783,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,brier,0.1539008618268977,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,brier,0.0017480599792206175,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,misclassification,0.23273333333333335,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,misclassification,-0.00013333333333331865,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.031175754022908893,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.031175754022908893,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,brier,0.15857381875212984,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,brier,0.006421016904452764,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,misclassification,0.2344666666666667,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,misclassification,0.0016000000000000458,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.06587712126212074,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.06587712126212074,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,brier,0.1530876555934512,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,brier,0.0009348537457741224,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,misclassification,0.23360000000000003,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,misclassification,0.0007333333333333636,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.02080905740985504,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.02080905740985504,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,brier,0.15287663356105083,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,brier,0.0007238317133737571,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,misclassification,0.2331333333333333,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,misclassification,0.0002666666666666373,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.018580080651522914,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.018580080651522914,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,brier,0.15276794871692426,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,brier,0.0006151468692471851,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,misclassification,0.23253333333333337,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,misclassification,-0.0003333333333332966,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.01661301416646037,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.01661301416646037,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,brier,0.152754805145859,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,brier,0.0006020032981819412,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,misclassification,0.2334666666666667,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,misclassification,0.0006000000000000449,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.017292998120816232,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.017292998120816232,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,brier,0.1525863016979045,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,brier,0.0004334998502274201,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,misclassification,0.23319999999999996,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,misclassification,0.0003333333333332966,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.014845176216264156,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.014845176216264156,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,angular_error,[nan nan nan nan],all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,running_time_train,0.0770959854125977,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,running_time_pred,3.1104850769043,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,angular_error,[nan nan nan nan],all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,running_time_train,0.124933958053589,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,running_time_pred,1.83793306350708,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,angular_error,[nan nan nan nan],all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,running_time_train,1.08252596855164,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,running_time_pred,0.889084100723267,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,angular_error,[nan nan nan nan],all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,running_time_train,1.24417090415955,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,running_time_pred,1.62623715400696,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,angular_error,[nan nan nan nan],all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,running_time_train,1.97315907478333,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,running_time_pred,0.88339900970459,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,angular_error,[nan nan nan nan],all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,running_time_train,7.70879983901978,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,running_time_pred,0.810918092727661,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,angular_error,0.34539352089286424,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mse_error,0.6016212108817248,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,angular_error_with_intercept,0.3552865093780697,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mse_error_with_intercept,0.4976884129663997,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,running_time_train,0.0066559314727783,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,running_time_pred,0.0039272308349609,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,angular_error,0.21299357155244125,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mse_error,0.0559959562352612,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,angular_error_with_intercept,0.2937422208450552,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mse_error_with_intercept,0.0869039450849087,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,running_time_train,0.0456788539886475,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,running_time_pred,0.0252749919891357,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,angular_error,0.25003371562453414,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mse_error,0.0783983953575624,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,angular_error_with_intercept,0.3153290778911553,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mse_error_with_intercept,0.1017445999238998,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,running_time_train,0.0272140502929688,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,running_time_pred,0.0157270431518555,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,angular_error,0.25723338089824066,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mse_error,0.0778373196534284,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,angular_error_with_intercept,0.314360476710684,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mse_error_with_intercept,0.095111337794704,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,running_time_train,0.127197027206421,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,running_time_pred,0.024601936340332,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,angular_error,0.24842015067449627,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mse_error,0.0727320791378982,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,angular_error_with_intercept,0.3181178794567295,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mse_error_with_intercept,0.0980204648015371,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,running_time_train,0.212254047393799,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,running_time_pred,0.0146629810333252,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,angular_error,0.2291545262564715,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mse_error,0.0689282820854474,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,angular_error_with_intercept,0.2980471337056278,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mse_error_with_intercept,0.0941445236584059,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,running_time_train,1.41278600692749,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,running_time_pred,0.0244209766387939,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,angular_error,0.3516056710223977,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mse_error,0.5717074291042068,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,angular_error_with_intercept,0.3571609957920589,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mse_error_with_intercept,0.4663678587280447,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,running_time_train,0.0172309875488281,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,running_time_pred,1.07521200180054,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,angular_error,0.19762931821265373,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mse_error,0.0440275899434273,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,angular_error_with_intercept,0.2055533557424228,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mse_error_with_intercept,0.0378104197935185,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,running_time_train,0.0155332088470459,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,running_time_pred,0.365200042724609,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,angular_error,0.2348432782242609,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mse_error,0.0603805820742571,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,angular_error_with_intercept,0.235215238198882,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mse_error_with_intercept,0.0484497106001727,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,running_time_train,0.253369092941284,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,running_time_pred,3.10189008712769,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,angular_error,0.22460571181531727,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mse_error,0.05644770230572,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,angular_error_with_intercept,0.2246691139519147,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mse_error_with_intercept,0.0451809128755958,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,running_time_train,0.910315036773682,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,running_time_pred,0.22834300994873,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,angular_error,0.23780090945827823,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mse_error,0.0618013180817806,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,angular_error_with_intercept,0.2464771070510378,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mse_error_with_intercept,0.0529560176432415,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,running_time_train,0.34228777885437,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,running_time_pred,1.25564789772034,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,angular_error,0.21600743977429063,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mse_error,0.0515786689486768,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,angular_error_with_intercept,0.2273925440794022,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mse_error_with_intercept,0.045827038255691,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,running_time_train,0.686591863632202,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,running_time_pred,0.287467002868652,all
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.10444225094452779,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.10444225094452779,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.10444225094452779,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.10444225094452779,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.020511387591568068,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.020511387591568068,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.020511387591568068,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.020511387591568068,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.008925220895640257,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.008925220895640257,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.008925220895640257,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.008925220895640257,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.005490471362258411,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.005490471362258411,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.005490471362258411,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.005490471362258411,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.004651649751228753,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.004651649751228753,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.004651649751228753,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.004651649751228753,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.002237027694668966,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.002237027694668966,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.002237027694668966,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.002237027694668966,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.0465701905312024,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.0465701905312024,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.0465701905312024,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.0465701905312024,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.025070480383649816,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.025070480383649816,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.025070480383649816,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.025070480383649816,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.02131977422997733,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.02131977422997733,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.02131977422997733,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.02131977422997733,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.02370147445671552,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.02370147445671552,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.02370147445671552,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.02370147445671552,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.027318679204281316,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.027318679204281316,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.027318679204281316,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.027318679204281316,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.02294998051411952,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.02294998051411952,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.02294998051411952,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.02294998051411952,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.04834968006056296,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.04834968006056296,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.04834968006056296,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.04834968006056296,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.0062732154924799955,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.0062732154924799955,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.0062732154924799955,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.0062732154924799955,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.00844436221794101,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.00844436221794101,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.00844436221794101,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.00844436221794101,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.009556206556799746,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.009556206556799746,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.009556206556799746,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.009556206556799746,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.011445294074244522,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.011445294074244522,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.011445294074244522,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.011445294074244522,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.009208724855509349,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.009208724855509349,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.009208724855509349,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.009208724855509349,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.10444225094452779,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.10444225094452779,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.10444225094452779,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.10444225094452779,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.020511387591568068,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.020511387591568068,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.020511387591568068,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.020511387591568068,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.008925220895640257,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.008925220895640257,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.008925220895640257,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.008925220895640257,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.005490471362258411,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.005490471362258411,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.005490471362258411,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.005490471362258411,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.004651649751228753,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.004651649751228753,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.004651649751228753,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.004651649751228753,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.002237027694668966,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.002237027694668966,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.002237027694668966,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.002237027694668966,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.0465701905312024,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.0465701905312024,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.0465701905312024,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.0465701905312024,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.025070480383649816,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.025070480383649816,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.025070480383649816,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.025070480383649816,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.02131977422997733,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.02131977422997733,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.02131977422997733,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.02131977422997733,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.02370147445671552,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.02370147445671552,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.02370147445671552,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.02370147445671552,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.027318679204281316,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.027318679204281316,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.027318679204281316,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.027318679204281316,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.02294998051411952,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.02294998051411952,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.02294998051411952,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.02294998051411952,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.04834968006056296,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.04834968006056296,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.04834968006056296,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.04834968006056296,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.0062732154924799955,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.0062732154924799955,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.0062732154924799955,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.0062732154924799955,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.00844436221794101,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.00844436221794101,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.00844436221794101,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.00844436221794101,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.009556206556799746,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.009556206556799746,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.009556206556799746,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.009556206556799746,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.011445294074244522,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.011445294074244522,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.011445294074244522,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.011445294074244522,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.009208724855509349,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.009208724855509349,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.009208724855509349,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.009208724855509349,"[0, 0, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.1737840810662321,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.1737840810662321,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.1737840810662321,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.1737840810662321,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.05515937646461678,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.05515937646461678,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.05515937646461678,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.05515937646461678,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.04636303555498538,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.04636303555498538,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.04636303555498538,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.04636303555498538,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.023050093281598922,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.023050093281598922,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.023050093281598922,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.023050093281598922,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.010984506911070877,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.010984506911070877,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.010984506911070877,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.010984506911070877,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.0034232781461545464,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.0034232781461545464,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.0034232781461545464,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.0034232781461545464,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.023437884870415916,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.023437884870415916,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.023437884870415916,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.023437884870415916,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.02536732285013242,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.02536732285013242,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.02536732285013242,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.02536732285013242,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.028431385513045564,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.028431385513045564,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.028431385513045564,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.028431385513045564,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.038378155308882576,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.038378155308882576,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.038378155308882576,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.038378155308882576,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.03277346471264795,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.03277346471264795,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.03277346471264795,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.03277346471264795,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.030075104693242947,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.030075104693242947,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.030075104693242947,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.030075104693242947,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.01965671851887587,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.01965671851887587,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.01965671851887587,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.01965671851887587,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.023599840838745115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.023599840838745115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.023599840838745115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.023599840838745115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.016464233417655197,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.016464233417655197,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.016464233417655197,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.016464233417655197,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.02076291504118331,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.02076291504118331,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.02076291504118331,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.02076291504118331,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.013284306580733115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.013284306580733115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.013284306580733115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.013284306580733115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.011385039352623385,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.011385039352623385,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.011385039352623385,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.011385039352623385,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.1737840810662321,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.1737840810662321,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.1737840810662321,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.1737840810662321,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.05515937646461678,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.05515937646461678,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.05515937646461678,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.05515937646461678,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.04636303555498538,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.04636303555498538,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.04636303555498538,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.04636303555498538,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.023050093281598922,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.023050093281598922,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.023050093281598922,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.023050093281598922,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.010984506911070877,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.010984506911070877,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.010984506911070877,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.010984506911070877,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.0034232781461545464,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.0034232781461545464,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.0034232781461545464,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.0034232781461545464,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.023437884870415916,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.023437884870415916,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.023437884870415916,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.023437884870415916,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.02536732285013242,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.02536732285013242,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.02536732285013242,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.02536732285013242,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.028431385513045564,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.028431385513045564,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.028431385513045564,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.028431385513045564,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.038378155308882576,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.038378155308882576,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.038378155308882576,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.038378155308882576,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.03277346471264795,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.03277346471264795,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.03277346471264795,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.03277346471264795,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.030075104693242947,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.030075104693242947,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.030075104693242947,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.030075104693242947,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.01965671851887587,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.01965671851887587,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.01965671851887587,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.01965671851887587,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.023599840838745115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.023599840838745115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.023599840838745115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.023599840838745115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.016464233417655197,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.016464233417655197,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.016464233417655197,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.016464233417655197,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.02076291504118331,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.02076291504118331,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.02076291504118331,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.02076291504118331,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.013284306580733115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.013284306580733115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.013284306580733115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.013284306580733115,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.011385039352623385,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.011385039352623385,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.011385039352623385,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.011385039352623385,"[0, 1, 1, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.06992903855182847,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.06992903855182847,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.06992903855182847,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.06992903855182847,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.06170326944258815,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.06170326944258815,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.06170326944258815,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.06170326944258815,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.03091869051088724,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.03091869051088724,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.03091869051088724,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.03091869051088724,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.012829599521289122,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.012829599521289122,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.012829599521289122,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.012829599521289122,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.01258278533044157,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.01258278533044157,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.01258278533044157,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.01258278533044157,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.00521868309164346,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.00521868309164346,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.00521868309164346,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.00521868309164346,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.0754244726187463,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.0754244726187463,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.0754244726187463,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.0754244726187463,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.015267155552338197,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.015267155552338197,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.015267155552338197,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.015267155552338197,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.023213113233336254,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.023213113233336254,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.023213113233336254,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.023213113233336254,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.023989828089796442,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.023989828089796442,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.023989828089796442,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.023989828089796442,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.025954433081772806,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.025954433081772806,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.025954433081772806,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.025954433081772806,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.02574129146300501,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.02574129146300501,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.02574129146300501,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.02574129146300501,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.07477678991531972,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.07477678991531972,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.07477678991531972,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.07477678991531972,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.028584100968711196,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.028584100968711196,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.028584100968711196,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.028584100968711196,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.02645257978353119,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.02645257978353119,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.02645257978353119,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.02645257978353119,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.021338981751575368,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.021338981751575368,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.021338981751575368,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.021338981751575368,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.025246774498517106,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.025246774498517106,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.025246774498517106,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.025246774498517106,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.018844525006667227,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.018844525006667227,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.018844525006667227,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.018844525006667227,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.06992903855182847,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.06992903855182847,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.06992903855182847,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.06992903855182847,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.06170326944258815,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.06170326944258815,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.06170326944258815,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.06170326944258815,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.03091869051088724,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.03091869051088724,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.03091869051088724,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.03091869051088724,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.012829599521289122,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.012829599521289122,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.012829599521289122,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.012829599521289122,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.01258278533044157,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.01258278533044157,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.01258278533044157,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.01258278533044157,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.00521868309164346,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.00521868309164346,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.00521868309164346,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.00521868309164346,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.0754244726187463,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.0754244726187463,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.0754244726187463,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.0754244726187463,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.015267155552338197,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.015267155552338197,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.015267155552338197,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.015267155552338197,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.023213113233336254,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.023213113233336254,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.023213113233336254,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.023213113233336254,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.023989828089796442,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.023989828089796442,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.023989828089796442,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.023989828089796442,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.025954433081772806,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.025954433081772806,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.025954433081772806,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.025954433081772806,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.02574129146300501,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.02574129146300501,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.02574129146300501,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.02574129146300501,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.07477678991531972,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.07477678991531972,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.07477678991531972,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.07477678991531972,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.028584100968711196,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.028584100968711196,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.028584100968711196,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.028584100968711196,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.02645257978353119,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.02645257978353119,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.02645257978353119,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.02645257978353119,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.021338981751575368,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.021338981751575368,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.021338981751575368,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.021338981751575368,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.025246774498517106,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.025246774498517106,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.025246774498517106,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.025246774498517106,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.018844525006667227,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.018844525006667227,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.018844525006667227,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.018844525006667227,"[1, 0, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.12574049422911127,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.12574049422911127,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.12574049422911127,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.12574049422911127,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.03594965182431983,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.03594965182431983,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.03594965182431983,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.03594965182431983,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.023121699430081438,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.023121699430081438,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.023121699430081438,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.023121699430081438,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.015596608985510749,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.015596608985510749,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.015596608985510749,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.015596608985510749,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.015848104339542667,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.015848104339542667,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.015848104339542667,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.015848104339542667,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.00541059011071405,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.00541059011071405,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.00541059011071405,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.00541059011071405,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.14785419251095208,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.14785419251095208,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.14785419251095208,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.14785419251095208,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.08375207424402725,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.08375207424402725,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.08375207424402725,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.08375207424402725,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.07349191327576181,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.07349191327576181,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.07349191327576181,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.07349191327576181,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.07148398656513014,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.07148398656513014,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.07148398656513014,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.07148398656513014,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.06843901091888173,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.06843901091888173,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.06843901091888173,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.06843901091888173,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.07244631925962469,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.07244631925962469,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.07244631925962469,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.07244631925962469,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.1367125004929669,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.1367125004929669,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.1367125004929669,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.1367125004929669,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.037014430401328,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.037014430401328,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.037014430401328,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.037014430401328,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.026636779340570026,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.026636779340570026,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.026636779340570026,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.026636779340570026,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.018824519737974388,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.018824519737974388,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.018824519737974388,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.018824519737974388,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.014544074061569118,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.014544074061569118,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.014544074061569118,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.014544074061569118,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.02275404634049905,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.02275404634049905,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.02275404634049905,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.02275404634049905,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.12574049422911127,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.12574049422911127,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,False,mae_bayes,0.12574049422911127,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,100,True,mae_bayes,0.12574049422911127,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.03594965182431983,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.03594965182431983,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,False,mae_bayes,0.03594965182431983,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,500,True,mae_bayes,0.03594965182431983,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.023121699430081438,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.023121699430081438,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,False,mae_bayes,0.023121699430081438,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,1000,True,mae_bayes,0.023121699430081438,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.015596608985510749,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.015596608985510749,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,False,mae_bayes,0.015596608985510749,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,5000,True,mae_bayes,0.015596608985510749,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.015848104339542667,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.015848104339542667,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,False,mae_bayes,0.015848104339542667,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,10000,True,mae_bayes,0.015848104339542667,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.00541059011071405,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.00541059011071405,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,False,mae_bayes,0.00541059011071405,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,PbP.Fixed,50000,True,mae_bayes,0.00541059011071405,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.14785419251095208,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.14785419251095208,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,False,mae_bayes,0.14785419251095208,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,100,True,mae_bayes,0.14785419251095208,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.08375207424402725,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.08375207424402725,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,False,mae_bayes,0.08375207424402725,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,500,True,mae_bayes,0.08375207424402725,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.07349191327576181,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.07349191327576181,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,False,mae_bayes,0.07349191327576181,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,1000,True,mae_bayes,0.07349191327576181,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.07148398656513014,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.07148398656513014,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,False,mae_bayes,0.07148398656513014,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,5000,True,mae_bayes,0.07148398656513014,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.06843901091888173,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.06843901091888173,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,False,mae_bayes,0.06843901091888173,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,10000,True,mae_bayes,0.06843901091888173,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.07244631925962469,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.07244631925962469,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,False,mae_bayes,0.07244631925962469,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP,50000,True,mae_bayes,0.07244631925962469,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.1367125004929669,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.1367125004929669,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,False,mae_bayes,0.1367125004929669,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,100,True,mae_bayes,0.1367125004929669,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.037014430401328,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.037014430401328,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,False,mae_bayes,0.037014430401328,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,500,True,mae_bayes,0.037014430401328,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.026636779340570026,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.026636779340570026,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,False,mae_bayes,0.026636779340570026,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,1000,True,mae_bayes,0.026636779340570026,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.018824519737974388,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.018824519737974388,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,False,mae_bayes,0.018824519737974388,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,5000,True,mae_bayes,0.018824519737974388,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.014544074061569118,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.014544074061569118,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,False,mae_bayes,0.014544074061569118,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,10000,True,mae_bayes,0.014544074061569118,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.02275404634049905,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.02275404634049905,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,False,mae_bayes,0.02275404634049905,"[1, 1, 0, 0]"
+SimG3,SimG3_rep0_n265000_d4_corrMIXTURE_NA25,Mean.IMP.M,50000,True,mae_bayes,0.02275404634049905,"[1, 1, 0, 0]"
