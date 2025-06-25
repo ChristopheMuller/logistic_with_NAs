@@ -115,7 +115,6 @@ create_method_object <- function(key) {
     "05.IMP.M" = ConstantImputationLogisticRegression$new(name="05.IMP.M", fill_value=0.5, mask=TRUE),
 
     "PbP" = RegLogPatByPat$new(name="PbP"),
-    "PbP.Fixed" = RegLogPatByPatFixed$new(name="PbP.Fixed"),
     "PbP.MinObs" = RegLogPatByPatMinObservation$new(name="PbP.MinObs"),
     
     "CC" = CompleteCase$new(name="CC"),
