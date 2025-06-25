@@ -11,50 +11,22 @@ env.sif
 data/*
 output
 
-!data/SimA/
-!data/SimA/*
-data/SimA/*/
+!data/SimMCAR/
+!data/SimMCAR/*
+data/SimMCAR/*/
 
-!data/SimB/
-!data/SimB/*
-data/SimB/*/
+!data/SimMAR/
+!data/SimMAR/*
+data/SimMAR/*/
 
-!data/SimC/
-!data/SimC/*
-data/SimC/*/
+!data/SimMNAR/
+!data/SimMNAR/*
+data/SimMNAR/*/
 
-!data/SimD/
-!data/SimD/*
-data/SimD/*/
+!data/SimMNARBIG/
+!data/SimMNARBIG/*
+data/SimMNARBIG/*/
 
-!data/SimE/
-!data/SimE/*
-data/SimE/*/
-
-!data/SimF/
-!data/SimF/*
-data/SimF/*/
-
-!data/SimF2/
-!data/SimF2/*
-data/SimF2/*/
-
-!data/SimF3/
-!data/SimF3/*
-data/SimF3/*/
-
-!data/SimF4/
-!data/SimF4/*
-data/SimF4/*/
-
-!data/SimG/
-!data/SimG/*
-data/SimG/*/
-
-!data/SimG2/
-!data/SimG2/*
-data/SimG2/*/
-
-!data/SimG3/
-!data/SimG3/*
-data/SimG3/*/
+!data/SimNL/
+!data/SimNL/*
+data/SimNL/*/
