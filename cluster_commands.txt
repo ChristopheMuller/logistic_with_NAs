@@ -1,0 +1,56 @@
+
+
+ssh -i ~/.ssh/chmuller chmuller@nef-frontal.inria.fr
+ssh chmuller@nef-devel.inria.fr
+
+
+oarsub -l nodes=1/core=8,walltime=24:00:00 -n logExpB --stdout output/Out_ExpB.txt --stderr output/Err_ExpB.txt "apptainer exec env.sif Rscript 3_train_methods_in_R.R"
+
+oarsub -l nodes=1/core=8,walltime=48:00:00 -n logExpD --stdout output/ExpD_out.txt --stderr output/ExpD_err.txt --notify mail:christophe.muller@inria.fr "apptainer exec env.sif Rscript 3_train_methods_in_R.R && apptainer exec env.sif python3 3_train_methods.py"
+oarsub -l nodes=1/core=8,walltime=48:00:00 -n logSimA -q production --project premedical --stdout output/SimA.txt --stderr output/SimA_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R && apptainer exec env.sif python3 3_train_methods.py && apptainer exec env.sif python3 4_adjust_results.py && apptainer exec env.sif python3 5_param_estimation_scores.py && apptainer exec env.sif python3 6A_build_score_matrix.py && apptainer exec env.sif Rscript 6B_build_calibration_score.R"
+
+In windows terminal: Rscript.exe .\3_train_methods_in_R.R .\configs\config_test.txt
+In linex terminal (not job): Rscript 3_train_methods_in_R.R configs/config_SimA_01.txt
+                            + python3 4_adjust_results.py
+                            + python3 5_param_estimation_scores.py
+                            + python3 6A_build_score_matrix.py
+                            + Rscript 6B_build_calibration_score.R
+In linux terminal (job): 
+    oarsub -l nodes=1/core=8,walltime=48:00:00 -n SimA -q production --project premedical --stdout output/SimA_config02.txt --stderr output/SimA_config02_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimA_02.txt && apptainer exec env.sif python3 4_adjust_results.py && apptainer exec env.sif python3 5_param_estimation_scores.py && apptainer exec env.sif python3 6A_build_score_matrix.py && apptainer exec env.sif Rscript 6B_build_calibration_score.R"
+
+    or 
+    oarsub -l walltime=48:00:00 -n SimB -q production --project premedical --stdout output/SimB_config02.txt --stderr output/SimB_config02_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimB_02.txt"
+
+oarsub -l walltime=3:00:00 -n SimF4_01 -q production --project premedical --stdout output/SimF4_config01.txt --stderr output/SimF4_config01_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_01.txt"
+oarsub -l walltime=3:00:00 -n SimF4_02 -q production --project premedical --stdout output/SimF4_config02.txt --stderr output/SimF4_config02_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_02.txt"
+oarsub -l walltime=3:00:00 -n SimF4_03 -q production --project premedical --stdout output/SimF4_config03.txt --stderr output/SimF4_config03_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_03.txt"
+oarsub -l walltime=3:00:00 -n SimF4_04 -q production --project premedical --stdout output/SimF4_config04.txt --stderr output/SimF4_config04_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_04.txt"
+oarsub -l walltime=3:00:00 -n SimF4_05 -q production --project premedical --stdout output/SimF4_config05.txt --stderr output/SimF4_config05_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_05.txt"
+oarsub -l walltime=3:00:00 -n SimF4_06 -q production --project premedical --stdout output/SimF4_config06.txt --stderr output/SimF4_config06_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_06.txt"
+oarsub -l walltime=3:00:00 -n SimF4_07 -q production --project premedical --stdout output/SimF4_config07.txt --stderr output/SimF4_config07_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_07.txt"
+oarsub -l walltime=3:00:00 -n SimF4_08 -q production --project premedical --stdout output/SimF4_config08.txt --stderr output/SimF4_config08_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_08.txt"
+oarsub -l walltime=3:00:00 -n SimF4_09 -q production --project premedical --stdout output/SimF4_config09.txt --stderr output/SimF4_config09_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_09.txt"
+oarsub -l walltime=3:00:00 -n SimF4_10 -q production --project premedical --stdout output/SimF4_config10.txt --stderr output/SimF4_config10_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_10.txt"
+oarsub -l walltime=3:00:00 -n SimF4_11 -q production --project premedical --stdout output/SimF4_config11.txt --stderr output/SimF4_config11_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_11.txt"
+oarsub -l walltime=3:00:00 -n SimF4_12 -q production --project premedical --stdout output/SimF4_config12.txt --stderr output/SimF4_config12_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_12.txt"
+oarsub -l walltime=3:00:00 -n SimF4_13 -q production --project premedical --stdout output/SimF4_config13.txt --stderr output/SimF4_config13_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_13.txt"
+oarsub -l walltime=3:00:00 -n SimF4_14 -q production --project premedical --stdout output/SimF4_config14.txt --stderr output/SimF4_config14_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_14.txt"
+oarsub -l walltime=3:00:00 -n SimF4_15 -q production --project premedical --stdout output/SimF4_config15.txt --stderr output/SimF4_config15_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_15.txt"
+oarsub -l walltime=3:00:00 -n SimF4_16 -q production --project premedical --stdout output/SimF4_config16.txt --stderr output/SimF4_config16_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_16.txt"
+oarsub -l walltime=3:00:00 -n SimF4_17 -q production --project premedical --stdout output/SimF4_config17.txt --stderr output/SimF4_config17_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_17.txt"
+oarsub -l walltime=3:00:00 -n SimF4_18 -q production --project premedical --stdout output/SimF4_config18.txt --stderr output/SimF4_config18_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_18.txt"
+oarsub -l walltime=3:00:00 -n SimF4_19 -q production --project premedical --stdout output/SimF4_config19.txt --stderr output/SimF4_config19_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/config_SimF4_19.txt"
+
+
+19/06: karma = 0.108
+20/06: karma = 0.116
+
+
+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
+
+
+
+
+scp -i C:\Users\Chris\.ssh\chmuller -r .\data\ExpD\ chmuller@nef-frontal.inria.fr:/home/chmuller/
+
+scp -r -i C:\Users\Chris\.ssh\chmuller chmuller@nef-frontal.inria.fr:/home/chmuller/logistic_with_NAs/data/ExpD/  .

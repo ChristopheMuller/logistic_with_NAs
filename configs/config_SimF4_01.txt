@@ -1,0 +1,3 @@
+sim=SimF4
+methods=PbP.Fixed,Mean.IMP.M,Mean.IMP
+training=100,500,1000,5000,10000,50000

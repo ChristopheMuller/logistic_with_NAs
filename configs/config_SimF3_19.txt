@@ -1,0 +1,3 @@
+sim=SimF3
+methods=MICE.100.M.IMP.M
+training=50000
