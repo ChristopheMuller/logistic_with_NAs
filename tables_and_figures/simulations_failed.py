@@ -1,4 +1,6 @@
-
+###
+# Investigate if / how many simulations failed
+###
 
 # %%
 
@@ -12,7 +14,7 @@ if os.getcwd().endswith("plots_scripts"):
 import numpy as np
 import pandas as pd
 
-exp = "SimD"
+exp = "SimMCAR"
 
 simulation_df = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 

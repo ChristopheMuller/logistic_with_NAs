@@ -5,7 +5,7 @@ import time
 
 from methods import *
 
-exp = "SimulationB"
+exp = "SimMCAR"
 
 
 methods_list = [

@@ -1,6 +1,6 @@
 #####
 #
-# Plot results per pattern (1 metrics), Simulation A
+# Plot results per pattern (1 metrics)
 #
 #####
 
@@ -21,7 +21,7 @@ from setups_design import metrics_config, methods_config
 
 # %% set up
 
-exp = "SimG3"
+exp = "SimMCAR"
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 

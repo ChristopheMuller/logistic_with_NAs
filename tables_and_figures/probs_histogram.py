@@ -12,7 +12,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
 
-exp = "SimulationA"
+exp = "SimMCAR"
 
 setup_df = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
 

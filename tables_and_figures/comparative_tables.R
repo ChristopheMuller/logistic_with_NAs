@@ -176,7 +176,7 @@ generate_latex_from_df <- function(formatted_df, metric_name) {
 }
 
 generate_metric_table <- function(metric_name, bayes.diff=TRUE, multiplier=1) {
-  Sims <- c("SimA", "SimE", "SimG", "SimC")
+  Sims <- c("SimMCAR", "SimMAR", "SimMNAR", "SimNL")
   Sims.names <- c("MCAR (gaussian)", "GPMM-MAR", "GPMM-MNAR", "MCAR (non-linear)")
   train.sizes <- c(100, 50000)
   

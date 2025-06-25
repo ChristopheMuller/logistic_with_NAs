@@ -3,7 +3,7 @@ library(dplyr)
 library(tidyr)
 library(tools)
 
-exp <- "SimA"
+exp <- "SimMCAR"
 n_train_selected <- c(100,500,1000,5000,10000,50000)
 methods_selected <- NULL # This remains unchanged as per previous instruction
 

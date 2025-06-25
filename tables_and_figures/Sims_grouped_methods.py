@@ -1,3 +1,7 @@
+###
+# Plot grid of results per simulation
+###
+
 #%%  if current working directory is "/plots_scripts", change it to the parent directory
 import os
 if os.getcwd().endswith("plots_scripts"):
@@ -16,7 +20,7 @@ from utils import calculate_ymin_for_R_proportion
 
 # %% set up
 
-exp = "SimG"
+exp = "SimMCAR"
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 
