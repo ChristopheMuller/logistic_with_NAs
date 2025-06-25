@@ -1,12 +1,10 @@
-
-####
-# SimB: BUG IN SIMULATION: M Should be constrained!
-# Was: GPMM, MAR, d = 5
-# Fixed in SimD
-####
+### 
+# SimNL: Non-linear, MCAR, 5 dim
+###
 # %%
 
 import numpy as np
+import matplotlib.pyplot as plt
 import pandas as pd
 import random
 import os
@@ -14,7 +12,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimB"
+experiment_name = "SimNL"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:
@@ -38,88 +36,13 @@ n_replicates = 10
 
 _prop_NA = 0.25
 _d = 5
-_corr_miss = 0.65
-_var_miss = 1.
-_max_var_obs = 1.
-_mu_miss = 0.0
-_var_mu_obs = 0.5
-_n_obs = 2
+_corr = 0.95
 
 n_train = 100_000
 n_test = 15_000
 n = n_train + n_test
 
 N_MC = 10_000
-
-
-# %%
-
-all_mus = {}
-all_corrs = {}
-all_vars = {}
-for i in range(2**_d):
-
-    pattern = np.array([int(x) for x in np.binary_repr(i, width=_d)])
-
-    corr_obs = np.random.uniform(-1,1)
-    var_obs = np.random.uniform(0, _max_var_obs)
-    mu_obs = np.random.normal(0, np.sqrt(_var_mu_obs), _n_obs)
-
-    all_mus[tuple(pattern)] = mu_obs
-    all_corrs[tuple(pattern)] = corr_obs
-    all_vars[tuple(pattern)] = var_obs
-
-all_mus_df = pd.DataFrame(all_mus).T
-all_mus_df.columns = [f"mu_{i}" for i in range(_n_obs)]
-all_mus_df["pattern"] = all_mus_df.index
-all_mus_df.to_csv(os.path.join(experiment_data_folder, "all_mus.csv"), index=False)
-
-all_corrs_df = pd.Series(all_corrs)
-index = all_corrs_df.index
-all_corrs_df = pd.DataFrame(all_corrs_df).reset_index(drop=True)
-all_corrs_df["pattern"] = index
-all_corrs_df.columns = ["corr", "pattern"]
-all_corrs_df.to_csv(os.path.join(experiment_data_folder, "all_corrs.csv"), index=False)
-
-all_vars_df = pd.Series(all_vars)
-index = all_vars_df.index
-all_vars_df = pd.DataFrame(all_vars_df).reset_index(drop=True)
-all_vars_df["pattern"] = index
-all_vars_df.columns = ["var", "pattern"]
-all_vars_df.to_csv(os.path.join(experiment_data_folder, "all_vars.csv"), index=False)
-
-
-def generate_full_mu(d, mu_miss, mu_obs):
-
-    full_mu = np.zeros(d)
-    n_obs = mu_obs.shape[0]
-    full_mu[:n_obs] = mu_obs
-    full_mu[n_obs:] = mu_miss
-
-    return full_mu
-
-def generate_full_cov(d, n_obs, corr_miss, var_miss, corr_obs, var_obs):
-
-    full_cov = np.zeros((d, d))
-
-    # upper left corner = toep matrix with corr_obs    
-    full_cov[:n_obs, :n_obs] = toep(n_obs, corr_obs) * var_obs
-
-    # lower right corner = toeplitz matrix with corr_miss
-    full_cov[n_obs:, n_obs:] = toep(d - n_obs, corr_miss) * var_miss
-
-    # cross terms = 0
-    full_cov[:n_obs, n_obs:] = 0
-    full_cov[n_obs:, :n_obs] = 0
-
-    return full_cov
-
-
-# E.g.
-# print(generate_full_cov(_d, _n_obs, corr_miss=_corr_miss, var_miss=_var_miss, 
-#                         corr_obs=all_corrs[tuple(np.ones(_d))], var_obs=all_vars[tuple(np.ones(_d))]))
-
-# print(generate_full_mu(_d, _mu_miss, all_mus[tuple(np.ones(_d))]))
 
 # %%
 
@@ -138,7 +61,7 @@ def toep_matrix(d, corr):
     """
     return np.array([[corr**abs(i-j) for j in range(d)] for i in range(d)])
 
-def generate_X(n, d, corr, mu=None):
+def generate_Z(n, d, corr, mu=None):
     """
     Generate a design matrix X with n rows and d columns, with a correlation of corr.
     """
@@ -167,10 +90,82 @@ def generate_M(n, d, prc):
 
     return M
 
+def transform_X_to_Z(X):
+    """
+    Transforms Z back to X based on the inverse operations.
+    Handles potential issues with domains of operations (log, sqrt, fractional powers)
+    and ensures correct sign recovery, accounting for shifts introduced in transform_X_to_Z.
+    """
+    Z = np.zeros_like(X, dtype=float) # Ensure output is float and matches Z's shape
+
+    Z[:,0] = X[:,0]
+    Z[:,1] = X[:,1]
+    
+    # Inverse for Z[:,2] = np.exp(X[:,2]) - 1.67
+    Z[:,2] = np.log(X[:,2] + 1.67)
+
+    Z[:,3] = np.sign(X[:,3]) * np.power(np.abs(X[:,3]), 1/3)
+
+    # Inverse for Z[:,4] = np.where(...) + 2
+    X_prime_col4 = X[:,4] - 2
+
+    mask_X4_positive = X_prime_col4 > 0
+    mask_X4_zero = X_prime_col4 == 0
+    mask_X4_negative = X_prime_col4 < 0
+
+    # If X_prime_col4 > 0, then X[:,4] was >= 0. Inverse: X[:,4] = sqrt(Z_prime_col4)
+    Z[mask_X4_positive, 4] = np.sqrt(X_prime_col4[mask_X4_positive])
+    
+    # If X_prime_col4 == 0, then Z[:,4] was 0. Inverse: X[:,4] = 0.0
+    Z[mask_X4_zero, 4] = 0.0
+    
+    # If X_prime_col4 < 0, then X[:,4] was < 0. Inverse: X[:,4] = log(-Z_prime_col4 / 10)
+    Z[mask_X4_negative, 4] = np.log(-X_prime_col4[mask_X4_negative] / 10)
+
+    return Z
+
+def transform_Z_to_X(Z):
+    """
+    Transforms X to Z based on the specified piecewise and power transformations.
+    (This function is provided by the user and is the 'target' for inversion).
+    """
+    X = np.zeros_like(Z, dtype=float)
+
+    X[:, 0] = Z[:,0]
+    X[:, 1] = Z[:,1]
+    
+    X[:, 2] = np.exp(Z[:,2]) - 1.67 # Added constant
+    
+    X[:, 3] = np.power(Z[:,3], 3)
+    
+    X[:, 4] = np.where(Z[:,4] >= 0, Z[:,4]**2, -10*np.exp(Z[:,4])) + 2 # Added constant
+
+    return X
+
+
+def get_y_prob_bayes(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
+
+    M = np.isnan(X_m)
+    unique_patterns = np.unique(M, axis=0)
+    
+    prob_y_all = np.zeros((X_m.shape[0], n_mc))
+    
+    for pattern in unique_patterns:
+
+        pattern_indices = np.all(M == pattern, axis=1)
+        X_m_subset = X_m[pattern_indices]
+        
+        prob_y_subset = get_y_prob_bayes_same_pattern(X_m_subset, full_mu, full_cov, true_beta, n_mc, intercept)
+        
+        prob_y_all[pattern_indices] = prob_y_subset
+    
+    return prob_y_all
 
 def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000, intercept=0):
 
     m = np.isnan(X_m[0])
+
+    Z_m = transform_X_to_Z(X_m)
     
     observed_idx = ~m
     missing_idx = m
@@ -187,29 +182,29 @@ def get_y_prob_bayes_same_pattern(X_m, full_mu, full_cov, true_beta, n_mc=1000, 
     cond_cov = cov_mis - cross_cov.T @ cov_obs_inv @ cross_cov
 
     prob_y_all = []
-    X_mc_all = []
 
-    for x_obs in X_m:
-        x_obs_obs = x_obs[observed_idx]
-
-        cond_mu = mu_mis + cross_cov.T @ cov_obs_inv @ (x_obs_obs - mu_obs)
+    for z_m in Z_m:
+        z_m_obs = z_m[observed_idx]
+        cond_mu = mu_mis + cross_cov.T @ cov_obs_inv @ (z_m_obs - mu_obs)
 
         if len(cond_mu) == 0:
-            X_mc = np.zeros((n_mc, 0))
+            Z_mc = np.zeros((n_mc, 0))
         else:
-            X_mc = np.random.multivariate_normal(cond_mu, cond_cov, size=n_mc)
+            Z_mc = np.random.multivariate_normal(cond_mu, cond_cov, size=n_mc)
 
-        X_full_mc = np.tile(x_obs, (n_mc, 1))
-        X_full_mc[:, missing_idx] = X_mc
+        Z_full_mc = np.tile(z_m, (n_mc, 1))
+        Z_full_mc[:, missing_idx] = Z_mc
+
+        X_full_mc = transform_Z_to_X(Z_full_mc)
 
         logits_mc = X_full_mc @ true_beta + intercept
         prob_y_mc = sigma(logits_mc)
 
         prob_y_all.append(prob_y_mc)
-        X_mc_all.append(X_mc)
 
     return np.array(prob_y_all)
 
+# %% 
 
 set_up_df = pd.DataFrame({
     "sim": [],
@@ -219,7 +214,6 @@ set_up_df = pd.DataFrame({
     "corr": [],
     "prop_NA": [],
     "true_beta": [],
-    "true_intercept":[],
     "center_X": [],
     "set_up": []
 })
@@ -229,46 +223,32 @@ for i in range(n_replicates):
 
     print(f"Set up {i+1}/{n_replicates}")
 
-    # Generate M
-    M = generate_M(n, _d, _prop_NA)
-
-    # generate X: mu and corr based on the pattern of M
-    X = np.zeros_like(M, dtype=float)
-    unique_patterns = np.unique(M, axis=0)
-    total_pats = 0
-    for pat in unique_patterns:
-
-        rows_with_pat = np.all(M == pat, axis=1)
-        cov_pat = generate_full_cov(_d, _n_obs, _corr_miss, _var_miss,
-                                   all_corrs[tuple(pat)], all_vars[tuple(pat)])
-        mu_pat = generate_full_mu(_d, _mu_miss, all_mus[tuple(pat)])
-        X_temp = np.random.multivariate_normal(mu_pat, cov_pat, size=np.sum(rows_with_pat))
-
-        X[rows_with_pat] = X_temp
-
-        total_pats += np.sum(rows_with_pat)
-
-    assert total_pats == n, "The number of rows with the same pattern does not match the total number of rows."  
+    # generate X, Z
+    Z = generate_Z(n, _d, _corr)
+    X = transform_Z_to_X(Z)
 
     # generate y
     y_logits = np.dot(X, beta0)
     y_probs = 1 / (1 + np.exp(-y_logits))
     y = np.random.binomial(1, y_probs)
 
-    # Mask X
+    # generate M
+    M = generate_M(n, _d, _prop_NA)
+    Z_obs = Z.copy()
+    Z_obs[M == 1] = np.nan
     X_obs = X.copy()
     X_obs[M == 1] = np.nan
+
     # create the params
     sim = experiment_name
     rep = i
     n = n_test + n_train
     d = _d
-    corr = "MIXTURE"
+    corr = np.round(_corr*100,0).astype(int)
     prop_NA = np.round(_prop_NA*100,0).astype(int)
     beta0 = beta0
     mu0 = np.zeros(_d)
     set_up = f"{sim}_rep{rep}_n{n}_d{d}_corr{corr}_NA{prop_NA}"
-
 
     # save the data
     new_row = pd.DataFrame({
@@ -279,7 +259,6 @@ for i in range(n_replicates):
         "corr": [corr],
         "prop_NA": [prop_NA],
         "true_beta": [beta0],
-        "true_intercept": [0.0],
         "center_X": [mu0],
         "set_up": [set_up]
     })
@@ -305,27 +284,8 @@ for i in range(n_replicates):
     np.savez(os.path.join(experiment_data_folder, "test_data", f"{set_up}.npz"), **data_to_save)
 
     # save bayes data
-    y_probs_bayes = np.zeros(n_test)
-    total_pats = 0
-    for pat in unique_patterns:
-        rows_with_pat = np.all(M[n_train:] == pat, axis=1)
-        cov_pat = generate_full_cov(_d, _n_obs, _corr_miss, _var_miss,
-                                   all_corrs[tuple(pat)], all_vars[tuple(pat)])
-        mu_pat = generate_full_mu(_d, _mu_miss, all_mus[tuple(pat)])
-
-        total_pats += np.sum(rows_with_pat)
-
-        y_probs_bayes_pat = get_y_prob_bayes_same_pattern(
-            X_obs[n_train:][rows_with_pat],
-            mu_pat,
-            cov_pat,
-            beta0,
-            n_mc=N_MC
-        )
-
-        y_probs_bayes[rows_with_pat] = np.mean(y_probs_bayes_pat, axis=1)
-
-    assert total_pats == n_test, "The number of rows with the same pattern does not match the number of test rows."
+    y_probs_bayes = get_y_prob_bayes(X_obs[n_train:], np.zeros(_d), toep_matrix(_d, _corr), beta0, N_MC)
+    y_probs_bayes = np.mean(y_probs_bayes, axis=1)
 
     data_to_save = {
         "y_probs_bayes": y_probs_bayes
@@ -335,7 +295,6 @@ for i in range(n_replicates):
 
 # save the set up
 set_up_df.to_csv(os.path.join(experiment_data_folder, "set_up.csv"), index=False)
-
 
 
 # %%

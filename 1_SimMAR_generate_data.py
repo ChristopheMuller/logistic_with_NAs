@@ -1,6 +1,5 @@
 ###
-# SimG: GPMM, MNAR, 5 dim: specifically to train and compare PbP and Mean.IMP(.M)
-# Correction from SimD
+# SimMAR: GPMM, MAR, dim 5
 ###
 # %%
 
@@ -12,7 +11,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimG2"
+experiment_name = "SimMAR"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:
@@ -32,19 +31,101 @@ if os.path.exists(os.path.join(experiment_data_folder, "bayes_data")) == False:
 
 # %%
 
-n_replicates = 1
+n_replicates = 10
 
 _prop_NA = 0.25
-_d = 4
-_max_var = 1.
-_var_mu = 0.5
+_d = 5
+_corr_miss = 0.65
+_var_miss = 1.
+_max_var_obs = 1.
+_mu_miss = 0.0
+_var_mu_obs = 0.5
+_n_obs = 2
 
-n_train = 250_000
+n_train = 100_000
 n_test = 15_000
 n = n_train + n_test
 
 N_MC = 10_000
 
+
+# %%
+
+all_mus = {}
+all_corrs = {}
+all_vars = {}
+for i in range(2**_d):
+
+    pattern = np.array([int(x) for x in np.binary_repr(i, width=_d)])
+
+    corr_obs = np.random.uniform(-1,1)
+    var_obs = np.random.uniform(0, _max_var_obs)
+    mu_obs = np.random.normal(0, np.sqrt(_var_mu_obs), _n_obs)
+
+    all_mus[tuple(pattern)] = mu_obs
+    all_corrs[tuple(pattern)] = corr_obs
+    all_vars[tuple(pattern)] = var_obs
+
+all_mus_df = pd.DataFrame(all_mus).T
+all_mus_df.columns = [f"mu_{i}" for i in range(_n_obs)]
+all_mus_df["pattern"] = all_mus_df.index
+all_mus_df.to_csv(os.path.join(experiment_data_folder, "all_mus.csv"), index=False)
+
+all_corrs_df = pd.Series(all_corrs)
+index = all_corrs_df.index
+all_corrs_df = pd.DataFrame(all_corrs_df).reset_index(drop=True)
+all_corrs_df["pattern"] = index
+all_corrs_df.columns = ["corr", "pattern"]
+all_corrs_df.to_csv(os.path.join(experiment_data_folder, "all_corrs.csv"), index=False)
+
+all_vars_df = pd.Series(all_vars)
+index = all_vars_df.index
+all_vars_df = pd.DataFrame(all_vars_df).reset_index(drop=True)
+all_vars_df["pattern"] = index
+all_vars_df.columns = ["var", "pattern"]
+all_vars_df.to_csv(os.path.join(experiment_data_folder, "all_vars.csv"), index=False)
+
+
+def generate_full_mu(d, mu_miss, mu_obs):
+
+    full_mu = np.zeros(d)
+    n_obs = mu_obs.shape[0]
+    full_mu[:n_obs] = mu_obs
+    full_mu[n_obs:] = mu_miss
+
+    return full_mu
+
+def generate_full_cov(d, n_obs, corr_miss, var_miss, corr_obs, var_obs):
+
+    full_cov = np.zeros((d, d))
+
+    # upper left corner = toep matrix with corr_obs    
+    full_cov[:n_obs, :n_obs] = toep(n_obs, corr_obs) * var_obs
+
+    # lower right corner = toeplitz matrix with corr_miss
+    full_cov[n_obs:, n_obs:] = toep(d - n_obs, corr_miss) * var_miss
+
+    # cross terms = 0
+    full_cov[:n_obs, n_obs:] = 0
+    full_cov[n_obs:, :n_obs] = 0
+
+    return full_cov
+
+
+# E.g.
+# print(generate_full_cov(_d, _n_obs, corr_miss=_corr_miss, var_miss=_var_miss, 
+#                         corr_obs=all_corrs[tuple(np.ones(_d))], var_obs=all_vars[tuple(np.ones(_d))]))
+
+# print(generate_full_mu(_d, _mu_miss, all_mus[tuple(np.ones(_d))]))
+
+# %%
+
+np.random.seed(1)
+random.seed(1)
+
+beta0 = np.random.normal(0, 1.0, _d)
+
+print("beta0", beta0)
 
 # %%
 
@@ -68,12 +149,15 @@ def generate_X(n, d, corr, mu=None):
     
     return X
 
-def generate_M(n, d, prc):
+def generate_M(n, d, prc, forbid_full_missing=True):
     """
     Generate a missing data matrix M with n rows and d columns, with a proportion of missing data prop_NA.
     It guarantees no row with all missing data.
     """
     M = np.random.binomial(n=1, p=prc, size=(n, d))
+
+    if not forbid_full_missing:
+        return M
 
     all_ones = np.all(M == 1, axis=1)
 
@@ -134,61 +218,11 @@ set_up_df = pd.DataFrame({
     "d": [],
     "corr": [],
     "prop_NA": [],
+    "true_beta": [],
+    "true_intercept":[],
     "center_X": [],
     "set_up": []
 })
-
-# %%
-
-np.random.seed(1)
-random.seed(1)
-
-beta0 = np.random.normal(0, 1, _d)
-
-print("beta0", beta0)
-
-all_mus = {}
-all_corrs = {}
-all_vars = {}
-for i in range(2**_d):
-
-    pattern = np.array([int(x) for x in np.binary_repr(i, width=_d)])
-
-    mu_pattern = np.random.normal(0, np.sqrt(_var_mu), _d)
-    corr_pattern = np.random.uniform(-1, 1)
-    var_pattern = np.random.uniform(0, _max_var)
-
-    print("Pattern:", pattern)
-    print("\tMu:", np.round(mu_pattern,2))
-    print("\tCorr:", np.round(corr_pattern, 2))
-    print("\tVar:", np.round(var_pattern, 2))
-    
-    all_mus[tuple(pattern)] = mu_pattern
-    all_corrs[tuple(pattern)] = corr_pattern
-    all_vars[tuple(pattern)] = var_pattern
-    
-
-# save the Mus and Corrs
-all_mus_df = pd.DataFrame(all_mus).T
-all_mus_df.columns = [f"mu_{i}" for i in range(_d)]
-all_mus_df["pattern"] = all_mus_df.index
-all_mus_df.to_csv(os.path.join(experiment_data_folder, "all_mus.csv"), index=False)
-
-all_corrs_df = pd.Series(all_corrs)
-index = all_corrs_df.index
-all_corrs_df = pd.DataFrame(all_corrs_df).reset_index(drop=True)
-all_corrs_df["pattern"] = index
-all_corrs_df.columns = ["corr", "pattern"]
-all_corrs_df.to_csv(os.path.join(experiment_data_folder, "all_corrs.csv"), index=False)
-
-all_vars_df = pd.Series(all_vars)
-index = all_vars_df.index
-all_vars_df = pd.DataFrame(all_vars_df).reset_index(drop=True)
-all_vars_df["pattern"] = index
-all_vars_df.columns = ["var", "pattern"]
-all_vars_df.to_csv(os.path.join(experiment_data_folder, "all_vars.csv"), index=False)
-
-# %%
 
 
 for i in range(n_replicates):
@@ -196,7 +230,9 @@ for i in range(n_replicates):
     print(f"Set up {i+1}/{n_replicates}")
 
     # Generate M
-    M = generate_M(n, _d, _prop_NA)
+    M_mis = generate_M(n, _d- _n_obs, _prop_NA, forbid_full_missing=False)
+    M_obs = np.zeros((n, _n_obs), dtype=int)
+    M = np.hstack((M_obs, M_mis))
 
     # generate X: mu and corr based on the pattern of M
     X = np.zeros_like(M, dtype=float)
@@ -205,10 +241,9 @@ for i in range(n_replicates):
     for pat in unique_patterns:
 
         rows_with_pat = np.all(M == pat, axis=1)
-        mu_pat = all_mus[tuple(pat)]
-        corr_pat = all_corrs[tuple(pat)]
-        var_pat = all_vars[tuple(pat)]
-        cov_pat = toep_matrix(_d, corr_pat) * var_pat
+        cov_pat = generate_full_cov(_d, _n_obs, _corr_miss, _var_miss,
+                                   all_corrs[tuple(pat)], all_vars[tuple(pat)])
+        mu_pat = generate_full_mu(_d, _mu_miss, all_mus[tuple(pat)])
         X_temp = np.random.multivariate_normal(mu_pat, cov_pat, size=np.sum(rows_with_pat))
 
         X[rows_with_pat] = X_temp
@@ -225,7 +260,6 @@ for i in range(n_replicates):
     # Mask X
     X_obs = X.copy()
     X_obs[M == 1] = np.nan
-
     # create the params
     sim = experiment_name
     rep = i
@@ -237,6 +271,7 @@ for i in range(n_replicates):
     mu0 = np.zeros(_d)
     set_up = f"{sim}_rep{rep}_n{n}_d{d}_corr{corr}_NA{prop_NA}"
 
+
     # save the data
     new_row = pd.DataFrame({
         "sim": [sim],
@@ -246,6 +281,7 @@ for i in range(n_replicates):
         "corr": [corr],
         "prop_NA": [prop_NA],
         "true_beta": [beta0],
+        "true_intercept": [0.0],
         "center_X": [mu0],
         "set_up": [set_up]
     })
@@ -275,9 +311,9 @@ for i in range(n_replicates):
     total_pats = 0
     for pat in unique_patterns:
         rows_with_pat = np.all(M[n_train:] == pat, axis=1)
-        mu_pat = all_mus[tuple(pat)]
-        corr_pat = all_corrs[tuple(pat)]
-        cov_pat = toep_matrix(_d, corr_pat) * all_vars[tuple(pat)]
+        cov_pat = generate_full_cov(_d, _n_obs, _corr_miss, _var_miss,
+                                   all_corrs[tuple(pat)], all_vars[tuple(pat)])
+        mu_pat = generate_full_mu(_d, _mu_miss, all_mus[tuple(pat)])
 
         total_pats += np.sum(rows_with_pat)
 
@@ -303,137 +339,5 @@ for i in range(n_replicates):
 set_up_df.to_csv(os.path.join(experiment_data_folder, "set_up.csv"), index=False)
 
 
-# %%
-
-experiment_name = "SimG3"
-experiment_data_folder = os.path.join("data", experiment_name)
-
-if os.path.exists(experiment_data_folder) == False:
-    os.makedirs(experiment_data_folder)
-
-if os.path.exists(os.path.join(experiment_data_folder, "original_data")) == False:
-    os.makedirs(os.path.join(experiment_data_folder, "original_data"))
-
-if os.path.exists(os.path.join(experiment_data_folder, "test_data")) == False:
-    os.makedirs(os.path.join(experiment_data_folder, "test_data"))
-
-if os.path.exists(os.path.join(experiment_data_folder, "pred_data")) == False:
-    os.makedirs(os.path.join(experiment_data_folder, "pred_data"))
-
-if os.path.exists(os.path.join(experiment_data_folder, "bayes_data")) == False:
-    os.makedirs(os.path.join(experiment_data_folder, "bayes_data"))
 
 # %%
-
-
-patterns_selected = [
-    [0,0,1,0],
-    [0,1,1,0],
-    [1,0,0,0],
-    [1,1,0,0]
-]
-patterns_selected_np = np.array(patterns_selected)
-
-setup = "SimG2_rep0_n265000_d4_corrMIXTURE_NA25"
-new_setup_name = "SimG3_rep0_n265000_d4_corrMIXTURE_NA25"
-
-original_data = np.load(os.path.join("data", "SimG2", "original_data", f"{setup}.npz"))
-M = original_data["M"]
-
-matches = (patterns_selected_np[:, None, :] == M).all(axis=2)
-idx = np.where(matches.any(axis=0))[0]
-
-M_sel = M[idx]
-X_obs_sel = original_data["X_obs"][idx]
-y_sel = original_data["y"][idx]
-y_probs_sel = original_data["y_probs"][idx]
-X_full_sel = original_data["X_full"][idx]
-
-# save new data
-np.savez(os.path.join(experiment_data_folder, "original_data", f"{new_setup_name}.npz"),
-         M=M_sel,
-         X_obs=X_obs_sel,
-         y=y_sel,
-         y_probs=y_probs_sel,
-         X_full=X_full_sel)
-
-# new test data
-n_test = 15_000
-
-M_test = M_sel[-n_test:]
-X_obs_test = X_obs_sel[-n_test:]
-y_test = y_sel[-n_test:]
-y_probs_test = y_probs_sel[-n_test:]
-X_full_test = X_full_sel[-n_test:]
-data_to_save = {
-    "M": M_test,
-    "X_obs": X_obs_test,
-    "y": y_test,
-    "y_probs": y_probs_test,
-    "X_full": X_full_test
-}
-np.savez(os.path.join(experiment_data_folder, "test_data", f"{new_setup_name}.npz"), **data_to_save)
-
-# %%
-
-n_test = 15_000
-n_train = len(idx) - n_test
-
-# save test data
-data_to_save = {
-    "X_obs": X_obs_sel[n_train:],
-    "M": M_sel[n_train:],
-    "y": y_sel[n_train:],
-    "y_probs": y_probs_sel[n_train:],
-    "X_full": X_full_sel[n_train:]
-}
-np.savez(os.path.join(experiment_data_folder, "test_data", f"{new_setup_name}.npz"), **data_to_save)
-
-# generate bayes data
-
-y_probs_bayes = np.zeros(n_test)
-total_pats = 0
-for pat in patterns_selected_np:
-    rows_with_pat = np.all(M_test == pat, axis=1)
-    mu_pat = all_mus[tuple(pat)]
-    corr_pat = all_corrs[tuple(pat)]
-    cov_pat = toep_matrix(_d, corr_pat) * all_vars[tuple(pat)]
-
-    total_pats += np.sum(rows_with_pat)
-
-    y_probs_bayes_pat = get_y_prob_bayes_same_pattern(
-        X_obs_test[rows_with_pat],
-        mu_pat,
-        cov_pat,
-        beta0,
-        n_mc=N_MC
-    )
-
-    y_probs_bayes[rows_with_pat] = np.mean(y_probs_bayes_pat, axis=1)
-
-assert total_pats == n_test, "The number of rows with the same pattern does not match the number of test rows."
-
-data_to_save = {
-    "y_probs_bayes": y_probs_bayes
-}
-np.savez(os.path.join(experiment_data_folder, "bayes_data", f"{new_setup_name}.npz"), **data_to_save)
-
-# %%
-set_up_df = pd.read_csv(os.path.join("data", "SimG2", "set_up.csv"))
-set_up_df["sim"] = experiment_name
-set_up_df["set_up"] = new_setup_name
-set_up_df.to_csv(os.path.join(experiment_data_folder, "set_up.csv"), index=False)
-
-# %%
-
-# import matplotlib.pyplot as plt
-
-# # verify:
-# bayes_data = np.load(os.path.join(experiment_data_folder, "bayes_data", f"{new_setup_name}.npz"))
-# bayes_probs = bayes_data["y_probs_bayes"]
-
-
-# test_data = np.load(os.path.join(experiment_data_folder, "test_data", f"{new_setup_name}.npz"))
-# y_probs = test_data["y_probs"]
-
-# plt.scatter(y_probs, bayes_probs, alpha=0.1)

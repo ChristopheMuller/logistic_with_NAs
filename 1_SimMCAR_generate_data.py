@@ -1,5 +1,5 @@
 ###
-# SimA: Gaussian, MCAR, 5 dim
+# SimMCAR: Gaussian, MCAR, 5 dim
 ###
 # %%
 
@@ -11,7 +11,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimA"
+experiment_name = "SimMCAR"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:

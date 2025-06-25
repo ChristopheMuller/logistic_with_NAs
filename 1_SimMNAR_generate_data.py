@@ -1,6 +1,5 @@
 ###
-# SimG: GPMM, MNAR, 5 dim
-# Correction from SimD
+# SimMNAR: GPMM, MNAR, 5 dim
 ###
 # %%
 
@@ -12,7 +11,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimG"
+experiment_name = "SimMNAR"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:

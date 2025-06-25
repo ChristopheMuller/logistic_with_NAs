@@ -1,5 +1,5 @@
 ####
-# SimF: GPMM, MNAR, big dimension, few patterns
+# SimMNARBIG: Identical to SimF (GPMM, unique beta, MNAR, big dimension) but more patterns (more than 8)
 ####
 # %%
 
@@ -11,7 +11,7 @@ from utils import *
 
 # %%
 
-experiment_name = "SimF"
+experiment_name = "SimMNARBIG"
 experiment_data_folder = os.path.join("data", experiment_name)
 
 if os.path.exists(experiment_data_folder) == False:
@@ -44,7 +44,7 @@ n = n_train + n_test
 
 N_MC = 10_000
 
-n_patterns = 8
+n_patterns = 50
 
 # %%
 
