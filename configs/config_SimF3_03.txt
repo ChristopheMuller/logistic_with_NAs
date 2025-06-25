@@ -1,3 +1,0 @@
-sim=SimF3
-methods=SAEM
-training=50000
