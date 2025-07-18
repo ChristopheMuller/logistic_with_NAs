@@ -1,4 +1,5 @@
-## Codebase from the paper
+## Codebase from the paper "When Pattern-by-Pattern Works: Theoretical and Empirical Insights for Logistic Models with Missing Values" ([HAL link](https://hal.science/view/index/docid/5150753))
+
 
 ### Structure of the code
 
