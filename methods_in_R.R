@@ -411,6 +411,61 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                       )
 )
 
+
+SAEM.OLD.LogisticRegression <- R6::R6Class("SAEM.OLD.LogisticRegression",
+                                      inherit = ImputationMethod,
+                                      public = list(
+                                        initialize = function(name) {
+                                          super$initialize(name)
+                                        },
+                                        
+                                        fit = function(X, M, y, X_test = NULL, M_test = NULL) {
+                                          # Convert data to required format
+                                          data <- as.data.frame(X)
+                                          colnames(data) <- paste0("X", 1:ncol(X))
+                                          data$y <- y
+                                          
+                                          # Fit SAEM model
+                                          formula <- as.formula(paste("y ~", paste(colnames(data)[1:(ncol(data)-1)], collapse = " + ")))
+                                          self$model <- miss.glm.old(formula, data = data, print_iter = FALSE)
+                                          
+                                          TRUE
+                                        },
+                                        
+                                        predict_probs = function(X_new, M_new) {
+                                          # Prepare test data
+                                          X_test <- as.data.frame(X_new)
+                                          colnames(X_test) <- paste0("X", 1:ncol(X_new))
+                                          
+                                          # Get predictions
+                                          pred_probs <- predict(self$model, newdata = X_test, type = "response", mcmc_map=500)
+                                          
+                                          return(pred_probs)
+                                        },
+                                        
+                                        return_params = function() {
+                                          if (!self$return_beta) return(NULL)
+                                          
+                                          # Extract coefficients
+                                          coef_summary <- summary(self$model)$coef
+                                          coefficients <- coef_summary[-1, "Estimate"]  # All except intercept
+                                          intercept <- coef_summary[1, "Estimate"]     # Intercept only
+                                          
+                                          # Remove names from the vectors
+                                          names(coefficients) <- NULL
+                                          names(intercept) <- NULL
+                                          
+                                          # Create the exact string format to match Python output
+                                          coef_str <- paste(coefficients, collapse = ", ")
+                                          int_str <- as.character(intercept)
+                                          
+                                          return(sprintf("[[%s], [%s]]", coef_str, int_str))
+                                        }
+                                      )
+)
+
+
+
 MeanImputationLogisticRegression <- R6::R6Class("MeanImputationLogisticRegression",
   inherit = ImputationMethod,
   public = list(
