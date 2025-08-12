@@ -374,7 +374,7 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                           
                                           # Fit SAEM model
                                           formula <- as.formula(paste("y ~", paste(colnames(data)[1:(ncol(data)-1)], collapse = " + ")))
-                                          self$model <- miss.glm(formula, data = data, print_iter = FALSE)
+                                          self$model <- misaem::miss.glm(formula, data = data, print_iter = FALSE)
                                           
                                           TRUE
                                         },
@@ -385,7 +385,7 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                           colnames(X_test) <- paste0("X", 1:ncol(X_new))
                                           
                                           # Get predictions
-                                          pred_probs <- predict(self$model, newdata = X_test, type = "response", mcmc_map=500)
+                                          pred_probs <- predict(self$model, newdata = X_test, type = "response", mc.size=100)
 
                                           return(pred_probs)
                                         },
@@ -427,7 +427,7 @@ SAEM.OLD.LogisticRegression <- R6::R6Class("SAEM.OLD.LogisticRegression",
                                           
                                           # Fit SAEM model
                                           formula <- as.formula(paste("y ~", paste(colnames(data)[1:(ncol(data)-1)], collapse = " + ")))
-                                          self$model <- miss.glm.old(formula, data = data, print_iter = FALSE)
+                                          self$model <- misaem::miss.glm.old(formula, data = data, print_iter = FALSE)
                                           
                                           TRUE
                                         },
@@ -438,7 +438,7 @@ SAEM.OLD.LogisticRegression <- R6::R6Class("SAEM.OLD.LogisticRegression",
                                           colnames(X_test) <- paste0("X", 1:ncol(X_new))
                                           
                                           # Get predictions
-                                          pred_probs <- predict(self$model, newdata = X_test, type = "response", mcmc_map=500)
+                                          pred_probs <- predict(self$model, newdata = X_test, type = "response")
                                           
                                           return(pred_probs)
                                         },
