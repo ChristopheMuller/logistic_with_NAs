@@ -6,7 +6,7 @@ from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 from scipy.stats import norm, multivariate_normal
 
-from SAEM import MissGLM
+from miss_glm import MissGLM
 
 import warnings
 
@@ -554,8 +554,8 @@ class SAEM_python(Classification):
 
     def fit(self, X, M, y):
         Xp = X.copy()
-        self.model = MissGLM(ll_obs_cal=False, var_cal=False, maxruns=1000)
-        self.model.fit(Xp, y, save_trace=False)
+        self.model = MissGLM(ll_obs_cal=False, var_cal=False, maxruns=500)
+        self.model.fit(Xp, y, save_trace=False, progress_bar=True)
 
     def predict_probs(self, X, M):
         Xp = X.copy()

@@ -5,19 +5,20 @@ import time
 
 from methods import *
 
-exp = "SimMCAR"
+exp = "MCAR_5d_095corr"
 
 
 methods_list = [
-    CompleteCase(name="CC"),
-    RegLog05imputation(name="05.IMP"),
-    RegLog05Mimputation(name="05.IMP.M"),
-    RegLogMeanimputation(name="Mean.IMP"),
-    RegLogMeanMimputation(name="Mean.IMP.M"),
-    RegLogPatByPat(name="PbP")
+    # CompleteCase(name="CC"),
+    # RegLog05imputation(name="05.IMP"),
+    # RegLog05Mimputation(name="05.IMP.M"),
+    # RegLogMeanimputation(name="Mean.IMP"),
+    # RegLogMeanMimputation(name="Mean.IMP.M"),
+    # RegLogPatByPat(name="PbP")
+    SAEM_python(name="PY.SAEM")
 ]
 
-training_size = np.array([100, 500, 1000, 5000, 10000, 50000])
+training_size = np.array([100, 500, 1000, 5000, 10000])
 
 test_size = 15000
 
