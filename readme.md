@@ -8,6 +8,6 @@ In term of stability:
 * SAEM.0L.0A fails sometimes but raise the right error (error in fit => retry with regularization)
 * SAEM.001L.0A never fails
 
-![](tables_and_figures\figures\MCAR_5d_0corr.png)
-![](tables_and_figures\figures\MCAR_5d_095corr.png)
-![](tables_and_figures\figures\MCAR_20d_05corr.png)
+![mcar5d0c](tables_and_figures/figures/MCAR_20d_05corr.png)
+![mcar5d095c](tables_and_figures/figures/MCAR_5d_095corr.png)
+![mcar20d05c](tables_and_figures/figures/MCAR_20d_05corr.png)
