@@ -362,6 +362,8 @@ MICERFLogisticRegression <- R6::R6Class("MICERFLogisticRegression",
 SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                       inherit = ImputationMethod,
                                       public = list(
+                                        lambda = 0,
+                                        alpha = 0,
                                         initialize = function(name, lambda=0, alpha=0) {
                                           super$initialize(name)
                                           self$lambda <- lambda
