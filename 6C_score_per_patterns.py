@@ -14,7 +14,7 @@ from utils import *
 
 # %%
 
-exp = "SimMCAR"
+exp = "MCAR_5d_0corr"
 set_up = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
 simulation = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 
@@ -26,26 +26,8 @@ metrics = {
 }
 
 methods = [
-"MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
-"MICE.1.IMP.M","MICE.1.Y.IMP.M","MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
-"MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP",
-"MICE.10.IMP.M","MICE.10.Y.IMP.M","MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M",
-"SAEM",
-"Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M",
-"PbP.Fixed",#"CC",
-"MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
-"MICE.RF.10.IMP.M","MICE.RF.10.Y.IMP.M","MICE.RF.10.M.IMP.M","MICE.RF.10.Y.M.IMP.M",
-"MICE.100.IMP","MICE.100.Y.IMP","MICE.100.M.IMP","MICE.100.Y.M.IMP",
-"MICE.100.IMP.M","MICE.100.Y.IMP.M","MICE.100.M.IMP.M","MICE.100.Y.M.IMP.M",
+"SAEM","SAEM.OLD",
 ]
-
-# patterns = [
-#     0,
-#     1,
-#     2,
-#     3,
-#     4
-# ]
 
 patterns = [
     [1,0,0,0,0],

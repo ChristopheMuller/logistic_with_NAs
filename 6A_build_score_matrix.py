@@ -21,14 +21,14 @@ name_score_matrix = "score_matrix.csv"
 
 # %% set up
 
-exp = "SimMCAR"
+exp = "MCAR_20d_05corr"
 
 all_methods_to_process = [
 "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
 "MICE.1.IMP.M","MICE.1.Y.IMP.M","MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
 "MICE.10.IMP","MICE.10.Y.IMP","MICE.10.M.IMP","MICE.10.Y.M.IMP",
 "MICE.10.IMP.M","MICE.10.Y.IMP.M","MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M",
-"SAEM",
+"SAEM", "SAEM.OLD", "PY.SAEM", "SAEM.0L.0A", "SAEM.001L.0A",
 "Mean.IMP","Mean.IMP.M","05.IMP","05.IMP.M",
 "PbP",
 "CC",

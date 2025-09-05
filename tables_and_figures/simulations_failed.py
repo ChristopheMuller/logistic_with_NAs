@@ -5,7 +5,7 @@
 # %%
 
 import os
-if os.getcwd().endswith("plots_scripts"):
+if os.getcwd().endswith("tables_and_figures"):
     os.chdir(os.path.join(os.getcwd(), ".."))
 
 
@@ -14,7 +14,7 @@ if os.getcwd().endswith("plots_scripts"):
 import numpy as np
 import pandas as pd
 
-exp = "SimMCAR"
+exp = "MCAR_20d_05corr"
 
 simulation_df = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 
@@ -23,5 +23,5 @@ temp = simulation_df.groupby(["method", "n_train"]).agg({"file_name": "count"})
 # what methods did not run for all n_train?
 
 temp = temp.reset_index()
-temp.sort_values(by=["file_name"], inplace=True)
-temp[:10]
+# temp.sort_values(by=["file_name"], inplace=True)
+temp[:20]

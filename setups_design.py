@@ -29,9 +29,10 @@ methods_config = {
     "PbP.Fixed": {"label": "PbP", "color": color_palette[0], "linestyle": "-", "marker":"o"},
     "PbP.MinObs": {"label": "PbP.MinObs", "color": color_palette[7], "linestyle": "--", "marker":"x"},
 
-    "SAEM": {"label": "SAEM", "color": color_palette[5], "linestyle": "-", "marker":"D"}, # Changed marker
-    "SAEM.OLD": {"label": "SAEM.OLD", "color": color_palette[5], "linestyle": "--", "marker":"D"}, # Changed marker
-    "PY.SAEM": {"label": "PY.SAEM", "color": color_palette[6], "linestyle": "-.", "marker":"D"}, # Changed marker
+    "SAEM.0L.0A": {"label": "SAEM.0L.0A", "color": color_palette[5], "linestyle": "-", "marker":"D"}, # Changed marker
+    "SAEM.001L.0A": {"label": "SAEM.001L.0A", "color": color_palette[6], "linestyle": "-.", "marker":"D"}, # Changed marker
+    "SAEM.OLD": {"label": "SAEM.OLD", "color": color_palette[7], "linestyle": "--", "marker":"D"}, # Changed marker
+    "PY.SAEM": {"label": "PY.SAEM", "color": color_palette[8], "linestyle": "-.", "marker":"D"}, # Changed marker
 
     "Mean.IMP": {"label": "Mean.IMP", "color": color_palette[3], "linestyle": "-", "marker":"o"},
     "Mean.IMP.M": {"label": "Mean.IMP.M", "color": color_palette[3], "linestyle": "--", "marker":"v"}, # Changed marker
