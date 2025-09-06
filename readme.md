@@ -5,7 +5,7 @@ Results of:
 
 In term of stability:
 * SAEM.OLD fails for small n when correlation is high or number of covariates is big
-* SAEM.0L.0A fails sometimes but raise the right error (error in fit => retry with regularization)
+* SAEM.0L.0A fails sometimes but raise the right error (suggest to add regularisation)
 * SAEM.001L.0A never fails
 
 ![mcar5d0c](tables_and_figures/figures/MCAR_5d_0corr.png)
