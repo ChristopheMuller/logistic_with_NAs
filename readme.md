@@ -4,7 +4,7 @@ Results of:
 * SAEM.001.0A ([new implementation](https://github.com/ChristopheMuller/misaem), some small regularization)
 
 In term of stability:
-* SAEM.OLD fails for small n when correlation is high or d is big
+* SAEM.OLD fails for small n when correlation is high or number of covariates is big
 * SAEM.0L.0A fails sometimes but raise the right error (error in fit => retry with regularization)
 * SAEM.001L.0A never fails
 
