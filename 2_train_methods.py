@@ -5,7 +5,7 @@ import time
 
 from methods import *
 
-exp = "MCAR_5d_095corr"
+exp = "MCAR_5d_0corr"
 
 
 methods_list = [
@@ -15,7 +15,8 @@ methods_list = [
     # RegLogMeanimputation(name="Mean.IMP"),
     # RegLogMeanMimputation(name="Mean.IMP.M"),
     # RegLogPatByPat(name="PbP")
-    SAEM_python(name="PY.SAEM")
+    SAEM_python(name="PY.SAEM.No.Reg"),
+    SAEM_Reg_python(name="PY.SAEM.With.Reg")
 ]
 
 training_size = np.array([100, 500, 1000, 5000, 10000])

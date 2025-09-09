@@ -6,7 +6,7 @@ from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 from scipy.stats import norm, multivariate_normal
 
-from miss_glm import MissGLM
+from misaem import SAEMLogisticRegression
 
 import warnings
 
@@ -546,7 +546,7 @@ class RegLogPatByPat(Classification):
 
 class SAEM_python(Classification):
 
-    def __init__(self, name="PY.SAEM"):
+    def __init__(self, name="PY.SAEM.No.Reg"):
         super().__init__(name)
 
         self.can_predict = True
@@ -554,7 +554,7 @@ class SAEM_python(Classification):
 
     def fit(self, X, M, y):
         Xp = X.copy()
-        self.model = MissGLM(ll_obs_cal=False, var_cal=False, maxruns=500)
+        self.model = SAEMLogisticRegression(ll_obs_cal=False, var_cal=False, maxruns=500, lr_penalty=None)
         self.model.fit(Xp, y, save_trace=False, progress_bar=True)
 
     def predict_probs(self, X, M):
@@ -563,5 +563,25 @@ class SAEM_python(Classification):
         return y_probs
     
     def return_params(self):
-        return [self.model.coef_.ravel()[1:].tolist(), self.model.coef_.ravel()[0].ravel().tolist()]
+        return [self.model.coef_.ravel().tolist(), self.model.intercept_.tolist()]
 
+class SAEM_Reg_python(Classification):
+
+    def __init__(self, name="PY.SAEM.With.Reg"):
+        super().__init__(name)
+
+        self.can_predict = True
+        self.return_beta = True
+
+    def fit(self, X, M, y):
+        Xp = X.copy()
+        self.model = SAEMLogisticRegression(ll_obs_cal=False, var_cal=False, maxruns=500, lr_penalty="l2", C=1.0)
+        self.model.fit(Xp, y, save_trace=False, progress_bar=True)
+
+    def predict_probs(self, X, M):
+        Xp = X.copy()
+        y_probs = self.model.predict_proba(Xp, method="map")[:,1]
+        return y_probs
+    
+    def return_params(self):
+        return [self.model.coef_.ravel().tolist(), self.model.intercept_.tolist()]
