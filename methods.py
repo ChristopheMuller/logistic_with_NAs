@@ -575,7 +575,7 @@ class SAEM_Reg_python(Classification):
 
     def fit(self, X, M, y):
         Xp = X.copy()
-        self.model = SAEMLogisticRegression(ll_obs_cal=False, var_cal=False, maxruns=500, lr_penalty="l2", C=1.0)
+        self.model = SAEMLogisticRegression(ll_obs_cal=False, var_cal=False, maxruns=500, lr_penalty="l2", lr_C=1.0)
         self.model.fit(Xp, y, save_trace=False, progress_bar=True)
 
     def predict_probs(self, X, M):
