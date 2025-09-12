@@ -21,9 +21,9 @@ from setups_design import metrics_config, methods_config
 
 # %% set up
 
-# exp = "MCAR_20d_05corr"
+exp = "MCAR_20d_05corr"
 # exp = "MCAR_5d_095corr"
-exp = "MCAR_5d_0corr"
+# exp = "MCAR_5d_0corr"
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 
@@ -42,6 +42,8 @@ methods_sel = [
     "SAEM.0L.0A", 
     "SAEM.001L.0A",    
     "SAEM.OLD",
+    "PY.SAEM.No.Reg",
+    "PY.SAEM.With.Reg",
     # "PY.SAEM"
     # "py.SAEM.fast",
     # "py.SAEM.fast.fixed",
@@ -113,7 +115,7 @@ for i, score in enumerate(scores_sel):
 plt.suptitle(exp, fontsize=16)
 
 plt.tight_layout()
-# plt.savefig("tables_and_figures/figures/MCAR_5d_0corr.png", bbox_inches='tight')
+plt.savefig(f"tables_and_figures/figures/{exp}.png", bbox_inches='tight')
 plt.show()
     
 
