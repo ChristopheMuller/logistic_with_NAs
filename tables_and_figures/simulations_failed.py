@@ -5,7 +5,7 @@
 # %%
 
 import os
-if os.getcwd().endswith("plots_scripts"):
+if os.getcwd().endswith("tables_and_figures"):
     os.chdir(os.path.join(os.getcwd(), ".."))
 
 

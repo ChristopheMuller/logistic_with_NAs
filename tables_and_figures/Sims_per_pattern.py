@@ -6,9 +6,9 @@
 
 # %%
 
-# if current working directory is "/plots_scripts", change it to the parent directory
+# if current working directory is "/tables_and_figures", change it to the parent directory
 import os
-if os.getcwd().endswith("plots_scripts"):
+if os.getcwd().endswith("tables_and_figures"):
     os.chdir(os.path.join(os.getcwd(), ".."))
 
 # %% load packages
@@ -111,5 +111,5 @@ for i, pattern in enumerate(patterns_sel):
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
-# plt.savefig(os.path.join("plots_scripts", exp, f"perPattern_{metric_sel}_{selection_name}.pdf"))
+# plt.savefig(os.path.join("tables_and_figures", exp, f"perPattern_{metric_sel}_{selection_name}.pdf"))
 plt.show()

@@ -176,7 +176,7 @@ axes[1].legend()
 axes[1].set_title("Exponential Covariate")
 
 plt.tight_layout()
-plt.savefig("plots_scripts/plots/logits.pdf")
+plt.savefig("tables_and_figures/plots/logits.pdf")
 plt.show()
 
 # %% Second plot: In probability space
@@ -219,7 +219,7 @@ axes[1].legend()
 axes[1].set_title("Exponential Covariate")
 
 plt.tight_layout()
-plt.savefig("plots_scripts/plots/probs_bayes.pdf")
+plt.savefig("tables_and_figures/plots/probs_bayes.pdf")
 plt.show()
 
 # %%

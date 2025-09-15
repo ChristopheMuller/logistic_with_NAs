@@ -109,5 +109,5 @@ latex_output <- generate_latex_table(
 cat(latex_output)
 
 # Save the R script to a file
-dir.create("plots_scripts/tables", recursive = TRUE, showWarnings = FALSE)
-writeLines(latex_output, "plots_scripts/tables/runtime_table.tex")
+dir.create("tables_and_figures/tables", recursive = TRUE, showWarnings = FALSE)
+writeLines(latex_output, "tables_and_figures/tables/runtime_table.tex")

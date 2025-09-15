@@ -248,7 +248,7 @@ generate_metric_table <- function(metric_name, bayes.diff=TRUE, multiplier=1) {
   formatted_table <- apply_latex_formatting(numeric_table, method_map_csv_to_latex)
   final_latex_code <- generate_latex_from_df(formatted_table, metric_name)
   
-  output_filename <- paste0("plots_scripts/tables/", metric_name, "_summary.tex")
+  output_filename <- paste0("tables_and_figures/tables/", metric_name, "_summary.tex")
   writeLines(final_latex_code, output_filename)
   
   cat(paste("Successfully generated table for metric '", metric_name, "' and saved to '", output_filename, "'.\n", sep = ""))

@@ -2,7 +2,7 @@
 # Plot grid of results per simulation
 ###
 
-#%%  if current working directory is "/plots_scripts", change it to the parent directory
+#%%  if current working directory is "/tables_and_figures", change it to the parent directory
 import os
 if os.getcwd().endswith("tables_and_figures"):
     os.chdir(os.path.join(os.getcwd(), ".."))
