@@ -106,7 +106,7 @@ create_method_object <- function(key) {
     "MICE.RF.10.M.IMP.M" = MICERFLogisticRegression$new(name="MICE.RF.10.M.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=TRUE),
     "MICE.RF.10.Y.M.IMP.M" = MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
 
-    "SAEM" = SAEMLogisticRegression$new(name="SAEM"),
+    "SAEM.NoReg" = SAEMLogisticRegression$new(name="SAEM.NoReg", lambda=0, alpha=0),
 
     "Mean.IMP" = MeanImputationLogisticRegression$new(name="Mean.IMP", mask=FALSE),
     "Mean.IMP.M" = MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),

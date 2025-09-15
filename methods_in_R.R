@@ -362,8 +362,12 @@ MICERFLogisticRegression <- R6::R6Class("MICERFLogisticRegression",
 SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                       inherit = ImputationMethod,
                                       public = list(
-                                        initialize = function(name) {
+                                        lambda = 0,
+                                        alpha = 0,
+                                        initialize = function(name, lambda=0, alpha=0) {
                                           super$initialize(name)
+                                          self$lambda <- lambda
+                                          self$alpha <- alpha
                                         },
                                         
                                         fit = function(X, M, y, X_test = NULL, M_test = NULL) {
@@ -374,8 +378,7 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                           
                                           # Fit SAEM model
                                           formula <- as.formula(paste("y ~", paste(colnames(data)[1:(ncol(data)-1)], collapse = " + ")))
-                                          self$model <- miss.glm(formula, data = data, print_iter = FALSE)
-                                          
+                                          self$model <- misaem::miss.glm(formula, data = data, print_iter = FALSE, alpha=self$alpha, lambda=self$lambda)
                                           TRUE
                                         },
                                         
@@ -385,7 +388,7 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
                                           colnames(X_test) <- paste0("X", 1:ncol(X_new))
                                           
                                           # Get predictions
-                                          pred_probs <- predict(self$model, newdata = X_test, type = "response", mcmc_map=500)
+                                          pred_probs <- predict(self$model, newdata = X_test, type = "response", mc.size=100)
 
                                           return(pred_probs)
                                         },
