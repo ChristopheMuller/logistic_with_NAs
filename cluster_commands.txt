@@ -47,7 +47,7 @@ oarsub -l walltime=1:0:00 -n SimMCAR_5d_095corr -q production --project premedic
 oarsub -l walltime=1:0:00 -n SimMCAR_20d_05corr -q production --project premedical --stdout output/SimMCAR_20d_05corr.txt --stderr output/SimMCAR_20d_05corr_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif Rscript 3_train_methods_in_R.R configs/conf_MCAR_20d_05corr.txt"
 
 
-oarsub -l walltime=4:0:00 -n SimMCAR_20d_05corrPYTHON -q production --project premedical --stdout output/SimMCAR_20d_05corr_PYTHON.txt --stderr output/SimMCAR_20d_05corr_PYTHON_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif python3 2_train_methods.py"
+oarsub -l walltime=1:30:00 -n SimMCAR_5d_0corrPYTHON -q production --project premedical --stdout output/SimMCAR_5d_0corr_PYTHON.txt --stderr output/SimMCAR_5d_0corr_PYTHON_err.txt --notify mail:christophe.muller@inria.fr "module load apptainer && apptainer exec env.sif python3 2_train_methods.py"
 
 
 19/06: karma = 0.108

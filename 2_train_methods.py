@@ -5,7 +5,7 @@ import time
 
 from methods import *
 
-exp = "MCAR_5d_0corr"
+exp = "MCAR_20d_05corr"
 
 
 methods_list = [
@@ -52,7 +52,9 @@ else:
         "n_train": [],
         "estimated_beta": [],
         "file_name": [],
-        "running_time": []
+        "running_time_train": [],
+        "running_time_pred": [],
+        "running_datetime": []
     })
 
 
@@ -92,19 +94,21 @@ for i in range(df_set_up.shape[0]):
             tic = time.time()
             met.fit(X_train, M_train, y_train)
             toc = time.time()
-            running_time = toc - tic
+            running_time_train = toc - tic
 
             if met.can_predict:
-
+                tic = time.time()
                 y_probs_pred = met.predict_probs(X_test, M_test)
+                toc = time.time()
+                running_time_pred = toc - tic
                 to_save = {
                     "y_probs_pred": y_probs_pred,
                 }
 
                 save_name = f"{df_set_up['set_up'][i]}_{met.name}_{training_size[j]}"
                 np.savez(os.path.join("data", exp, "pred_data", f"{save_name}.npz"), **to_save)
-
-            else:
+            else:  
+                running_time_pred = np.nan
                 save_name = np.nan
 
             if met.return_beta:
@@ -119,7 +123,9 @@ for i in range(df_set_up.shape[0]):
                 "n_train": training_size[j],
                 "estimated_beta": str(estimated_beta),
                 "file_name": save_name,
-                "running_time": running_time
+                "running_time_train": running_time_train,
+                "running_time_pred": running_time_pred,
+                "running_datetime": pd.Timestamp.now()
             }
             simulations_df = pd.concat([simulations_df, pd.DataFrame(new_row_sim, index=[0])])
             simulations_df.to_csv(os.path.join("data", exp, "simulation.csv"), index=False)
