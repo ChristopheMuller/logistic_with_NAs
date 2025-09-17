@@ -6,6 +6,7 @@
 *.pdf
 *.pyc
 *.jpg
+*.tex
 env.sif
 
 data/*
