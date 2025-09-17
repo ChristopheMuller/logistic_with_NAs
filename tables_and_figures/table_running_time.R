@@ -30,11 +30,6 @@ pred_time_agg <- df %>%
 
 combined_agg_df <- left_join(train_time_agg, pred_time_agg, by = "method")
 
-# Removed method_map_csv_to_latex_runtime
-# Removed: ordered_methods <- names(method_map_csv_to_latex_runtime)[names(method_map_csv_to_latex_runtime) %in% combined_agg_df$method]
-# Removed: combined_agg_df <- combined_agg_df %>% slice(match(ordered_methods, method))
-# The methods in combined_agg_df will now be used as-is, in their default order.
-
 generate_latex_table <- function(data_frame, caption_text, label_text) { # Removed methods_map parameter
   column_names <- colnames(data_frame)
   
@@ -53,6 +48,7 @@ generate_latex_table <- function(data_frame, caption_text, label_text) { # Remov
   header <- paste0(
     "\\begin{table}[h!]\n",
     "\\centering\n",
+    "\\caption{", caption_text, "}\n",
     "\\begin{tabular}{", col_spec, "}\n",
     "\\toprule\n",
     "\\textbf{Algorithms} & \\multicolumn{", num_train_cols, "}{c}{\\textbf{Training}} & \\multicolumn{1}{c}{\\textbf{Prediction}} \\\\\n",
@@ -89,7 +85,6 @@ generate_latex_table <- function(data_frame, caption_text, label_text) { # Remov
   footer <- paste0(
     "\\bottomrule\n",
     "\\end{tabular}\n",
-    "\\caption{", caption_text, "}\n",
     "\\label{", label_text, "}\n",
     "\\end{table}\n"
   )
@@ -109,5 +104,5 @@ latex_output <- generate_latex_table(
 cat(latex_output)
 
 # Save the R script to a file
-dir.create("tables_and_figures/tables", recursive = TRUE, showWarnings = FALSE)
-writeLines(latex_output, "tables_and_figures/tables/runtime_table.tex")
+path_ = file.path("tables_and_figures", exp, "table_running_time.tex") # R version
+writeLines(latex_output, path_)

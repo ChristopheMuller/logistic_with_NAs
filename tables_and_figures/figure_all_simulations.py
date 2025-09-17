@@ -51,15 +51,15 @@ method_groups = {
         "CC",
         "PbP.Fixed",
         "Mean.IMP.M",
-        "SAEM",
-        "MICE.100.Y.IMP",
+        "SAEM.NoReg",
         "MICE.100.IMP",
+        "MICE.100.Y.IMP",
+        "MICE.RF.10.IMP",
         "MICE.RF.10.Y.IMP",
-        "MICE.RF.10.IMP"
-        # "MICE.100.Y.M.IMP.M",
         # "MICE.100.Y.IMP.M",
+        # "MICE.100.Y.M.IMP.M",
+        # "MICE.RF.10.Y.IMP.M",
         # "MICE.RF.10.Y.M.IMP.M",
-        # "MICE.RF.10.Y.IMP.M"
     ]
 }
 
@@ -77,7 +77,7 @@ selected_method_groups = [
 scores_sel = ["misclassification", "mae_bayes", "calibration", "mse_error"]
 metrics_name = "4_metrics_grid_with_legends" # Updated filename
 filter_bayes = [True, True, True, False]
-ylimsmax = [0.1, 0.2, 0.03, 0.9]
+ylimsmax = [0.1, 0.2, 0.030, 0.9]
 ntrains = [100, 500, 1000, 5000, 10000, 50000]
 
 ylimsmin = calculate_ymin_for_R_proportion(0.03, ylimsmax)
@@ -188,5 +188,5 @@ for r_idx, group_name in enumerate(selected_method_groups):
 
 plt.subplots_adjust(left=0.08, top=0.9, right=0.85, bottom=0.05, wspace=0.21, hspace=0.1)
 
-plt.savefig(os.path.join("tables_and_figures", exp, f"{metrics_name}_grid.pdf"), bbox_inches='tight', pad_inches=0.1)
+plt.savefig(os.path.join("tables_and_figures", exp, f"{exp}_{metrics_name}_grid.pdf"), bbox_inches='tight', pad_inches=0.1)
 plt.show()

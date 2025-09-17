@@ -157,6 +157,7 @@ generate_latex_from_df <- function(formatted_df, metric_name) {
   latex_output_lines <- c(
     "\\begin{table}[h!]",
     "\\centering",
+    paste0("\\caption{", caption, "}"),
     paste0("\\begin{tabular}{", col_spec, "}"),
     "\\toprule",
     "\\multirow{2}{*}{Methods}",
@@ -167,7 +168,6 @@ generate_latex_from_df <- function(formatted_df, metric_name) {
     apply(formatted_df, 1, function(row) paste0(paste(row, collapse = " & "), " \\\\")),
     "\\bottomrule",
     "\\end{tabular}",
-    paste0("\\caption{", caption, "}"),
     paste0("\\label{", label, "}"),
     "\\end{table}"
   )
@@ -183,7 +183,8 @@ generate_metric_table <- function(metric_name, bayes.diff=TRUE, multiplier=1) {
   method_map_csv_to_latex <- list(
     "PbP.Fixed" = "PbP",
     # "CC" = "CC",
-    "SAEM" = "SAEM",
+    # "SAEM" = "SAEM",
+    "SAEM.NoReg" = "SAEM",
     "Mean.IMP" = "Mean.IMP",
     "Mean.IMP.M" = "Mean.IMP.M",
     "MICE.1.IMP" = "MICE.1.IMP",

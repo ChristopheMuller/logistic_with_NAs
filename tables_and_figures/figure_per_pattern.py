@@ -21,47 +21,43 @@ from setups_design import metrics_config, methods_config
 
 # %% set up
 
-exp = "SimMCAR"
+exp = "SimNL"
+names_titles = [
+    "Gaussian missing (Z1)",
+    "Gaussian missing (Z2)",
+    "Exponential missing (Z3)",
+    "Cubic missing (Z4)",
+    "Non-monotonic missing (Z5)"
+]
+
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 
 
-metrics_config
-
-
-# %%
-
 metric_sel = "mae_bayes"
-patterns_sel = [[0,0,1,0],
-    [0,1,1,0],
-    [1,0,0,0],
-    [1,1,0,0]]
+patterns_sel = [
+    [1,0,0,0,0],
+    [0,1,0,0,0],
+    [0,0,1,0,0],
+    [0,0,0,1,0],
+    [0,0,0,0,1],
+]
 patterns_sel = [str(pattern) for pattern in patterns_sel]
 
 pattern_names = patterns_sel.copy()
 
 methods_sel = [
-# "MICE.1.IMP","MICE.1.Y.IMP",
-# "MICE.1.M.IMP","MICE.1.Y.M.IMP",
-# "MICE.1.IMP.M","MICE.1.Y.IMP.M",
-# "MICE.1.M.IMP.M","MICE.1.Y.M.IMP.M",
-# "MICE.10.IMP","MICE.10.Y.IMP",
-# "MICE.10.M.IMP","MICE.10.Y.M.IMP",
-# "MICE.10.IMP.M","MICE.10.Y.IMP.M",
-# "MICE.10.M.IMP.M","MICE.10.Y.M.IMP.M",
-# "MICE.100.IMP","MICE.100.Y.IMP",
-# "MICE.100.M.IMP","MICE.100.Y.M.IMP",
-# "MICE.100.IMP.M","MICE.100.Y.IMP.M",
-# "MICE.100.M.IMP.M","MICE.100.Y.M.IMP.M",
-# "SAEM",
-"Mean.IMP",
 "Mean.IMP.M",
-# "05.IMP",
-# "05.IMP.M",
-# "PbP","CC",
 "PbP.Fixed",
-# "MICE.RF.10.IMP","MICE.RF.10.Y.IMP","MICE.RF.10.M.IMP","MICE.RF.10.Y.M.IMP",
-# "MICE.RF.10.IMP.M","MICE.RF.10.Y.IMP.M","MICE.RF.10.M.IMP.M","MICE.RF.10.Y.M.IMP.M"
+"SAEM.NoReg",
+"MICE.100.IMP",
+"MICE.100.Y.IMP",
+"MICE.RF.10.IMP",
+"MICE.RF.10.Y.IMP",
+# "MICE.100.Y.IMP.M",
+# "MICE.100.Y.M.IMP.M",
+# "MICE.RF.10.Y.IMP.M",
+# "MICE.RF.10.Y.M.IMP.M",
 ]
 
 
@@ -100,16 +96,17 @@ for i, pattern in enumerate(patterns_sel):
     axes[i].set_xscale("log")
     axes[i].set_xlabel("Number of training samples")
     axes[i].set_ylabel(metrics_config[metric_sel]["label"])
-    axes[i].set_title(f"{pattern_names[i]}")   
+    # axes[i].set_title(f"M = {pattern_names[i]}")   
+    axes[i].set_title(names_titles[i])
 
-    if i == 0:
+    if i == 1:
         axes[i].legend()
     # axes[i].grid()
 
-    axes[i].set_ylim(-0.01, 0.2)
+    axes[i].set_ylim(-0.01, 0.35)
     # line at
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
-# plt.savefig(os.path.join("tables_and_figures", exp, f"perPattern_{metric_sel}_{selection_name}.pdf"))
+plt.savefig(os.path.join("tables_and_figures", exp, f"{exp}_perPattern_{metric_sel}.pdf"))
 plt.show()
