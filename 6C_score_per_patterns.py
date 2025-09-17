@@ -14,7 +14,7 @@ from utils import *
 
 # %%
 
-exp = "SimMNAR"
+exp = "SimNL"
 set_up = pd.read_csv(os.path.join("data", exp, "set_up.csv"))
 simulation = pd.read_csv(os.path.join("data", exp, "simulation.csv"))
 
