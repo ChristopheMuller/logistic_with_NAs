@@ -417,7 +417,7 @@ SAEMLogisticRegression <- R6::R6Class("SAEMLogisticRegression",
 MeanImputationLogisticRegression <- R6::R6Class("MeanImputationLogisticRegression",
   inherit = ImputationMethod,
   public = list(
-    column_means = NULL,
+    imputation_values = NULL,
     mask = FALSE,
 
     initialize = function(name = "Mean", mask = FALSE) {
@@ -428,11 +428,25 @@ MeanImputationLogisticRegression <- R6::R6Class("MeanImputationLogisticRegressio
     fit = function(X, M, y, X_test = NULL, M_test = NULL) {
       data_train <- as.data.frame(X)
 
-      self$column_means <- list()
+      self$imputation_values <- list()
       for (col_name in names(data_train)) {
-        self$column_means[[col_name]] <- mean(data_train[[col_name]], na.rm = TRUE)
+        vals <- data_train[[col_name]]
+        
+        if (is.numeric(vals)) {
+          val <- mean(vals, na.rm = TRUE)
+        } else {
+          ux <- unique(na.omit(vals))
+          if(length(ux) == 0) {
+             val <- NA 
+          } else {
+             val <- ux[which.max(tabulate(match(vals, ux)))]
+          }
+        }
+        
+        self$imputation_values[[col_name]] <- val
+        
         if (any(is.na(data_train[[col_name]]))) {
-          data_train[[col_name]][is.na(data_train[[col_name]])] <- self$column_means[[col_name]]
+          data_train[[col_name]][is.na(data_train[[col_name]])] <- val
         }
       }
 
@@ -451,11 +465,17 @@ MeanImputationLogisticRegression <- R6::R6Class("MeanImputationLogisticRegressio
 
       for (col_name in names(data_new)) {
         if (any(is.na(data_new[[col_name]]))) {
-          if (!is.null(self$column_means[[col_name]])) {
-            data_new[[col_name]][is.na(data_new[[col_name]])] <- self$column_means[[col_name]]
+          if (!is.null(self$imputation_values[[col_name]])) {
+            data_new[[col_name]][is.na(data_new[[col_name]])] <- self$imputation_values[[col_name]]
           } else {
-            data_new[[col_name]][is.na(data_new[[col_name]])] <- mean(data_new[[col_name]], na.rm = TRUE)
-            cat("Warning: No mean stored for column", col_name, "- using mean of new data.\n")
+            vals <- data_new[[col_name]]
+            if (is.numeric(vals)) {
+              val <- mean(vals, na.rm = TRUE)
+            } else {
+              ux <- unique(na.omit(vals))
+              val <- ux[which.max(tabulate(match(vals, ux)))]
+            }
+            data_new[[col_name]][is.na(data_new[[col_name]])] <- val
           }
         }
       }
@@ -471,20 +491,14 @@ MeanImputationLogisticRegression <- R6::R6Class("MeanImputationLogisticRegressio
     return_params = function() {
       if (!self$return_beta) return(NULL)
 
-      # Get coefficients from the fitted glm model
-      # For glm, coef(self$model) directly gives the coefficients
-      # The first element is the intercept, followed by other coefficients
       model_coef <- coef(self$model)
 
-      # Separate intercept and coefficients
-      intercept <- model_coef[1]  # First coefficient is intercept in R
-      coefficients <- model_coef[-1] # All other coefficients
+      intercept <- model_coef[1]
+      coefficients <- model_coef[-1]
 
-      # Remove names from the vectors
       names(intercept) <- NULL
       names(coefficients) <- NULL
 
-      # Create the exact string format to match Python output
       coef_str <- paste(coefficients, collapse = ", ")
       int_str <- as.character(intercept)
 
@@ -492,7 +506,6 @@ MeanImputationLogisticRegression <- R6::R6Class("MeanImputationLogisticRegressio
     }
   )
 )
-
 ConstantImputationLogisticRegression <- R6::R6Class("ConstantImputationLogisticRegression",
   inherit = ImputationMethod,
   public = list(
@@ -589,33 +602,33 @@ RegLogPatByPat <- R6::R6Class("RegLogPatByPat",
       
       for (pattern_str in unique_pattern_keys) {
 
-        current_pattern_mask_vec <- M_matrix[match(pattern_str, all_pattern_keys),]
+        S_indices <- which(all_pattern_keys == pattern_str)
+        current_pattern_mask_vec <- M_matrix[S_indices[1], ]
 
         has_observed_vars <- any(current_pattern_mask_vec == 0)
 
         if (has_observed_vars) {
-
-          S_indices <- which(apply(M_matrix, 1, function(row) all(row == current_pattern_mask_vec)))
-
+            
           Xp <- X_df[S_indices, current_pattern_mask_vec == 0, drop = FALSE]
           yp <- y_vec[S_indices]
 
-          if (nrow(Xp) > 0 && length(unique(yp)) == 2) {
+          keep_cols <- sapply(Xp, function(col) length(unique(col)) > 1)
+          Xp_clean <- Xp[, keep_cols, drop = FALSE]
 
-            model_data <- Xp
+          if (nrow(Xp_clean) > 0 && length(unique(yp)) == 2) {
+
+            model_data <- Xp_clean
             model_data$y_outcome <- yp 
             
-            if (ncol(Xp) > 0) {
-              formula_str <- paste("y_outcome ~", paste(names(Xp), collapse = " + "))
+            if (ncol(Xp_clean) > 0) {
+              formula_str <- paste("y_outcome ~", paste(names(Xp_clean), collapse = " + "))
             } else {
               formula_str <- "y_outcome ~ 1"
-              cat("Warning: No observed variables for pattern '", pattern_str, "'. Using intercept-only model.\n")
             }
 
             reg_model <- tryCatch({
               glm(as.formula(formula_str), family = binomial(), data = model_data)
             }, error = function(e) {
-              message(paste("  Warning: GLM failed for pattern '", pattern_str, "'. Error: ", e$message, sep=""))
               return(NULL)
             })
             
@@ -640,7 +653,7 @@ RegLogPatByPat <- R6::R6Class("RegLogPatByPat",
         
         pattern_indices <- which(all_pattern_keys_new == pattern_str)
         
-        current_m_mask_vec <- M_new_matrix[pattern_indices[1], ] # Mask is same for all rows with this pattern
+        current_m_mask_vec <- M_new_matrix[pattern_indices[1], ] 
 
         all_vars_missing <- all(current_m_mask_vec == 1)
 
@@ -650,7 +663,155 @@ RegLogPatByPat <- R6::R6Class("RegLogPatByPat",
           reg_model <- self$models_by_pattern[[pattern_str]]
 
           X_current_pattern <- X_new_df[pattern_indices, current_m_mask_vec == 0, drop = FALSE]
-          pattern_predictions <- predict(reg_model, newdata = X_current_pattern, type = "response")
+
+          if (!is.null(reg_model$xlevels)) {
+            for (var_name in names(reg_model$xlevels)) {
+              if (var_name %in% names(X_current_pattern)) {
+                known_levels <- reg_model$xlevels[[var_name]]
+                current_vals <- X_current_pattern[[var_name]]
+                
+                is_unknown_level <- !(current_vals %in% known_levels)
+                
+                if (any(is_unknown_level)) {
+                   X_current_pattern[is_unknown_level, var_name] <- NA
+                }
+              }
+            }
+          }
+
+          pattern_predictions <- suppressWarnings(predict(reg_model, newdata = X_current_pattern, type = "response"))
+          
+          if (any(is.na(pattern_predictions))) {
+             pattern_predictions[is.na(pattern_predictions)] <- self$default_prob
+          }
+          
+          predictions[pattern_indices] <- pattern_predictions
+        }
+      }
+      return(predictions)
+    },
+
+    return_params = function() {
+      if (!self$return_beta) return(NULL)
+    }
+  )
+)
+
+library(brglm2)
+
+RegLogPatByPatRegularized <- R6::R6Class("RegLogPatByPatRegularized",
+  inherit = ImputationMethod,
+  public = list(
+    
+    models_by_pattern = NULL,
+    default_prob = NULL,
+
+    initialize = function(name = "PbP.Brglm") {
+      super$initialize(name)
+      self$can_predict = TRUE  
+      self$return_beta = FALSE 
+      self$models_by_pattern = list()
+    },
+
+    fit = function(X, M, y, X_test = NULL, M_test = NULL) {
+
+      X_df <- as.data.frame(X)
+      M_matrix <- as.matrix(M)
+      y_vec <- as.numeric(y)
+
+      self$default_prob <- mean(y_vec, na.rm = TRUE)
+
+      all_pattern_keys <- apply(M_matrix, 1, paste, collapse = "_")
+      unique_pattern_keys <- unique(all_pattern_keys)
+      
+      for (pattern_str in unique_pattern_keys) {
+
+        S_indices <- which(all_pattern_keys == pattern_str)
+        current_pattern_mask_vec <- M_matrix[S_indices[1], ]
+        
+        # Check if there are any observed variables to train on
+        if (any(current_pattern_mask_vec == 0)) {
+            
+          Xp <- X_df[S_indices, current_pattern_mask_vec == 0, drop = FALSE]
+          yp <- y_vec[S_indices]
+
+          keep_cols <- sapply(Xp, function(col) length(unique(col)) > 1)
+          Xp_clean <- Xp[, keep_cols, drop = FALSE]
+          
+          # brglm2 works with a single class if necessary, but 2 is safer
+          if (nrow(Xp_clean) > 0 && length(unique(yp)) >= 1) {
+
+            model_data <- Xp_clean
+            model_data$y_outcome <- yp 
+            
+            if (ncol(Xp_clean) > 0) {
+              formula_str <- paste("y_outcome ~", paste(names(Xp_clean), collapse = " + "))
+            } else {
+              formula_str <- "y_outcome ~ 1"
+            }
+
+            # Use method = "brglmFit" for bias reduction (regularization)
+            reg_model <- tryCatch({
+              glm(as.formula(formula_str), 
+                  family = binomial(), 
+                  data = model_data, 
+                  method = "brglmFit") 
+            }, error = function(e) {
+              return(NULL)
+            })
+            
+            self$models_by_pattern[[pattern_str]] <- reg_model
+          }
+        }
+      }
+      TRUE
+    },
+
+    predict_probs = function(X_new, M_new) {
+      X_new_df <- as.data.frame(X_new)
+      M_new_matrix <- as.matrix(M_new)
+
+      n_new_obs <- nrow(X_new_df)
+      predictions <- numeric(n_new_obs)
+
+      all_pattern_keys_new <- apply(M_new_matrix, 1, paste, collapse = "_")
+      unique_pattern_keys_new <- unique(all_pattern_keys_new)
+      
+      for (pattern_str in unique_pattern_keys_new) {
+        
+        pattern_indices <- which(all_pattern_keys_new == pattern_str)
+        current_m_mask_vec <- M_new_matrix[pattern_indices[1], ] 
+
+        all_vars_missing <- all(current_m_mask_vec == 1)
+        reg_model <- self$models_by_pattern[[pattern_str]]
+
+        if (all_vars_missing || is.null(reg_model)) {
+          predictions[pattern_indices] <- self$default_prob
+        } else {
+          
+          X_current_pattern <- X_new_df[pattern_indices, current_m_mask_vec == 0, drop = FALSE]
+
+          # Handle unseen factor levels (set to NA to avoid crash)
+          if (!is.null(reg_model$xlevels)) {
+            for (var_name in names(reg_model$xlevels)) {
+              if (var_name %in% names(X_current_pattern)) {
+                known_levels <- reg_model$xlevels[[var_name]]
+                current_vals <- X_current_pattern[[var_name]]
+                
+                is_unknown_level <- !(current_vals %in% known_levels)
+                
+                if (any(is_unknown_level)) {
+                   X_current_pattern[is_unknown_level, var_name] <- NA
+                }
+              }
+            }
+          }
+
+          pattern_predictions <- suppressWarnings(predict(reg_model, newdata = X_current_pattern, type = "response"))
+          
+          if (any(is.na(pattern_predictions))) {
+             pattern_predictions[is.na(pattern_predictions)] <- self$default_prob
+          }
           
           predictions[pattern_indices] <- pattern_predictions
         }
@@ -692,27 +853,36 @@ RegLogPatByPatMinObservation <- R6::R6Class("RegLogPatByPat",
 
       for (pattern_str in unique_pattern_keys) {
 
-        current_pattern_mask_vec <- M_matrix[match(pattern_str, all_pattern_keys),]
+        # Optimized matching
+        S_indices <- which(all_pattern_keys == pattern_str)
+        current_pattern_mask_vec <- M_matrix[S_indices[1], ]
 
         has_observed_vars <- any(current_pattern_mask_vec == 0)
-        
-        # Determine the number of observed variables for this pattern
-        num_observed_vars <- sum(current_pattern_mask_vec == 0)
 
         if (has_observed_vars) {
-
-          S_indices <- which(apply(M_matrix, 1, function(row) all(row == current_pattern_mask_vec)))
 
           Xp <- X_df[S_indices, current_pattern_mask_vec == 0, drop = FALSE]
           yp <- y_vec[S_indices]
 
-          if (nrow(Xp) >= num_observed_vars && length(unique(yp)) == 2) {
+          # --- FIX: Remove constant columns (prevents "contrasts" error) ---
+          keep_cols <- sapply(Xp, function(col) length(unique(col)) > 1)
+          Xp_clean <- Xp[, keep_cols, drop = FALSE]
+          # -----------------------------------------------------------------
 
-            model_data <- Xp
+          # Determine number of effective variables after cleaning
+          num_active_vars <- ncol(Xp_clean)
+
+          # Constraint: Rows > (Variables + Intercept)
+          # We use the cleaned variable count, as constant cols don't use degrees of freedom
+          if (nrow(Xp_clean) > (num_active_vars + 1) && length(unique(yp)) >= 2) {
+
+            model_data <- Xp_clean
             model_data$y_outcome <- yp
 
-            if (ncol(Xp) > 0) {
-              formula_str <- paste("y_outcome ~", paste(names(Xp), collapse = " + "))
+            if (ncol(Xp_clean) > 0) {
+              # Safe formula construction
+              vars_clean <- paste0("`", names(Xp_clean), "`")
+              formula_str <- paste("y_outcome ~", paste(vars_clean, collapse = " + "))
             } else {
               formula_str <- "y_outcome ~ 1"
             }
@@ -720,14 +890,15 @@ RegLogPatByPatMinObservation <- R6::R6Class("RegLogPatByPat",
             reg_model <- tryCatch({
               glm(as.formula(formula_str), family = binomial(), data = model_data)
             }, error = function(e) {
-              message(paste("    Warning: GLM failed for pattern '", pattern_str, "'. Error: ", e$message, ". Model not trained for this pattern.", sep=""))
-              return(NULL) # Return NULL if GLM fails
+              message(paste("    Warning: GLM failed for pattern '", pattern_str, "'. Error: ", e$message, sep=""))
+              return(NULL) 
             })
 
             self$models_by_pattern[[pattern_str]] <- reg_model
           } else {
-            message(paste("    Not enough data points (", nrow(Xp), ") or not enough unique outcomes (", length(unique(yp)), ") for pattern '", pattern_str, "'. Model not trained for this pattern.", sep=""))
-            self$models_by_pattern[[pattern_str]] <- NULL # Explicitly set to NULL
+            # Keeping the message for debugging, but this is expected behavior for this class
+            message(paste("    Not enough data points (", nrow(Xp_clean), ") vs vars (", num_active_vars, ") for pattern '", pattern_str, "'.", sep=""))
+            self$models_by_pattern[[pattern_str]] <- NULL 
           }
         }
       }
@@ -747,8 +918,7 @@ RegLogPatByPatMinObservation <- R6::R6Class("RegLogPatByPat",
       for (pattern_str in unique_pattern_keys_new) {
         
         pattern_indices <- which(all_pattern_keys_new == pattern_str)
-        
-        current_m_mask_vec <- M_new_matrix[pattern_indices[1], ] # Mask is same for all rows with this pattern
+        current_m_mask_vec <- M_new_matrix[pattern_indices[1], ] 
 
         all_vars_missing <- all(current_m_mask_vec == 1)
 
@@ -758,8 +928,31 @@ RegLogPatByPatMinObservation <- R6::R6Class("RegLogPatByPat",
           reg_model <- self$models_by_pattern[[pattern_str]]
 
           X_current_pattern <- X_new_df[pattern_indices, current_m_mask_vec == 0, drop = FALSE]
-          pattern_predictions <- predict(reg_model, newdata = X_current_pattern, type = "response")
+
+          if (!is.null(reg_model$xlevels)) {
+            for (var_name in names(reg_model$xlevels)) {
+              if (var_name %in% names(X_current_pattern)) {
+                known_levels <- reg_model$xlevels[[var_name]]
+                current_vals <- X_current_pattern[[var_name]]
+                
+                is_unknown_level <- !(current_vals %in% known_levels)
+                
+                if (any(is_unknown_level)) {
+                   X_current_pattern[is_unknown_level, var_name] <- NA
+                }
+              }
+            }
+          }
+
+          # --- FIX: added na.action = na.pass ---
+          pattern_predictions <- suppressWarnings(
+            predict(reg_model, newdata = X_current_pattern, type = "response", na.action = na.pass)
+          )
           
+          if (any(is.na(pattern_predictions))) {
+             pattern_predictions[is.na(pattern_predictions)] <- self$default_prob
+          }
+
           predictions[pattern_indices] <- pattern_predictions
         }
       }
