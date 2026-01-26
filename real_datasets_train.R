@@ -21,13 +21,13 @@ methods <- c(
   
   MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
   MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
-
+  
   MICELogisticRegression$new(name="MICE.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
   MICELogisticRegression$new(name="MICE.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
-
+  
   MICERFLogisticRegression$new(name="MICE.RF.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
   MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
-
+  
   MeanImputationLogisticRegression$new(name="Mean.IMP", mask=FALSE),
   MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),
 
@@ -160,15 +160,20 @@ data_info <- list(
   )
 )
 
-
-# Training
-
-for(datas in data_info){
+process_dataset <- function(datas, methods, k_fold, methods_cannot_deal_with_categorical) {
+  
   file <- datas$file
   var <- datas$var
   value <- datas$value
   
-  dataset <- readRDS(paste0("real_datasets/", file, ".RDS"))
+  # Ensure input directory exists or handle error if needed
+  rds_path <- paste0("real_datasets/", file, ".RDS")
+  if (!file.exists(rds_path)) {
+    warning(paste("File not found:", rds_path))
+    return(NULL)
+  }
+  
+  dataset <- readRDS(rds_path)
   remove_NAs <- is.na(dataset[[var]])
   dataset <- dataset[!remove_NAs, ]
   
@@ -176,16 +181,16 @@ for(datas in data_info){
   Y <- as.numeric(Y.values) <= value
   X <- dataset %>% select(-all_of(var))
   cat_var <- sapply(X, is.factor)
-
-  n <- nrow(X)
-  d <- ncol(X)
   
-  # randomize the indices
+  n <- nrow(X)
+  
+  # Randomize indices
   new_idx <- sample(1:n, n, replace=FALSE)
   X <- X[new_idx, ]
   Y <- Y[new_idx]
   M <- is.na(X)
   
+  # Initialize predictions list
   all_preds <- list()
   for(met in methods){
     all_preds[[met$name]] <- rep(NA, n)
@@ -194,7 +199,9 @@ for(datas in data_info){
   fold_ids <- numeric(n)
   
   for(fold in 1:k_fold){
-    cat("Dataset:", file, "- Fold:", fold, "\n")
+    # Using message() instead of cat() works better in parallel logs sometimes
+    # but cat() is fine if you don't need real-time logs in the console
+    
     test_indices <- seq(fold, n, by=k_fold)
     train_indices <- setdiff(1:n, test_indices)
     fold_ids[test_indices] <- fold
@@ -202,33 +209,28 @@ for(datas in data_info){
     X_train <- X[train_indices, ]
     Y_train <- Y[train_indices]
     M_train <- M[train_indices, ]
-
+    
     X_test <- X[test_indices, ]
     Y_test <- Y[test_indices]
     M_test <- M[test_indices, ]
-
+    
     factor_cols <- which(cat_var)
     for(j in factor_cols){
       train_levs <- unique(X_train[[j]])
-      
       is_unseen <- !(X_test[[j]] %in% train_levs) & !is.na(X_test[[j]])
-      
       if(any(is_unseen)){
         X_test[is_unseen, j] <- NA
         M_test[is_unseen, j] <- TRUE
       }
-      
     }
     
     for(method in methods){
-      cat("   Method:", method$name, "\n")
-
+      
       if(method$name %in% methods_cannot_deal_with_categorical){
         X_train_met <- X_train[, !cat_var, drop=FALSE]
         X_test_met <- X_test[, !cat_var, drop=FALSE]
         M_train_met <- M_train[, !cat_var, drop=FALSE]
         M_test_met <- M_test[, !cat_var, drop=FALSE]
-        
       } else {
         X_train_met <- X_train
         X_test_met <- X_test
@@ -241,36 +243,61 @@ for(datas in data_info){
       } else {
         is_fully_missing <- rowSums(M_test_met) == ncol(M_test_met)
       }
-
-      baseline_prob <- mean(Y_train, na.rm = TRUE)
       
+      baseline_prob <- mean(Y_train, na.rm = TRUE)
       final_preds <- rep(baseline_prob, nrow(X_test_met))
       
       if (any(!is_fully_missing)) {
-        
         valid_idx <- which(!is_fully_missing)
-        
         X_test_valid <- X_test_met[valid_idx, , drop=FALSE]
         M_test_valid <- M_test_met[valid_idx, , drop=FALSE]
-
+        
+        # Use tryCatch to prevent one method failing from stopping the whole worker
         valid_preds <- tryCatch({
           method$fit(X_train_met, M_train_met, Y_train, X_test_valid, M_test_valid)
           method$predict_probs(X_test_valid, M_test_valid)
         }, error = function(e) {
-          cat(paste0("   Warning: Method '", method$name, "' failed (", e$message, "). Using global mean.\n"))
-          return(rep(mean(Y_train, na.rm = TRUE), nrow(X_test_valid)))
+          # Only warning, no return here to keep flow
+          return(rep(baseline_prob, nrow(X_test_valid)))
         })        
         final_preds[valid_idx] <- valid_preds
       }
       all_preds[[method$name]][test_indices] <- final_preds
-
     }
   }
   
-  dir.create("real_datasets_results/preds", showWarnings = FALSE)
+  # Save Results
+  dir.create("real_datasets_results/preds", recursive = TRUE, showWarnings = FALSE)
   saveRDS(all_preds, file=paste0("real_datasets_results/preds/", file, "_preds.RDS"))
   saveRDS(Y, file=paste0("real_datasets_results/preds/", file, "_Y.RDS"))
   saveRDS(fold_ids, file=paste0("real_datasets_results/preds/", file, "_folds.RDS"))
+  
+  return(paste("Completed:", file))
 }
+
+# ------------------------------------------------------------------------------
+# 3. Parallel Execution
+# ------------------------------------------------------------------------------
+
+# Set up parallel backend
+# Use availableCores() - 1 to leave one core free for system stability
+n_cores <- max(1, availableCores() - 1)
+plan(multisession, workers = n_cores)
+
+cat("Starting parallel processing on", n_cores, "cores...\n")
+
+# Run processing
+# future_walk is used because we are relying on side-effects (saving files)
+# future.seed = TRUE is crucial for reproducible 'sample()' calls inside the workers
+future_walk(
+  .x = data_info, 
+  .f = process_dataset, 
+  methods = methods, 
+  k_fold = k_fold, 
+  methods_cannot_deal_with_categorical = methods_cannot_deal_with_categorical,
+  .options = furrr_options(seed = TRUE)
+)
+
+cat("All datasets processed.\n")
 
 
