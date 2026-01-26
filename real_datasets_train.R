@@ -15,19 +15,19 @@ source("methods_in_R.R")
 k_fold <- 5
 get_fresh_methods <- function() {
   list(
-    SAEMLogisticRegression$new(name="SAEM", lambda=0, alpha=0),
-    
-    MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
-    MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
-    
-    MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
-    MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
-    
-    MICELogisticRegression$new(name="MICE.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
-    MICELogisticRegression$new(name="MICE.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
-    
-    MICERFLogisticRegression$new(name="MICE.RF.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
-    MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+    # SAEMLogisticRegression$new(name="SAEM", lambda=0, alpha=0),
+    # 
+    # MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+    # MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+    # 
+    # MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+    # MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+    # 
+    # MICELogisticRegression$new(name="MICE.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+    # MICELogisticRegression$new(name="MICE.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+    # 
+    # MICERFLogisticRegression$new(name="MICE.RF.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+    # MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
     
     MeanImputationLogisticRegression$new(name="Mean.IMP", mask=FALSE),
     MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),
@@ -52,106 +52,106 @@ data_info <- list(
     var = "Wind",
     value = 9.7
   ),
-  # boys = list(
-  #   file = "boys",
-  #   var = "age",
-  #   value = 10.5045
-  # ),
-  # ## chorizonDL = list(
-  # ##   file = "chorizonDL",
-  # ##   var = "Ti_XRF",
-  # ##   value = 0.347
-  # ## ),
-  # colic = list(
-  #   file = "colic",
-  #   var = "outcome",
-  #   value = 2
-  # ),
-  # debt = list(
-  #   file = "debt",
-  #   var = "prodebt",
-  #   value = 3.24
-  # ),
-  # diabetes = list(
-  #   file = "diabetes",
-  #   var = "Class",
-  #   value = 0
-  # ),
-  # globwarn = list(
-  #   file = "globwarm",
-  #   var = "chesapeake",
-  #   value = -0.48
-  # ),
-  # housevotes84 = list(
-  #   file = "housevotes84",
-  #   var = "Class",
-  #   value = 1
-  # ),
-  # NHANES = list(
-  #   file = "NHANES",
-  #   var = "Age",
-  #   value = 36
-  # ),
-  # oceanbuoys = list(
-  #   file = "oceanbuoys",
-  #   var = "wind_ns",
-  #   value = 2.9
-  # ),
-  # Ozone = list(
-  #   file = "Ozone",
-  #   var = "V13",
-  #   value = 110
-  # ),
-  # pedestrian = list(
-  #   file = "pedestrian",
-  #   var = "sensor_id",
-  #   value = 10
-  # ),
-  # popmis = list(
-  #   file = "popmis",
-  #   var = "teachpop",
-  #   value = 4
-  # ),
-  # pulplignin = list(
-  #   file = "pulplignin",
-  #   var = "Y.Kappa",
-  #   value = 20.74
-  # ),
-  # ## riskfactors = list(
-  # ##   file = "riskfactors",
-  # ##   var = "health_general",
-  # ##   value = 2
-  # ## ),
-  # SBS5242 = list(
-  #   file = "SBS5242",
-  #   var = "USB",
-  #   value = 4.779415
-  # ),
-  # selfreport = list(
-  #   file = "selfreport",
-  #   var = "sex",
-  #   value = 1.5
-  # ),
-  # sleep = list(
-  #   file = "sleep",
-  #   var = "Danger",
-  #   value = 2
-  # ),
-  # soybean = list(
-  #   file = "soybean",
-  #   var = "Class",
-  #   value = 7
-  # ),
-  # tbc = list(
-  #   file = "tbc",
-  #   var = "sex",
-  #   value = 1
-  # ),
-  # vnf = list(
-  #   file = "vnf",
-  #   var = "Q8.1",
-  #   value = 1
-  # ),
+  boys = list(
+    file = "boys",
+    var = "age",
+    value = 10.5045
+  ),
+  ## chorizonDL = list(
+  ##   file = "chorizonDL",
+  ##   var = "Ti_XRF",
+  ##   value = 0.347
+  ## ),
+  colic = list(
+    file = "colic",
+    var = "outcome",
+    value = 2
+  ),
+  debt = list(
+    file = "debt",
+    var = "prodebt",
+    value = 3.24
+  ),
+  diabetes = list(
+    file = "diabetes",
+    var = "Class",
+    value = 0
+  ),
+  globwarn = list(
+    file = "globwarm",
+    var = "chesapeake",
+    value = -0.48
+  ),
+  housevotes84 = list(
+    file = "housevotes84",
+    var = "Class",
+    value = 1
+  ),
+  NHANES = list(
+    file = "NHANES",
+    var = "Age",
+    value = 36
+  ),
+  oceanbuoys = list(
+    file = "oceanbuoys",
+    var = "wind_ns",
+    value = 2.9
+  ),
+  Ozone = list(
+    file = "Ozone",
+    var = "V13",
+    value = 110
+  ),
+  pedestrian = list(
+    file = "pedestrian",
+    var = "sensor_id",
+    value = 10
+  ),
+  popmis = list(
+    file = "popmis",
+    var = "teachpop",
+    value = 4
+  ),
+  pulplignin = list(
+    file = "pulplignin",
+    var = "Y.Kappa",
+    value = 20.74
+  ),
+  ## riskfactors = list(
+  ##   file = "riskfactors",
+  ##   var = "health_general",
+  ##   value = 2
+  ## ),
+  SBS5242 = list(
+    file = "SBS5242",
+    var = "USB",
+    value = 4.779415
+  ),
+  selfreport = list(
+    file = "selfreport",
+    var = "sex",
+    value = 1.5
+  ),
+  sleep = list(
+    file = "sleep",
+    var = "Danger",
+    value = 2
+  ),
+  soybean = list(
+    file = "soybean",
+    var = "Class",
+    value = 7
+  ),
+  tbc = list(
+    file = "tbc",
+    var = "sex",
+    value = 1
+  ),
+  vnf = list(
+    file = "vnf",
+    var = "Q8.1",
+    value = 1
+  ),
   walking = list(
     file = "walking",
     var = "sex",
