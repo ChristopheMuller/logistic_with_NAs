@@ -12,29 +12,29 @@ source("methods_in_R.R")
 
 
 # Input
-k_fold <- 5
+k_fold <- 2
 methods <- c(
   # SAEMLogisticRegression$new(name="SAEM", lambda=0, alpha=0),
-  # 
+  
+  # MICELogisticRegression$new(name="MICE.1.IMP", n_imputations=1, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+  
   # MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
   # MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
   
   # MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
   # MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
   
-  # 
+
   MeanImputationLogisticRegression$new(name="Mean.IMP", mask=FALSE),
-  # MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),
-  # 
+  MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),
+
   ConstantImputationLogisticRegression$new(name="05.IMP", fill_value=0.5, mask=FALSE),
   ConstantImputationLogisticRegression$new(name="05.IMP.M", fill_value=0.5, mask=TRUE),
-  # 
+
   RegLogPatByPat$new(name="PbP")
   # RegLogPatByPatMinObservation$new(name="PbP.MinObs"),
 
   # RegLogPatByPatRegularized$new(name="PbP.Reg")
-
-  
   
 )
 
@@ -55,11 +55,11 @@ data_info <- list(
     var = "age",
     value = 10.5045
   ),
-  chorizonDL = list(
-    file = "chorizonDL",
-    var = "Ti_XRF",
-    value = 0.347
-  ),
+  ## chorizonDL = list(
+  ##   file = "chorizonDL",
+  ##   var = "Ti_XRF",
+  ##   value = 0.347
+  ## ),
   colic = list(
     file = "colic",
     var = "outcome",
@@ -115,11 +115,11 @@ data_info <- list(
     var = "Y.Kappa",
     value = 20.74
   ),
-  riskfactors = list(
-    file = "riskfactors",
-    var = "health_general",
-    value = 2
-  ),
+  ## riskfactors = list(
+  ##   file = "riskfactors",
+  ##   var = "health_general",
+  ##   value = 2
+  ## ),
   SBS5242 = list(
     file = "SBS5242",
     var = "USB",
@@ -173,7 +173,7 @@ for(datas in data_info){
   Y <- as.numeric(Y.values) <= value
   X <- dataset %>% select(-all_of(var))
   cat_var <- sapply(X, is.factor)
-  
+
   n <- nrow(X)
   d <- ncol(X)
   
@@ -238,7 +238,7 @@ for(datas in data_info){
       } else {
         is_fully_missing <- rowSums(M_test_met) == ncol(M_test_met)
       }
-      
+
       baseline_prob <- mean(Y_train, na.rm = TRUE)
       
       final_preds <- rep(baseline_prob, nrow(X_test_met))
@@ -249,7 +249,7 @@ for(datas in data_info){
         
         X_test_valid <- X_test_met[valid_idx, , drop=FALSE]
         M_test_valid <- M_test_met[valid_idx, , drop=FALSE]
-      
+
         valid_preds <- tryCatch({
           method$fit(X_train_met, M_train_met, Y_train, X_test_valid, M_test_valid)
           method$predict_probs(X_test_valid, M_test_valid)
@@ -264,10 +264,10 @@ for(datas in data_info){
     }
   }
   
-  dir.create("real_datasets_results", showWarnings = FALSE)
-  saveRDS(all_preds, file=paste0("real_datasets_results/", file, "_preds.RDS"))
-  saveRDS(Y, file=paste0("real_datasets_results/", file, "_Y.RDS"))
-  saveRDS(fold_ids, file=paste0("real_datasets_results/", file, "_folds.RDS"))
+  dir.create("real_datasets_results/preds", showWarnings = FALSE)
+  saveRDS(all_preds, file=paste0("real_datasets_results/preds/", file, "_preds.RDS"))
+  saveRDS(Y, file=paste0("real_datasets_results/preds/", file, "_Y.RDS"))
+  saveRDS(fold_ids, file=paste0("real_datasets_results/preds/", file, "_folds.RDS"))
 }
 
 
