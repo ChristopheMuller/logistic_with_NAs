@@ -32,8 +32,6 @@ data/SimMNARBIG/*/
 !data/SimNL/*
 data/SimNL/*/
 
-
-real_datasets/
-real_datasets_results/
+real_datasets_results/preds/*
 
 .DS_Store
