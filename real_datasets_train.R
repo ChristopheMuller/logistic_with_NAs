@@ -12,18 +12,21 @@ source("methods_in_R.R")
 
 
 # Input
-k_fold <- 2
+k_fold <- 5
 methods <- c(
-  # SAEMLogisticRegression$new(name="SAEM", lambda=0, alpha=0),
+  SAEMLogisticRegression$new(name="SAEM", lambda=0, alpha=0),
+    
+  MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+  MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
   
-  # MICELogisticRegression$new(name="MICE.1.IMP", n_imputations=1, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
-  
-  # MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
-  # MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
-  
-  # MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
-  # MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
-  
+  MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+  MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+
+  MICELogisticRegression$new(name="MICE.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+  MICELogisticRegression$new(name="MICE.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+
+  MICERFLogisticRegression$new(name="MICE.RF.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+  MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
 
   MeanImputationLogisticRegression$new(name="Mean.IMP", mask=FALSE),
   MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),
@@ -31,8 +34,8 @@ methods <- c(
   ConstantImputationLogisticRegression$new(name="05.IMP", fill_value=0.5, mask=FALSE),
   ConstantImputationLogisticRegression$new(name="05.IMP.M", fill_value=0.5, mask=TRUE),
 
-  RegLogPatByPat$new(name="PbP")
-  # RegLogPatByPatMinObservation$new(name="PbP.MinObs"),
+  RegLogPatByPat$new(name="PbP"),
+  RegLogPatByPatMinObservation$new(name="PbP.MinObs")
 
   # RegLogPatByPatRegularized$new(name="PbP.Reg")
   
