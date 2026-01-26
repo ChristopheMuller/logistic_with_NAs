@@ -127,8 +127,13 @@ MICELogisticRegression <- R6::R6Class("MICELogisticRegression",
         }
 
         # Fit logistic regression
-        formula <- as.formula(paste("y ~", paste(names(imp_train_data)[names(imp_train_data) != "y"], 
-                                                 collapse = " + ")))
+        rhs <- names(imp_train_data)
+        rhs <- rhs[rhs != "y"]
+        if (length(rhs) == 0){
+          formula <- as.formula("y ~ 1")
+        } else {
+          formula <- as.formula(paste("y ~", paste(rhs, collapse = " + ")))
+        }
         models[[i]] <- glm(formula, family = binomial(), data = cbind(imp_train_data, y = y_train))
       }
       
@@ -826,7 +831,7 @@ RegLogPatByPatRegularized <- R6::R6Class("RegLogPatByPatRegularized",
 )
 
 
-RegLogPatByPatMinObservation <- R6::R6Class("RegLogPatByPat",
+RegLogPatByPatMinObservation <- R6::R6Class("RegLogPatByPatMinObservation",
   inherit = ImputationMethod,
   public = list(
 
@@ -898,7 +903,7 @@ RegLogPatByPatMinObservation <- R6::R6Class("RegLogPatByPat",
           } else {
             # Keeping the message for debugging, but this is expected behavior for this class
             message(paste("    Not enough data points (", nrow(Xp_clean), ") vs vars (", num_active_vars, ") for pattern '", pattern_str, "'.", sep=""))
-            self$models_by_pattern[[pattern_str]] <- NULL 
+            self$models_by_pattern[[pattern_str]] <- list(NULL) 
           }
         }
       }
