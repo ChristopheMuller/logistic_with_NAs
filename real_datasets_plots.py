@@ -16,6 +16,19 @@ def plot_real_datasets_grid(df, datasets, metrics, methods, output_path=None):
         (df["Method"].isin(methods))
     ].copy()
 
+    # Pre-aggregation check for the AUC/Calibration logic
+    for (d, mthd), group in df_filtered.groupby(["Dataset", "Method"]):
+        cal_mask = group["Metric"] == "Calibration"
+        auc_mask = group["Metric"] == "AUC"
+        
+        if cal_mask.any() and group.loc[cal_mask, "Value"].isna().all():
+            # Check the mean AUC for this specific Dataset/Method
+            mean_auc = group.loc[auc_mask, "Value"].mean()
+            
+            if np.isclose(mean_auc, 0.5, atol=1e-3):
+                idx_to_fix = group[cal_mask].index
+                df_filtered.loc[idx_to_fix, "Value"] = 0.0
+
     df_agg = df_filtered.groupby(["Dataset", "Metric", "Method"])["Value"].agg(["mean", "std", "count"]).reset_index()
     df_agg["se"] = df_agg["std"] / np.sqrt(df_agg["count"])
 
@@ -43,11 +56,8 @@ def plot_real_datasets_grid(df, datasets, metrics, methods, output_path=None):
 
         for c_idx, m_name in enumerate(metrics):
             ax = fig.add_subplot(gs[r_idx, c_idx])
-            
-            data_subset = df_agg[
-                (df_agg["Dataset"] == d_name) & 
-                (df_agg["Metric"] == m_name)
-            ]
+
+            data_subset = df_agg[(df_agg["Dataset"] == d_name) & (df_agg["Metric"] == m_name)].copy()
 
             if data_subset.empty:
                 ax.axis('off')
@@ -89,9 +99,12 @@ def plot_real_datasets_grid(df, datasets, metrics, methods, output_path=None):
             ax.spines['top'].set_visible(False)
             ax.spines['right'].set_visible(False)
             ax.spines['bottom'].set_visible(False)
-            
-            y_min = data_subset["mean"].min()
-            y_max = data_subset["mean"].max()
+
+            data_subset.loc[:,"ub"] = data_subset.loc[:,"mean"] + data_subset.loc[:,"se"]
+            data_subset.loc[:,"lb"] = data_subset.loc[:,"mean"] - data_subset.loc[:,"se"]
+
+            y_min = data_subset["lb"].min()
+            y_max = data_subset["ub"].max()
             y_range = y_max - y_min
             if y_range == 0:
                 y_range = 0.1
@@ -122,11 +135,15 @@ if __name__ == "__main__":
     try:
         df = pd.read_csv("real_datasets_results/real_datasets_metrics_detailed.csv")
 
-        selected_datasets = sorted(df["Dataset"].unique().tolist())
+        # df datasets: to lowercase
+        df["Dataset"] = df["Dataset"].str.lower()
+
+        selected_datasets = sorted(df["Dataset"].unique().tolist())[10:]
         selected_metrics = ["AUC", "Brier", "Misclassification", "Calibration"]
         selected_methods = sorted(df["Method"].unique().tolist()) 
 
-        plot_real_datasets_grid(df, selected_datasets, selected_metrics, selected_methods)
+        plot_real_datasets_grid(df, selected_datasets, selected_metrics, selected_methods,
+                                output_path="real_datasets_results/real_data_2.pdf")
         
     except FileNotFoundError:
         print("CSV file not found. Please ensure the path is correct.")
