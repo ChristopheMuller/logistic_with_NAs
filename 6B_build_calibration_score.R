@@ -10,7 +10,7 @@ np <- import("numpy")
 # Configuration
 ####
 
-exp <- "SimMNAR"
+exp <- "SimNL"
 df_set_up <- read.csv(file.path("data", exp, "set_up.csv"))
 simulation_file <- file.path("data", exp, "simulation.csv")
 df_simulations <- read.csv(simulation_file)

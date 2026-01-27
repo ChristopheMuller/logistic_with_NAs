@@ -1,0 +1,3 @@
+sim=SimNL
+methods=PbP.Reg
+training=100,500,1000,5000,10000,50000
