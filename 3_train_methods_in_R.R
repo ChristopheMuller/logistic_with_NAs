@@ -116,6 +116,7 @@ create_method_object <- function(key) {
 
     "PbP" = RegLogPatByPat$new(name="PbP"),
     "PbP.MinObs" = RegLogPatByPatMinObservation$new(name="PbP.MinObs"),
+    "PbP.Reg" = RegLogPatByPatRegularized$new(name="PbP.Reg"),
     
     "CC" = CompleteCase$new(name="CC"),
 
