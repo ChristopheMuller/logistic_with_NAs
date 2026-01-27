@@ -68,7 +68,7 @@ saveRDS(results, file = "real_datasets_results/coverage_results.rds")
 resul_loaded <- readRDS("real_datasets_results/coverage_results.rds")
 
 # Cols of interest
-# - file name (without rds)
+# - file name (without rds, and in lower case)
 # - n_rows
 # - n_cols
 # - n_missing (% of cells)
@@ -77,7 +77,7 @@ resul_loaded <- readRDS("real_datasets_results/coverage_results.rds")
 
 final_results <- resul_loaded %>%
   mutate(
-    file = gsub("\\.RDS$", "", basename(file)),
+    file = tools::file_path_sans_ext(basename(tolower(file))),
     pct_missing = n_missing / (n_rows * n_cols) * 100,
     top_3_mask_coverage = top_3_mask_count / n_rows * 100,
     top_10_mask_coverage = top_10_mask_count / n_rows * 100
@@ -86,6 +86,7 @@ final_results <- resul_loaded %>%
     file,
     n_rows,
     n_cols,
+    n_unique_masks,
     pct_missing,
     top_3_mask_coverage,
     top_10_mask_coverage
@@ -97,7 +98,7 @@ library(xtable)
 latex_table <- xtable(final_results, 
                       caption = "Summary of missing data statistics per dataset.",
                       label = "tab:real_data_sets",
-                      digits = c(0, 0, 0, 0, 2, 2, 2))
+                      digits = c(0, 0, 0, 0, 0, 2, 2, 2))
 
 print(latex_table, 
       file = "tables_and_figures/missing_data_table.tex", 
