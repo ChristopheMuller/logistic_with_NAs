@@ -7,7 +7,7 @@ import os
 
 # %%
 
-exp = "SimMAR"
+exp = "SimMNAR"
 
 simulation_set_up = pd.read_csv(os.path.join("data", exp, "simulation_set_up.csv"))
 

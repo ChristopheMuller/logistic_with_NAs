@@ -21,7 +21,7 @@ name_score_matrix = "score_matrix.csv"
 
 # %% set up
 
-exp = "SimMAR"
+exp = "SimMNAR"
 
 all_methods_to_process = [
 # "MICE.1.IMP","MICE.1.Y.IMP","MICE.1.M.IMP","MICE.1.Y.M.IMP",
