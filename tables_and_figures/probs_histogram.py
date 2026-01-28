@@ -46,7 +46,7 @@ plt.xlim(0, 1) # Explicitly set x-axis limits to 0 and 1 for clarity
 plt.legend()
 plt.grid(axis='y', alpha=0.75)
 plt.tight_layout()
-plt.savefig("plots_scripts/plots/SimA_probs_histogram.pdf")
+plt.savefig("tables_and_figures/plots/SimA_probs_histogram.pdf")
 plt.show()
 
 

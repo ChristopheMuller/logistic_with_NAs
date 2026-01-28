@@ -11,6 +11,9 @@ metrics_config = {
     "mse_error": {"label": "Inference"},
     "mse_error_with_intercept": {"label": "Inference"},
     "angular_error_with_intercept": {"label": "Angular"},
+
+    "running_time_train": {"label": "Train Time (s)"},
+    "running_time_pred": {"label": "Predict Time (s)"},
 }
 
 import seaborn as sns
@@ -26,7 +29,8 @@ methods_config = {
     "PbP.Fixed": {"label": "PbP", "color": color_palette[0], "linestyle": "-", "marker":"o"},
     "PbP.MinObs": {"label": "PbP.MinObs", "color": color_palette[7], "linestyle": "--", "marker":"x"},
 
-    "SAEM": {"label": "SAEM", "color": color_palette[5], "linestyle": "-", "marker":"D"}, # Changed marker
+    "SAEM": {"label": "SAEM.OLD", "color": color_palette[5], "linestyle": "--", "marker":"P"}, # Changed marker
+    "SAEM.NoReg": {"label": "SAEM", "color": color_palette[5], "linestyle": "-", "marker":"D"},
 
     "Mean.IMP": {"label": "Mean.IMP", "color": color_palette[3], "linestyle": "-", "marker":"o"},
     "Mean.IMP.M": {"label": "Mean.IMP.M", "color": color_palette[3], "linestyle": "--", "marker":"v"}, # Changed marker

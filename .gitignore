@@ -6,6 +6,7 @@
 *.pdf
 *.pyc
 *.jpg
+*.tex
 env.sif
 
 data/*
@@ -30,3 +31,7 @@ data/SimMNARBIG/*/
 !data/SimNL/
 !data/SimNL/*
 data/SimNL/*/
+
+real_datasets_results/preds/*
+
+.DS_Store
