@@ -134,16 +134,21 @@ def plot_real_datasets_grid(df, datasets, metrics, methods, output_path=None):
 if __name__ == "__main__":
     try:
         df = pd.read_csv("real_datasets_results/real_datasets_metrics_detailed.csv")
-
-        # df datasets: to lowercase
+        df2 = pd.read_csv("tabzilla/tabzilla_real_datasets_results/real_datasets_metrics_detailed.csv")
+        df = pd.concat([df, df2], ignore_index=True)
+        
+        # sort df
+        df = df.sort_values(by=["Dataset", "Metric", "Method"]).reset_index(drop=True)
+        # df datasets: 
+        # 1. to lowercase
         df["Dataset"] = df["Dataset"].str.lower()
 
-        selected_datasets = sorted(df["Dataset"].unique().tolist())[10:]
+        selected_datasets = sorted(df["Dataset"].unique().tolist())
         selected_metrics = ["AUC", "Brier", "Misclassification", "Calibration"]
         selected_methods = sorted(df["Method"].unique().tolist()) 
 
         plot_real_datasets_grid(df, selected_datasets, selected_metrics, selected_methods,
-                                output_path="real_datasets_results/real_data_2.pdf")
+                                output_path="real_datasets_results/real_data.pdf")
         
     except FileNotFoundError:
         print("CSV file not found. Please ensure the path is correct.")
