@@ -903,7 +903,6 @@ RegLogPatByPatMinObservation <- R6::R6Class("RegLogPatByPatMinObservation",
           } else {
             # Keeping the message for debugging, but this is expected behavior for this class
             message(paste("    Not enough data points (", nrow(Xp_clean), ") vs vars (", num_active_vars, ") for pattern '", pattern_str, "'.", sep=""))
-            self$models_by_pattern[[pattern_str]] <- list(NULL) 
           }
         }
       }
@@ -1053,3 +1052,142 @@ CompleteCase <- R6::R6Class("CompleteCase",
     }
   )
 )
+
+
+RegLogPatByPatMinObservationPreDefined <- R6::R6Class("RegLogPatByPatMinObservationPreDefined",
+        inherit = ImputationMethod,
+        public = list(
+          
+          models_by_pattern = NULL,
+          default_prob = NULL,
+          k = 5,
+          
+          initialize = function(name = "PbP", k=5) {
+            super$initialize(name)
+            self$can_predict = TRUE
+            self$return_beta = FALSE
+            self$models_by_pattern = list()
+            self$k = k
+          },
+          
+          fit = function(X, M, y, X_test = NULL, M_test = NULL) {
+            
+            X_df <- as.data.frame(X)
+            M_matrix <- as.matrix(M)
+            y_vec <- as.numeric(y)
+            
+            self$default_prob <- mean(y_vec, na.rm = TRUE)
+            
+            all_pattern_keys <- apply(M_matrix, 1, paste, collapse = "_")
+            unique_pattern_keys <- unique(all_pattern_keys)
+            
+            for (pattern_str in unique_pattern_keys) {
+              
+              # Optimized matching
+              S_indices <- which(all_pattern_keys == pattern_str)
+              current_pattern_mask_vec <- M_matrix[S_indices[1], ]
+              
+              has_observed_vars <- any(current_pattern_mask_vec == 0)
+              
+              if (has_observed_vars) {
+                
+                Xp <- X_df[S_indices, current_pattern_mask_vec == 0, drop = FALSE]
+                yp <- y_vec[S_indices]
+                
+                keep_cols <- sapply(Xp, function(col) length(unique(col)) > 1)
+                Xp_clean <- Xp[, keep_cols, drop = FALSE]
+
+                num_active_vars <- ncol(Xp_clean)
+                
+                if (nrow(Xp_clean) >= self$k && length(unique(yp)) >= 2) {
+                  
+                  model_data <- Xp_clean
+                  model_data$y_outcome <- yp
+                  
+                  if (ncol(Xp_clean) > 0) {
+                    vars_clean <- paste0("`", names(Xp_clean), "`")
+                    formula_str <- paste("y_outcome ~", paste(vars_clean, collapse = " + "))
+                  } else {
+                    formula_str <- "y_outcome ~ 1"
+                  }
+                  
+                  reg_model <- tryCatch({
+                    glm(as.formula(formula_str), family = binomial(), data = model_data)
+                  }, error = function(e) {
+                    message(paste("    Warning: GLM failed for pattern '", pattern_str, "'. Error: ", e$message, sep=""))
+                    return(NULL) 
+                  })
+                  
+                  self$models_by_pattern[[pattern_str]] <- reg_model
+                } else {
+                  message(paste("    Not enough data points (", nrow(Xp_clean), ") vs vars (", num_active_vars, ") for pattern '", pattern_str, "'.", sep=""))
+                }
+              }
+            }
+            TRUE
+          },
+          
+          predict_probs = function(X_new, M_new) {
+            X_new_df <- as.data.frame(X_new)
+            M_new_matrix <- as.matrix(M_new)
+            
+            n_new_obs <- nrow(X_new_df)
+            predictions <- numeric(n_new_obs)
+            
+            all_pattern_keys_new <- apply(M_new_matrix, 1, paste, collapse = "_")
+            unique_pattern_keys_new <- unique(all_pattern_keys_new)
+            
+            for (pattern_str in unique_pattern_keys_new) {
+              
+              pattern_indices <- which(all_pattern_keys_new == pattern_str)
+              current_m_mask_vec <- M_new_matrix[pattern_indices[1], ] 
+              
+              all_vars_missing <- all(current_m_mask_vec == 1)
+              
+              if (all_vars_missing || is.null(self$models_by_pattern[[pattern_str]])) {
+                predictions[pattern_indices] <- self$default_prob
+              } else {
+                reg_model <- self$models_by_pattern[[pattern_str]]
+                
+                X_current_pattern <- X_new_df[pattern_indices, current_m_mask_vec == 0, drop = FALSE]
+                
+                if (!is.null(reg_model$xlevels)) {
+                  for (var_name in names(reg_model$xlevels)) {
+                    if (var_name %in% names(X_current_pattern)) {
+                      known_levels <- reg_model$xlevels[[var_name]]
+                      current_vals <- X_current_pattern[[var_name]]
+                      
+                      is_unknown_level <- !(current_vals %in% known_levels)
+                      
+                      if (any(is_unknown_level)) {
+                        X_current_pattern[is_unknown_level, var_name] <- NA
+                      }
+                    }
+                  }
+                }
+                
+                pattern_predictions <- suppressWarnings(
+                  predict(reg_model, newdata = X_current_pattern, type = "response", na.action = na.pass)
+                )
+                
+                if (any(is.na(pattern_predictions))) {
+                  pattern_predictions[is.na(pattern_predictions)] <- self$default_prob
+                }
+                
+                predictions[pattern_indices] <- pattern_predictions
+              }
+            }
+            return(predictions)
+          },
+          
+          return_params = function() {
+            if (!self$return_beta) return(NULL)
+          }
+        )
+)
+
+
+
+
+
+
