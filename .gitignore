@@ -33,9 +33,10 @@ data/SimMNARBIG/*/
 data/SimNL/*/
 
 real_datasets_results/preds/*
-icml_real_datasets
-icml_real_datasets_results
-icml_other_datasets
-icml_other_datasets_results
+tabzilla/tabzilla_real_datasets_results/preds/*
+tabzilla/tabzilla_real_datasets_results/preds_backup_before_minobs/*
+tabzilla/tabzilla_datasets_discard/*
+tabzilla/tabzilla_datasets_too_big/*
+tabzilla/tabzilla_APSFailure_results/*
 
 .DS_Store
