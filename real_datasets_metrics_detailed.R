@@ -3,15 +3,12 @@ library(tidyr)
 library(pROC)
 library(reliabilitydiag)
 
-# Datasets definition
-datasets <- c("boys", "colic", "debt", "diabetes", "globwarm", "housevotes84", 
-              "oceanbuoys", "popmis", "pulplignin", "selfreport", "soybean", 
-              "tbc", "vnf", "walking",
-              "airquality", "chorizonDL", "NHANES", "Ozone", "pedestrian", 
-              "riskfactors", "SBS5242", "sleep")
+rds_dir <- "icml_other_datasets"
+file_names <- list.files(path = rds_dir, pattern = "\\.rds$", full.names = FALSE)
+datasets <- tools::file_path_sans_ext(file_names)
 
-preds_path <- "real_datasets_results/preds/"
-results_path <- "real_datasets_results/"
+preds_path <- "icml_other_datasets_results/preds/"
+results_path <- "icml_other_datasets_results/"
 results_list <- list()
 
 cat("Starting metric computation for MCCV results...\n")

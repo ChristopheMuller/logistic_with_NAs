@@ -3,7 +3,17 @@ library(tidyr)
 
 # --- 1. Prepare Data ---
 
-final_df <- read.csv("real_datasets_results/real_datasets_metrics_detailed.csv")
+final_df <- read.csv("icml_real_datasets_results/real_datasets_metrics_detailed.csv")
+final_df <- final_df %>%
+  mutate(Dataset = ifelse(Dataset == "openml__colic__25", "c25", Dataset)) %>%
+  mutate(Dataset = ifelse(Dataset == "openml__colic__27", "c27", Dataset)) %>%
+  mutate(Dataset = ifelse(Dataset == "openml__heart-c__48", "hec", Dataset)) %>%
+  mutate(Dataset = ifelse(Dataset == "openml__heart-h__50", "heh", Dataset))
+  
+
+
+# all datasets start with "openml__", remove that
+final_df$Dataset <- gsub("^openml__", "", final_df$Dataset)
 
 #in lower case, and only two first letters for dataset names
 final_df$Dataset <- tolower(final_df$Dataset)
@@ -100,7 +110,7 @@ final_table_data <- auc_means %>%
   left_join(bold_flags, by = c("Dataset", "Method")) %>%
   mutate(
     # Format number to 2 decimal places
-    Display_Str = sprintf("%.2f", Mean_AUC),
+    Display_Str = sprintf("%.4f", Mean_AUC),
     # Apply Bold Wrapper if flag is TRUE
     Display_Str = ifelse(Is_Bold, paste0("\\textbf{", Display_Str, "}"), Display_Str)
   ) %>%
@@ -113,13 +123,16 @@ wide_table <- final_table_data %>%
 
 # --- 4. View/Save ---
 
-# Print to console
-print(wide_table)
+# sort wide_table by Method
+wide_table <- wide_table %>%
+  arrange(Method)
 
 # Save as CSV (Note: CSVs don't render LaTeX bolding, but the text will contain the tags)
 write.csv(wide_table, file.path(results_path, "AUC_summary_table.csv"), row.names = FALSE)
 
 # If you want a LaTeX table printed to console
 if (requireNamespace("xtable", quietly = TRUE)) {
-  print(xtable::xtable(wide_table[,c(1,11:20)]), include.rownames = FALSE, sanitize.text.function = identity)
+  print(xtable::xtable(wide_table), include.rownames = FALSE, sanitize.text.function = identity)
 }
+
+

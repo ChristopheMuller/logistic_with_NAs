@@ -9,34 +9,61 @@ library(ggplot2)
 source("methods_in_R.R")
 
 # Setup parallel processing
-plan(multisession, workers = parallel::detectCores() - 2)
+plan(multisession, workers = parallel::detectCores() - 4)
 
 # Input
 k_fold_mc <- 15
 
 get_fresh_methods <- function() {
   list(    
-    SAEMLogisticRegression$new(name="SAEM", lambda=0, alpha=0),
+    # SAEMLogisticRegression$new(name="SAEM", lambda=0, alpha=0),
     
-    MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
-    MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+    # MICELogisticRegression$new(name="MICE.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+    # MICELogisticRegression$new(name="MICE.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
     
-    MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
-    MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
+    # MICERFLogisticRegression$new(name="MICE.RF.10.IMP", n_imputations=10, add.y=FALSE, mask.after=FALSE, mask.before=FALSE),
+    # MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP", n_imputations=10, add.y=TRUE, mask.after=FALSE, mask.before=TRUE),
     
-    MICELogisticRegression$new(name="MICE.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
-    MICELogisticRegression$new(name="MICE.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+    # MICELogisticRegression$new(name="MICE.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+    # MICELogisticRegression$new(name="MICE.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
     
-    MICERFLogisticRegression$new(name="MICE.RF.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
-    MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
+    # MICERFLogisticRegression$new(name="MICE.RF.10.IMP.M", n_imputations=10, add.y=FALSE, mask.after=TRUE, mask.before=FALSE),
+    # MICERFLogisticRegression$new(name="MICE.RF.10.Y.M.IMP.M", n_imputations=10, add.y=TRUE, mask.after=TRUE, mask.before=TRUE),
     
-    MeanImputationLogisticRegression$new(name="Mean.IMP", mask=FALSE),
-    MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),
+    # MeanImputationLogisticRegression$new(name="Mean.IMP", mask=FALSE),
+    # MeanImputationLogisticRegression$new(name="Mean.IMP.M", mask=TRUE),
     
-    ConstantImputationLogisticRegression$new(name="05.IMP", fill_value=0.5, mask=FALSE),
-    ConstantImputationLogisticRegression$new(name="05.IMP.M", fill_value=0.5, mask=TRUE),
+    # ConstantImputationLogisticRegression$new(name="05.IMP", fill_value=0.5, mask=FALSE),
+    # ConstantImputationLogisticRegression$new(name="05.IMP.M", fill_value=0.5, mask=TRUE),
     
-    RegLogPatByPat$new(name="PbP")
+    # RegLogPatByPat$new(name="PbP"),
+    RegLogPatByPatMinObservationPreDefined$new(name="PbP.1596", k=1596),
+    RegLogPatByPatMinObservationPreDefined$new(name="PbP.1806", k=1806),
+    RegLogPatByPatMinObservationPreDefined$new(name="PbP.3149", k=3149),
+    RegLogPatByPatMinObservationPreDefined$new(name="PbP.74", k=74)
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k10", k=10),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k20", k=20),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k30", k=30),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k40", k=40),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k50", k=50),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k60", k=60),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k70", k=70),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k80", k=80),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k90", k=90),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.k100", k=100),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.110", k=110),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.120", k=120),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.130", k=130),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.140", k=140),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.150", k=150),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.160", k=160),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.170", k=170),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.180", k=180),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.190", k=190),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP.200", k=200),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP602", k=602),
+    # RegLogPatByPatMinObservationPreDefined$new(name="Pbp837", k=837),
+    # RegLogPatByPatMinObservationPreDefined$new(name="PbP1383", k=1383)
   )
 }
 
@@ -46,118 +73,135 @@ methods_cannot_deal_with_categorical <- c(
   "05.IMP.M"
 )
 
-data_info <- list(
-  airquality = list(
-    file = "airquality",
-    var = "Wind",
-    value = 9.7
-  ),
-  boys = list(
-    file = "boys",
-    var = "age",
-    value = 10.5045
-  ),
-  # chorizonDL = list(
-  #   file = "chorizonDL",
-  #   var = "Ti_XRF",
-  #   value = 0.347
-  # ),
-  colic = list(
-    file = "colic",
-    var = "outcome",
-    value = 2
-  ),
-  debt = list(
-    file = "debt",
-    var = "prodebt",
-    value = 3.24
-  ),
-  diabetes = list(
-    file = "diabetes",
-    var = "Class",
-    value = 0
-  ),
-  globwarn = list(
-    file = "globwarm",
-    var = "chesapeake",
-    value = -0.48
-  ),
-  housevotes84 = list(
-    file = "housevotes84",
-    var = "Class",
-    value = 1
-  ),
-  NHANES = list(
-    file = "NHANES",
-    var = "Age",
-    value = 36
-  ),
-  oceanbuoys = list(
-    file = "oceanbuoys",
-    var = "wind_ns",
-    value = 2.9
-  ),
-  Ozone = list(
-    file = "Ozone",
-    var = "V13",
-    value = 110
-  ),
-  pedestrian = list(
-    file = "pedestrian",
-    var = "sensor_id",
-    value = 10
-  ),
-  popmis = list(
-    file = "popmis",
-    var = "teachpop",
-    value = 4
-  ),
-  pulplignin = list(
-    file = "pulplignin",
-    var = "Y.Kappa",
-    value = 20.74
-  ),
-  ## riskfactors = list(
-  ##   file = "riskfactors",
-  ##   var = "health_general",
-  ##   value = 2
-  ## ),
-  SBS5242 = list(
-    file = "SBS5242",
-    var = "USB",
-    value = 4.779415
-  ),
-  selfreport = list(
-    file = "selfreport",
-    var = "sex",
-    value = 1.5
-  ),
-  sleep = list(
-    file = "sleep",
-    var = "Danger",
-    value = 2
-  ),
-  soybean = list(
-    file = "soybean",
-    var = "Class",
-    value = 7
-  ),
-  tbc = list(
-    file = "tbc",
-    var = "sex",
-    value = 1
-  ),
-  vnf = list(
-    file = "vnf",
-    var = "Q8.1",
-    value = 1
-  ),
-  walking = list(
-    file = "walking",
-    var = "sex",
-    value = 1
+# data_info <- list(
+#   airquality = list(
+#     file = "airquality",
+#     var = "Wind",
+#     value = 9.7
+#   ),
+#   boys = list(
+#     file = "boys",
+#     var = "age",
+#     value = 10.5045
+#   ),
+#   # chorizonDL = list(
+#   #   file = "chorizonDL",
+#   #   var = "Ti_XRF",
+#   #   value = 0.347
+#   # ),
+#   colic = list(
+#     file = "colic",
+#     var = "outcome",
+#     value = 2
+#   ),
+#   debt = list(
+#     file = "debt",
+#     var = "prodebt",
+#     value = 3.24
+#   ),
+#   diabetes = list(
+#     file = "diabetes",
+#     var = "Class",
+#     value = 0
+#   ),
+#   globwarn = list(
+#     file = "globwarm",
+#     var = "chesapeake",
+#     value = -0.48
+#   ),
+#   housevotes84 = list(
+#     file = "housevotes84",
+#     var = "Class",
+#     value = 1
+#   ),
+#   NHANES = list(
+#     file = "NHANES",
+#     var = "Age",
+#     value = 36
+#   ),
+#   oceanbuoys = list(
+#     file = "oceanbuoys",
+#     var = "wind_ns",
+#     value = 2.9
+#   ),
+#   Ozone = list(
+#     file = "Ozone",
+#     var = "V13",
+#     value = 110
+#   ),
+#   pedestrian = list(
+#     file = "pedestrian",
+#     var = "sensor_id",
+#     value = 10
+#   ),
+#   popmis = list(
+#     file = "popmis",
+#     var = "teachpop",
+#     value = 4
+#   ),
+#   pulplignin = list(
+#     file = "pulplignin",
+#     var = "Y.Kappa",
+#     value = 20.74
+#   ),
+#   ## riskfactors = list(
+#   ##   file = "riskfactors",
+#   ##   var = "health_general",
+#   ##   value = 2
+#   ## ),
+#   SBS5242 = list(
+#     file = "SBS5242",
+#     var = "USB",
+#     value = 4.779415
+#   ),
+#   selfreport = list(
+#     file = "selfreport",
+#     var = "sex",
+#     value = 1.5
+#   ),
+#   sleep = list(
+#     file = "sleep",
+#     var = "Danger",
+#     value = 2
+#   ),
+#   soybean = list(
+#     file = "soybean",
+#     var = "Class",
+#     value = 7
+#   ),
+#   tbc = list(
+#     file = "tbc",
+#     var = "sex",
+#     value = 1
+#   ),
+#   vnf = list(
+#     file = "vnf",
+#     var = "Q8.1",
+#     value = 1
+#   ),
+#   walking = list(
+#     file = "walking",
+#     var = "sex",
+#     value = 1
+#   )
+# )
+
+
+rds_dir <- "icml_other_datasets"
+file_names <- list.files(path = rds_dir, pattern = "\\.rds$", full.names = FALSE)[2]
+dataset_names <- tools::file_path_sans_ext(file_names)
+data_info <- lapply(dataset_names, function(name) {
+  list(
+    file = name,
+    var = "target",
+    value = 0  
   )
-)
+})
+names(data_info) <- dataset_names
+
+# Verify the structure
+str(data_info)
+
 
 # Function to process a single fold
 process_fold <- function(fold, X, Y, M, cat_var, methods_cannot_deal_with_categorical, seed_base) {
@@ -250,7 +294,7 @@ process_fold <- function(fold, X, Y, M, cat_var, methods_cannot_deal_with_catego
 }
 
 # Training
-dir.create("real_datasets_results/preds", showWarnings = FALSE, recursive = TRUE)
+dir.create("icml_real_datasets_results/preds", showWarnings = FALSE, recursive = TRUE)
 
 for(datas in data_info){
   file <- datas$file
@@ -261,7 +305,7 @@ for(datas in data_info){
   cat("Processing dataset:", file, "\n")
   cat("========================================\n")
   
-  dataset <- readRDS(paste0("real_datasets/", file, ".RDS"))
+  dataset <- readRDS(paste0("icml_other_datasets/", file, ".RDS"))
   remove_NAs <- is.na(dataset[[var]])
   dataset <- dataset[!remove_NAs, ]
   
@@ -302,8 +346,8 @@ for(datas in data_info){
   
   # Save results
   
-  saveRDS(fold_results, file=paste0("real_datasets_results/preds/", file, "_mc_results.RDS"))
-  saveRDS(Y, file=paste0("real_datasets_results/preds/", file, "_Y.RDS"))
+  saveRDS(fold_results, file=paste0("icml_other_datasets_results/preds/", file, "_mc_results.RDS"))
+  saveRDS(Y, file=paste0("icml_other_datasets_results/preds/", file, "_Y.RDS"))
   
   cat("Results saved for", file, "\n")
 }
