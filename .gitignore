@@ -33,5 +33,9 @@ data/SimMNARBIG/*/
 data/SimNL/*/
 
 real_datasets_results/preds/*
+icml_real_datasets
+icml_real_datasets_results
+icml_other_datasets
+icml_other_datasets_results
 
 .DS_Store
