@@ -23,17 +23,17 @@ from setups_design import metrics_config, methods_config
 
 exp = "SimNL"
 names_titles = [
-    "Gaussian missing (Z1)",
-    "Gaussian missing (Z2)",
-    "Exponential missing (Z3)",
-    "Cubic missing (Z4)",
-    "Non-monotonic missing (Z5)"
+    "Gaussian missing (X1)",
+    "Gaussian missing (X2)",
+    "Exponential missing (X3)",
+    "Cubic missing (X4)",
+    "Non-monotonic missing (X5)"
 ]
 
 score_matrix = pd.read_csv(os.path.join("data", exp, "score_matrix.csv"))
 score_matrix = score_matrix[score_matrix["exp"] == exp]
 
-
+#%%
 metric_sel = "mae_bayes"
 patterns_sel = [
     [1,0,0,0,0],
@@ -60,6 +60,7 @@ methods_sel = [
 # "MICE.RF.10.Y.M.IMP.M",
 ]
 
+#%%
 
 score_matrix_sel = score_matrix[score_matrix["metric"] == metric_sel]
 score_matrix_sel = score_matrix_sel[score_matrix_sel["method"].isin(methods_sel)]
@@ -67,6 +68,12 @@ score_matrix_sel = score_matrix_sel[score_matrix_sel["exp"] == exp]
 
 score_matrix_sel = score_matrix_sel[score_matrix_sel["filter"].isin(patterns_sel)]
 
+# %%
+missing_patterns = set(patterns_sel) - set(score_matrix_sel["filter"])
+if missing_patterns:
+    raise ValueError(f"No scores found for missingness patterns: {sorted(missing_patterns)}")
+
+#%%
 score_matrix_sel["score"] = score_matrix_sel["score"].astype(float)
 score_matrix_sel = score_matrix_sel.groupby(["filter", "method", "n_train"]).agg({"score": ["mean", "std", "count"]}).reset_index()
 score_matrix_sel.columns = ["filter", "method", "n_train", "mean", "sd", "count"]
@@ -108,5 +115,7 @@ for i, pattern in enumerate(patterns_sel):
     axes[i].axhline(0, color="black", linestyle="--", linewidth=0.5)
 
 plt.tight_layout()
-plt.savefig(os.path.join("tables_and_figures", exp, f"{exp}_perPattern_{metric_sel}.pdf"))
+output_dir = os.path.join("tables_and_figures", exp)
+os.makedirs(output_dir, exist_ok=True)
+plt.savefig(os.path.join(output_dir, f"{exp}_perPattern_{metric_sel}.pdf"))
 plt.show()
