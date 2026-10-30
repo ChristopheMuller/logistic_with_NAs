@@ -10,6 +10,8 @@
 *.bib
 env.sif
 
+latex/
+
 data/*
 output
 
