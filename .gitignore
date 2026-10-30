@@ -41,3 +41,4 @@ tabzilla/tabzilla_datasets_too_big/*
 tabzilla/tabzilla_APSFailure_results/*
 
 .DS_Store
+.ignore
