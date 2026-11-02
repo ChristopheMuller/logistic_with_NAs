@@ -47,3 +47,4 @@ tabzilla/tabzilla_APSFailure_results/*
 .DS_Store
 .ignore
 .RData
+.Rhistory
