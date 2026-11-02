@@ -28,6 +28,8 @@ methods_config = {
 
     "PbP.Fixed": {"label": "PbP", "color": color_palette[0], "linestyle": "-", "marker":"o"},
     "PbP.MinObs": {"label": "PbP.MinObs", "color": color_palette[7], "linestyle": "--", "marker":"x"},
+    "PbP":  {"label": "PbP", "color": color_palette[0], "linestyle": "-", "marker":"o"},
+    "PbP.Reg":  {"label": "PbP.Reg", "color": color_palette[0], "linestyle": "--", "marker":"x"},
 
     "SAEM": {"label": "SAEM.OLD", "color": color_palette[5], "linestyle": "--", "marker":"P"}, # Changed marker
     "SAEM.NoReg": {"label": "SAEM", "color": color_palette[5], "linestyle": "-", "marker":"D"},

@@ -65,6 +65,7 @@ methods_sel = [
 score_matrix_sel = score_matrix[score_matrix["metric"] == metric_sel]
 score_matrix_sel = score_matrix_sel[score_matrix_sel["method"].isin(methods_sel)]
 score_matrix_sel = score_matrix_sel[score_matrix_sel["exp"] == exp]
+score_matrix_sel = score_matrix_sel[score_matrix_sel["bayes_adj"].astype(str).str.lower() == "false"]
 
 score_matrix_sel = score_matrix_sel[score_matrix_sel["filter"].isin(patterns_sel)]
 

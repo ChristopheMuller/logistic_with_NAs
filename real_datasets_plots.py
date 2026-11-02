@@ -142,13 +142,14 @@ if __name__ == "__main__":
         # df datasets: 
         # 1. to lowercase
         df["Dataset"] = df["Dataset"].str.lower()
+        df = df[df["Method"] != "PbP.MinObs"]
 
-        selected_datasets = sorted(df["Dataset"].unique().tolist())
+        selected_datasets = sorted(df["Dataset"].unique().tolist())[30:]
         selected_metrics = ["AUC", "Brier", "Misclassification", "Calibration"]
         selected_methods = sorted(df["Method"].unique().tolist()) 
 
         plot_real_datasets_grid(df, selected_datasets, selected_metrics, selected_methods,
-                                output_path="real_datasets_results/real_data.pdf")
+                                output_path="real_datasets_results/real_data_4.pdf")
         
     except FileNotFoundError:
         print("CSV file not found. Please ensure the path is correct.")
