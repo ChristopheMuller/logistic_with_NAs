@@ -8,6 +8,7 @@
 # %%
 
 import os
+import csv
 import numpy as np
 import pandas as pd
 from utils import *
@@ -58,91 +59,50 @@ patterns = [
 
 # %%
 
-def build_score_matrix_pattern(pattern, exp, set_up, simulation, metrics, methods, existing_matrix=None):
-
-    n_set_ups = len(set_up)
-    n_metrics = len(metrics)
-
-    if existing_matrix is not None:
-        score_matrix = existing_matrix.copy()
-    else:  
-        score_matrix = pd.DataFrame(
-            columns = ["exp", "set_up", "method", "n_train", "bayes_adj", "metric", "score", "filter"]
-        )
-
-    simulation = simulation.copy()
-    simulation = simulation[simulation["method"].isin(methods)]
-
-    for i in range(n_set_ups):
-
-        setup = set_up.iloc[i]["set_up"]
-        print(f"Set up {i+1}/{n_set_ups} - {setup}")
-
-        simulation_setup = simulation[simulation["set_up"] == setup]
-
-        M = np.load(os.path.join("data", exp, "test_data", f"{setup}.npz"))["M"]
-        idx = get_index_pattern(pattern, M)
-        print(f"\tPattern {pattern}: {len(idx)}")
-
-        true_y = np.load(os.path.join("data", exp, "test_data", f"{setup}.npz"))["y"][idx]
-        bayes_probs = np.load(os.path.join("data", exp, "bayes_data", f"{setup}.npz"))["y_probs_bayes"][idx]
-        
-        for j in range(len(simulation_setup)):
-            method = simulation_setup.iloc[j]["method"]
-            ntrain = np.round(simulation_setup.iloc[j]["n_train"], 0).astype(int)
-
-            ####
-
-            pred_probs = np.load(os.path.join("data", exp, "pred_data", f"{setup}_{method}_{ntrain}.npz"))["y_probs_pred"].ravel()[idx]
-
-            for k in range(n_metrics):
-
-                metric = list(metrics.keys())[k]
-                score = metrics[metric](true_y, pred_probs, bayes_probs)
-                score_bayes = metrics[metric](true_y, bayes_probs, bayes_probs)
-                score_bayes_adj = score - score_bayes
-
-                score_matrix = pd.concat([
-                    score_matrix,
-                    pd.DataFrame({
-                        "exp": [exp],
-                        "set_up": [setup],
-                        "method": [method],
-                        "n_train": [ntrain],
-                        "bayes_adj": False,
-                        "metric": [metric],
-                        "score": [score],
-                        "filter": [pattern]
-                    })
-                ], ignore_index=True)
-
-                score_matrix = pd.concat([
-                    score_matrix,
-                    pd.DataFrame({
-                        "exp": [exp],
-                        "set_up": [setup],
-                        "method": [method],
-                        "n_train": [ntrain],
-                        "bayes_adj": True,
-                        "metric": [metric],
-                        "score": [score_bayes_adj],
-                        "filter": [pattern]
-                    })
-                ], ignore_index=True)
-
-    score_matrix = score_matrix.reset_index(drop=True)
-    return score_matrix
-
 def score_matrix_per_pattern(exp, set_up, simulation, metrics, methods, patterns, score_matrix):
+    """Replace per-pattern scores while preserving all other score rows."""
+    pattern_labels = [str(pattern) for pattern in patterns]
+    simulation = simulation.loc[
+        simulation["method"].isin(methods)
+        & simulation["set_up"].isin(set_up["set_up"])
+    ].copy()
+    simulation["n_train"] = simulation["n_train"].round().astype(int)
+    score_keys = ["set_up", "method", "n_train"]
+    selected_results = pd.MultiIndex.from_frame(simulation[score_keys])
+    replace = (
+        score_matrix["exp"].eq(exp)
+        & score_matrix["metric"].isin(metrics)
+        & score_matrix["filter"].isin(pattern_labels)
+        & pd.MultiIndex.from_frame(score_matrix[score_keys]).isin(selected_results)
+    )
+    retained = score_matrix.loc[~replace]
+    rows = []
 
-    for pattern in patterns:
-        print(f"Processing pattern {pattern}")
-        score_matrix = build_score_matrix_pattern(pattern, exp, set_up, simulation, metrics, methods, score_matrix)
-    
-    return score_matrix
+    for i, setup in enumerate(set_up["set_up"], start=1):
+        print(f"Set up {i}/{len(set_up)} - {setup}", flush=True)
+        with np.load(os.path.join("data", exp, "test_data", f"{setup}.npz")) as test:
+            mask, true_y = test["M"], test["y"]
+        with np.load(os.path.join("data", exp, "bayes_data", f"{setup}.npz")) as bayes:
+            bayes_probs = bayes["y_probs_bayes"]
+        indices = [get_index_pattern(pattern, mask) for pattern in patterns]
+        if any(len(idx) == 0 for idx in indices):
+            raise ValueError(f"A selected pattern has no test observations in {setup}")
 
-new_matrix = score_matrix_per_pattern( exp, set_up, simulation, metrics, methods, patterns, score_matrix)
+        for result in simulation.loc[simulation["set_up"] == setup].itertuples():
+            ntrain = int(round(result.n_train))
+            path = os.path.join("data", exp, "pred_data", f"{setup}_{result.method}_{ntrain}.npz")
+            with np.load(path) as prediction:
+                pred_probs = prediction["y_probs_pred"].ravel()
+            for pattern, idx in zip(pattern_labels, indices):
+                for metric, calculate in metrics.items():
+                    score = calculate(true_y[idx], pred_probs[idx], bayes_probs[idx])
+                    baseline = calculate(true_y[idx], bayes_probs[idx], bayes_probs[idx])
+                    for adjusted, value in ((False, score), (True, score - baseline)):
+                        rows.append({"exp": exp, "set_up": setup, "method": result.method,
+                                     "n_train": ntrain, "bayes_adj": adjusted,
+                                     "metric": metric, "score": value, "filter": pattern})
+    return pd.concat([retained, pd.DataFrame(rows)], ignore_index=True)
 
-# %%
 
-new_matrix.to_csv(os.path.join("data", exp, "score_matrix.csv"), index=False)
+new_matrix = score_matrix_per_pattern(exp, set_up, simulation, metrics, methods, patterns, score_matrix)
+new_matrix.to_csv(os.path.join("data", exp, "score_matrix.csv"), index=False, quoting=csv.QUOTE_ALL)
