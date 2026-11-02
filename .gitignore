@@ -37,6 +37,7 @@ data/SimMNARBIG/*/
 data/SimNL/*/
 
 real_datasets_results/preds/*
+/real_datasets_results/hybrid*/datasets/*.rds
 tabzilla/tabzilla_real_datasets_results/preds/*
 tabzilla/tabzilla_real_datasets_results/preds_backup_before_minobs/*
 tabzilla/tabzilla_datasets_discard/*
