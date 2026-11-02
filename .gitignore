@@ -6,6 +6,7 @@
 *.pdf
 *.pyc
 *.jpg
+*.png
 *.tex
 *.bib
 env.sif
