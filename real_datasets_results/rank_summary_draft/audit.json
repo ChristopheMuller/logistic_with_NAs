@@ -1,0 +1,41 @@
+{
+  "benchmark": {
+    "rows": 16800,
+    "datasets": 20,
+    "methods": 14,
+    "missing_values_by_metric": {
+      "AUC": 0,
+      "Brier": 0,
+      "Calibration": 207,
+      "Misclassification": 0
+    }
+  },
+  "tabzilla": {
+    "rows": 17100,
+    "datasets": 19,
+    "methods": 15,
+    "missing_values_by_metric": {
+      "AUC": 0,
+      "Brier": 0,
+      "Calibration": 686,
+      "Misclassification": 0
+    }
+  },
+  "draft_selection": {
+    "datasets": 38,
+    "methods": 14,
+    "excluded": [
+      "Tabzilla colic (retain benchmark version)",
+      "PbP.MinObs (not shared)"
+    ],
+    "method_order": "Average of the AUC and Brier mean ranks",
+    "limitations": [
+      "CSV completeness does not establish correctness of stored predictions.",
+      "Execution failures and intentional baseline fallbacks are not labelled in CSVs.",
+      "Metric script uses test-label mean for NA predictions; affected rows unknown.",
+      "Metric script does not fix ROC direction explicitly.",
+      "SAEM and constant-imputation methods can use fewer covariates on categorical datasets.",
+      "Other potential duplicate tasks (e.g. related heart/breast datasets) need provenance review."
+    ]
+  }
+}
